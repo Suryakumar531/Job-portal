@@ -1,0 +1,38 @@
+/* src/EmployerLogin.css */
+.login-container{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#FFFFFF}
+.login-card{display:flex;width:900px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(255, 255, 255, 0.1)}
+.login-left{flex:1;background:#FFFFFF;display:flex;justify-content:center;align-items:center}
+.illustration{max-width:1500%}
+.login-right{flex:1;padding:100px;display:flex;flex-direction:column}
+.logo{color:#0073e6;margin:0 0 8px}
+.logo span{display:block;color:#666;font-size:13px}
+.top-links{display:flex;gap:px;align-items:center;font-size:14px}
+.create-btn{background:#0073e6;color:#fff;border:none;padding:6px 10px;border-radius:4px;cursor:pointer}
+.form-title{margin:30px 0;font-size:18px;font-weight:700}
+.login-form{display:flex;flex-direction:column;gap:10px}
+.login-form label{font-size:14px}
+.login-form input{padding:10px;border:2px solid #ccc;border-radius:9px}
+.password-input{position:relative}
+.password-input .eye-icon{position:relative}
+.form-options{display:flex;justify-content:space-between;font-size:14px}
+.login-btn{background:hsl(210, 96%, 42%);color:#fff;border:none;padding:12px;border-radius:4px;cursor:pointer}
+.illustration {background:white}
+.logo {
+  position: absolute;  /*top left */
+  top: 20px;           /* Distance from the top */
+  left: 50px;          /* Distance from the left */
+  font-size: 24px;     /* Bigger text */
+  font-weight: bold;   /* Make it bold */
+  color: #2100f4;         /* Text color */
+}
+
+.top-right-container {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* spacing between items */
+  z-index: 1000; /* optional, to ensure it's on top */
+}
+
