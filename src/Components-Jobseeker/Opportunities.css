@@ -13,9 +13,11 @@
 .Opportunities-job-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 20px;
   justify-items: center;
   margin-top: 40px;
+  margin-left: 145px;
+  margin-right: 145px;
 }
 
 .Opportunities-view-more-btn {
