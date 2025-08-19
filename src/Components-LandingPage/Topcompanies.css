@@ -102,17 +102,20 @@
 }
 
 .carousel-view-all {
-  border: 2px solid #007bff;
+  border: 2px solid #1E88E5;
   background: transparent;
-  color: #007bff;
+  color: #1E88E5;
   padding: 10px 20px;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
+  height: 60px;
+  width: 170px;
+  font-size: 15px;
 }
 
 .carousel-view-all:hover {
-  background-color: #007bff;
+  background-color: #1E88E5;
   color: white;
 }
 
