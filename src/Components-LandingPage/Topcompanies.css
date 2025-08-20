@@ -10,7 +10,7 @@
 .carousel-title {
   text-align: center;
   font-size: 40px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   color: #022c43;
 }
 
@@ -97,8 +97,8 @@
 
 .carousel-view-all-wrapper {
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 80px;
+  margin-bottom: 110px;
 }
 
 .carousel-view-all {
@@ -110,7 +110,7 @@
   border-radius: 8px;
   cursor: pointer;
   height: 60px;
-  width: 170px;
+  width: 190px;
   font-size: 15px;
 }
 

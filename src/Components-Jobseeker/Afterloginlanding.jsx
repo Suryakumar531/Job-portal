@@ -5,7 +5,7 @@ import { JHeader } from './JHeader';
 import { JMainsection } from './JMainsection';
 import { Jobsbycompany } from './Jobsbycompany';
 import { Opportunities } from './Opportunities';
-import { Jfooter } from './Jfooter';
+import { Footer } from '../Components-LandingPage/Footer';
 
 export const Afterloginlanding = () => {
     return (
@@ -14,7 +14,7 @@ export const Afterloginlanding = () => {
            <JMainsection />
            <Opportunities />
            <Jobsbycompany />
-        <Jfooter />
+        <Footer />
         </>
     )
 }
