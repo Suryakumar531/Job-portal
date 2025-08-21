@@ -7,7 +7,7 @@ import place from '../assets/opportunity_location.png'
 
 export const OpportunitiesCard = (props) => {
     const {job} = props
-    const logoContent = job.logo ? (<img src={job.logo} alt={job.company} className="Opportunities-job-logo" />) : (<div className="Opportunities-job-logo-placeholder">{job.company.charAt(0)}</div>)
+    const logoContent = job.logo ? (<img src={job.logo} alt={job.company} className="Opportunities-job-logo" />) : (<div className="Opportunities-job-logo-placeholder">{job.company.charAt(0).toUpperCase()}</div>)
     
     return (
         <div className="Opportunities-job-card">

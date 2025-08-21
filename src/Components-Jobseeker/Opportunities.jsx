@@ -26,7 +26,7 @@ const jobs = [
   },
   {
     title: "Marketing Manager",
-    company: "Dell",
+    company: "dell",
     type: "3 months duration",
     salary: "₹ 40,000/month",
     experience: "2 to 3 years of experience",
@@ -52,7 +52,7 @@ const jobs = [
   },
   {
     title: "UX/UI Designer",
-    company: "Creative Minds Studio",
+    company: "creative minds studio",
     type: "3 months duration",
     salary: "Unpaid",
     experience: "0 to 1 year of experience",

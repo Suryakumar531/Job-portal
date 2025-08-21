@@ -7,6 +7,8 @@ export const Elogin = () => {
     <div>
       <h1>Employer login</h1>
       <Link to="/Job-portal">Link back to homepage</Link>
+      <p>=??</p>
+      <Link to='/Job-portal/employer/signup'>want to signup</Link>
     </div>
   )
 }

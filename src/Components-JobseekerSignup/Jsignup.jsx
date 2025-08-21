@@ -34,7 +34,7 @@ export const Jsignup = () => {
     }
 
     if (!formValues.email.trim()) {
-      newErrors.email = "email is required"
+      newErrors.email = "Email is required"
     } else if (!regexOfMail.test(formValues.email)) {
       newErrors.email = "Invalid email format"
     }
