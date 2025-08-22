@@ -120,15 +120,17 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 10px 0 20px;
-  font-size: 13px;
-  color: #333;
+  font-size: 14px;
+  color: #032240;
+  font-weight: 400;
 }
 
 .forgot-password {
   margin-top: 16px;
   text-decoration: none;
   font-size: 14px;
-  color: #333;
+  color: #032240;
+  font-weight: 400;
 }
 
 .j-login-btn {

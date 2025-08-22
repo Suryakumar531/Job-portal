@@ -9,6 +9,7 @@ import { Jcreatepassword } from './Components-JobseekerSignup/Jcreatepassword'
 import { Jforgotpassword } from './Components-JobseekerSignup/Jforgotpassword'
 import { Afterloginlanding } from './Components-Jobseeker/Afterloginlanding'
 import { ESignup } from './Components-EmployerSignup/ESignup'
+import { Eforgotpassword } from './Components-EmployerSignup/Eforgotpassword'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -41,6 +42,10 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/employer/signup',
   element: <ESignup />,
+},
+{
+  path: '/Job-portal/employer/login/forgotpassword',
+  element: <Eforgotpassword />,
 }])
 
 function App() {
