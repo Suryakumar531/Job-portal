@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './Jcreatepassword.css'
 import confirm_password from "../assets/ConfirmPassword.png"
 import eye from '../assets/show_password.png'
 import eyeHide from '../assets/eye-hide.png'
 
-export const Jcreatepassword = () => {
+export const Ecreatepassword = () => {
   const [passwordShow, setPasswordShow] = useState(true)
-    
+  
   const togglePasswordView = () => {
     setPasswordShow((prev) => !prev)
-  }
+   }
 
   const initialValues = { newPassword: "", confirmPassword: "" }
 
@@ -56,10 +55,11 @@ export const Jcreatepassword = () => {
       <header className="j-create-password-header">
         <Link to="/Job-portal" className="logo">
           <span className="logo-text">job portal</span>
+          <span className='subtext'>for Employers</span>
         </Link>
         <div className="j-create-password-header-links">
           <span className='no-account'>Create a new account?</span>
-          <Link to="/Job-portal/jobseeker/signup" className="signup-btn">Create</Link>
+          <Link to="/Job-portal/employer/signup" className="signup-btn">Create</Link>
         </div>
       </header>
       <div className='j-create-password-login-body'>
@@ -75,7 +75,7 @@ export const Jcreatepassword = () => {
               value={formValues.newPassword}
               onChange={handleForm}
               className={errors.newPassword ? "input-error" : ""} />
-            <span className="eye-icon" onClick={togglePasswordView}><img src={passwordShow ? eye : eyeHide} className='show-icon' alt='show' /></span>
+              <span className="eye-icon" onClick={togglePasswordView}><img src={passwordShow ? eye : eyeHide} className='show-icon' alt='show' /></span>
           </div>
           {errors.newPassword && <span className="error-msg">{errors.newPassword}</span>}
 
@@ -92,10 +92,11 @@ export const Jcreatepassword = () => {
           <button className="j-reset-link-btn">Reset Password</button>
 
           <div className='center-div-text'>
-            <p>Remember your password? <Link to="/Job-portal/jobseeker/login" className='j-password-form-login-link'>Login</Link></p>
+            <p>Remember your password? <Link to="/Job-portal/employer/login" className='j-password-form-login-link'>Login</Link></p>
           </div>
         </form>
       </div>
     </div>
   )
 }
+
