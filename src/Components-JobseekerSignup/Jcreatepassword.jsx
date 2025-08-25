@@ -36,7 +36,7 @@ export const Jcreatepassword = () => {
       newErrors.confirmPassword = "Confirm Password is required"
     } else if (formValues.confirmPassword.length < 8) {
       newErrors.confirmPassword = "Password must be at least 8 characters"
-    } else if (formValues.confirmPassword !== formValues.password) {
+    } else if (formValues.confirmPassword !== formValues.newPassword) {
       newErrors.confirmPassword = "Passwords do not match"
     }
 
