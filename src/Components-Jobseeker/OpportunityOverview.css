@@ -1,0 +1,156 @@
+body{
+    background-color: #fff;
+}
+.opp-overview-content {
+    margin-top: 14rem;
+    margin-bottom: 10rem;
+    margin-left: 10rem;
+}
+
+.search-backbtn-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rem;
+}
+
+.back-btn {
+  padding: 15px 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  font-weight: 600;
+  color: #0d1b2a;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.opp-overview-main {
+    display: flex;
+    gap: 20rem;
+}
+
+.opp-job-details-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.opp-job-main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.opp-job-sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.opp-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.opp-job-header h2 {
+  margin: 0;
+}
+
+.opp-job-meta p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.opp-job-tags {
+  margin-top: 10px;
+}
+
+.opp-tag {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.opp-fulltime { background: #eaf3ff; color: #0066ff; }
+.opp-internship { background: #fff6e5; color: #ff9900; }
+
+.opp-job-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.opp-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.opp-save {
+  border: 1px solid #007bff;
+  color: #007bff;
+  background: white;
+}
+
+.opp-apply {
+  border: none;
+  background: #007bff;
+  color: white;
+}
+
+.opp-job-highlights ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.opp-match-score {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.opp-score {
+  background: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.opp-skills span {
+  display: inline-block;
+  margin: 5px;
+  padding: 6px 10px;
+  background: #f0f2f5;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.opp-share-job {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.opp-share-job button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.opp-report-btn {
+  margin-left: auto;
+  border: none;
+  background: #f8f8f8;
+  color: red;
+}

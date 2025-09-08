@@ -11,6 +11,7 @@ import { Afterloginlanding } from './Components-Jobseeker/Afterloginlanding'
 import { ESignup } from './Components-EmployerSignup/ESignup'
 import { Eforgotpassword } from './Components-EmployerSignup/Eforgotpassword'
 import { Ecreatepassword } from './Components-EmployerSignup/Ecreatepassword'
+import { OpportunityOverview } from './Components-Jobseeker/OpportunityOverview'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -51,6 +52,10 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/employer/login/forgotpassword/createpassword',
   element: <Ecreatepassword />,
+},
+{
+  path: '/Job-portal/jobseeker/OpportunityOverview',
+  element: <OpportunityOverview />,
 }])
 
 function App() {
