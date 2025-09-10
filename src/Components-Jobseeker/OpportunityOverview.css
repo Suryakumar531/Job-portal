@@ -27,6 +27,7 @@ body {
 
 .opp-overview-main {
   display: flex;
+  gap: 20px;
 }
 
 .opp-topcard-job-title {
@@ -39,7 +40,7 @@ body {
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   padding: 18px;
-  width: 75%;
+  min-width: 727px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -57,7 +58,7 @@ body {
 .opp-job-details-card {
   background: #fff;
   border: 1px solid #eee;
-  width: 75%;
+  min-width: 727px;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -87,14 +88,13 @@ ul {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-right: 50px;
-}
-
-.opp-card {
-  background: #fff;
+  margin-right: 120px;
   border: 1px solid #eee;
   border-radius: 12px;
-  padding: 20px;
+  max-width: 540px;
+  min-width: 450px;
+  padding: 25px;
+  height: fit-content;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -163,4 +163,51 @@ ul {
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.opp-similar-job {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  margin-bottom: 17px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.similar-job-title {
+  color: #032240;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.similar-job-company {
+  font-size: 14px;
+  color: #032240;
+  font-weight: 500;
+  text-align: left;
+}
+
+.similar-job-logo-placeholder {
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  border: 1px solid #1E88E5;
+  border-radius: 5px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #1E88E5;
+}
+
+.similar-job-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  color: #83858B;
+}
+
+.similar-job-footer-posted {
+  margin-top: 2px;
 }

@@ -178,27 +178,113 @@ export const OpportunityOverview = () => {
           <div className="opp-job-sidebar">
             <h3>Similar Jobs</h3>
             <div className="opp-similar-job">
-              <h4>UX / UI Developer</h4>
-              <p>Data Insights Ltd.</p>
-              <p><span className="star"><img src={starIcon} /></span> 3.4 | 522 reviews</p>
-              <p><img src={place} className='card-icons' /> Chennai</p>
-              <a href="#">View details</a>
+              <div className="Opportunities-job-header">
+                <div>
+                  <h2 className="similar-job-title">UI/UX Designer</h2>
+                  <p className="similar-job-company">Creative Minds Studio <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> 3.4 <span className="Opportunities-divider">|</span><span> 522 Reviews</span></p>
+                </div>
+                <div className="similar-job-logo-placeholder">C</div>
+              </div>
+              <div className="Opportunities-job-details">
+                <p className='Opportunities-detail-line'>Full-time . Hybrid, Permanent</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
+              </div>
+              <div className="similar-job-footer">
+                <a href="#" className="suggest-link">
+                  View details
+                </a>
+                <p className='similar-job-footer-posted'>
+                  Posted 2 days ago
+                </p>
+              </div>
             </div>
 
-            <div className="similar-job">
-              <h4>Senior UX Designer</h4>
-              <p>Global Brands Co.</p>
-              <p><span className="star"><img src={starIcon} /></span> 3.5 | 514 reviews</p>
-              <p><img src={place} className='card-icons' /> Bengaluru</p>
-              <a href="#">View details</a>
+            <div className="opp-similar-job">
+              <div className="Opportunities-job-header">
+                <div>
+                  <h2 className="similar-job-title">UI Designer</h2>
+                  <p className="similar-job-company">Tech Solutions Inc. <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> 3.2 <span className="Opportunities-divider">|</span><span> 1k Reviews</span></p>
+                </div>
+                <div className="similar-job-logo-placeholder">T</div>
+              </div>
+              <div className="Opportunities-job-details">
+                <p className='Opportunities-detail-line'>Full-time . On-Site, Permanent</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
+              </div>
+              <div className="similar-job-footer">
+                <a href="#" className="suggest-link">
+                  View details
+                </a>
+                <p className='similar-job-footer-posted'>
+                  Posted 2 days ago
+                </p>
+              </div>
             </div>
 
-            <div className="similar-job">
-              <h4>UI Designer</h4>
-              <p>Tech Solutions Inc.</p>
-              <p><span className="star"><img src={starIcon} /></span> 3.2 | 1k+ reviews</p>
-              <p><img src={place} className='card-icons' /> Chennai</p>
-              <a href="#">View details</a>
+            <div className="opp-similar-job">
+              <div className="Opportunities-job-header">
+                <div>
+                  <h2 className="similar-job-title">UI/UX Designer</h2>
+                  <p className="similar-job-company">Creative Minds Studio <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> 3.4 <span className="Opportunities-divider">|</span><span> 522 Reviews</span></p>
+                </div>
+                <div className="similar-job-logo-placeholder">C</div>
+              </div>
+              <div className="Opportunities-job-details">
+                <p className='Opportunities-detail-line'>Full-time . Hybrid, Permanent</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
+              </div>
+              <div className="similar-job-footer">
+                <a href="#" className="suggest-link">
+                  View details
+                </a>
+                <p className='similar-job-footer-posted'>
+                  Posted 2 days ago
+                </p>
+              </div>
+            </div>
+
+            <div className="opp-similar-job">
+              <div className="Opportunities-job-header">
+                <div>
+                  <h2 className="similar-job-title">UI/UX Designer</h2>
+                  <p className="similar-job-company">Creative Minds Studio <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> 3.4 <span className="Opportunities-divider">|</span><span> 522 Reviews</span></p>
+                </div>
+                <div className="similar-job-logo-placeholder">C</div>
+              </div>
+              <div className="Opportunities-job-details">
+                <p className='Opportunities-detail-line'>Full-time . Hybrid, Permanent</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
+              </div>
+              <div className="similar-job-footer">
+                <a href="#" className="suggest-link">
+                  View details
+                </a>
+                <p className='similar-job-footer-posted'>
+                  Posted 2 days ago
+                </p>
+              </div>
+            </div>
+
+            <div className="opp-similar-job">
+              <div className="Opportunities-job-header">
+                <div>
+                  <h2 className="similar-job-title">UI/UX Designer</h2>
+                  <p className="similar-job-company">Creative Minds Studio <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> 3.4 <span className="Opportunities-divider">|</span><span> 522 Reviews</span></p>
+                </div>
+                <div className="similar-job-logo-placeholder">C</div>
+              </div>
+              <div className="Opportunities-job-details">
+                <p className='Opportunities-detail-line'>Full-time . Hybrid, Permanent</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
+              </div>
+              <div className="similar-job-footer">
+                <a href="#" className="suggest-link">
+                  View details
+                </a>
+                <p className='similar-job-footer-posted'>
+                  Posted 2 days ago
+                </p>
+              </div>
             </div>
           </div>
         </div>
