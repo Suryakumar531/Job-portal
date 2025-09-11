@@ -22,7 +22,7 @@ export const JHeader = () => {
             </nav>
 
             <div className="auth-links">
-                <div><img className='header-icons' src={breifcase} alt='My Jobs' /></div>
+                <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
                 <div><img className='header-icons' src={chat} alt='Messages' /></div>
                 <div><img className='header-icons' src={bell} alt='Notifications' /></div>
                 <div><img className='header-icons' src={profile} alt='My Profile' /></div>
