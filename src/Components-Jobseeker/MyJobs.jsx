@@ -156,8 +156,8 @@ export const MyJobs = () => {
             <header className="header">
                 <div className="logo">job portal</div>
                 <nav className="nav-links">
-                    <a href="#" className="nav-item" >Home</a>
-                    <a href="#" className="nav-item" >Jobs</a>
+                    <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
+                    <Link to="/Job-portal/jobseeker/jobs" className="nav-item" >Jobs</Link>
                     <a href="#" className="nav-item" >Companies</a>
                 </nav>
 

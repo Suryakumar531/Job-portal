@@ -1,8 +1,13 @@
 import React from 'react'
 import { JHeader } from './JHeader';
 import { Footer } from '../Components-LandingPage/Footer';
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import './OpportunityOverview.css'
+import breifcase from '../assets/header_case.png'
+import chat from '../assets/header_message.png'
+import bell from '../assets/header_bell.png'
+import profile from '../assets/header_profile.png'
 import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
@@ -19,7 +24,22 @@ export const OpportunityOverview = () => {
 
   return (
     <>
-      <JHeader />
+      <header className="header">
+        <div className="logo">job portal</div>
+        <nav className="nav-links">
+          <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
+          <Link to="/Job-portal/jobseeker/jobs" className="nav-item" >Jobs</Link>
+          <a href="#" className="nav-item" >Companies</a>
+        </nav>
+
+        <div className="auth-links">
+          <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
+          <div><img className='header-icons' src={chat} alt='Messages' /></div>
+          <div><img className='header-icons' src={bell} alt='Notifications' /></div>
+          <div><img className='header-icons' src={profile} alt='My Profile' /></div>
+        </div>
+      </header>
+
       <div className='opp-overview-content'>
         <div className='search-backbtn-container'>
           <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
@@ -73,7 +93,7 @@ export const OpportunityOverview = () => {
               <div className='Opportunities-details-bottom'>
                 <div className="Opportunities-job-tags">
                   <span className="Opportunities-job-tag full-time">
-                  Full-time
+                    Full-time
                   </span>
                 </div>
                 <a href="#" className="suggest-link">
@@ -106,19 +126,19 @@ export const OpportunityOverview = () => {
                   <li>Good time-management skills.</li>
                 </ul>
               </div>
-              
+
               <h3>Company Overview</h3>
               <p>
-                Finding customers made easy through the vast profile of database that we have through market research. 
-                Billions United is a brand that empowers other brand.Founded in 2010, Billions United is a preferred choice for data and marketing solutions. 
+                Finding customers made easy through the vast profile of database that we have through market research.
+                Billions United is a brand that empowers other brand.Founded in 2010, Billions United is a preferred choice for data and marketing solutions.
                 We derive intelligence from our data to help brands maximize ROI.
               </p>
 
               <h3>Job Description</h3>
               <p>
-                We are looking for a UI/UX Designer to turn our software into easy-to-use products for our clients. 
-                You will be responsible for gathering user requirements, designing graphic elements, and building navigation components. 
-                If you have experience with design software, wireframe tools, and a strong design portfolio, we would love to meet you. 
+                We are looking for a UI/UX Designer to turn our software into easy-to-use products for our clients.
+                You will be responsible for gathering user requirements, designing graphic elements, and building navigation components.
+                If you have experience with design software, wireframe tools, and a strong design portfolio, we would love to meet you.
                 Ultimately, you will create both functional and appealing features that address client needs and help grow our customer base.
               </p>
 
