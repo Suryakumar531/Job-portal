@@ -29,7 +29,7 @@ export const OpportunityOverview = () => {
         <nav className="nav-links">
           <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
           <Link to="/Job-portal/jobseeker/jobs" className="nav-item" >Jobs</Link>
-          <a href="#" className="nav-item" >Companies</a>
+          <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>   
         </nav>
 
         <div className="auth-links">

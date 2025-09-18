@@ -9,6 +9,7 @@ import profile from '../assets/header_profile.png'
 import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
+import { Opportunities } from './Opportunities';
 
 export const JobsTab = () => {
     return (
@@ -18,7 +19,7 @@ export const JobsTab = () => {
                 <nav className="nav-links">
                     <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
                     <a href="#" className="nav-item nav-active" >Jobs</a>
-                    <a href="#" className="nav-item" >Companies</a>
+                    <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>   
                 </nav>
 
                 <div className="auth-links">
@@ -57,6 +58,8 @@ export const JobsTab = () => {
                     <button className="search-button">Search</button>
                 </div>
             </div>
+            
+            <Opportunities />
 
             <Footer />
         </>

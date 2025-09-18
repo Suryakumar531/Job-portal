@@ -19,7 +19,7 @@ export const Afterloginlanding = () => {
                 <nav className="nav-links">
                     <a href="#" className="nav-item nav-active" >Home</a>
                     <Link to="/Job-portal/jobseeker/jobs" className="nav-item" >Jobs</Link>
-                    <a href="#" className="nav-item" >Companies</a>
+                    <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>   
                 </nav>
 
                 <div className="auth-links">
