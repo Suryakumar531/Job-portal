@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CompaniesTab.css'
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Footer } from '../Components-LandingPage/Footer';
 import breifcase from '../assets/header_case.png'
 import chat from '../assets/header_message.png'
 import bell from '../assets/header_bell.png'
+import bell_dot from '../assets/header_bell_dot.png'
 import profile from '../assets/header_profile.png'
 import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
@@ -19,7 +20,10 @@ import Infy from '../assets/INFY_BIG.png'
 import Tcs from '../assets/TCS.png'
 import META from '../assets/META_BIG.png'
 import starIcon from '../assets/Star_icon.png'
+import { notificationsData } from './Afterloginlanding';
+import { JNotification } from './JNotification';
 
+/* Below Code is removed after backend integration*/
 const companiesList = [
   {
     id: 1,
@@ -89,6 +93,9 @@ const companiesList = [
 
 export const CompaniesTab = () => {
   const navigate = useNavigate();
+  const [showNotification, setShowNotification] = useState(false);
+  const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
+
   return (
     <>
       <header className="header">
@@ -102,9 +109,10 @@ export const CompaniesTab = () => {
         <div className="auth-links">
           <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
           <div><img className='header-icons' src={chat} alt='Messages' /></div>
-          <div><img className='header-icons' src={bell} alt='Notifications' /></div>
+          <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
           <div><img className='header-icons' src={profile} alt='My Profile' /></div>
         </div>
+        <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
       </header>
 
       <div className='jobs-tab-search-bar'>

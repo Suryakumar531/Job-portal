@@ -5,9 +5,12 @@ import { Link } from 'react-router-dom';
 import breifcase from '../assets/header_case.png'
 import chat from '../assets/header_message.png'
 import bell from '../assets/header_bell.png'
+import bell_dot from '../assets/header_bell_dot.png'
 import profile from '../assets/header_profile.png'
 import { SavedJobsCard } from './SavedJobsCard';
 import { AppliedJobCard } from './AppliedJobCard';
+import { notificationsData } from './Afterloginlanding';
+import { JNotification } from './JNotification';
 
 /* Below Code is removed after backend integration*/
 const savedJobsList = [
@@ -151,6 +154,9 @@ const appliedJobsList = [
 
 export const MyJobs = () => {
     const [activeTab, setActiveTab] = useState("saved");
+    const [showNotification, setShowNotification] = useState(false);
+    const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
+
     return (
         <>
             <header className="header">
@@ -164,9 +170,10 @@ export const MyJobs = () => {
                 <div className="auth-links">
                     <div to="/Job-portal/jobseeker/myjobs" className="nav-icon-active"><img className='header-icons' src={breifcase} alt='My Jobs' /></div>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
-                    <div><img className='header-icons' src={bell} alt='Notifications' /></div>
+                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
                     <div><img className='header-icons' src={profile} alt='My Profile' /></div>
                 </div>
+                <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
             </header>
 
             <main>

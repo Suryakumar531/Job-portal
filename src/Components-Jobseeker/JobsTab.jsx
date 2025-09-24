@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './JobsTab.css'
 import { Footer } from '../Components-LandingPage/Footer'
 import { Link } from 'react-router-dom';
 import breifcase from '../assets/header_case.png'
 import chat from '../assets/header_message.png'
 import bell from '../assets/header_bell.png'
+import bell_dot from '../assets/header_bell_dot.png'
 import profile from '../assets/header_profile.png'
 import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
 import { Opportunities } from './Opportunities';
+import { notificationsData } from './Afterloginlanding';
+import { JNotification } from './JNotification';
 
 export const JobsTab = () => {
+    const [showNotification, setShowNotification] = useState(false);
+    const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
+
     return (
         <>
             <header className="header">
@@ -25,9 +31,10 @@ export const JobsTab = () => {
                 <div className="auth-links">
                     <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
-                    <div><img className='header-icons' src={bell} alt='Notifications' /></div>
+                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
                     <div><img className='header-icons' src={profile} alt='My Profile' /></div>
                 </div>
+                <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
             </header>
 
             <div className='jobs-tab-search-bar'>
