@@ -9,6 +9,7 @@ import Google from '../assets/GOOG.png'
 import Infy from '../assets/INFY_BIG.png'
 import Tcs from '../assets/TCS.png'
 import META from '../assets/META_BIG.png'
+import { useNavigate } from "react-router-dom";
 
 const jobs = [
   {
@@ -118,6 +119,7 @@ const jobs = [
 ];
 
 export const Opportunities = () => {
+  const navigate = useNavigate();
   return (
     <section className='Opportunities-section'>
         <h2 className='Opportunities-title'>Opportunities Just For You</h2>
@@ -126,7 +128,7 @@ export const Opportunities = () => {
           <OpportunitiesCard key={index} job={job} />
         ))}
       </div>
-      <button className="Opportunities-view-more-btn">View More</button>
+      <button onClick={() => navigate('/Job-portal/jobseeker/jobs')} className="Opportunities-view-more-btn">View More</button>
     </section>
   )
 }

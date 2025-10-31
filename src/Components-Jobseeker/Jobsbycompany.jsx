@@ -9,6 +9,7 @@ import META from '../assets/META_BIG.png'
 import starIcon from '../assets/Star_icon.png'
 import left from '../assets/left_arrow.png'
 import right from '../assets/right_arrow.png'
+import { useNavigate } from "react-router-dom";
 
 /* Below Code is removed after backend integration*/
 const findbyCompaniesNameList = [
@@ -63,6 +64,7 @@ const findbyCompaniesNameList = [
 ];
 
 export const Jobsbycompany = () => {
+    const navigate = useNavigate();
     const CustomPrevArrow = ({ onClick }) => (
         <div className="custom-arrow prev" onClick={onClick}>
             <img src={left} alt="Previous" />
@@ -106,7 +108,7 @@ export const Jobsbycompany = () => {
                 ))}
             </Slider>
             <div className="carousel-view-all-wrapper">
-                <button className="carousel-view-all">View All Companies</button>
+                <button onClick={() => navigate('/Job-portal/jobseeker/jobs')} className="carousel-view-all">View All Companies</button>
             </div>
         </section>
     )

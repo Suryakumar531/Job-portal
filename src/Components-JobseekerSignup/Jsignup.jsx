@@ -76,7 +76,7 @@ export const Jsignup = () => {
         </div>
 
         <form action={handleSubmit} className="j-sign-up-form">
-          <h2>Create an Account</h2>
+          <h2>Sign up for Jobseeker</h2>
 
           <label>User name</label>
           <input type="text" name="username" value={formValues.username} onChange={handleForm} placeholder="Enter your name" className={errors.username ? "input-error" : ""} />
