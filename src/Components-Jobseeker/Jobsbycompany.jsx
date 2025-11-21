@@ -108,7 +108,7 @@ export const Jobsbycompany = () => {
                 ))}
             </Slider>
             <div className="carousel-view-all-wrapper">
-                <button onClick={() => navigate('/Job-portal/jobseeker/jobs')} className="carousel-view-all">View All Companies</button>
+                <button onClick={() => navigate('/Job-portal/jobseeker/companies')} className="carousel-view-all">View All Companies</button>
             </div>
         </section>
     )

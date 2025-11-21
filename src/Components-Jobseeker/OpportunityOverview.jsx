@@ -63,20 +63,20 @@ export const OpportunityOverview = () => {
   const navigate = useNavigate();
   const logoContent = job.logo ? (<img src={job.logo} alt={job.company} className="Opportunities-job-logo" />) : (<div className="Opportunities-job-logo-placeholder">{job.company.charAt(0).toUpperCase()}</div>)
   function formatPostedDate(dateString) {
-      const postedDate = new Date(dateString);
-      const today = new Date();
+    const postedDate = new Date(dateString);
+    const today = new Date();
 
-      const diffInMs = today - postedDate;
-      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const diffInMs = today - postedDate;
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
-      if (diffInDays === 0) return "Posted: today";
-      if (diffInDays === 1) return "Posted: 1 day ago";
-      if (diffInDays > 1 && diffInDays <= 30) return `Posted: ${diffInDays} days ago`;
-      if (diffInDays > 30 && diffInDays <= 60) return `Posted: more than 1 month ago`;
-      if (diffInDays > 60 && diffInDays <= 90) return `Posted: more than 2 months ago`;
+    if (diffInDays === 0) return "Posted: today";
+    if (diffInDays === 1) return "Posted: 1 day ago";
+    if (diffInDays > 1 && diffInDays <= 30) return `Posted: ${diffInDays} days ago`;
+    if (diffInDays > 30 && diffInDays <= 60) return `Posted: more than 1 month ago`;
+    if (diffInDays > 60 && diffInDays <= 90) return `Posted: more than 2 months ago`;
 
-      return `Posted: Long ago`;
-    }
+    return `Posted: Long ago`;
+  }
   return (
     <>
       <header className="header">
