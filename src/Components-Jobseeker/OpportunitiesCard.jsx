@@ -33,9 +33,9 @@ export const OpportunitiesCard = (props) => {
                         </span>
                     ))}
                 </div>
-                <a href="#" className="suggest-link">
-                    Suggest more roles like this
-                </a>
+                <div className="Opportunities-job-type">
+                    Hybrid
+                </div>
             </div>
 
             <hr className="Opportunities-separator" />

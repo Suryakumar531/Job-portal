@@ -21,16 +21,296 @@
     color: #83858B;
     text-align: center;
 }
+/* ----------------------------------------------------- */
+/* Main container from your existing structure */
+.my-profile-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
 
-
-
-.myprofile-footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+.profile-main-content {
     display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin: 8rem;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.sidebar-item {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sidebar-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Style for non-dropdown items when active */
+.sidebar-item.active-main {
+    background-color: #e7f3ff;
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.arrow {
+    border: solid #6c757d;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-item.open .arrow {
+    transform: rotate(-135deg);
+    margin-top: -4px;
+}
+
+.submenu {
+    padding: 0.5rem 0 0.5rem 1rem;
+    border-left: 2px solid #e0e0e0;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.submenu-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.submenu-item .dot {
+    color: #007bff;
+    font-size: 1.5rem;
+    line-height: 0;
+    margin-right: 0.75rem;
+}
+
+.submenu-item.active {
+    background-color: #e7f3ff;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.submenu-item:not(.active):hover {
+    background-color: #f8f9fa;
+}
+
+
+/* --- Content Area Styles --- */
+.content-area {
+    flex-grow: 1;
+}
+
+.content-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem 2rem 2rem;
+}
+
+.content-card h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+/* --- Form Styles --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-group input::placeholder {
+    color: #ccc;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #007bff;
+    border-color: #007bff;
+}
+.btn-secondary:hover {
+    background-color: #e7f3ff;
+}
+
+/* --- Specific Component Styles --- */
+
+/* Profile Component */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.profile-header h2 {
+    margin: 0;
+}
+.reset-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+}
+.profile-layout {
+    display: flex;
+    gap: 2rem;
+}
+.photo-uploader {
+    flex-basis: 200px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px 0; 
+    margin: 0 auto 0.5rem;
+    color: #6c757d;
+}
+.photo-placeholder span { font-size: 2.5rem; }
+.photo-uploader small {
+    display: block;
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+}
+.photo-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.photo-btn { background: none; border: none; font-weight: 500; cursor: pointer; }
+.photo-btn.upload { color: #007bff; }
+.photo-btn.remove { color: #dc3545; }
+.profile-form { flex-grow: 1; }
+.profile-actions { border-top: none; padding-top: 0; margin-top: 1rem; }
+
+/* Key Skills Component */
+.skills-list {
+    margin-bottom: 1.5rem;
+}
+.skill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+.skill-item:first-child {
+    padding-top: 0;
+}
+.edit-skill-btn {
+    background: none;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-skill-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+}
+/* ----------------------------------------------------- */
+
+.myprofile-footer {
+    margin-left: 45%;
+    margin-bottom: 2rem;
+    margin-right: 40%;
 }

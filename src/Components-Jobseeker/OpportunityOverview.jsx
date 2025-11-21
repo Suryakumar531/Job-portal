@@ -19,9 +19,64 @@ import twitter from '../assets/socials-x.png'
 import linkedin from '../assets/socials-linkedin.png'
 import facebook from '../assets/socials-facebook.png'
 
+const job = {
+  id: "1",
+  title: "Data Analyst",
+  company: "Tech Solutions Inc.",
+  ratings: 3.4,
+  reviewNo: 533,
+  duration: "3 months duration",
+  salary: "3.5",
+  experience: "1",
+  location: "Coimbatore",
+  tags: ["Internship"],
+  posted: "2025-11-12",
+  openings: 5,
+  applicants: 40,
+  workType: "On-site",
+  logo: "",
+  JobHighlights: [
+    "Freshers can also apply",
+    "Proven work experience as a UI/UX Designer",
+    "Good time-management skills"
+  ],
+  companyOverview: "Finding customers made easy through the vast profile of database that we have through market research.Billions United is a brand that empowers other brand.Founded in 2010, Billions United is a preferred choice for data and marketing solutions We derive intelligence from our data to help brands maximize ROI",
+  jobDescription: "We are looking for a UI/UX Designer to turn our software into easy-to-use products for our clients.You will be responsible for gathering user requirements, designing graphic elements, and building navigation components.If you have experience with design software, wireframe tools, and a strong design portfolio, we would love to meet you Ultimately, you will create both functional and appealing features that address client needs and help grow our customer base.",
+  Responsibilities: [
+    "Gather and evaluate user requirements in collaboration with product managers and engineers",
+    "Illustrate design ideas using storyboards, process flows, and sitemaps",
+    "Design graphic user interface elements such as menus, tabs, and widgets.",
+    "Build page navigation buttons and search fields",
+    "Develop UI mockups and prototypes that clearly illustrate site functionality and appearance.",
+    "Create original graphic designs (e.g. images, sketches, and tables).",
+    "Prepare and present rough drafts to internal teams and key stakeholders.",
+    "Identify and troubleshoot UX problems (e.g. responsiveness issues)",
+    "Conduct layout adjustments based on user feedback.",
+    "Adhere to style standards on fonts, colors, and images."
+  ],
+  IndustryType: "IT Services",
+  Department: "UI-UX Design",
+  KeySkills: ["UX Research", "Wireframes", "Figma", "Photoshop", "HTML", "CSS"]
+}
+
 export const OpportunityOverview = () => {
   const navigate = useNavigate();
+  const logoContent = job.logo ? (<img src={job.logo} alt={job.company} className="Opportunities-job-logo" />) : (<div className="Opportunities-job-logo-placeholder">{job.company.charAt(0).toUpperCase()}</div>)
+  function formatPostedDate(dateString) {
+      const postedDate = new Date(dateString);
+      const today = new Date();
 
+      const diffInMs = today - postedDate;
+      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+      if (diffInDays === 0) return "Posted: today";
+      if (diffInDays === 1) return "Posted: 1 day ago";
+      if (diffInDays > 1 && diffInDays <= 30) return `Posted: ${diffInDays} days ago`;
+      if (diffInDays > 30 && diffInDays <= 60) return `Posted: more than 1 month ago`;
+      if (diffInDays > 60 && diffInDays <= 90) return `Posted: more than 2 months ago`;
+
+      return `Posted: Long ago`;
+    }
   return (
     <>
       <header className="header">
@@ -29,7 +84,7 @@ export const OpportunityOverview = () => {
         <nav className="nav-links">
           <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
           <Link to="/Job-portal/jobseeker/jobs" className="nav-item" >Jobs</Link>
-          <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>   
+          <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>
         </nav>
 
         <div className="auth-links">
@@ -78,34 +133,36 @@ export const OpportunityOverview = () => {
             <div className="opp-overview-job-card">
               <div className="Opportunities-job-header">
                 <div>
-                  <h2 className="opp-topcard-job-title">UI/UX Designer</h2>
-                  <h5 className="Opportunities-job-company">Creative Minds Studio <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> 3.4 <span className="Opportunities-divider">|</span><span className="opp-reviews"> 522 Reviews</span></h5>
+                  <h2 className="opp-topcard-job-title">{job.title}</h2>
+                  <h5 className="Opportunities-job-company">{job.company} <span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> {job.ratings} <span className="Opportunities-divider">|</span><span className="opp-reviews"> {job.reviewNo} Reviews</span></h5>
                 </div>
-                <div className="Opportunities-job-logo-placeholder">C</div>
+                {logoContent}
               </div>
 
               <div className="Opportunities-job-details">
-                <p className='Opportunities-detail-line'><img src={time} className='card-icons' />3 months duration<span className="Opportunities-divider">|</span>₹ 20,000 - 25,000/month</p>
-                <p className='Opportunities-detail-line'><img src={experience} className='card-icons' />0 to 1 year of experience</p>
-                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
+                <p className='Opportunities-detail-line'><img src={time} className='card-icons' />{job.duration}<span className="Opportunities-divider">|</span>₹ {job.salary} Lpa</p>
+                <p className='Opportunities-detail-line'><img src={experience} className='card-icons' />{job.experience} years of experience</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' />{job.location}</p>
               </div>
 
               <div className='Opportunities-details-bottom'>
                 <div className="Opportunities-job-tags">
-                  <span className="Opportunities-job-tag full-time">
-                    Full-time
-                  </span>
+                  {job.tags.map((tag, index) => (
+                    <span key={index} className={`Opportunities-job-tag ${tag.toLowerCase()}`}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <a href="#" className="suggest-link">
-                  Suggest more roles like this
-                </a>
+                <div className="Opportunities-job-type">
+                  {job.workType}
+                </div>
               </div>
 
               <hr className="Opportunities-separator" />
 
               <div className="Opportunities-job-footer">
                 <div className="Opportunities-job-meta">
-                  <p>Posted: 1 week ago <span className="Opportunities-divider">|</span> Openings: 1 <span className="Opportunities-divider">|</span> Applicants: 80</p>
+                  <p>{formatPostedDate(job.posted)} <span className="Opportunities-divider">|</span> Openings: {job.openings} <span className="Opportunities-divider">|</span> Applicants: {job.applicants}</p>
                 </div>
 
                 <div className="Opportunities-job-actions">
@@ -121,62 +178,35 @@ export const OpportunityOverview = () => {
               <div className="opp-job-highlights">
                 <h3>Job Highlights</h3>
                 <ul>
-                  <li>Freshers can also apply.</li>
-                  <li>Proven work experience as a UI/UX Designer.</li>
-                  <li>Good time-management skills.</li>
+                  {job.JobHighlights.map((item, i) => <li key={i}>{item}</li>)}
                 </ul>
               </div>
 
               <h3>Company Overview</h3>
               <p>
-                Finding customers made easy through the vast profile of database that we have through market research.
-                Billions United is a brand that empowers other brand.Founded in 2010, Billions United is a preferred choice for data and marketing solutions.
-                We derive intelligence from our data to help brands maximize ROI.
+                {job.companyOverview}
               </p>
 
               <h3>Job Description</h3>
               <p>
-                We are looking for a UI/UX Designer to turn our software into easy-to-use products for our clients.
-                You will be responsible for gathering user requirements, designing graphic elements, and building navigation components.
-                If you have experience with design software, wireframe tools, and a strong design portfolio, we would love to meet you.
-                Ultimately, you will create both functional and appealing features that address client needs and help grow our customer base.
+                {job.jobDescription}
               </p>
 
               <h3>Responsibilities</h3>
               <ul>
-                <li>Gather and evaluate user requirements in collaboration with product managers and engineers.</li>
-                <li>Illustrate design ideas using storyboards, process flows, and sitemaps.</li>
-                <li>Design graphic user interface elements such as menus, tabs, and widgets.</li>
-                <li>Build page navigation buttons and search fields.</li>
-                <li>Develop UI mockups and prototypes that clearly illustrate site functionality and appearance.</li>
-                <li>Create original graphic designs (e.g. images, sketches, and tables).</li>
-                <li>Prepare and present rough drafts to internal teams and key stakeholders.</li>
-                <li>Identify and troubleshoot UX problems (e.g. responsiveness issues).</li>
-                <li>Conduct layout adjustments based on user feedback.</li>
-                <li>Adhere to style standards on fonts, colors, and images.</li>
+                {job.Responsibilities.map((item, i) => <li key={i}>{item}</li>)}
               </ul>
 
-              <h3>Key Details</h3>
-              <p><strong>Role:</strong> UI/UX Designer</p>
-              <p><strong>Industry Type:</strong> IT Services</p>
-              <p><strong>Department:</strong> UX, UI, Design</p>
-              <p><strong>Job Type:</strong> Full-Time - On-site - Permanent</p>
-              <p><strong>Location:</strong> Chennai</p>
+              <h3>Key Details:</h3>
+              <p><strong>Role:</strong> {job.title}</p>
+              <p><strong>Industry Type:</strong> {job.IndustryType}</p>
+              <p><strong>Department:</strong> {job.Department}</p>
+              <p><strong>Job Type:</strong> {job.workType}</p>
+              <p><strong>Location:</strong> {job.location}</p>
 
               <h3>Key Skills</h3>
               <div className="opp-key-skills-container">
-                <span>UX Research</span>
-                <span>Wireframes</span>
-                <span>Figma</span>
-                <span>Photoshop</span>
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>Illustrator</span>
-                <span>wireframe</span>
-                <span>prototype</span>
-                <span>problem solving</span>
-                <span>interactions</span>
-                <span>xd</span>
+                {job.KeySkills.map((item, i) => <span key={i}>{item}</span>)}
               </div>
 
               <hr className="Opportunities-separator" />
@@ -210,7 +240,7 @@ export const OpportunityOverview = () => {
                 <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
               </div>
               <div className="similar-job-footer">
-                <a href="#" className="suggest-link">
+                <a href="#" className="Opportunities-job-type">
                   View details
                 </a>
                 <p className='similar-job-footer-posted'>
@@ -232,7 +262,7 @@ export const OpportunityOverview = () => {
                 <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
               </div>
               <div className="similar-job-footer">
-                <a href="#" className="suggest-link">
+                <a href="#" className="Opportunities-job-type">
                   View details
                 </a>
                 <p className='similar-job-footer-posted'>
@@ -254,7 +284,7 @@ export const OpportunityOverview = () => {
                 <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
               </div>
               <div className="similar-job-footer">
-                <a href="#" className="suggest-link">
+                <a href="#" className="Opportunities-job-type">
                   View details
                 </a>
                 <p className='similar-job-footer-posted'>
@@ -276,7 +306,7 @@ export const OpportunityOverview = () => {
                 <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
               </div>
               <div className="similar-job-footer">
-                <a href="#" className="suggest-link">
+                <a href="#" className="Opportunities-job-type">
                   View details
                 </a>
                 <p className='similar-job-footer-posted'>
@@ -298,7 +328,7 @@ export const OpportunityOverview = () => {
                 <p className='Opportunities-detail-line'><img src={place} className='card-icons' />Chennai</p>
               </div>
               <div className="similar-job-footer">
-                <a href="#" className="suggest-link">
+                <a href="#" className="Opportunities-job-type">
                   View details
                 </a>
                 <p className='similar-job-footer-posted'>
