@@ -58,7 +58,7 @@ const router = createBrowserRouter([{
   element: <Ecreatepassword />,
 },
 {
-  path: '/Job-portal/jobseeker/OpportunityOverview',
+  path: '/Job-portal/jobseeker/OpportunityOverview/:id',
   element: <OpportunityOverview />,
 },
 {

@@ -145,9 +145,7 @@ export const CompaniesTab = () => {
       </div>
 
       <div className="companies-tab-container">
-        <div className="companies-tab-header">
-          <h1 className="carousel-title">Find Jobs By Companies</h1>
-        </div>
+        <h2 className="carousel-title">Companies for you</h2>
         <div className="companies-tab-grid">
           {companiesList.map((company) => (
             <div key={company.id} className="companies-tab-card">
@@ -165,9 +163,6 @@ export const CompaniesTab = () => {
               <button className="companies-tab-view-jobs-btn">View Jobs</button>
             </div>
           ))}
-        </div>
-        <div className="companies-tab-view-all-container">
-          <button className="carousel-view-all">View more</button>
         </div>
       </div>
       <Footer />

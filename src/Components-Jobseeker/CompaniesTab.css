@@ -3,13 +3,13 @@
   padding: 20px;
   background-color: #fff;
   max-width: 80rem;
-  margin: 0 auto 7rem;
+  margin: 0 auto 4rem;
 }
 
 .companies-tab-header {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .companies-tab-grid {

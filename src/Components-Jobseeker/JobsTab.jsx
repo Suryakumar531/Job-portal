@@ -10,13 +10,83 @@ import profile from '../assets/header_profile.png'
 import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
-import { Opportunities } from './Opportunities';
-import { notificationsData } from './Afterloginlanding';
 import { JNotification } from './JNotification';
+import { Joblist } from '../JobList';
+import { OpportunitiesCard } from './OpportunitiesCard';
+import { notificationsData } from './Afterloginlanding'; 
 
 export const JobsTab = () => {
     const [showNotification, setShowNotification] = useState(false);
-    const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
+    const newNotificationsCount = notificationsData ? notificationsData.filter(n => n.isNew).length : 0;
+
+    const displayCount = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const indexofLastjob = currentPage * displayCount;
+    const indexoffirstjob = indexofLastjob - displayCount;
+
+    const currentPost = Joblist.slice(indexoffirstjob, indexofLastjob);
+    const totalpages = Math.ceil(Joblist.length / displayCount);
+
+    const HandlePrev = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    }
+    const HandleNext = () => {
+        if (currentPage < totalpages) setCurrentPage(currentPage + 1);
+    }
+
+    const renderPageNumbers = () => {
+        const pageNumbers = [];
+        const siblingCount = 1; 
+
+        if (totalpages <= 5) {
+            for (let i = 1; i <= totalpages; i++) {
+                pageNumbers.push(i);
+            }
+        } else {
+            pageNumbers.push(1);
+
+            let startPage = Math.max(2, currentPage - siblingCount);
+            let endPage = Math.min(totalpages - 1, currentPage + siblingCount);
+
+
+            if (currentPage <= 3) {
+                endPage = 4; 
+            }
+            
+            if (currentPage >= totalpages - 2) {
+                startPage = totalpages - 3; 
+            }
+
+            if (startPage > 2) {
+                pageNumbers.push('...');
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                pageNumbers.push(i);
+            }
+
+            if (endPage < totalpages - 1) {
+                pageNumbers.push('...');
+            }
+
+            pageNumbers.push(totalpages);
+        }
+
+        return pageNumbers.map((number, index) => {
+            if (number === '...') {
+                return <span key={`dots-${index}`} className="dots">...</span>;
+            }
+            return (
+                <button
+                    key={number}
+                    className={`page-btn ${currentPage === number ? "active" : ""}`}
+                    onClick={() => setCurrentPage(number)}>
+                    {number}
+                </button>
+            );
+        });
+    };
 
     return (
         <>
@@ -25,16 +95,16 @@ export const JobsTab = () => {
                 <nav className="nav-links">
                     <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
                     <a href="#" className="nav-item nav-active" >Jobs</a>
-                    <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>   
+                    <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>
                 </nav>
 
                 <div className="auth-links">
                     <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
-                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
+                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot : bell} alt='Notifications' /></div>
                     <Link to="/Job-portal/jobseeker/myprofile"><img className='header-icons' src={profile} alt='My Profile' /></Link>
                 </div>
-                <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
+                <JNotification notificationsData={notificationsData || []} showNotification={showNotification} setShowNotification={setShowNotification} />
             </header>
 
             <div className='jobs-tab-search-bar'>
@@ -65,8 +135,39 @@ export const JobsTab = () => {
                     <button className="search-button">Search</button>
                 </div>
             </div>
-            
-            <Opportunities />
+
+            <section className='Opportunities-section'>
+                <div className='Opportunities-section'>
+                    <h2 className='Opportunities-title'>Jobs For You</h2>
+                    <div className="Opportunities-job-list">
+                        {currentPost.map((job, id) => (
+                            <OpportunitiesCard key={id} job={job} />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <div className="Navigation-job-Tab">
+                <button 
+                    onClick={HandlePrev} 
+                    disabled={currentPage === 1} 
+                    className='Navigation-btn'
+                >
+                    Previous
+                </button>
+                
+                <div className="page-numbers">
+                    {renderPageNumbers()}
+                </div>
+                
+                <button 
+                    onClick={HandleNext} 
+                    disabled={currentPage === totalpages} 
+                    className='Navigation-btn'
+                >
+                    Next
+                </button>
+            </div>
 
             <Footer />
         </>

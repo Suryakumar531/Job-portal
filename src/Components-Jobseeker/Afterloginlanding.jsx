@@ -12,6 +12,7 @@ import bell from '../assets/header_bell.png'
 import bell_dot from '../assets/header_bell_dot.png'
 import profile from '../assets/header_profile.png'
 import { JNotification } from './JNotification';
+import { useNavigate } from "react-router-dom";
 
 /* Below Code is removed after backend integration*/
 const notificationsData = [
@@ -45,7 +46,7 @@ const notificationsData = [
         time: '17 Aug 2025, 9:30 am',
         isNew: false,
     },
-     {
+    {
         id: 6,
         text: '5 new jobs match your preferences',
         time: '17 Aug 2025, 9:30 am',
@@ -58,7 +59,8 @@ export const Afterloginlanding = () => {
 
     const [showNotification, setShowNotification] = useState(false);
     const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
-    
+    const navigate = useNavigate();
+
     return (
         <>
             <header className="header">
@@ -72,13 +74,17 @@ export const Afterloginlanding = () => {
                 <div className="auth-links">
                     <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
-                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
+                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot : bell} alt='Notifications' /></div>
                     <Link to="/Job-portal/jobseeker/myprofile"><img className='header-icons' src={profile} alt='My Profile' /></Link>
                 </div>
                 <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
             </header>
             <JMainsection />
-            <Opportunities />
+            <section className='Opportunities-section'>
+                <h2 className='Opportunities-title'>Opportunities Just For You</h2>
+                <Opportunities />
+                <button onClick={() => navigate('/Job-portal/jobseeker/jobs')} className="Opportunities-view-more-btn">View More</button>
+            </section>
             <Jobsbycompany />
             <Footer />
         </>

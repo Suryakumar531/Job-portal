@@ -171,6 +171,7 @@ ul {
   margin-bottom: 17px;
   padding-left: 10px;
   padding-right: 10px;
+  cursor: pointer;
 }
 
 .similar-job-title {
