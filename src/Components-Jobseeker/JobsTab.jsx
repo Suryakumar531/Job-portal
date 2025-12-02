@@ -11,7 +11,7 @@ import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
 import { JNotification } from './JNotification';
-import { Joblist } from '../JobList';
+import { Joblist } from "../JobList";
 import { OpportunitiesCard } from './OpportunitiesCard';
 import { notificationsData } from './Afterloginlanding'; 
 
@@ -25,7 +25,7 @@ export const JobsTab = () => {
     const indexofLastjob = currentPage * displayCount;
     const indexoffirstjob = indexofLastjob - displayCount;
 
-    const currentPost = Joblist.slice(indexoffirstjob, indexofLastjob);
+    const currentJobCards = Joblist.slice(indexoffirstjob, indexofLastjob);
     const totalpages = Math.ceil(Joblist.length / displayCount);
 
     const HandlePrev = () => {
@@ -140,7 +140,7 @@ export const JobsTab = () => {
                 <div className='Opportunities-section'>
                     <h2 className='Opportunities-title'>Jobs For You</h2>
                     <div className="Opportunities-job-list">
-                        {currentPost.map((job, id) => (
+                        {currentJobCards.map((job, id) => (
                             <OpportunitiesCard key={id} job={job} />
                         ))}
                     </div>
