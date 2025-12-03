@@ -23,6 +23,7 @@ import starIcon from '../assets/Star_icon.png'
 import { notificationsData } from './Afterloginlanding';
 import { JNotification } from './JNotification';
 import { CompaniesList } from '../CompaniesList';
+import { AvatarMenu } from './AvatarMenu';
 
 /* Below Code is removed after backend integration*/
 const companiesList = CompaniesList.slice(0,8)
@@ -46,7 +47,7 @@ export const CompaniesTab = () => {
           <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
           <div><img className='header-icons' src={chat} alt='Messages' /></div>
           <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
-          <Link to="/Job-portal/jobseeker/myprofile"><img className='header-icons' src={profile} alt='My Profile' /></Link>
+          <AvatarMenu />
         </div>
         <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
       </header>
@@ -96,7 +97,7 @@ export const CompaniesTab = () => {
                 <span className="companies-tab-reviews">{company.reviewNo} reviews</span>
               </div>
               <p className="companies-tab-desc">{company.slogan}</p>
-              <button className="companies-tab-view-jobs-btn">View Jobs</button>
+              <button className="companies-tab-view-jobs-btn" onClick={()=>navigate(`/Job-portal/jobseeker/companies/${company.companyId}`)}>View Jobs</button>
             </div>
           ))}
         </div>

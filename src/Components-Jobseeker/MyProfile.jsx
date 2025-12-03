@@ -12,6 +12,7 @@ import { JNotification } from './JNotification';
 import editIcon from '../assets/EditIcon.png'
 import uploadIcon from '../assets/UploadIcon.png'
 import deleteIcon from '../assets/DeleteIcon.png'
+import { AvatarMenu } from './AvatarMenu';
 
 // --- REUSABLE COMPONENTS ---
 
@@ -743,7 +744,7 @@ export const MyProfile = () => {
                     <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
                     <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot : bell} alt='Notifications' /></div>
-                    <Link to="/Job-portal/jobseeker/myprofile" className="nav-icon-active"><img className='header-icons' src={profile} alt='My Profile' /></Link>
+                    <AvatarMenu />
                 </div>
                 <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
             </header>

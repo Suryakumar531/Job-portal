@@ -18,6 +18,7 @@ import META from '../assets/META_BIG.png'
 import Google from '../assets/GOOG.png'
 import { CompaniesList } from "../CompaniesList";
 import { Joblist } from "../Joblist";
+import { AvatarMenu } from './AvatarMenu';
 
 export const JobsThroughCompany = () => {
 
@@ -114,7 +115,7 @@ export const JobsThroughCompany = () => {
                     <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
                     <div><img className='header-icons' src={bell} alt='Notifications' /></div>
-                    <div><img className='header-icons' src={profile} alt='My Profile' /></div>
+                    <AvatarMenu />
                 </div>
             </header>
             <div className='job-search-companies'>

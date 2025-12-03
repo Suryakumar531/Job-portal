@@ -11,6 +11,7 @@ import { SavedJobsCard } from './SavedJobsCard';
 import { AppliedJobCard } from './AppliedJobCard';
 import { notificationsData } from './Afterloginlanding';
 import { JNotification } from './JNotification';
+import { AvatarMenu } from './AvatarMenu';
 
 /* Below Code is removed after backend integration*/
 const savedJobsList = [
@@ -171,7 +172,7 @@ export const MyJobs = () => {
                     <div to="/Job-portal/jobseeker/myjobs" className="nav-icon-active"><img className='header-icons' src={breifcase} alt='My Jobs' /></div>
                     <div><img className='header-icons' src={chat} alt='Messages' /></div>
                     <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /></div>
-                    <Link to="/Job-portal/jobseeker/myprofile"><img className='header-icons' src={profile} alt='My Profile' /></Link>
+                    <AvatarMenu />
                 </div>
                 <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
             </header>

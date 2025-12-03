@@ -20,6 +20,7 @@ import linkedin from '../assets/socials-linkedin.png'
 import facebook from '../assets/socials-facebook.png'
 import formatPostedDate from './OpportunitiesCard';
 import { Joblist } from '../JobList';
+import { AvatarMenu } from './AvatarMenu';
 
 export const OpportunityOverview = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export const OpportunityOverview = () => {
           <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
           <div><img className='header-icons' src={chat} alt='Messages' /></div>
           <div><img className='header-icons' src={bell} alt='Notifications' /></div>
-          <div><img className='header-icons' src={profile} alt='My Profile' /></div>
+          <AvatarMenu />
         </div>
       </header>
 
