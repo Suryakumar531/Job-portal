@@ -1,132 +1,167 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import './JNotification.css'
 import bell from '../assets/header_bell.png'
 import bell_dot from '../assets/header_bell_dot.png'
 
-/* Below Code is removed after backend integration*/
-const notificationsData = [
-    {
-        id: 1,
-        text: 'Recruiter viewed your profile',
-        time: 'Today, 10:45 am',
-        isNew: true,
-    },
-    {
-        id: 2,
-        text: 'You have an interview invitation from XYZ Pvt Ltd',
-        time: 'Yesterday, 4:20 pm',
-        isNew: true,
-    },
-    {
-        id: 3,
-        text: 'Application submitted successfully for UI/UX Designer',
-        time: 'Yesterday, 4:20 pm',
-        isNew: false,
-    },
-    {
-        id: 4,
-        text: 'Your profile is 90% complete — finish to get more calls',
-        time: 'Yesterday, 4:20 pm',
-        isNew: false,
-    },
-    {
-        id: 5,
-        text: '5 new jobs match your preferences',
-        time: '17 Aug 2025, 9:30 am',
-        isNew: false,
-    },
-    {
-        id: 6,
-        text: '5 new jobs match your preferences',
-        time: '17 Aug 2025, 9:30 am',
-        isNew: false,
-    },
-];
-
-export { notificationsData };
-
-const OverflowMenu = ({ notificationId, onMarkAsRead, onDelete }) => {
-    return (
-        <div className="overflow-menu">
-            <button onClick={() => onMarkAsRead(notificationId)} className="menu-item">Mark as read</button>
-            <button onClick={() => onDelete(notificationId)} className="menu-item delete-item">Delete</button>
-        </div>
-    );
-};
-
 export const JNotification = ({ notificationsData, showNotification, setShowNotification }) => {
-    // State to track which notification's menu is open
+    const [notifications, setNotifications] = useState(notificationsData);
     const [activeMenuId, setActiveMenuId] = useState(null);
 
-    const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
+    const containerRef = useRef(null);
 
-    // Handler to toggle the menu for a specific notification
+    const newNotificationsCount = notifications.filter(n => !n.isRead).length;
+
+    // Toggle 3-dot menu
     const toggleMenu = (id, event) => {
-        // Stop event propagation to prevent the notification's click action
         event.stopPropagation();
         setActiveMenuId(activeMenuId === id ? null : id);
     };
 
-    // Placeholder handlers for menu actions
+    // MARK AS READ
     const handleMarkAsRead = (id) => {
-        console.log(`Marking notification ${id} as read`);
-        // you'd update notificationsData here
+        setNotifications(prev =>
+            prev.map(n =>
+                n.id === id ? { ...n, isRead: true } : n
+            )
+        );
         setActiveMenuId(null);
     };
 
-    const handleDelete = (id) => {
-        console.log(`Deleting notification ${id}`);
-        // you'd update notificationsData here
+    // MARK AS UNREAD
+    const handleMarkAsUnread = (id) => {
+        setNotifications(prev =>
+            prev.map(n =>
+                n.id === id ? { ...n, isRead: false } : n
+            )
+        );
         setActiveMenuId(null);
     };
+
+    // DELETE ONE
+    const handleDelete = (id) => {
+        setNotifications(prev => prev.filter(n => n.id !== id));
+        setActiveMenuId(null);
+    };
+
+    // CLEAR ALL
+    const handleClearAll = () => {
+        setNotifications([]);
+        setActiveMenuId(null);
+    };
+
+    // CLOSE ON OUTSIDE CLICK
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                containerRef.current &&
+                !containerRef.current.contains(event.target)
+            ) {
+                setShowNotification(false);
+            }
+        };
+
+        if (showNotification) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showNotification, setShowNotification]);
+
 
     return (
-        <div className={`notifications-container ${showNotification ? "show-notification" : "hide-notification"}`}>
+        <div
+            ref={containerRef}
+            className={`notifications-container ${showNotification ? "show-notification" : "hide-notification"}`}
+        >
+            {/* HEADER */}
             <div className="notifications-header">
-                <div className='notifications-heading-container'><img className='notification-header-icons' src={newNotificationsCount > 0 ? bell_dot: bell} alt='Notifications' /><h2>Notifications</h2></div>
-                <button onClick={() => setShowNotification(false)} className="notifications-close-btn">&times;</button>
+                <div className="notifications-heading-container">
+                    <img
+                        className="notification-header-icons"
+                        src={newNotificationsCount > 0 ? bell_dot : bell}
+                        alt="Notifications"
+                    />
+                    <h2>Notifications</h2>
+                </div>
+                <button onClick={() => setShowNotification(false)} className="notifications-close-btn">
+                    &times;
+                </button>
             </div>
-            
+
+            {/* SUBHEADER */}
             <div className="notifications-subheader">
                 <div>
                     <span>Stay Up to Date</span>
                     {newNotificationsCount > 0 && (
-                        <span className="new-notifications-count">{newNotificationsCount} New Notifications</span>
+                        <span className="new-notifications-count">
+                            {newNotificationsCount} New Notifications
+                        </span>
                     )}
                 </div>
-                <button className="clear-all-btn">Clear all</button>
+
+                <button className="clear-all-btn" onClick={handleClearAll}>
+                    Clear all
+                </button>
             </div>
 
+            {/* NOTIFICATION LIST */}
             <div className="notifications-list">
-                {notificationsData.map((notification) => (
-                    <div 
-                        key={notification.id} 
-                        className={notification.isNew ? "notification-new-item" : "notification-old-item"}
+                {notifications.map((notification) => (
+                    <div
+                        key={notification.id}
+                        className={notification.isRead ? "notification-old-item" : "notification-new-item"}
                     >
                         <div className="notification-content">
                             <p className="notification-text">{notification.text}</p>
                             <p className="notification-time">{notification.time}</p>
                         </div>
-                        
+
                         <div className="more-options-wrapper">
-                            <button 
-                                className="more-options-btn" 
+                            <button
+                                className="more-options-btn"
                                 onClick={(e) => toggleMenu(notification.id, e)}
                             >
                                 ⋮
                             </button>
-                            {/* Conditionally render the menu */}
+
                             {activeMenuId === notification.id && (
-                                <OverflowMenu 
-                                    notificationId={notification.id}
-                                    onMarkAsRead={handleMarkAsRead}
-                                    onDelete={handleDelete}
-                                />
+                                <div className="overflow-menu">
+                                    {notification.isRead ? (
+                                        <button
+                                            className="menu-item"
+                                            onClick={() => handleMarkAsUnread(notification.id)}
+                                        >
+                                            Mark as unread
+                                        </button>
+                                    ) : (
+                                        <button
+                                            className="menu-item"
+                                            onClick={() => handleMarkAsRead(notification.id)}
+                                        >
+                                            Mark as read
+                                        </button>
+                                    )}
+
+                                    <button
+                                        onClick={() => handleDelete(notification.id)}
+                                        className="menu-item delete-item"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             )}
                         </div>
                     </div>
                 ))}
+
+                {notifications.length === 0 && (
+                    <p style={{ padding: "20px", textAlign: "center", color: "#777" }}>
+                        No notifications
+                    </p>
+                )}
             </div>
         </div>
     );
-}
+};
