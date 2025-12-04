@@ -3,6 +3,47 @@ import './JNotification.css'
 import bell from '../assets/header_bell.png'
 import bell_dot from '../assets/header_bell_dot.png'
 
+/* Below Code is removed after backend integration*/
+const notificationsData = [
+    {
+        id: 1,
+        text: 'Recruiter viewed your profile',
+        time: 'Today, 10:45 am',
+        isNew: true,
+    },
+    {
+        id: 2,
+        text: 'You have an interview invitation from XYZ Pvt Ltd',
+        time: 'Yesterday, 4:20 pm',
+        isNew: true,
+    },
+    {
+        id: 3,
+        text: 'Application submitted successfully for UI/UX Designer',
+        time: 'Yesterday, 4:20 pm',
+        isNew: false,
+    },
+    {
+        id: 4,
+        text: 'Your profile is 90% complete — finish to get more calls',
+        time: 'Yesterday, 4:20 pm',
+        isNew: false,
+    },
+    {
+        id: 5,
+        text: '5 new jobs match your preferences',
+        time: '17 Aug 2025, 9:30 am',
+        isNew: false,
+    },
+    {
+        id: 6,
+        text: '5 new jobs match your preferences',
+        time: '17 Aug 2025, 9:30 am',
+        isNew: false,
+    },
+];
+
+export { notificationsData };
 
 const OverflowMenu = ({ notificationId, onMarkAsRead, onDelete }) => {
     return (

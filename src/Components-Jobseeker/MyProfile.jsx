@@ -1,18 +1,11 @@
 import React, { useState, useRef } from 'react'
 import './MyProfile.css'
 import { Link } from 'react-router-dom';
-import breifcase from '../assets/header_case.png'
-import chat from '../assets/header_message.png'
-import bell from '../assets/header_bell.png'
-import bell_dot from '../assets/header_bell_dot.png'
-import profile from '../assets/header_profile.png'
 import addPhoto from '../assets/AddPhoto.png'
-import { notificationsData } from './Afterloginlanding';
-import { JNotification } from './JNotification';
 import editIcon from '../assets/EditIcon.png'
 import uploadIcon from '../assets/UploadIcon.png'
 import deleteIcon from '../assets/DeleteIcon.png'
-import { AvatarMenu } from './AvatarMenu';
+import { JHeader } from './JHeader';
 
 // --- REUSABLE COMPONENTS ---
 
@@ -594,8 +587,6 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => (
 // --- MAIN COMPONENT ---
 
 export const MyProfile = () => {
-    const [showNotification, setShowNotification] = useState(false);
-    const newNotificationsCount = notificationsData.filter(n => n.isNew).length;
     const [openDropdown, setOpenDropdown] = useState('Basic Details');
     const [activeItem, setActiveItem] = useState('Profile');
 
@@ -733,21 +724,7 @@ export const MyProfile = () => {
 
     return (
         <div>
-            <header className="header">
-                <div className="logo">job portal</div>
-                <nav className="nav-links">
-                    <Link to="/Job-portal/jobseeker/" className="nav-item">Home</Link>
-                    <Link to="/Job-portal/jobseeker/jobs" className="nav-item">Jobs</Link>
-                    <Link to="/Job-portal/jobseeker/companies" className="nav-item">Companies</Link>
-                </nav>
-                <div className="auth-links">
-                    <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
-                    <div><img className='header-icons' src={chat} alt='Messages' /></div>
-                    <div onClick={() => setShowNotification(!showNotification)}><img className='header-icons' src={newNotificationsCount > 0 ? bell_dot : bell} alt='Notifications' /></div>
-                    <AvatarMenu />
-                </div>
-                <JNotification notificationsData={notificationsData} showNotification={showNotification} setShowNotification={setShowNotification} />
-            </header>
+            <JHeader />
             <main>
                 <div className='profile-main-desc'>
                     <h1>My Profile</h1>

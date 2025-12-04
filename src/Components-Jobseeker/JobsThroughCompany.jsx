@@ -3,22 +3,11 @@ import './JobsThroughCompany.css'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { OpportunitiesCard } from './OpportunitiesCard';
 import { Footer } from '../Components-LandingPage/Footer';
-import breifcase from '../assets/header_case.png'
-import chat from '../assets/header_message.png'
-import bell from '../assets/header_bell.png'
-import profile from '../assets/header_profile.png'
-import TCS from '../assets/TCS.png'
-import Apple from '../assets/Apple-Logo.png'
-import Wipro from '../assets/WIT.png'
 import starIcon from '../assets/Star_icon.png'
-import CTS from '../assets/CTSH_BIG.png'
-import Amazon from '../assets/AMZN_BIG.png'
-import Infy from '../assets/INFY_BIG.png'
-import META from '../assets/META_BIG.png'
-import Google from '../assets/GOOG.png'
 import { CompaniesList } from "../CompaniesList";
 import { Joblist } from "../Joblist";
 import { AvatarMenu } from './AvatarMenu';
+import { JHeader } from './JHeader';
 
 export const JobsThroughCompany = () => {
 
@@ -103,21 +92,7 @@ export const JobsThroughCompany = () => {
     return (
 
         <>
-            <header className="header">
-                <div className="logo">job portal</div>
-                <nav className="nav-links">
-                    <Link to="/Job-portal/jobseeker/" className="nav-item" >Home</Link>
-                    <Link to="/Job-portal/jobseeker/jobs" className="nav-item" >Jobs</Link>
-                    <Link to="/Job-portal/jobseeker/companies" className="nav-item" >Companies</Link>
-                </nav>
-
-                <div className="auth-links">
-                    <Link to="/Job-portal/jobseeker/myjobs"><img className='header-icons' src={breifcase} alt='My Jobs' /></Link>
-                    <div><img className='header-icons' src={chat} alt='Messages' /></div>
-                    <div><img className='header-icons' src={bell} alt='Notifications' /></div>
-                    <AvatarMenu />
-                </div>
-            </header>
+            <JHeader />
             <div className='job-search-companies'>
                 <section className='Opportunities-section'>
                     <div className="company-header-container">
