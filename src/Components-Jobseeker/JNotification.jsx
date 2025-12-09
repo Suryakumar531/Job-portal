@@ -158,7 +158,7 @@ export const JNotification = ({ notificationsData, showNotification, setShowNoti
 
                 {notifications.length === 0 && (
                     <p style={{ padding: "20px", textAlign: "center", color: "#777" }}>
-                        No notifications
+                        No notifications for you
                     </p>
                 )}
             </div>

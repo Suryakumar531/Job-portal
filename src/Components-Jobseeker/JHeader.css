@@ -6,7 +6,6 @@
 
 .jheader-icons {
   height: 28px;
-  /* margin: 15px; */
   cursor: pointer;
   padding: 15px;
   border-radius: 25px;
@@ -36,7 +35,6 @@
 .jheader-icons-active{
   background-color:#E9F3FC ;
    height: 28px;
-  /* margin: 15px; */
   cursor: pointer;
   padding: 15px;
   border-radius: 15px;
