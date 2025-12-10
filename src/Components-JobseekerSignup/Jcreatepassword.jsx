@@ -7,10 +7,16 @@ import eyeHide from '../assets/eye-hide.png'
 
 export const Jcreatepassword = () => {
   const [passwordShow, setPasswordShow] = useState(true)
+
+  const [confirmPasswordShow, setconfirmPasswordShow] = useState(true)
     
   const togglePasswordView = () => {
     setPasswordShow((prev) => !prev)
   }
+
+  const toggleConfirmPasswordView = () => {
+    setconfirmPasswordShow((prev) => !prev)
+   }
 
   const initialValues = { newPassword: "", confirmPassword: "" }
 
@@ -81,11 +87,11 @@ export const Jcreatepassword = () => {
 
           <label>Confirm Password</label>
           <div className="password-wrapper">
-            <input type={passwordShow ? "password" : "text"} placeholder="Re-enter new password" name="confirmPassword"
+            <input type={confirmPasswordShow ? "password" : "text"} placeholder="Re-enter new password" name="confirmPassword"
               value={formValues.confirmPassword}
               onChange={handleForm}
               className={errors.confirmPassword ? "input-error" : ""} />
-            <span className="eye-icon" onClick={togglePasswordView}><img src={passwordShow ? eye : eyeHide} className='show-icon' alt='show' /></span>
+            <span className="eye-icon" onClick={toggleConfirmPasswordView}><img src={confirmPasswordShow ? eye : eyeHide} className='show-icon' alt='show' /></span>
           </div>
           {errors.confirmPassword && <span className="error-msg">{errors.confirmPassword}</span>}
 
