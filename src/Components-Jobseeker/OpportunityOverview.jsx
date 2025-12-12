@@ -24,7 +24,7 @@ export const OpportunityOverview = () => {
   const job = Joblist.find(singleJob => singleJob.id === id);
 
   const similarJobs = Joblist.filter((similarJob) => {
-    return similarJob.id !== job.id && similarJob.Department === job.Department;
+    return similarJob.id !== job.id && similarJob.Department.some(item => job.Department.includes(item));
   });
 
   const limitedSimilarJob = similarJobs.slice(0, 9);
@@ -137,10 +137,11 @@ export const OpportunityOverview = () => {
 
               <h3>Key Details:</h3>
               <p><strong>Role:</strong> {job.title}</p>
-              <p><strong>Industry Type:</strong> {job.IndustryType}</p>
-              <p><strong>Department:</strong> {job.Department}</p>
+              <p><strong>Industry Type:</strong> {job.IndustryType.join(", ")}</p>
+              <p><strong>Department:</strong> {job.Department.join(", ")}</p>
               <p><strong>Job Type:</strong> {job.WorkType}</p>
               <p><strong>Location:</strong> {job.location}</p>
+              <p><strong>Shift:</strong> {job.Shift}</p>
 
               <h3>Key Skills</h3>
               <div className="opp-key-skills-container">
