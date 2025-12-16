@@ -36,9 +36,17 @@ export const Jsignup = () => {
     const regexofUppercase = /^(?=.*[A-Z]).+$/
     const regexofNumber = /^(?=.*\d).+$/
     const regexofSpecialChar = /^(?=.*[!@#$%^&*]).+$/
+    const regexofUserName = /^(?=[a-zA-Z])\S+$/
+    const regexofMobile = /^\d{10}$/
 
     if (!formValues.username.trim()) {
       newErrors.username = "Username is required"
+    } else if (formValues.username.length < 4 ) {
+      newErrors.username = "Username must be at least 4 characters"
+    } else if (formValues.username.length > 20 ) {
+      newErrors.username = "Username should not exceed 20 characters"
+    } else if (!regexofUserName.test(formValues.username)){
+      newErrors.username = "Invalid username Format"
     }
 
     if (!formValues.email.trim()) {
@@ -63,6 +71,10 @@ export const Jsignup = () => {
       newErrors.confirmpassword = "Confirm Password is required"
     } else if (formValues.password !== formValues.confirmpassword) {
       newErrors.confirmpassword = "Passwords do not match"
+    }
+
+    if (formValues.phone && !regexofMobile.test(formValues.phone)) {
+      newErrors.phone = "Invalid format";
     }
 
     setErrors(newErrors)
@@ -99,7 +111,7 @@ export const Jsignup = () => {
           <h2>Sign up for Jobseeker</h2>
 
           <label>User name</label>
-          <input type="text" name="username" value={formValues.username} onChange={handleForm} placeholder="Enter your name" className={errors.username ? "input-error" : ""} />
+          <input type="text" name="username" value={formValues.username} onChange={handleForm} placeholder="Create your Username" className={errors.username ? "input-error" : ""} />
           {errors.username && <span className="error-msg">{errors.username}</span>}
 
           <label>Email ID</label>
@@ -121,7 +133,8 @@ export const Jsignup = () => {
           {errors.confirmpassword && <span className="error-msg">{errors.confirmpassword}</span>}
 
           <label>Mobile number (optional)</label>
-          <input type="tel" name="phone" value={formValues.phone} onChange={handleForm} placeholder="Enter your mobile number" />
+          <input type="tel" name="phone" value={formValues.phone} onChange={handleForm} placeholder="Enter your mobile number" className={errors.phone ? "input-error" : ""} />
+          {errors.phone && <span className="error-msg">{errors.phone}</span>}
 
           <button className="j-sign-up-submit">Signup</button>
 
