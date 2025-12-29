@@ -5,14 +5,14 @@ import { OpportunitiesCard } from './OpportunitiesCard';
 import { Footer } from '../Components-LandingPage/Footer';
 import starIcon from '../assets/Star_icon.png'
 import { CompaniesList } from "../CompaniesList";
-import { Joblist } from "../Joblist";
+import { JobList } from "../JobList";
 import { AvatarMenu } from './AvatarMenu';
 import { JHeader } from './JHeader';
 
 export const JobsThroughCompany = () => {
 
     const { companyId } = useParams()
-    const filteredJobs = Joblist.filter(comp => comp.companyId === companyId);
+    const filteredJobs = JobList.filter(comp => comp.companyId === companyId);
 
     console.log(filteredJobs)
 

@@ -11,9 +11,10 @@
   border-radius: 25px;
 }
 .jheader-nav-links {
-  margin-left: 10%;
   display: flex;
   gap: 24px;
+  margin-left: 35%;
+  justify-content: center;
 }
 
 .jheader-nav-items {

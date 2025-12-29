@@ -15,15 +15,15 @@ import twitter from '../assets/socials-x.png'
 import linkedin from '../assets/socials-linkedin.png'
 import facebook from '../assets/socials-facebook.png'
 import formatPostedDate from './OpportunitiesCard';
-import { Joblist } from '../JobList';
+import { JobList } from '../JobList';
 
 export const OpportunityOverview = () => {
   const navigate = useNavigate();
 
   const { id } = useParams()
-  const job = Joblist.find(singleJob => singleJob.id === id);
+  const job = JobList.find(singleJob => singleJob.id === id);
 
-  const similarJobs = Joblist.filter((similarJob) => {
+  const similarJobs = JobList.filter((similarJob) => {
     return similarJob.id !== job.id && similarJob.Department.some(item => job.Department.includes(item));
   });
 

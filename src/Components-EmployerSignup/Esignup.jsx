@@ -5,7 +5,7 @@ import workTime from '../assets/WorkTime.png'
 import eye from '../assets/show_password.png'
 import eyeHide from '../assets/eye-hide.png'
 
-export const ESignup = () => {
+export const Esignup = () => {
   const [passwordShow, setPasswordShow] = useState(true)
   const [confirmPasswordShow, setConfirmPasswordShow] = useState(true)
 

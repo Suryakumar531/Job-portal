@@ -8,7 +8,7 @@ import { Jsignup } from './Components-JobseekerSignup/Jsignup'
 import { Jcreatepassword } from './Components-JobseekerSignup/Jcreatepassword'
 import { Jforgotpassword } from './Components-JobseekerSignup/Jforgotpassword'
 import { Afterloginlanding } from './Components-Jobseeker/Afterloginlanding'
-import { ESignup } from './Components-EmployerSignup/ESignup'
+import { Esignup } from './Components-EmployerSignup/Esignup'
 import { Eforgotpassword } from './Components-EmployerSignup/Eforgotpassword'
 import { Ecreatepassword } from './Components-EmployerSignup/Ecreatepassword'
 import { OpportunityOverview } from './Components-Jobseeker/OpportunityOverview'
@@ -17,6 +17,7 @@ import { JobsTab } from './Components-Jobseeker/JobsTab'
 import { CompaniesTab } from './Components-Jobseeker/CompaniesTab'
 import { MyProfile } from './Components-Jobseeker/MyProfile'
 import { JobsThroughCompany } from './Components-Jobseeker/JobsThroughCompany'
+import { AboutUs } from './Components-LandingPage/AboutUs'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -48,7 +49,7 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/employer/signup',
-  element: <ESignup />,
+  element: <Esignup />,
 },
 {
   path: '/Job-portal/employer/login/forgotpassword',
@@ -77,6 +78,10 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/jobseeker/myprofile',
   element: <MyProfile />,
+},
+{
+  path: '/Job-portal/aboutus',
+  element: <AboutUs />,
 },
 {
   path: '/Job-portal/jobseeker/companies/:companyId',

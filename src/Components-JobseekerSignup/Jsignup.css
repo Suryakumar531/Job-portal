@@ -84,4 +84,49 @@ body {
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+ 
+  .j-sign-up-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+  }
+ 
+  .j-sign-up-header .no-account,
+  .j-sign-up-header .employer-redirect-link,
+  .j-sign-up-header .separator {
+    display: none;
+  }
+ 
+  .j-sign-up-body {
+    flex-direction: column;
+    padding: 30px 30px;
+  }
 
+  .j-sign-up-header-links {
+    width: auto;
+  }
+
+  .j-sign-up-form {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .j-sign-up-form h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 20px;
+  }
+ 
+  .j-sign-up-header .signup-btn {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+
+  .signup-illustration {
+    display: none;
+  }
+}

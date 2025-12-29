@@ -10,13 +10,13 @@ import Infy from '../assets/INFY_BIG.png'
 import Tcs from '../assets/TCS.png'
 import META from '../assets/META_BIG.png'
 import { useNavigate } from "react-router-dom";
-import { Joblist } from '../JobList';
+import { JobList } from '../JobList';
 
 
 export const Opportunities = () => {
   const navigate = useNavigate();
   const [displayCount, setDisplayCount] = useState(8);
-  const itemsToDisplay = Joblist.slice(0, displayCount);
+  const itemsToDisplay = JobList.slice(0, displayCount);
   return (
       <div className="Opportunities-job-list">
         {itemsToDisplay.map((job, index) => (

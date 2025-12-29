@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import search from '../assets/icon_search.png'
 import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
-import { Joblist } from "../JobList";
+import { JobList } from "../JobList";
 import { OpportunitiesCard } from './OpportunitiesCard';
 import { JHeader } from './JHeader';
 
@@ -16,8 +16,8 @@ export const JobsTab = () => {
     const indexofLastjob = currentPage * displayCount;
     const indexoffirstjob = indexofLastjob - displayCount;
 
-    const currentJobCards = Joblist.slice(indexoffirstjob, indexofLastjob);
-    const totalpages = Math.ceil(Joblist.length / displayCount);
+    const currentJobCards = JobList.slice(indexoffirstjob, indexofLastjob);
+    const totalpages = Math.ceil(JobList.length / displayCount);
 
     const HandlePrev = () => {
         if (currentPage > 1) setCurrentPage(currentPage - 1);

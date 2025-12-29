@@ -8,7 +8,7 @@ import Tcs from './assets/TCS.png'
 import metaLogo from './assets/META_BIG.png'
 
 
-export const Joblist = [
+export const JobList = [
   {
     id: "62",
     title: "Software Engineer",
