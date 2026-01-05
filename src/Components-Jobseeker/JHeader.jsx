@@ -7,6 +7,7 @@ import bell from '../assets/header_bell.png'
 import { JNotification } from './JNotification';
 import bell_dot from '../assets/header_bell_dot.png'
 import { AvatarMenu } from './AvatarMenu';
+import home_icon from '../assets/home_icon.png'
 
 //Remove after back end integration
 const notificationsData = [
@@ -64,11 +65,6 @@ export const JHeader = () => {
         { image: breifcase, path: "/Job-portal/jobseeker/myjobs" },
         { image: chat, path: "" }
     ]
-
-    const handleNavClick = (e) => {
-        setActiveItem(e);
-    }
-
 
     return (
         <header className="header">

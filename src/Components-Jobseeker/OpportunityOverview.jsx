@@ -167,7 +167,7 @@ export const OpportunityOverview = () => {
           <div className="opp-job-sidebar">
             <h3>Similar Jobs</h3>
             {limitedSimilarJob.length > 0 ? limitedSimilarJob.map((sim) => (
-              <div key={sim.id} className="opp-similar-job">
+              <div key={sim.id} onClick={() => navigate(`/Job-portal/jobseeker/OpportunityOverview/${sim.id}`)} className="opp-similar-job">
                 <div className="Opportunities-job-header">
                   <div>
                     <h2 className="similar-job-title">{sim.title}</h2>
