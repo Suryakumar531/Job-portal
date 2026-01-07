@@ -66,6 +66,7 @@ const Profile = ({ data, onChange, onReset, onNext }) => {
         else if (data.dob > today) newErrors.dob = "*Date cannot be in the future";
         if (data.maritalStatus === "Select") newErrors.maritalStatus = "*Please select status";
         if (!data.nationality?.trim()) newErrors.nationality = "*Nationality is required";
+        else if (!AlphaOnlyreg.test(data.nationality)) newErrors.nationality ="*Please use letters only"
         
         setErrors(newErrors);
 
@@ -142,7 +143,7 @@ const Profile = ({ data, onChange, onReset, onNext }) => {
 const CurrentDetails = ({ data, onChange, onReset, onNext }) => {
     const [errors, setErrors] = useState({});
     const handleChange = (e) => { onChange(e); if(errors[e.target.name]) setErrors({...errors, [e.target.name]: ''}); };
-
+     const AlphaOnlyreg = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
     const handleSubmit = (e) => {
         e.preventDefault();
         const newErrors = {};
@@ -151,6 +152,9 @@ const CurrentDetails = ({ data, onChange, onReset, onNext }) => {
         if (!data.experience) newErrors.experience = "Required";
         if (data.noticePeriod === 'Select') newErrors.noticePeriod = "Required";
         if (!data.currentLocation?.trim()) newErrors.currentLocation = "Required";
+        else if (!AlphaOnlyreg.test(data.currentLocation)) newErrors.currentLocation ="*Please use letters only";
+        if (data.prefLocation && !AlphaOnlyreg.test(data.prefLocation)) newErrors.prefLocation = "*Please use letters only";
+        
         
         setErrors(newErrors);
         
@@ -176,8 +180,10 @@ const CurrentDetails = ({ data, onChange, onReset, onNext }) => {
                         <option value="Select">Select</option><option value="Immediate">Immediate</option><option value="1 Month">1 Month</option><option value="2 Months">2 Months</option><option value="3 Months">3 Months</option>
                     </select>
                 </div>
-                <div className="form-group full-width"><label>Current Location</label><input type="text" name="currentLocation" value={data.currentLocation || ''} onChange={handleChange} className={errors.currentLocation ? 'input-error' : ''} placeholder="e.g., Bangalore"/></div>
-                <div className="form-group full-width"><label>Preferred Location(s)</label><input type="text" name="prefLocation" value={data.prefLocation || ''} onChange={handleChange} placeholder="e.g., Bangalore, Chennai, Coimbatore"/></div>
+                <div className="form-group full-width"><label>Current Location</label><input type="text" name="currentLocation" value={data.currentLocation || ''} onChange={handleChange} className={errors.currentLocation ? 'input-error' : ''} placeholder="e.g., Bangalore"/>
+                 {errors.currentLocation && <span className="error-message">{errors.currentLocation}</span>}</div>
+                <div className="form-group full-width"><label>Preferred Location(s)</label><input type="text" name="prefLocation" value={data.prefLocation || ''} onChange={handleChange} placeholder="e.g., Bangalore, Chennai, Coimbatore"/>
+                {errors.prefLocation && <span className="error-message">{errors.prefLocation}</span>}</div>
             </div>
             <div className="form-actions"><button type="submit" className="btn btn-primary">Save & Continue</button></div>
         </form>
@@ -189,6 +195,7 @@ const ContactDetails = ({ data, onChange, onReset, onNext }) => {
     const handleChange = (e) => { onChange(e); if(errors[e.target.name]) setErrors({...errors, [e.target.name]: ''}); };
     const mobileRegex = /^\d{10}$/;
     const Pincode = /^[1-9][0-9]{5}$/
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const handleSubmit = (e) => {
         e.preventDefault();
         const newErrors = {};
@@ -199,14 +206,18 @@ const ContactDetails = ({ data, onChange, onReset, onNext }) => {
 
         else if (data.mobile.length >0 && data.mobile === data.altMobile) newErrors.altMobile = "Mobile Number Should Not be same";
         if (!data.email) newErrors.email = "Required";
-        else if (data.email.length>0 && data.email === data.altEmail) newErrors.altEmail = "Email Should Not be same";
+        else if(!emailRegex.test(data.email)) newErrors.email= "Invalid Format";
+        if (data.email.length>0 && data.email === data.altEmail) newErrors.altEmail = "Email Should Not be same";
+        else if(data.altEmail && !emailRegex.test(data.altEmail)) newErrors.altEmail= "Invalid Format";
+      
         if (!data.address) newErrors.address = "Required";
         if (!data.country) newErrors.country = "Required";
+        
         if (!data.state) newErrors.state = "Required";
         if (!data.street) newErrors.street = "Required";
         if (!data.pincode) newErrors.pincode = "Required";
+        else if(!Pincode.test(data.pincode)) newErrors.pincode = "Enter a Valid PinCode";
         if (!data.city) newErrors.city = "Required";
-            else if(!Pincode.test(data.pincode)) newErrors.pincode = "Enter a Valid PinCode";
         
         setErrors(newErrors);
         if (Object.keys(newErrors).length === 0) {
@@ -291,6 +302,7 @@ const EducationDetails = ({ data, onUpdateSSLC, onUpdateHSC, onUpdateGrad, onAdd
         if (!data.sslc.percentage) newErrors.sslcpercentage = "Required";
         else if (!percentageReg.test(data.sslc.percentage)) newErrors.sslcpercentage = "Invalid format";
         if (!data.sslc.location) newErrors.sslclocation = "Required";
+         else if (!AlphaOnlyreg.test(data.sslc.location)) newErrors.sslc.location ="*Please use letters only";
         if (!data.sslc.year) newErrors.sslcyear = "Date Of Year Required";
         else if (data.sslc.year > today) {
         newErrors.sslcyear = "Year cannot be in the future";}
@@ -301,11 +313,59 @@ const EducationDetails = ({ data, onUpdateSSLC, onUpdateHSC, onUpdateGrad, onAdd
         if (!data.hsc.percentage) newErrors.hscpercentage = "Required";
          else if (!percentageReg.test(data.hsc.percentage)) newErrors.hscpercentage = "Invalid format";
         if (!data.hsc.location) newErrors.hsclocation = "Required";
+         else if (!AlphaOnlyreg.test(data.hsc.location)) newErrors.hsc.location ="*Please use letters only";
         if (!data.hsc.year) newErrors.hscyear = "Date Of Year Required";
         else if (data.hsc.year > today) {
         newErrors.hscyear = "Year cannot be in the future";}
-   
-       
+            
+        data.graduations.forEach((grad, index) => {
+        if (!grad.degree || grad.degree.trim() === "") {
+        newErrors[`graddegree${index}`] = "Degree is required";
+         }
+        if (!grad.status || grad.status === "Select") {
+        newErrors[`gradstatus${index}`] = "Please select degree status";
+        }
+        if (!grad.college || grad.college.trim() === "") {
+        newErrors[`gradcollege${index}`] = "Institution name is required";
+        }
+        if (!grad.percentage || grad.percentage.trim() === "") {
+        newErrors[`gradpercentage${index}`] = "Percentage is required";
+        }else if (!percentageReg.test(grad.percentage)) newErrors[`gradpercentage${index}`] ="Invalid format"
+        if (!grad.startYear) {
+        newErrors[`gradstartYear${index}`] = "Starting year is required";
+        }
+        if (!grad.city) {
+        newErrors[`gradcity${index}`] = "City is required";
+        }
+        if (!grad.state) {
+        newErrors[`gradstate${index}`] = "State is required";
+        }
+        if (!grad.country) {
+        newErrors[`gradcountry${index}`] = "Country is required";
+        }
+        if (!grad.dept) {
+        newErrors[`graddepartment${index}`] = "department is required";
+        }
+        if (!grad.endYear) {
+        newErrors[`gradendYear${index}`] = "Ending year is required";
+        } else if (new Date(grad.endYear) < new Date(grad.startYear)) {
+        newErrors[`gradendYear${index}`] = "Ending year cannot be before starting year";
+        }
+        else if (grad.startYear) {
+        const start = new Date(grad.startYear);
+        const end = new Date(grad.endYear);
+
+        if (end < start) {
+            newErrors[`gradendYear${index}`] = "Ending year cannot be before starting year";
+        } 
+        else if (end.getFullYear() - start.getFullYear() < 1) {
+            newErrors[`gradendYear${index}`] = "Course duration must be at least 1 year";
+        }
+        }
+        });
+        
+        
+        
         setErrors(newErrors);
         if (Object.keys(newErrors).length === 0) {
             onNext();
@@ -406,16 +466,26 @@ const EducationDetails = ({ data, onUpdateSSLC, onUpdateHSC, onUpdateGrad, onAdd
                                 )}
  
                                 <div className="form-grid">
-                                    <div className="form-group"><label>Degree</label><input type="text" name="degree" value={grad.degree} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., B.E" /></div>
-                                    <div className="form-group"><label>Degree status</label><select name="status" value={grad.status} onChange={(e) => onUpdateGrad(grad.id, e)}><option value="Select">Select</option><option value="Completed">Completed</option><option value="Pursuing">Pursuing</option></select></div>
-                                    <div className="form-group"><label>Department</label><input type="text" name="dept" value={grad.dept} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., Computer Science" /></div>
-                                    <div className="form-group"><label>Percentage</label><input type="text" name="percentage" value={grad.percentage} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="%" /></div>
-                                    <div className="form-group"><label>Starting year</label><input type="date" name="startYear" value={grad.startYear} onChange={(e) => onUpdateGrad(grad.id, e)} /></div>
-                                    <div className="form-group"><label>Ending year</label><input type="date" name="endYear" value={grad.endYear} onChange={(e) => onUpdateGrad(grad.id, e)} /></div>
-                                    <div className="form-group full-width"><label>Institution name</label><input type="text" name="college" value={grad.college} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., XYZ Institute" /></div>
-                                    <div className="form-group"><label>City</label><input type="text" name="city" value={grad.city} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., Green park" /></div>
-                                    <div className="form-group"><label>State</label><input type="text" name="state" value={grad.state} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., Tamil Nadu" /></div>
-                                    <div className="form-group"><label>Country</label><input type="text" name="country" value={grad.country} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., India" /></div>
+                                    <div className="form-group"><label>Degree</label><input type="text" name="degree" value={grad.degree} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., B.E" />
+                                    {errors[`graddegree${index}`] && <span className="error-msg">{errors[`graddegree${index}`]}</span>}</div>
+                                    <div className="form-group"><label>Degree status</label><select name="status" value={grad.status} onChange={(e) => onUpdateGrad(grad.id, e)}><option value="Select">Select</option><option value="Completed">Completed</option><option value="Pursuing">Pursuing</option></select>
+                                    {errors[`gradstatus${index}`] && <span className="error-msg">{errors[`gradstatus${index}`]}</span>}</div>
+                                    <div className="form-group"><label>Department</label><input type="text" name="dept" value={grad.dept} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., Computer Science" />
+                                    {errors[`graddepartment${index}`] && <span className="error-msg">{errors[`graddepartment${index}`]}</span>}</div>
+                                    <div className="form-group"><label>Percentage</label><input type="text" name="percentage" value={grad.percentage} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="%" />
+                                    {errors[`gradpercentage${index}`] && <span className="error-msg">{errors[`gradpercentage${index}`]}</span>}</div>
+                                    <div className="form-group"><label>Starting year</label><input type="date" name="startYear" value={grad.startYear} onChange={(e) => onUpdateGrad(grad.id, e)} />
+                                    {errors[`gradstartYear${index}`] && <span className="error-msg">{errors[`gradstartYear${index}`]}</span>}</div>
+                                    <div className="form-group"><label>Ending year</label><input type="date" name="endYear" value={grad.endYear} onChange={(e) => onUpdateGrad(grad.id, e)} />
+                                    {errors[`gradendYear${index}`] && <span className="error-msg">{errors[`gradendYear${index}`]}</span>}</div>
+                                    <div className="form-group full-width"><label>Institution name</label><input type="text" name="college" value={grad.college} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., XYZ Institute" />
+                                    {errors[`gradcollege${index}`] && <span className="error-msg">{errors[`gradcollege${index}`]}</span>}</div>
+                                    <div className="form-group"><label>City</label><input type="text" name="city" value={grad.city} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., Green park" />
+                                    {errors[`gradcity${index}`] && <span className="error-msg">{errors[`gradcity${index}`]}</span>}</div>
+                                    <div className="form-group"><label>State</label><input type="text" name="state" value={grad.state} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., Tamil Nadu" />
+                                    {errors[`gradstate${index}`] && <span className="error-msg">{errors[`gradstate${index}`]}</span>}</div>
+                                    <div className="form-group"><label>Country</label><input type="text" name="country" value={grad.country} onChange={(e) => onUpdateGrad(grad.id, e)} placeholder="e.g., India" />
+                                    {errors[`gradcountry${index}`] && <span className="error-msg">{errors[`gradcountry${index}`]}</span>}</div>
                                 </div>
                             </div>
                         )}
@@ -514,6 +584,7 @@ const KeySkills = ({ skills, onAdd, onUpdate, onDelete, onReset, onNext }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editIndex, setEditIndex] = useState(null); 
     const [currentSkill, setCurrentSkill] = useState("");
+    const [errors, setErrors] = useState({});
 
     const openAdd = () => { setEditIndex(null); setCurrentSkill(""); setIsModalOpen(true); };
     const openEdit = (index) => { setEditIndex(index); setCurrentSkill(skills[index]); setIsModalOpen(true); };
@@ -532,7 +603,19 @@ const KeySkills = ({ skills, onAdd, onUpdate, onDelete, onReset, onNext }) => {
     onReset('skills'); 
   }
     };
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+        
+        
+        if(skills.length ===0) newErrors.skills = "Add atleast One Keyskills"
+        
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            onNext();
+        }
+    };
 
     return (
         <form className="content-card" onSubmit={(e) => { e.preventDefault(); onNext(); }}>
@@ -543,8 +626,9 @@ const KeySkills = ({ skills, onAdd, onUpdate, onDelete, onReset, onNext }) => {
             <div className="skills-list">
                 {skills.map((skill, index) => (<EditableListItem key={index} title={skill} onEdit={() => openEdit(index)} />))}
             </div>
+            {errors.skills && <span className="error-message">{errors.skills}</span>}
             <button type="button" className="add-link" onClick={openAdd}>+ Add another skill</button>
-            <div className="form-actions"><button type="submit" className="btn btn-primary">Save & Continue</button></div>
+            <div className="form-actions"><button onClick={handleSubmit} type="submit" className="btn btn-primary">Save & Continue</button></div>
             <PopupModal title={editIndex !== null ? "Edit Skill" : "Add Skill"} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} onDelete={handleDelete} mode={editIndex !== null ? 'edit' : 'add'}>
                 <div className="form-group"><label>Skill *</label><input type="text" value={currentSkill} onChange={(e) => setCurrentSkill(e.target.value)} placeholder="Enter Skill" /></div>
             </PopupModal>
@@ -556,6 +640,7 @@ const LanguagesKnown = ({ languages, onAdd, onUpdate, onDelete, onReset, onNext 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
     const [currentLang, setCurrentLang] = useState({ name: "", proficiency: "Select" });
+    const [errors, setErrors] = useState({});
 
     const openAdd = () => { setEditIndex(null); setCurrentLang({ name: "", proficiency: "Select" }); setIsModalOpen(true); };
     const openEdit = (index) => { setEditIndex(index); setCurrentLang(languages[index]); setIsModalOpen(true); };
@@ -565,6 +650,19 @@ const LanguagesKnown = ({ languages, onAdd, onUpdate, onDelete, onReset, onNext 
             if (editIndex !== null) onUpdate(editIndex, currentLang);
             else onAdd(currentLang);
             setIsModalOpen(false);
+        }
+    };
+     const handleSubmit = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+        
+        
+        if(languages.length === 0) newErrors.languages = "Add atleast One Languages"
+        
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            onNext();
         }
     };
 
@@ -579,8 +677,9 @@ const LanguagesKnown = ({ languages, onAdd, onUpdate, onDelete, onReset, onNext 
             <div className="skills-list">
                 {languages.map((lang, index) => (<EditableListItem key={index} title={lang.name} onEdit={() => openEdit(index)} />))}
             </div>
+            {errors.languages && <span className="error-message">{errors.languages}</span>}
             <button type="button" className="add-link" onClick={openAdd}>+ Add another</button>
-            <div className="form-actions"><button type="submit" className="btn btn-primary">Save & Continue</button></div>
+            <div className="form-actions"><button type="submit" className="btn btn-primary" onClick={handleSubmit}>Save & Continue</button></div>
             <PopupModal title={editIndex !== null ? "Edit Language" : "Add Language"} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} onDelete={handleDelete} mode={editIndex !== null ? 'edit' : 'add'}>
                 <div className="form-group" style={{marginBottom:'1rem'}}><label>Language Name *</label><input type="text" value={currentLang.name} onChange={(e) => setCurrentLang({...currentLang, name: e.target.value})} placeholder="e.g., English" /></div>
                 <div className="form-group"><label>Proficiency</label><select value={currentLang.proficiency} onChange={(e) => setCurrentLang({...currentLang, proficiency: e.target.value})}><option value="Select">Select</option><option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Fluent">Fluent</option><option value="Native">Native</option></select></div>
@@ -593,6 +692,7 @@ const Certifications = ({ certs, onAdd, onUpdate, onDelete, onReset, onNext }) =
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
     const [currentCert, setCurrentCert] = useState({ name: "", file: null });
+    const [errors, setErrors] = useState({});
 
     const openAdd = () => { setEditIndex(null); setCurrentCert({ name: "", file: null }); setIsModalOpen(true); };
     const openEdit = (index) => { setEditIndex(index); setCurrentCert(certs[index]); setIsModalOpen(true); };
@@ -602,6 +702,20 @@ const Certifications = ({ certs, onAdd, onUpdate, onDelete, onReset, onNext }) =
             if (editIndex !== null) onUpdate(editIndex, currentCert);
             else onAdd(currentCert);
             setIsModalOpen(false);
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+        
+        
+        if(certs.length === 0) newErrors.certs = "Add atleast One certificate"
+        
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+            onNext();
         }
     };
 
@@ -616,8 +730,9 @@ const Certifications = ({ certs, onAdd, onUpdate, onDelete, onReset, onNext }) =
             <div className="skills-list">
                 {certs.map((cert, index) => (<EditableListItem key={index} title={cert.name} onEdit={() => openEdit(index)} />))}
             </div>
+            {errors.certs && <span className="error-message">{errors.certs}</span>}
             <button type="button" className="add-link" onClick={openAdd}>+ Add another certification</button>
-            <div className="form-actions"><button type="submit" className="btn btn-primary">Save & Continue</button></div>
+            <div className="form-actions"><button type="submit" onClick={handleSubmit} className="btn btn-primary">Save & Continue</button></div>
             <PopupModal title={editIndex !== null ? "Edit Certification" : "Add Certification"} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSave} onDelete={handleDelete} mode={editIndex !== null ? 'edit' : 'add'}>
                 <div className="form-group" style={{marginBottom:'1rem'}}><label>Certification Name *</label><input type="text" value={currentCert.name} onChange={(e) => setCurrentCert({...currentCert, name: e.target.value})} placeholder="e.g., Full-stack development" /></div>
                 <div className="form-group"><label>Upload Certificate (PDF, PNG, JPEG)</label><div style={{border:'1px solid #ddd', padding:'8px', borderRadius:'6px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'#fff'}}><span style={{color: currentCert.file ? '#333' : '#999', fontSize:'0.9rem'}}>{currentCert.file ? "File Selected" : "Not Uploaded"}</span><span style={{fontSize:'1.2rem', color:'#666'}}>⋮</span></div></div>
@@ -839,19 +954,7 @@ export const MyProfile = () => {
         alert("*Work experience details Required.");
         return;
     }
- 
-    // const Preferences = allData.preferences;
-    // let IsPreferencesValid = true;
-    // if (Preferences.currentCTC === '') {
-    //     IsPreferencesValid = Preferences.entries.every(pref => 
-    //         pref.currentCTC?.trim() !=="" &&  pref.expectedCTC?.trim() !== ""
-    //     );
-    // }
-
-    // if (!isWorkValid) {
-    //     alert("*Work experience details Required.");
-    //     return;
-    // }
+    
     // --- FINAL EXECUTION ---
     if (isProfileValid && isSslcValid && isHscValid && isWorkValid ) {
         console.log("FINAL SUBMISSION DATA:", allData);
