@@ -9,43 +9,35 @@ import tick from '../assets/icon_tick.png'
 import starIcon from '../assets/Star_icon.png'
 import { CompaniesList } from '../CompaniesList';
 import { JHeader } from './JHeader';
+import { SearchBar } from './SearchBar'
 
 /* Below Code is removed after backend integration*/
-const companiesList = CompaniesList.slice(0,8)
+const companiesList = CompaniesList.slice(0, 8)
 
 export const CompaniesTab = () => {
   const navigate = useNavigate();
+
+  const [query, setQuery] = useState('');
+  const [location, setLocation] = useState('');
+  const [experience, setExperience] = useState('');
+
+  const handleInitialSearch = () => {
+
+    navigate('/Job-portal/jobseeker/searchresults', {
+      state: {
+        query: query,
+        location: location,
+        experience: experience
+      }
+    })
+  }
 
   return (
     <>
       <JHeader />
       <div className='jobs-tab-search-bar'>
-        <div className="search-bar">
-          <div className="search-field">
-            <span><img src={search} className="icon-size" alt="search_icon" /></span>
-            <input type="text" placeholder="Search by Skills, company or job title" />
-          </div>
-          <div className="separator"></div>
-
-          <div className="search-field">
-            <span><img src={location} className="icon-size" alt="location_icon" /></span>
-            <input type="text" placeholder="Enter Location" />
-          </div>
-          <div className="separator"></div>
-
-          <div className="search-field">
-            <span><img src={tick} className="icon-size" alt="search_tick" /></span>
-            <select defaultValue="" required>
-              <option value="" disabled hidden>Enter Experience</option>
-              <option value="fresher">Fresher</option>
-              <option value="1-3">1-3 Years</option>
-              <option value="3-5">3-5 Years</option>
-              <option value="5+">5+ Years</option>
-            </select>
-          </div>
-
-          <button className="search-button">Search</button>
-        </div>
+        <SearchBar searchQuery={query} setSearchQuery={setQuery} searchLocation={location} setSearchLocation={setLocation} searchExp={experience}
+          setSearchExp={setExperience} onSearch={handleInitialSearch} />
       </div>
 
       <div className="companies-tab-container">
@@ -64,7 +56,7 @@ export const CompaniesTab = () => {
                 <span className="companies-tab-reviews">{company.reviewNo} reviews</span>
               </div>
               <p className="companies-tab-desc">{company.slogan}</p>
-              <button className="companies-tab-view-jobs-btn" onClick={()=>navigate(`/Job-portal/jobseeker/companies/${company.companyId}`)}>View Jobs</button>
+              <button className="companies-tab-view-jobs-btn" onClick={() => navigate(`/Job-portal/jobseeker/companies/${company.companyId}`)}>View Jobs</button>
             </div>
           ))}
         </div>

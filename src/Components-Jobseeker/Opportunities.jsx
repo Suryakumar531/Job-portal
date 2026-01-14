@@ -9,12 +9,10 @@ import Google from '../assets/GOOG.png'
 import Infy from '../assets/INFY_BIG.png'
 import Tcs from '../assets/TCS.png'
 import META from '../assets/META_BIG.png'
-import { useNavigate } from "react-router-dom";
 import { JobList } from '../JobList';
 
 
 export const Opportunities = () => {
-  const navigate = useNavigate();
   const [displayCount, setDisplayCount] = useState(8);
   const itemsToDisplay = JobList.slice(0, displayCount);
   return (

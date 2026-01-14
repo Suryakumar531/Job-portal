@@ -8,6 +8,8 @@ import tick from '../assets/icon_tick.png'
 import { JobList } from "../JobList";
 import { OpportunitiesCard } from './OpportunitiesCard';
 import { JHeader } from './JHeader';
+import { useNavigate } from "react-router-dom"
+import { SearchBar } from './SearchBar'
 
 export const JobsTab = () => {
     const displayCount = 10;
@@ -28,7 +30,7 @@ export const JobsTab = () => {
 
     const renderPageNumbers = () => {
         const pageNumbers = [];
-        const siblingCount = 1; 
+        const siblingCount = 1;
 
         if (totalpages <= 5) {
             for (let i = 1; i <= totalpages; i++) {
@@ -42,11 +44,11 @@ export const JobsTab = () => {
 
 
             if (currentPage <= 3) {
-                endPage = 4; 
+                endPage = 4;
             }
-            
+
             if (currentPage >= totalpages - 2) {
-                startPage = totalpages - 3; 
+                startPage = totalpages - 3;
             }
 
             if (startPage > 2) {
@@ -79,36 +81,28 @@ export const JobsTab = () => {
         });
     };
 
+    const navigate = useNavigate();
+    const [query, setQuery] = useState('');
+    const [location, setLocation] = useState('');
+    const [experience, setExperience] = useState('');
+
+    const handleInitialSearch = () => {
+
+        navigate('/Job-portal/jobseeker/searchresults', {
+            state: {
+                query: query,
+                location: location,
+                experience: experience
+            }
+        })
+    }
+
     return (
         <>
             <JHeader />
             <div className='jobs-tab-search-bar'>
-                <div className="search-bar">
-                    <div className="search-field">
-                        <span><img src={search} className="icon-size" alt="search_icon" /></span>
-                        <input type="text" placeholder="Search by Skills, company or job title" />
-                    </div>
-                    <div className="separator"></div>
-
-                    <div className="search-field">
-                        <span><img src={location} className="icon-size" alt="location_icon" /></span>
-                        <input type="text" placeholder="Enter Location" />
-                    </div>
-                    <div className="separator"></div>
-
-                    <div className="search-field">
-                        <span><img src={tick} className="icon-size" alt="search_tick" /></span>
-                        <select defaultValue="" required>
-                            <option value="" disabled hidden>Enter Experience</option>
-                            <option value="fresher">Fresher</option>
-                            <option value="1-3">1-3 Years</option>
-                            <option value="3-5">3-5 Years</option>
-                            <option value="5+">5+ Years</option>
-                        </select>
-                    </div>
-
-                    <button className="search-button">Search</button>
-                </div>
+                <SearchBar searchQuery={query} setSearchQuery={setQuery} searchLocation={location} setSearchLocation={setLocation} searchExp={experience}
+                    setSearchExp={setExperience} onSearch={handleInitialSearch} />
             </div>
 
             <section className='Opportunities-section'>
@@ -123,21 +117,21 @@ export const JobsTab = () => {
             </section>
 
             <div className="Navigation-job-Tab">
-                <button 
-                    onClick={HandlePrev} 
-                    disabled={currentPage === 1} 
+                <button
+                    onClick={HandlePrev}
+                    disabled={currentPage === 1}
                     className='Navigation-btn'
                 >
                     Previous
                 </button>
-                
+
                 <div className="page-numbers">
                     {renderPageNumbers()}
                 </div>
-                
-                <button 
-                    onClick={HandleNext} 
-                    disabled={currentPage === totalpages} 
+
+                <button
+                    onClick={HandleNext}
+                    disabled={currentPage === totalpages}
                     className='Navigation-btn'
                 >
                     Next
