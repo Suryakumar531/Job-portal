@@ -1,12 +1,13 @@
 .search-result-title{
     text-align: center;
-    margin: 80px 0 ;
+    margin: 15px 0;
 }
 .Mainsec-Search-Res{
     display: grid; 
     grid-template-columns: 30% 50%;
-    margin: 20px;
-    padding: 30px;
+    margin: 20px auto;
+    padding: 20px;
+    gap: 6.5rem;
 }
 .Aside{
     padding: 20px;

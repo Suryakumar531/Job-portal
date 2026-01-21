@@ -134,7 +134,6 @@ export const SearchResults = () => {
 
     // --- THE APPLY FUNCTION ---
     const HandleApplyFilter = () => {
-        // Copy the current selections into the "Applied" state
         setAppliedSidebarFilters({
             locations: selectedLocations,
             workType: selectedWorkType,
@@ -305,18 +304,15 @@ export const SearchResults = () => {
                 />
             </div>
             <div className='search-result-title'>
-                <h1 > Jobs Based On Your Search</h1>
+                <h1> Jobs Based On Your Search</h1>
             </div>
 
             <div className='Mainsec-Search-Res'>
                 <div className='Aside'>
-
-                    {/* --- THIS IS THE SECTION YOU REQUESTED --- */}
                     <div className='aside-header'>
                         <p onClick={HandleApplyFilter} className='filter-applied' style={{ cursor: 'pointer' }}>Apply Filters</p>
                         <p onClick={HandleClear} className='filter-applied' style={{ cursor: 'pointer' }}>Clear Filters</p>
                     </div>
-                    {/* --------------------------------------- */}
 
                     <div className='Search-Worktype-Container'>
                         <h4>Work Type</h4>
@@ -544,7 +540,7 @@ export const SearchResults = () => {
                 <div className='maincontent'>
                     <div className='SortbySearch'>
                         <h2 className='NoofJobsCont'>Showing {sortedJobs.length} Jobs</h2>
-                        <div className="sort-wrapper">
+                        {sortedJobs.length !== 0 && <div className="sort-wrapper">
                             <button className='Sortbutton' onClick={() => setOpenSort(!openSort)}>
                                 Sort by ▾
                             </button>
@@ -555,7 +551,7 @@ export const SearchResults = () => {
                                     <div onClick={() => handleSort("date")}>Date</div>
                                 </div>
                             )}
-                        </div>
+                        </div>}
                     </div>
 
                     {sortedJobs.map((jb, index) =>

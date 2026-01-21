@@ -12,7 +12,7 @@ export const SearchBar = ({searchQuery, setSearchQuery,searchLocation, setSearch
           type="text" 
           value={searchQuery} 
           onChange={(e) => setSearchQuery(e.target.value)} 
-          placeholder="Search by Skills..." 
+          placeholder="Search by Skills, company or job title" 
         />
       </div>
       <div className="separator"></div>
