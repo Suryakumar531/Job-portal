@@ -1,14 +1,15 @@
 import { useEffect, useState, useMemo } from 'react'
 import { JHeader } from './JHeader'
 import './SearchResults.css'
-import { JobList } from '../JobList'
 import { SearchResultsCard } from './SearchResultsCard'
 import { Footer } from '../Components-LandingPage/Footer'
 import { useLocation } from 'react-router-dom'
 import { SearchBar } from './SearchBar'
 import { Header } from '../Components-LandingPage/Header'
+import { useJobs } from '../JobContext'
 
 export const SearchResults = () => {
+    const { jobs } = useJobs()
 
     // --- UI STATES (These control the checkboxes visually) ---
     const [minVal, setMinVal] = useState(0);
@@ -48,14 +49,14 @@ export const SearchResults = () => {
             return acc;
         }, {});
     };
-    const educationCounts = JobList.reduce((acc, item) => {
+    const educationCounts = jobs.reduce((acc, item) => {
         item.EducationRequired.forEach((edu) => {
             const degree = edu.toLowerCase();
             acc[degree] = (acc[degree] || 0) + 1;
         });
         return acc;
     }, {});
-    const InduntryCounts = JobList.reduce((acc, item) => {
+    const InduntryCounts = jobs.reduce((acc, item) => {
         item.IndustryType.forEach((int) => {
             const degree = int.toLowerCase();
             acc[degree] = (acc[degree] || 0) + 1;
@@ -64,11 +65,11 @@ export const SearchResults = () => {
     }, {});
 
     // ... [Data Prep] ...
-    const locationCounts = countPropertyOccurrences(JobList, 'location');
-    const workTypeCounts = countPropertyOccurrences(JobList, 'WorkType');
-    const PostedbyCounts = countPropertyOccurrences(JobList, 'PostedBy')
-    const CompanyCounts = countPropertyOccurrences(JobList, 'company');
-    const PostedDtCounts = countPostedDate(JobList, 'posted')
+    const locationCounts = countPropertyOccurrences(jobs, 'location');
+    const workTypeCounts = countPropertyOccurrences(jobs, 'WorkType');
+    const PostedbyCounts = countPropertyOccurrences(jobs, 'PostedBy')
+    const CompanyCounts = countPropertyOccurrences(jobs, 'company');
+    const PostedDtCounts = countPostedDate(jobs, 'posted')
 
     const locationArray = Object.entries(locationCounts);
     const WorkTypeArray = Object.entries(workTypeCounts);
@@ -227,7 +228,7 @@ export const SearchResults = () => {
 
     // --- FILTER LOGIC (Listens to 'appliedSidebarFilters') ---
     const filteredJobs = useMemo(() => {
-        return JobList.filter((job) => {
+        return jobs.filter((job) => {
             // Header Search
             const matchesSearch = appliedFilters.query === "" ||
                 job.title?.toLowerCase().includes(appliedFilters.query.toLowerCase()) ||
@@ -274,7 +275,7 @@ export const SearchResults = () => {
 
             return matchesLocation && matchesWorkType && matchesPostedby && matchesCompany && matchesEducation && matchesPostedDate && matchesExperience && matchesIndustryType && matchesSalary && matchesSearch && matchesSearchBarLocation && matchesSearchExp;
         });
-    }, [JobList, appliedFilters, appliedSidebarFilters]); // Depends on Applied Filters
+    }, [jobs, appliedFilters, appliedSidebarFilters]); // Depends on Applied Filters
 
     const sortedJobs = useMemo(() => {
         if (!sortBy) return filteredJobs;

@@ -5,9 +5,9 @@ import experience from '../assets/opportunity_bag.png'
 import place from '../assets/opportunity_location.png'
 import { formatPostedDate } from './OpportunitiesCard';
 import "./SearchResultsCard.css"
-import { JobList } from '../JobList';
 import { useNavigate } from 'react-router-dom';
 import starIcon from '../assets/Star_icon.png'
+import { useJobs } from '../JobContext';
 
 export function SearchResultsCard(props) {
     const { job } = props;
@@ -17,13 +17,17 @@ export function SearchResultsCard(props) {
     const HandleClick = () => {
         navigate(`/Job-portal/jobseeker/OpportunityOverview/${job.id}`)
     }
+
+    const { toggleSaveJob, isJobSaved, applyForJob } = useJobs();
+    const isSaved = isJobSaved(job.id);
+
     return (
         <div className="SearchResults-job-card">
           <div onClick={HandleClick}>
             <div className="SearchResults-job-card-header">
                 <div>
                     <h3 className="SearchResults-job-card-title">{job.title}</h3>
-                    <p className="SearchResults-job-card-company"><span className="star"><img src={starIcon} /> </span>{job.ratings}</p>
+                    <p className="SearchResults-job-card-company"><span className="star"><img src={starIcon} /> </span>{job.ratings} - {job.company}</p>
                 </div>
                 {logoContent}
             </div>
@@ -47,8 +51,25 @@ export function SearchResultsCard(props) {
                 </div>
 
                 <div className="SearchResults-job-card-actions">
-                    <button className="SearchResults-job-card-save-btn">Save</button>
-                    <button className="SearchResults-job-card-apply-btn">Apply</button>
+                    <button
+                        className={isSaved ? "Opportunities-apply-btn" : "Opportunities-save-btn"}
+                        onClick={(e) => {
+                            e.stopPropagation(); 
+                            toggleSaveJob(job);
+                        }}
+                    >
+                        {isSaved ? "Saved" : "Save"}
+                    </button>
+
+                    <button
+                        className="Opportunities-apply-btn"
+                        onClick={(e) => {
+                            e.stopPropagation(); 
+                            applyForJob(job);
+                        }}
+                    >
+                        Apply
+                    </button>
                 </div>
             </div>
         </div>

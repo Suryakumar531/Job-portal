@@ -68,7 +68,7 @@
 }
 
 .SearchResults-job-card-detail-line {
-  display: block;
+  display: flex;
   align-items: center;
 }
 
@@ -105,32 +105,7 @@
 .SearchResults-job-card-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
-}
-
-.SearchResults-job-card-save-btn {
-  border: 1px solid #1E88E5;
-  background: white;
-  color: #1E88E5;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.SearchResults-job-card-apply-btn {
-  background: #1E88E5;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.SearchResults-job-card-btn-actions {
-  display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
 .SearchResults-job-card-separator {
