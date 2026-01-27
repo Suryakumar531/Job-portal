@@ -7,13 +7,14 @@ import { Jobsbycompany } from './Jobsbycompany';
 import { Opportunities } from './Opportunities';
 import { Footer } from '../Components-LandingPage/Footer';
 import { useNavigate } from "react-router-dom";
+import { Header } from '../Components-LandingPage/Header';
 
 export const Afterloginlanding = () => {
     const navigate = useNavigate();
 
     return (
         <>
-            <JHeader />
+            <Header />
             <JMainsection />
             <section className='Opportunities-section'>
                 <h2 className='Opportunities-title'>Opportunities Just For You</h2>

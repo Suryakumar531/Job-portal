@@ -10,6 +10,7 @@ import starIcon from '../assets/Star_icon.png'
 import { CompaniesList } from '../CompaniesList';
 import { JHeader } from './JHeader';
 import { SearchBar } from './SearchBar'
+import { Header } from '../Components-LandingPage/Header';
 
 /* Below Code is removed after backend integration*/
 const companiesList = CompaniesList.slice(0, 8)
@@ -34,7 +35,7 @@ export const CompaniesTab = () => {
 
   return (
     <>
-      <JHeader />
+      <Header />
       <div className='jobs-tab-search-bar'>
         <SearchBar searchQuery={query} setSearchQuery={setQuery} searchLocation={location} setSearchLocation={setLocation} searchExp={experience}
           setSearchExp={setExperience} onSearch={handleInitialSearch} />

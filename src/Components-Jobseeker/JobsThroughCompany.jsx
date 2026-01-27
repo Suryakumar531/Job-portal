@@ -1,18 +1,19 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './JobsThroughCompany.css'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { OpportunitiesCard } from './OpportunitiesCard';
 import { Footer } from '../Components-LandingPage/Footer';
 import starIcon from '../assets/Star_icon.png'
 import { CompaniesList } from "../CompaniesList";
-import { JobList } from "../JobList";
-import { AvatarMenu } from './AvatarMenu';
-import { JHeader } from './JHeader';
+import { useJobs } from '../JobContext';
+import { Header } from '../Components-LandingPage/Header';
 
 export const JobsThroughCompany = () => {
+    const { jobs } = useJobs();
 
     const { companyId } = useParams()
-    const filteredJobs = JobList.filter(comp => comp.companyId === companyId);
+
+    const filteredJobs = jobs.filter(comp => comp.companyId === companyId);
 
     console.log(filteredJobs)
 
@@ -92,7 +93,7 @@ export const JobsThroughCompany = () => {
     return (
 
         <>
-            <JHeader />
+            <Header />
             <div className='job-search-companies'>
                 <section className='Opportunities-section'>
                     <div className="company-header-container">
@@ -101,59 +102,60 @@ export const JobsThroughCompany = () => {
                             <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
                             <div className='company-main-section'>
                                 <div className='company-logo-container'>
-                                    <img className='company-logo' src={CompanyTitle.logo} alt="logo" />
+                                    <img className='company-logo' src={CompanyTitle?.logo} alt="logo" />
                                 </div>
 
                                 <div className="company-info-card">
-
-                                    <h2 className="company-name">{CompanyTitle.companyName}</h2>
+                                    <h2 className="company-name">{CompanyTitle?.companyName}</h2>
                                     <div className="company-title-container">
-                                        <span className="star"><img src={starIcon} />  {CompanyTitle.ratings}</span> <span className="company-divider">|</span><span className="opp-reviews">{CompanyTitle.reviewNo} reviews</span>
+                                        <span className="star"><img src={starIcon} alt="star" />  {CompanyTitle?.ratings}</span> <span className="company-divider">|</span><span className="opp-reviews">{CompanyTitle?.reviewNo} reviews</span>
                                     </div>
-
                                 </div>
                                 <div className='job-by-company-moto'>
-                                    <p className="company-moto">{CompanyTitle.slogan}</p>
+                                    <p className="company-moto">{CompanyTitle?.slogan}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div className="Opportunities-job-list">
-
-                        {currentJobCards.map((job, id) => (
-                            <OpportunitiesCard key={id} job={job} />
-                        ))}
+                        {currentJobCards.length > 0 ? (
+                            currentJobCards.map((job) => (
+                                <OpportunitiesCard key={job.id} job={job} />
+                            ))
+                        ) : (
+                            <div className="no-jobs-msg">No active jobs found for this company.</div>
+                        )}
                     </div>
 
-                    <div className="Navigation-job-Tab">
-                        <button
-                            onClick={HandlePrev}
-                            disabled={currentPage === 1}
-                            className='Navigation-btn'
-                        >
-                            Previous
-                        </button>
+                    {filteredJobs.length > 0 && (
+                        <div className="Navigation-job-Tab">
+                            <button
+                                onClick={HandlePrev}
+                                disabled={currentPage === 1}
+                                className='Navigation-btn'
+                            >
+                                Previous
+                            </button>
 
-                        <div className="page-numbers">
-                            {renderPageNumbers()}
+                            <div className="page-numbers">
+                                {renderPageNumbers()}
+                            </div>
+
+                            <button
+                                onClick={HandleNext}
+                                disabled={currentPage === totalpages}
+                                className='Navigation-btn'
+                            >
+                                Next
+                            </button>
                         </div>
-
-                        <button
-                            onClick={HandleNext}
-                            disabled={currentPage === totalpages}
-                            className='Navigation-btn'
-                        >
-                            Next
-                        </button>
-                    </div>
+                    )}
 
                 </section>
             </div>
 
             <Footer />
         </>
-
     )
-
-
 }

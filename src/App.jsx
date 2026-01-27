@@ -19,6 +19,7 @@ import { MyProfile } from './Components-Jobseeker/MyProfile'
 import { JobsThroughCompany } from './Components-Jobseeker/JobsThroughCompany'
 import { AboutUs } from './Components-LandingPage/AboutUs'
 import { SearchResults } from './Components-Jobseeker/SearchResults'
+import { JobProvider } from './JobContext';
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -95,9 +96,9 @@ const router = createBrowserRouter([{
 
 function App() {
   return (
-    <>
+    <JobProvider>
       <RouterProvider router={router} />
-    </>
+    </JobProvider>
   )
 }
 

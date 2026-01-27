@@ -1,25 +1,23 @@
 import React, { useState } from 'react'
 import './JobsTab.css'
 import { Footer } from '../Components-LandingPage/Footer'
-import { Link } from 'react-router-dom';
-import search from '../assets/icon_search.png'
-import location from '../assets/icon_location.png'
-import tick from '../assets/icon_tick.png'
-import { JobList } from "../JobList";
+import { useJobs } from '../JobContext';
 import { OpportunitiesCard } from './OpportunitiesCard';
-import { JHeader } from './JHeader';
 import { useNavigate } from "react-router-dom"
 import { SearchBar } from './SearchBar'
+import { Header } from '../Components-LandingPage/Header';
 
 export const JobsTab = () => {
+    const { jobs } = useJobs();
+
     const displayCount = 10;
     const [currentPage, setCurrentPage] = useState(1);
 
     const indexofLastjob = currentPage * displayCount;
     const indexoffirstjob = indexofLastjob - displayCount;
 
-    const currentJobCards = JobList.slice(indexoffirstjob, indexofLastjob);
-    const totalpages = Math.ceil(JobList.length / displayCount);
+    const currentJobCards = jobs.slice(indexoffirstjob, indexofLastjob);
+    const totalpages = Math.ceil(jobs.length / displayCount);
 
     const HandlePrev = () => {
         if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -99,7 +97,7 @@ export const JobsTab = () => {
 
     return (
         <>
-            <JHeader />
+            <Header />
             <div className='jobs-tab-search-bar'>
                 <SearchBar searchQuery={query} setSearchQuery={setQuery} searchLocation={location} setSearchLocation={setLocation} searchExp={experience}
                     setSearchExp={setExperience} onSearch={handleInitialSearch} />
@@ -109,8 +107,8 @@ export const JobsTab = () => {
                 <div className='Opportunities-section'>
                     <h2 className='Opportunities-title'>Jobs For You</h2>
                     <div className="Opportunities-job-list">
-                        {currentJobCards.map((job, id) => (
-                            <OpportunitiesCard key={id} job={job} />
+                        {currentJobCards.map((job) => (
+                            <OpportunitiesCard key={jobs.id} job={job} />
                         ))}
                     </div>
                 </div>

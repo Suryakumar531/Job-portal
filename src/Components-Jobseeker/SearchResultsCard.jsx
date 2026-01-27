@@ -19,7 +19,8 @@ export function SearchResultsCard(props) {
     }
     return (
         <div className="SearchResults-job-card">
-            <div onClick={HandleClick} className="SearchResults-job-card-header">
+          <div onClick={HandleClick}>
+            <div className="SearchResults-job-card-header">
                 <div>
                     <h3 className="SearchResults-job-card-title">{job.title}</h3>
                     <p className="SearchResults-job-card-company"><span className="star"><img src={starIcon} /> </span>{job.ratings}</p>
@@ -36,6 +37,7 @@ export function SearchResultsCard(props) {
                     <span className="SearchResults-job-card-divider">|</span><img src={experience} className='SearchResults-job-card-icons' /> {job.WorkType}
                 </p>
             </div>
+           </div>
 
             <hr className="SearchResults-job-card-separator" />
 

@@ -13,15 +13,14 @@ export const AppliedJobCard = ({ opp }) => {
         <div>
           <h2 className="myjobs-job-title">{opp.title}</h2>
         </div>
-        <span className="menu-dots">⋮</span>
       </div>
       <div className="myjobs-company-sub">
-        <p className="myjobs-company-name">{opp.company}<span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> {opp.rating}<span className="Opportunities-divider">|</span><span>{opp.reviews}</span></p>
+        <p className="myjobs-company-name">{opp.company}<span className="Opportunities-divider">|</span><span className="star"><img src={starIcon} /></span> {opp.ratings}<span className="Opportunities-divider">|</span><span>{opp.reviewNo} reviews</span></p>
       </div>
 
       <div className="Opportunities-job-details">
-        <p className='Opportunities-detail-line'><img src={time} className='card-icons' />{opp.type}<span className="Opportunities-divider">|</span>{opp.salary}</p>
-        <p className='Opportunities-detail-line'><img src={experience} className='card-icons' />{opp.experience}</p>
+        <p className='Opportunities-detail-line'><img src={time} className='card-icons' />{opp.WorkType}<span className="Opportunities-divider">|</span>{opp.salary} Lpa</p>
+        <p className='Opportunities-detail-line'><img src={experience} className='card-icons' />{opp.experience} years</p>
         <p className='Opportunities-detail-line'><img src={place} className='card-icons' />{opp.location}</p>
         <p className='Opportunities-detail-line'><img src={calender} className='card-icons' />{opp.posted}<span className="Opportunities-divider">|</span>Openings: {opp.openings}<span className="Opportunities-divider">|</span>Applicants: {opp.applicants}</p>
       </div>
@@ -44,7 +43,7 @@ export const AppliedJobCard = ({ opp }) => {
         </div>
 
         <div className="Opportunities-job-actions">
-          <button className="applied-dis-btn" disabled>Applied</button>
+          <button className="myjobs-btn">View details</button>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { SearchResultsCard } from './SearchResultsCard'
 import { Footer } from '../Components-LandingPage/Footer'
 import { useLocation } from 'react-router-dom'
 import { SearchBar } from './SearchBar'
+import { Header } from '../Components-LandingPage/Header'
 
 export const SearchResults = () => {
 
@@ -291,7 +292,7 @@ export const SearchResults = () => {
 
     return (
         <>
-            <JHeader />
+            <Header />
             <div className='jobs-tab-search-bar'>
                 <SearchBar
                     searchQuery={searchQuery}
