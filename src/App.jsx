@@ -20,6 +20,10 @@ import { JobsThroughCompany } from './Components-Jobseeker/JobsThroughCompany'
 import { AboutUs } from './Components-LandingPage/AboutUs'
 import { SearchResults } from './Components-Jobseeker/SearchResults'
 import { JobProvider } from './JobContext';
+import { JobApplication } from './Components-Jobseeker/JobApplication'
+import { ApplicationStatusScreen } from './Components-Jobseeker/ApplicationStatusScreen'
+import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
+import { Revoked } from './Components-Jobseeker/Revoked'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -90,8 +94,24 @@ const router = createBrowserRouter([{
   element: <JobsThroughCompany />,
 },
 {
+  path: '/Job-portal/jobseeker/jobapplication/:id',
+  element: <JobApplication />,
+},
+{
   path: '/Job-portal/jobseeker/searchresults',
   element: <SearchResults />,
+},
+{
+  path: '/Job-portal/jobseeker/submitted/:id',
+  element: <ApplicationStatusScreen />,
+},
+{
+  path: '/Job-portal/jobseeker/appliedjobsoverview/:id',
+  element: <AppliedJobsOverview />,
+},
+{
+  path: '/Job-portal/jobseeker/withdrawn',
+  element: <Revoked />,
 }])
 
 function App() {

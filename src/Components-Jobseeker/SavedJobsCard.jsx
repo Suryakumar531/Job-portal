@@ -70,8 +70,7 @@ export const SavedJobsCard = ({ job }) => {
                             backgroundColor: isApplied ? '#ccc' : ''
                         }}
                         onClick={(e) => {
-                            e.stopPropagation();
-                            applyForJob(job);
+                             navigate (`/Job-portal/jobseeker/jobapplication/${job.id}`)
                         }}
                     >
                         {isApplied ? "Applied" : "Apply"}

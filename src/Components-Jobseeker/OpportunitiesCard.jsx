@@ -30,7 +30,7 @@ export const OpportunitiesCard = (props) => {
         navigate(`/Job-portal/jobseeker/OpportunityOverview/${job.id}`)
     }
 
-    const { toggleSaveJob, isJobSaved, applyForJob } = useJobs();
+    const { toggleSaveJob, isJobSaved } = useJobs();
     const isSaved = isJobSaved(job.id);
 
     return (
@@ -85,8 +85,7 @@ export const OpportunitiesCard = (props) => {
                     <button
                         className="Opportunities-apply-btn"
                         onClick={(e) => {
-                            e.stopPropagation(); // <--- Stops card click (prevents from bubbling event)
-                            applyForJob(job);
+                             navigate (`/Job-portal/jobseeker/jobapplication/${job.id}`)
                         }}
                     >
                         Apply

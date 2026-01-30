@@ -42,6 +42,23 @@ export const JobProvider = ({ children }) => {
         alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
     };
 
+    const withdrawApplication = (jobId) => {
+        const jobToRestore = appliedJobs.find(j => j.id === jobId);
+
+        if (jobToRestore) {
+            const { appliedDate, status, applicationStatus, ...restoredJob } = jobToRestore;
+
+            setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId));
+
+            setJobs((prev) => {
+                if (prev.some(j => j.id === jobId)) return prev;
+                return [...prev, restoredJob];
+            });
+
+            alert("Application withdrawn successfully.");
+        }
+    };
+
     const toggleSaveJob = (originalJob) => {
         if (isJobSaved(originalJob.id)) {
             setSavedJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
@@ -60,6 +77,7 @@ export const JobProvider = ({ children }) => {
             appliedJobs,
             savedJobs,
             applyForJob,
+            withdrawApplication,
             toggleSaveJob,
             isJobSaved
         }}>

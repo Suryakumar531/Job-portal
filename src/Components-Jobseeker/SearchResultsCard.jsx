@@ -64,8 +64,7 @@ export function SearchResultsCard(props) {
                     <button
                         className="Opportunities-apply-btn"
                         onClick={(e) => {
-                            e.stopPropagation(); 
-                            applyForJob(job);
+                             navigate (`/Job-portal/jobseeker/jobapplication/${job.id}`)
                         }}
                     >
                         Apply

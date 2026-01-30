@@ -19,7 +19,7 @@ export const OpportunityOverview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { jobs, appliedJobs, applyForJob, toggleSaveJob, isJobSaved } = useJobs();
+  const { jobs, appliedJobs, toggleSaveJob, isJobSaved } = useJobs();
 
   const job = jobs.find(singleJob => singleJob.id === id) || appliedJobs.find(singleJob => singleJob.id === id);
 
@@ -129,7 +129,7 @@ export const OpportunityOverview = () => {
       
                   <button 
                     className="Opportunities-apply-btn"
-                    onClick={() => applyForJob(job)}
+                    onClick={() => navigate (`/Job-portal/jobseeker/jobapplication/${job.id}`)}
                     disabled={isApplied}
                     style={{ 
                         opacity: isApplied ? 0.6 : 1, 

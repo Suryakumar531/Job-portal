@@ -5,8 +5,11 @@ import experience from '../assets/opportunity_bag.png'
 import place from '../assets/opportunity_location.png'
 import calender from '../assets/calender_card.png'
 import './AppliedJobCard.css'
+import { useNavigate } from "react-router-dom";
+
 
 export const AppliedJobCard = ({ opp }) => {
+  const navigate = useNavigate();
   return (
     <div className="myjobs-job-card">
       <div className="myjobs-card-header">
@@ -43,7 +46,7 @@ export const AppliedJobCard = ({ opp }) => {
         </div>
 
         <div className="Opportunities-job-actions">
-          <button className="myjobs-btn">View details</button>
+          <button className="myjobs-btn" onClick={()=>navigate(`/Job-portal/jobseeker/appliedjobsoverview/${opp.id}`)}>View details</button>
         </div>
       </div>
     </div>
