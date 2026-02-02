@@ -33,7 +33,7 @@ const AnimatedConnector = styled(StepConnector)(({ theme }) => ({
 export const AppliedJobsOverview = () => {
 
   const { id } = useParams();
-  const { appliedJobs, withdrawApplication } = useJobs();
+  const { appliedJobs, setJobs, setAppliedJobs } = useJobs();
   const navigate = useNavigate();
   const job = appliedJobs.find(job => job.id === id)
 
@@ -47,6 +47,27 @@ export const AppliedJobsOverview = () => {
     { label: 'Shortlisted', sub: "You have passed the initial review stages and have been flagged as a top contender among the applicant pool.", status: 'pending' },
     { label: 'Interview Called', sub: "The hiring team has officially reached out to schedule a meeting, moving your status from 'Review' to active 'Engagement.'", status: 'pending' },
   ];
+
+  const withdrawApplication = (jobId) => {
+    const jobToRestore = appliedJobs.find(j => j.id === jobId);
+ 
+    if (jobToRestore) {
+        const isConfirmed = window.confirm("Are you sure, you want to withdraw this application?");
+        if (isConfirmed) {
+          navigate ('/Job-portal/jobseeker/withdrawn')
+            const { appliedDate, status, applicationStatus, ...restoredJob } = jobToRestore;
+            setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId));
+            setJobs((prev) => {
+                if (prev.some(j => j.id === jobId)) return prev;
+                return [...prev, restoredJob];
+               
+            });
+ 
+            alert("Application withdrawn successfully.");
+           
+        }
+    }
+};
 
   const completedCount = job.applicationStatus.filter(step =>
     step.status.toLowerCase() === 'completed' || step.status.toLowerCase() === 'complete'
@@ -184,8 +205,7 @@ export const AppliedJobsOverview = () => {
           }}
             onClick={(e) => {
               e.stopPropagation()
-              withdrawApplication(job.id)
-              navigate('/Job-portal/jobseeker/withdrawn')}}
+              withdrawApplication(job.id)}}
           >Withdraw</button>
         </div>
 
