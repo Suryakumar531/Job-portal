@@ -48,7 +48,7 @@ export const AppliedJobsOverview = () => {
     { label: 'Interview Called', sub: "The hiring team has officially reached out to schedule a meeting, moving your status from 'Review' to active 'Engagement.'", status: 'pending' },
   ];
 
-  const completedCount = applicationStatus.filter(step =>
+  const completedCount = job.applicationStatus.filter(step =>
     step.status.toLowerCase() === 'completed' || step.status.toLowerCase() === 'complete'
   ).length;
   useEffect(() => {
