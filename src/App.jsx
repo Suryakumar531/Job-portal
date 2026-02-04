@@ -24,6 +24,12 @@ import { JobApplication } from './Components-Jobseeker/JobApplication'
 import { ApplicationStatusScreen } from './Components-Jobseeker/ApplicationStatusScreen'
 import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
 import { Revoked } from './Components-Jobseeker/Revoked'
+import { Settings } from './Components-Jobseeker/Settings'
+import { Blogpage } from './Components-LandingPage/BlogPage'
+import BlogCategory from './Components-LandingPage/BlogCategory'
+import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
+import { ContactUs } from './Components-LandingPage/Contactus'
+import { FAQ } from './Components-LandingPage/FAQ'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -86,7 +92,7 @@ const router = createBrowserRouter([{
   element: <MyProfile />,
 },
 {
-  path: '/Job-portal/aboutus',
+  path: '/Job-portal/jobseeker/aboutus',
   element: <AboutUs />,
 },
 {
@@ -112,7 +118,32 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/jobseeker/withdrawn',
   element: <Revoked />,
-}])
+},
+{
+  path: '/Job-portal/jobseeker/Settings',
+  element: <Settings />
+},
+{
+  path: '/Job-portal/jobseeker/Contact_Us',
+  element: < ContactUs/>
+},
+{
+  path: '/Job-portal/jobseeker/FAQ',
+  element: <FAQ/>
+},
+{
+  path: '/Job-portal/jobseeker/Blogs',
+  element: < Blogpage/>
+},
+{
+  path: '/Job-portal/jobseeker/Blogs/Category',
+  element: <BlogCategory />
+},
+{
+  path: '/Job-portal/jobseeker/Blogs/Technology',
+  element: <TechnologyBlog/>
+},
+])
 
 function App() {
   return (
