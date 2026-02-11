@@ -85,9 +85,9 @@ export const ProfileCreationHelp = () => {
   };
 
   return (
-    <div className="profilehelp-page">
+      <>
       <Header />
-
+      <div className="profilehelp-page">
       <div className="profilehelp-container">
         <h1 className="profilehelp-title">
           How to create an online job profile
@@ -133,5 +133,6 @@ export const ProfileCreationHelp = () => {
 
       <Footer />
     </div>
+    </>
   );
 }

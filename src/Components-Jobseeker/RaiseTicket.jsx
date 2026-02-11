@@ -74,7 +74,7 @@ export const RaiseTicket = () => {
     }
 
     return (
-        <div>
+        <>
             <Header />
             <div className="Raiseticket-main-wrapper">
 
@@ -188,6 +188,6 @@ export const RaiseTicket = () => {
 
             </div>
             <Footer />
-        </div>
+        </>
     );
 };

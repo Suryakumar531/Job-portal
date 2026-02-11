@@ -111,7 +111,7 @@ export const HelpCenter = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
     return (
-        <div>
+        <>
             <Header />
             <div className='Helpcenter-page'>
                 <div className="helpcenter-container">
@@ -316,6 +316,6 @@ export const HelpCenter = () => {
             </div>
 
             <Footer />
-        </div>
+        </>
     )
 }

@@ -65,8 +65,9 @@ export const FileUploadHelp = () => {
   };
 
   return (
-    <div className="technicalhelp-page">
+      <>
       <Header />
+       <div className="technicalhelp-page">
       <div className="technicalhelp-container">
         <h1 className="technicalhelp-title">{uploadIssueData.title}</h1>
         <p className="technicalhelp-updated">{uploadIssueData.updatedDate}</p>
@@ -94,5 +95,6 @@ export const FileUploadHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }

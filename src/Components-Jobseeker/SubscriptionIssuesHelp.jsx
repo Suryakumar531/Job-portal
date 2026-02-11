@@ -38,8 +38,9 @@ export const SubscriptionIssuesHelp = () => {
   };
 
   return (
-    <div className="jobemployerhelp-page">
+      <>
       <Header />
+      <div className="jobemployerhelp-page">
       <div className="jobemployerhelp-container">
         <h1 className="jobemployerhelp-title">{subscriptionData.title}</h1>
         <p className="jobemployerhelp-updated">{subscriptionData.updatedDate}</p>
@@ -70,5 +71,6 @@ export const SubscriptionIssuesHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }

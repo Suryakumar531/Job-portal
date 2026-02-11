@@ -48,9 +48,9 @@ export const JobApplyIssuesHelp = () => {
   };
 
   return (
-    <div className="Jobseekerhelp-page">
+      <>
       <Header />
-
+      <div className="Jobseekerhelp-page">
       <div className="Jobseekerhelp-container">
         <h1 className="Jobseekerhelp-title">{applyHelpData.title}</h1>
         <p className="Jobseekerhelp-updated">{applyHelpData.updatedDate}</p>
@@ -78,5 +78,6 @@ export const JobApplyIssuesHelp = () => {
 
       <Footer />
     </div>
+    </>
   );
 }

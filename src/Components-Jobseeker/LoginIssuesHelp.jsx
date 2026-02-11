@@ -65,8 +65,9 @@ export const LoginIssuesHelp = () => {
   };
 
   return (
-    <div className="technicalhelp-page">
+      <>
       <Header />
+      <div className="technicalhelp-page">
       <div className="technicalhelp-container">
         <h1 className="technicalhelp-title">{loginIssueData.title}</h1>
         <p className="technicalhelp-updated">{loginIssueData.updatedDate}</p>
@@ -94,5 +95,6 @@ export const LoginIssuesHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }

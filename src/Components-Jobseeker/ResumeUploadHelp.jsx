@@ -96,9 +96,9 @@ export const ResumeUploadHelp = () => {
   };
 
   return (
-    <div className="resumehelp-page">
+      <>
       <Header />
-
+      <div className="resumehelp-page">
       <div className="resumehelp-container">
         <h1 className="resumehelp-title">
           {resumeHelpData.title}
@@ -136,5 +136,6 @@ export const ResumeUploadHelp = () => {
 
       <Footer />
     </div>
+    </>
   );
 }

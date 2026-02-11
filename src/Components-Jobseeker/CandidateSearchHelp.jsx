@@ -3,6 +3,7 @@ import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./JobEmployerHelp.css";
 import CandidateSearchImg from "../assets/candidatesearch.png";
+import { Header } from "../Components-LandingPage/Header";
 
 export const CandidateSearchHelp = () => {
   const candidateData = {
@@ -37,8 +38,9 @@ export const CandidateSearchHelp = () => {
   };
 
   return (
-    <div className="jobemployerhelp-page">
-      <JHeader />
+      <>
+      <Header />
+      <div className="jobemployerhelp-page">
       <div className="jobemployerhelp-container">
         <h1 className="jobemployerhelp-title">{candidateData.title}</h1>
         <p className="jobemployerhelp-updated">{candidateData.updatedDate}</p>
@@ -69,5 +71,6 @@ export const CandidateSearchHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }

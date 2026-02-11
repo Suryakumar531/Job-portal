@@ -64,9 +64,10 @@ export const InterviewSchedulingHelp = () => {
   };
 
   return (
-    <div className="Jobseekerhelp-page">
+    <>
+    
       <Header />
-
+      <div className="Jobseekerhelp-page">
       <div className="Jobseekerhelp-container">
         <h1 className="Jobseekerhelp-title">{interviewData.title}</h1>
         <p className="Jobseekerhelp-updated">{interviewData.updatedDate}</p>
@@ -101,5 +102,6 @@ export const InterviewSchedulingHelp = () => {
 
       <Footer />
     </div>
+    </>
   );
 }

@@ -38,8 +38,10 @@ export const InvoicePaymentHelp = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="jobemployerhelp-page">
-      <Header />
+      
       <div className="jobemployerhelp-container">
         <h1 className="jobemployerhelp-title">{paymentData.title}</h1>
         <p className="jobemployerhelp-updated">{paymentData.updatedDate}</p>
@@ -70,5 +72,6 @@ export const InvoicePaymentHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }

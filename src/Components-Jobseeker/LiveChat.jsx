@@ -5,6 +5,7 @@ import { Footer } from "../Components-LandingPage/Footer";
 import SilverStar from "../assets/SilverStar.png"
 import GoldStar from "../assets/GoldStar.png"
 import SendIcon from "../assets/SendIcon.png"
+import { Header } from "../Components-LandingPage/Header";
 
 
 const TypingDots = () => {
@@ -91,8 +92,8 @@ export const LiveChat = () => {
   };
 
   return (
-    <div>
-      <JHeader />
+    <>
+      <Header />
 
       <div className="Livechat-chat-wrapper">
         <div className="Livechat-chat-box">
@@ -199,6 +200,6 @@ export const LiveChat = () => {
       </div>
 
       <Footer />
-    </div>
+    </>
   );
 };

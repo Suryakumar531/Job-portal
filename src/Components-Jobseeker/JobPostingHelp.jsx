@@ -38,8 +38,9 @@ export const JobPostingHelp = () => {
   };
 
   return (
-    <div className="jobemployerhelp-page">
+      <>
       <Header />
+      <div className="jobemployerhelp-page">
       <div className="jobemployerhelp-container">
         <h1 className="jobemployerhelp-title">{employerData.title}</h1>
         <p className="jobemployerhelp-updated">{employerData.updatedDate}</p>
@@ -70,5 +71,6 @@ export const JobPostingHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }

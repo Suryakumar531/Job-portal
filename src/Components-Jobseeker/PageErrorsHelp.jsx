@@ -65,8 +65,9 @@ export const PageErrorsHelp = () => {
   };
 
   return (
-    <div className="technicalhelp-page">
+    <>
       <Header />
+       <div className="technicalhelp-page">
       <div className="technicalhelp-container">
         <h1 className="technicalhelp-title">{pageErrorData.title}</h1>
         <p className="technicalhelp-updated">{pageErrorData.updatedDate}</p>
@@ -94,5 +95,6 @@ export const PageErrorsHelp = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 }
