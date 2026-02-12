@@ -44,6 +44,7 @@ import { InvoicePaymentHelp } from './Components-Jobseeker/InvoicePaymentHelp'
 import { LoginIssuesHelp } from './Components-Jobseeker/LoginIssuesHelp'
 import { PageErrorsHelp } from './Components-Jobseeker/PageErrorsHelp'
 import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
+import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -216,6 +217,10 @@ const router = createBrowserRouter([{
 {
   path:'/Job-portal/jobseeker/help-center/file-upload-help',
   element: <FileUploadHelp />,
+},
+{
+  path: '/Job-portal/Employer/Dashboard',
+  element: <EmployerDashboard/>
 },
 ])
 

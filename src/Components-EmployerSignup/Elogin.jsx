@@ -8,7 +8,7 @@ import './Elogin.css'
 
 export const Elogin = () => {
   const [passwordShow, setPasswordShow] = useState(true)
-
+  const navigate = useNavigate();
   const togglePasswordView = () => {
     setPasswordShow((prev) => !prev)
   }
@@ -43,7 +43,7 @@ export const Elogin = () => {
     if (!validateForm()) {
       return false // stops form submit if errors
     }
-    console.log("Logged in successfully") // This Code is removed after backend integration 
+     navigate('/Job-portal/Employer/Dashboard')
   }
 
   return (

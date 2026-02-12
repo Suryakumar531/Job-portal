@@ -20,6 +20,10 @@ export const JobProvider = ({ children }) => {
             ...originalJob,
             appliedDate: `Applied on ${getFormattedDate()}`,
             status: { text: 'Hiring in Progress', type: 'progress' },
+            // other 2 options for Status:
+            // status= {text: 'Reviewing Application', type: 'reviewing'},
+            // status= {text: 'Hiring Done', type: 'done'},
+            
             applicationStatus: [
 
                 { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
