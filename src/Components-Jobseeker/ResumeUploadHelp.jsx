@@ -1,9 +1,8 @@
 import React from "react";
 import "./ResumeUploadHelp.css";
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import ResumeHelpImg from "../assets/resume-help.png";
-import { Header } from "../Components-LandingPage/Header";
+import { FHeader } from "./FHeader";
 
 export const ResumeUploadHelp = () => {
 
@@ -97,7 +96,7 @@ export const ResumeUploadHelp = () => {
 
   return (
       <>
-      <Header />
+      <FHeader />
       <div className="resumehelp-page">
       <div className="resumehelp-container">
         <h1 className="resumehelp-title">

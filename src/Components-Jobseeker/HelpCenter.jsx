@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { JHeader } from './JHeader'
 import { Footer } from '../Components-LandingPage/Footer'
 import "./HelpCenter.css";
 import Helpcenterimg from "../assets/Helpcenter.png";
 import search from '../assets/icon_search.png'
 import { Link, useNavigate } from 'react-router-dom';
-import { Header } from '../Components-LandingPage/Header';
+import { FHeader } from './FHeader';
 
 
 export const HelpCenter = () => {
@@ -112,7 +111,7 @@ export const HelpCenter = () => {
     };
     return (
         <>
-            <Header />
+            <FHeader />
             <div className='Helpcenter-page'>
                 <div className="helpcenter-container">
                     <img src={Helpcenterimg} alt="helpcenter" className="Helpcenter-Img" />

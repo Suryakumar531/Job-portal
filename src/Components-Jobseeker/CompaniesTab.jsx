@@ -8,7 +8,6 @@ import location from '../assets/icon_location.png'
 import tick from '../assets/icon_tick.png'
 import starIcon from '../assets/Star_icon.png'
 import { CompaniesList } from '../CompaniesList';
-import { JHeader } from './JHeader';
 import { SearchBar } from './SearchBar'
 import { Header } from '../Components-LandingPage/Header';
 

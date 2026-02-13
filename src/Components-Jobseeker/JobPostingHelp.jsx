@@ -1,9 +1,8 @@
 import React from "react";
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./JobEmployerHelp.css";
 import JobPostingImg from "../assets/jobposting.png";
-import { Header } from "../Components-LandingPage/Header";
+import { FHeader } from './FHeader';
 
 export const JobPostingHelp = () => {
   const employerData = {
@@ -39,7 +38,7 @@ export const JobPostingHelp = () => {
 
   return (
       <>
-      <Header />
+      <FHeader />
       <div className="jobemployerhelp-page">
       <div className="jobemployerhelp-container">
         <h1 className="jobemployerhelp-title">{employerData.title}</h1>

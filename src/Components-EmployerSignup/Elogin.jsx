@@ -43,7 +43,7 @@ export const Elogin = () => {
     if (!validateForm()) {
       return false // stops form submit if errors
     }
-     navigate('/Job-portal/Employer/Dashboard')
+    navigate('/Job-portal/Employer/Dashboard')
   }
 
   return (

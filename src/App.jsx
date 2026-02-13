@@ -26,9 +26,9 @@ import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
 import { Revoked } from './Components-Jobseeker/Revoked'
 import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
-import BlogCategory from './Components-LandingPage/BlogCategory'
+import { BlogCategory } from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
-import { ContactUs } from './Components-LandingPage/Contactus'
+import { ContactUs } from './Components-LandingPage/ContactUs'
 import { FAQ } from './Components-LandingPage/FAQ'
 import { HelpCenter } from './Components-Jobseeker/HelpCenter'
 import { RaiseTicket } from './Components-Jobseeker/RaiseTicket'
@@ -139,8 +139,8 @@ const router = createBrowserRouter([{
   element: <Settings />
 },
 {
-  path: '/Job-portal/jobseeker/Contact_Us',
-  element: < ContactUs/>
+  path: '/Job-portal/jobseeker/ContactUs',
+  element: <ContactUs />
 },
 {
   path: '/Job-portal/jobseeker/FAQ',
@@ -148,7 +148,7 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/jobseeker/Blogs',
-  element: < Blogpage/>
+  element: <Blogpage />
 },
 {
   path: '/Job-portal/jobseeker/Blogs/Category',
@@ -220,7 +220,7 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/Employer/Dashboard',
-  element: <EmployerDashboard/>
+  element: <EmployerDashboard />
 },
 ])
 

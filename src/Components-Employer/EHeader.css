@@ -21,12 +21,7 @@
     align-items: center;
     justify-content: center;
     padding: 8px;
-    border-radius: 8px 12px;
-    border-color:gray;
-    border-style: solid;
-    width: 40%;
-
-
+    width: 80%;
 }
 
 .searchicon{
@@ -35,7 +30,7 @@
 }
 
 .input1{
-    width: 100%;
+    width: 190px;
     height: 5px;
     outline: none;
     border: none;

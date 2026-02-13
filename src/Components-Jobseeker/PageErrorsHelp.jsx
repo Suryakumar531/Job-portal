@@ -1,9 +1,8 @@
 import React from "react";
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./TechnicalIssues.css";
 import PageErrorImg from "../assets/pageerror.png";
-import { Header } from "../Components-LandingPage/Header";
+import { FHeader } from "./FHeader";
 
 export const PageErrorsHelp = () => {
   const pageErrorData = {
@@ -66,7 +65,7 @@ export const PageErrorsHelp = () => {
 
   return (
     <>
-      <Header />
+      <FHeader />
        <div className="technicalhelp-page">
       <div className="technicalhelp-container">
         <h1 className="technicalhelp-title">{pageErrorData.title}</h1>
