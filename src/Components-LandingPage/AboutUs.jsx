@@ -1,5 +1,4 @@
 import React from 'react'
-import { JHeader } from '../Components-Jobseeker/JHeader'
 import './AboutUs.css'
 import WorkLife from "../assets/WorkLifeBet.png"
 import forjobseekers from '../assets/jobseeker.png'
