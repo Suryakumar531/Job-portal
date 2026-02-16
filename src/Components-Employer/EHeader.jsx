@@ -10,7 +10,7 @@ import { Link, NavLink } from 'react-router-dom'
 export const EHeader=()=> {
     const NavIcons =[
             
-            {image: chat , path: ""},
+            {image: chat , path: "/Job-portal/Employer/Chat"},
              {image: bell,path: ""},
             {image: Profile,path: ""}
            
@@ -27,7 +27,7 @@ export const EHeader=()=> {
                 {NavIcons.map((IC,index)=>{
                 const isActive = Location.pathname===IC.path
                 return(
-                <Link key={index}><img className={isActive? 'jheader-icons-active' : 'jheader-icons'} src={IC.image} width={40} alt='My Jobs' /></Link>)})}
+                <Link to={IC.path} key={index}><img className={isActive? 'jheader-icons-active' : 'jheader-icons'} src={IC.image} width={40} alt='My Jobs' /></Link>)})}
             </div>
            
         </header>

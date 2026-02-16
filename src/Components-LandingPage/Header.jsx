@@ -67,7 +67,7 @@ export const Header = () => {
 
   const navIcons = [
     { image: breifcase, path: '/Job-portal/jobseeker/myjobs' },
-    { image: chat, path: '' },
+    { image: chat, path: '/Job-portal-Live/jobseeker/Chat' },
   ];
 
   const newNotificationsCount = notificationsData
