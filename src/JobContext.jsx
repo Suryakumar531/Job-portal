@@ -1,34 +1,74 @@
 import React, { createContext, useState, useContext } from 'react';
 import { Joblist } from './JobList';
 
- 
+
+
 const JobContext = createContext();
- 
+
 export const JobProvider = ({ children }) => {
-    const [jobs, setJobs] = useState(Joblist );
+    // Total JobList
+    const [jobs, setJobs] = useState(Joblist);
+
+    // States to Toggle online status in chats
     const [onlineStatus, setOnlineStatus] = useState("yes");
+
+    // Jobs to show when Applied
     const [appliedJobs, setAppliedJobs] = useState([]);
+
+    // Jobs to show when Saved
     const [savedJobs, setSavedJobs] = useState([]);
-    const [activeChatId, setActiveChatId] = useState(1);
-    
+
+    // Using Id to Toggle Menu in Notification Window
+    const [activeMenuId, setActiveMenuId] = useState(null);
+
+    // Chats/messages between Employer and Jobseeker 1:1;
     const [chats, setChats] = useState([
         {
             id: 1,
             name: "Employer",
-            role: "employer", 
-            messages: [] 
+            role: "employer",
+            messages: []
         },
         {
             id: 2,
             name: "jobseeker",
-            role: "jobseeker", 
+            role: "jobseeker",
             messages: []
         }
     ]);
+
+    // Toggle End Conversation Logic In Employer Chat Window
     const [isChatEnded, setIsChatEnded] = useState(false);
 
+    // NotificationData previously passed from AfterLoginLanding page
+    const [notificationsData, setNotificationsData] = useState([{
+        id: Date.now(),
+        text: "Welcome to Job Portal",
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        isRead: false,
+    }]);
+   
+    // New Messages Notification Logic
+    const [showNotification, setShowNotification] = useState(false);
+
+    // to add NewNotification in NotificationData 
+    const addNotification = (text) => {
+        const newNotif = {
+            id: Date.now(),
+            text: text,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            isRead: false
+        };
+        setNotificationsData(prev => [newNotif, ...prev]);
+    };
+
+    
+    const getFormattedDate = () => {
+        return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    };
+
     const isJobSaved = (jobId) => savedJobs.some((j) => j.id === jobId);
- 
+
     const applyForJob = (originalJob) => {
         const newAppliedJob = {
             ...originalJob,
@@ -47,7 +87,7 @@ export const JobProvider = ({ children }) => {
         setSavedJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
         alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
     };
- 
+
     const toggleSaveJob = (originalJob) => {
         if (isJobSaved(originalJob.id)) {
             setSavedJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
@@ -59,15 +99,17 @@ export const JobProvider = ({ children }) => {
             setSavedJobs((prev) => [...prev, newSavedJob]);
         }
     };
- 
+
     return (
         <JobContext.Provider value={{
-            jobs, appliedJobs, savedJobs, chats, setChats, 
-            onlineStatus, setOnlineStatus, activeChatId, setActiveChatId, isJobSaved,isChatEnded, setIsChatEnded
+            jobs, appliedJobs, setAppliedJobs, savedJobs, chats, setChats, setJobs,
+            onlineStatus, setOnlineStatus, isJobSaved, isChatEnded, setIsChatEnded,
+            setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
+            activeMenuId,setActiveMenuId
         }}>
             {children}
         </JobContext.Provider>
     );
 };
- 
+
 export const useJobs = () => useContext(JobContext);

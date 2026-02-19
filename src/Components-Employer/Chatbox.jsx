@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chatbox.css";
 import { Header } from "../Components-LandingPage/Header";
-import { useJobs } from "../JobContext";
+import { useJobs } from "../Jobcontext";
 
 
 export const Chatbox = () => {
-  const { chats, setChats,isChatEnded, setIsChatEnded } = useJobs();
+  const { chats, setChats,isChatEnded, setIsChatEnded,addNotification } = useJobs();
   const [input, setInput] = useState("");
-  // New state to track if conversation is active
+  
    
   const scrollRef = useRef(null);
 
@@ -20,7 +20,6 @@ export const Chatbox = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    // Chat end aana send panna mudiyaadhu
     if (!input.trim() || isChatEnded) return; 
 
     const employerReply = {
@@ -30,9 +29,14 @@ export const Chatbox = () => {
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
+    // Chat updates
     setChats(prev => prev.map(chat => 
       chat.role === "employer" ? { ...chat, messages: [...chat.messages, employerReply] } : chat
     ));
+
+    // 2. Sending datas Notification
+    addNotification(`New message from Employer: ${input}`);
+
     setInput("");
   };
 
