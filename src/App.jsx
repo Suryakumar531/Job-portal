@@ -142,7 +142,7 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/jobseeker/Contact_Us',
-  element: < ContactUs/>
+  element: <ContactUs/>
 },
 {
   path: '/Job-portal/jobseeker/FAQ',
@@ -150,7 +150,7 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/jobseeker/Blogs',
-  element: < Blogpage/>
+  element: <Blogpage/>
 },
 {
   path: '/Job-portal/jobseeker/Blogs/Category',

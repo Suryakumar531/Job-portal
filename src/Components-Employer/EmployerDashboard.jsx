@@ -15,17 +15,60 @@ import ActiveJobs from '../assets/Employer/EActiveJobs.png'
 import TotalAPP from '../assets/Employer/ETotalAPP.png'
 import Close from '../assets/Employer/close.png'
 import jobpost from '../assets/Employer/JOBPOST.png'
-import { Header } from '../Components-LandingPage/Header'
-import { JHeader } from '../Components-Jobseeker/JHeader'
+import { useJobs } from '../JobContext'
 
 export const EmployerDashboard = () => {
-
+    const { jobs,addJob,deleteJob } = useJobs();
     const [activetab,setActiveTab]= useState('Dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     const ToggleSidebar=()=>{
         setIsSidebarOpen(!isSidebarOpen)
     }
+
+    const handlePostDefaultJob = () => {
+        const defaultJob = {
+            id: Date.now().toString(), // Dynamic ID for safety
+            title: "Software Engineer",
+            company: "Apple IN",
+            companyId: "AIN001",
+            logo: "1",
+            posted: new Date().toISOString().split('T')[0], // Current date
+            PostedBy: "Company Jobs",
+            IndustryType: ["IT Services"],
+            Department: ["Engineering", "Development"],
+            WorkType: "Hybrid",
+            Shift: "General",
+            duration: "Full-time",
+            ratings: 3.5,
+            reviewNo: 533,
+            salary: "12.0",
+            experience: "3",
+            location: "Bengaluru",
+            openings: 8,
+            applicants: 65,
+            tags: ["Full-time"],
+            EducationRequired: ["B.Tech/B.E.", "M.Tech", "MCA", "MS/M.Sc (Science)", "Any Graduate"],
+            KeySkills: ["Python", "Go", "SQL", "Microservices", "AWS", "Distributed Systems"],
+            JobHighlights: [
+                "Experience with cloud platforms (AWS/GCP/Azure)",
+                "Strong knowledge of data structures and algorithms",
+                "Experience with high-traffic, distributed systems"
+            ],
+            companyOverview: "Apple is a global technology leader...",
+            jobDescription: "We are seeking a skilled Software Engineer...",
+            Responsibilities: [
+                "Design, develop, and deploy scalable backend services...",
+                "Collaborate with Product and Data teams...",
+                "Optimize and maintain large-scale databases..."
+            ]
+        };
+
+        addJob(defaultJob);
+        alert("Job Posted Successfully to Global State!");
+        setActiveTab('My job post'); // Redirect to see the post
+    };
+
 
   return (
     <>
@@ -143,7 +186,7 @@ export const EmployerDashboard = () => {
             <h2>Hi Yamuna,</h2>
             <p style={{fontWeight:"600"}}>Here's, What's Going on... </p>
             </div>
-            <button className='post-job-btn'>+ Post a Job</button>
+            <button className='post-job-btn' onClick={handlePostDefaultJob}>+ Post a Job</button>
         </div>
         <div className='E-DashB-Over-View'>
             <h2 style={{marginLeft:"40px"}}>OverView</h2>
@@ -195,7 +238,31 @@ export const EmployerDashboard = () => {
         {activetab === 'Post a Job' && ( 
         <h1>Post Job</h1>)}
         {activetab === 'My job post' && (
-        <h1>Your Post</h1>)}
+                        <div className='MyJobPosts-Container'>
+                            <h1>Your Posted Jobs ({jobs.length})</h1>
+                            <div className='job-list'>
+                                {jobs.length === 0 ? (
+                                    <p>No jobs posted yet.</p>
+                                ) : (
+                                    jobs.map((job) => (
+                                        <div key={job.id} className='job-card' style={{border: '1px solid #ddd', padding: '15px', margin: '10px 0', borderRadius: '8px'}}>
+                                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                                <h3>{job.title}</h3>
+                                                {/* DELETE BUTTON */}
+                                                <button 
+                                                    onClick={() => deleteJob(job.id)}
+                                                    style={{backgroundColor: 'red', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer'}}
+                                                >
+                                                    Remove Job
+                                                </button>
+                                            </div>
+                                            <p>{job.company} - {job.location}</p>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    )}
         {activetab === 'Analytics' && (
         <h1>Applicants Section</h1>)}
         {activetab === 'Billing' &&( 

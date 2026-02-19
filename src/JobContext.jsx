@@ -99,13 +99,23 @@ export const JobProvider = ({ children }) => {
             setSavedJobs((prev) => [...prev, newSavedJob]);
         }
     };
+    const addJob = (newJob) => {
+        setJobs((prevJobs) => [...prevJobs, newJob]);
+    };
+
+    const deleteJob = (jobId) => {
+        setJobs((prev) => prev.filter((j) => j.id !== jobId));
+       setSavedJobs((prev) => prev.filter((j) => j.id !== jobId));
+        addNotification("Job posting has been successfully deleted.");
+    };
+    
 
     return (
         <JobContext.Provider value={{
             jobs, appliedJobs, setAppliedJobs, savedJobs, chats, setChats, setJobs,
             onlineStatus, setOnlineStatus, isJobSaved, isChatEnded, setIsChatEnded,
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
-            activeMenuId,setActiveMenuId
+            activeMenuId,setActiveMenuId,addJob,deleteJob
         }}>
             {children}
         </JobContext.Provider>
