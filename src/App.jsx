@@ -45,6 +45,8 @@ import { LoginIssuesHelp } from './Components-Jobseeker/LoginIssuesHelp'
 import { PageErrorsHelp } from './Components-Jobseeker/PageErrorsHelp'
 import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
+import { EMessenger } from './Components-Employer/EMessenger'
+import { JMessenger } from './Components-Jobseeker/JMessenger'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -221,6 +223,14 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/Employer/Dashboard',
   element: <EmployerDashboard />
+},
+{
+  path: '/Job-portal/Employer/chat',
+  element: <EMessenger />
+},
+{
+  path: '/Job-portal/jobseeker/chat',
+  element: <JMessenger />
 },
 ])
 

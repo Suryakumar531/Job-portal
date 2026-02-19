@@ -37,7 +37,6 @@ export const AppliedJobsOverview = () => {
   const navigate = useNavigate();
   const job = appliedJobs.find(job => job.id === id)
 
-
   const [activeStep, setActiveStep] = useState(-1);
 
   const applicationStatus = [
@@ -60,7 +59,6 @@ export const AppliedJobsOverview = () => {
             setJobs((prev) => {
                 if (prev.some(j => j.id === jobId)) return prev;
                 return [...prev, restoredJob];
-               
             });
  
             alert("Application withdrawn successfully.");
@@ -79,11 +77,10 @@ export const AppliedJobsOverview = () => {
     }, 500);
     return () => clearTimeout(timer);
   }, []);
+  console.log(appliedJobs[0])
   return (
-
     <div >
       <Header />
-
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }} className='appliedjobsO-job-card'>
         <div >
           <div className="myjobs-card-header">
