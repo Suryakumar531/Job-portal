@@ -15,10 +15,11 @@ import ActiveJobs from '../assets/Employer/EActiveJobs.png'
 import TotalAPP from '../assets/Employer/ETotalAPP.png'
 import Close from '../assets/Employer/close.png'
 import jobpost from '../assets/Employer/JOBPOST.png'
+import place from '../assets/Employer/ETotalAPP.png'
 import { useJobs } from '../JobContext'
 
 export const EmployerDashboard = () => {
-    const { jobs,addJob,deleteJob } = useJobs();
+    const { jobs,addJob,deleteJob,appliedJobs } = useJobs();
     const [activetab,setActiveTab]= useState('Dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -194,14 +195,14 @@ export const EmployerDashboard = () => {
             <div className='E-DashB-No-Counts'>
                 <div><img src={ActiveJobs} width={40} alt="" /></div>
                 <div >
-                    <p>0</p>
+                    <p>{jobs.length}</p>
                     <p className='E-job-status'>Active Jobs</p>
                 </div>
             </div>
             <div className='E-DashB-No-Counts'>
                 <div><img src={TotalAPP} width={40} alt="" /></div>
                 <div >
-                    <p>0</p>
+                    <p>{appliedJobs.length}</p>
                     <p className='E-job-status'>Total Applicants</p>
                 </div>
             </div>
@@ -236,7 +237,43 @@ export const EmployerDashboard = () => {
         {activetab === 'Chats' && (
         <h1>Chats</h1>)}
         {activetab === 'Post a Job' && ( 
-        <h1>Post Job</h1>)}
+        <div className="postedjobs-container">
+      <h2 className="postedjobs-header">Jobs posted by you</h2>
+
+      <div className="postedjobs-grid-layout postedjobs-table-header">
+        <div /> 
+        <span className="postedjobs-label">Applicants</span>
+        <span className="postedjobs-label">New</span>
+        <span className="postedjobs-label">Reviewed</span>
+        <span className="postedjobs-label">Hired</span>
+        <span className="postedjobs-label">Rejected</span>
+        <div /> 
+      </div>
+
+      <div className="postedjobs-list">
+        <div className='job-list'>
+                                {jobs.length === 0 ? (
+                                    <p>No jobs posted yet.</p>
+                                ) : (
+                                    jobs.map((job) => (
+                                        <div key={job.id} className='job-card' style={{border: '1px solid #ddd', padding: '15px', margin: '10px 0', borderRadius: '8px'}}>
+                                            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                                <h3>{job.title}</h3>
+                                                {/* DELETE BUTTON */}
+                                                <button 
+                                                    onClick={() => deleteJob(job.id)}
+                                                    style={{backgroundColor: "#0066cc", color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer'}}
+                                                >
+                                                    Remove Job
+                                                </button>
+                                            </div>
+                                            <p>{job.company} - {job.location}</p>
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+      </div>
+    </div>)}
         {activetab === 'My job post' && (
                         <div className='MyJobPosts-Container'>
                             <h1>Your Posted Jobs ({jobs.length})</h1>
@@ -251,7 +288,7 @@ export const EmployerDashboard = () => {
                                                 {/* DELETE BUTTON */}
                                                 <button 
                                                     onClick={() => deleteJob(job.id)}
-                                                    style={{backgroundColor: 'red', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer'}}
+                                                    style={{backgroundColor: "#0066cc", color: 'white', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer'}}
                                                 >
                                                     Remove Job
                                                 </button>

@@ -105,7 +105,7 @@ export const JobProvider = ({ children }) => {
 
     const deleteJob = (jobId) => {
         setJobs((prev) => prev.filter((j) => j.id !== jobId));
-       setSavedJobs((prev) => prev.filter((j) => j.id !== jobId));
+        setSavedJobs((prev) => prev.filter((j) => j.id !== jobId));
         addNotification("Job posting has been successfully deleted.");
     };
     
