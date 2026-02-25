@@ -47,6 +47,13 @@ import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
 import { Messenger } from './Components-Jobseeker/Messenger'
 import { Chatbox } from './Components-Employer/Chatbox'
+import {FindTalent} from './Components-Employer/FindTalent'
+import { AboutYourCompany } from './Components-Employer/AboutYourCompany'
+import { CompanyVerify } from './Components-Employer/CompanyVerify'
+import { PostJobForm } from './Components-Employer/PostJobForm'
+import { PostJobPreview } from './Components-Employer/PostJobPreview'
+import { PostedJobs } from './Components-Employer/PostedJobs'
+import { EditJob } from './Components-Employer/EditJob'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -225,12 +232,40 @@ const router = createBrowserRouter([{
   element: <EmployerDashboard/>
 },
 {
+  path: '/Job-portal/Employer/about-your-company',
+  element: <AboutYourCompany/>
+},
+{
+  path: '/Job-portal/Employer/about-your-company/company-verification',
+  element: <CompanyVerify />,
+},
+{
+  path: '/Job-portal/Employer/PostJob',
+  element: <PostJobForm />
+},
+{
+  path: '/Job-portal/Employer/PostJobpreview',
+  element: <PostJobPreview />
+},
+{
+  path: '/Job-portal/Employer/Postedjobs',
+  element: <PostedJobs />
+},
+{
+  path: '/Job-portal/Employer/EditJob',
+  element: <EditJob />
+},
+{
   path: '/Job-portal/jobseeker/Chat',
   element: <Messenger/>
 },
 {
   path: '/Job-portal/Employer/Chat',
   element: <Chatbox/>
+},
+{
+  path: '/Job-portal/Employer/FindTalent',
+  element: <FindTalent/>
 },
 ])
 

@@ -37,6 +37,42 @@ export const JobProvider = ({ children }) => {
         }
     ]);
 
+    // Profile List from my profile
+     const [allData, setAllData] = useState({
+            profile: { fullName: '', gender: 'Select', dob: '', maritalStatus: 'Select', nationality: '' },
+            currentDetails: { jobTitle: '', company: '', experience: '', currentLocation: '', prefLocation: '' },
+            contact: { mobile: '', altMobile: '', email: '', altEmail: '', address: '', street: '', city: '', state: '', pincode: '', country: '' },
+            resume: { size: '', portfolio: '' },
+            education: { highestQual: 'Select', sslc: { institution: '', percentage: '', location: '', year: '' }, hsc: { stream: 'Select', institution: '', location: '', year: '', percentage: '' }, graduations: [{ id: 1, degree: '', status: 'Select', dept: '', percentage: '', startYear: '', endYear: '', college: '', city: '', state: '', country: '' }] },
+            experience: { status: 'Fresher', hasExperience: 'No', entries: [{ id: 1, title: '', company: '', startDate: '', endDate: '', industry: 'Select', jobType: 'Select', location: '', responsibilities: '' }] },
+            skills: ["User Research", "Problem solving", "Figma"],
+            languages: [{ name: "English", proficiency: "Fluent" }, { name: "Tamil", proficiency: "Native" }],
+            certs: [{ name: "Full-Stack Development", file: "cert1.pdf" }, { name: "UI/UX Design", file: "cert2.pdf" }],
+            preferences: [{ currentCTC: '', expectedCTC: '', jobType: 'Select', role: '', ready: '', relocate: '' }]
+        });
+
+    const postJob = (newJobData) => {
+        const newJob = {
+            ...newJobData,
+            id: jobs.length > 0 ? Math.max(...jobs.map(j => j.id)) + 1 : 1, 
+            postedDate: getFormattedDate(),
+        };
+        setJobs((prev) => [newJob, ...prev]);
+        alert(`Job "${newJob.title}" posted successfully!`);
+    };
+
+    // 2. Edit an Existing Job
+    const editJob = (jobId, updatedData) => {
+        setJobs((prev) => 
+            prev.map((job) => (job.id === jobId ? { ...job, ...updatedData } : job))
+        );
+        
+        // Also update saved jobs if the edited job was saved
+        setSavedJobs((prev) => 
+            prev.map((job) => (job.id === jobId ? { ...job, ...updatedData } : job))
+        );
+    };
+
     // Toggle End Conversation Logic In Employer Chat Window
     const [isChatEnded, setIsChatEnded] = useState(false);
 
@@ -115,7 +151,7 @@ export const JobProvider = ({ children }) => {
             jobs, appliedJobs, setAppliedJobs, savedJobs, chats, setChats, setJobs,
             onlineStatus, setOnlineStatus, isJobSaved, isChatEnded, setIsChatEnded,
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
-            activeMenuId,setActiveMenuId,addJob,deleteJob
+            activeMenuId,setActiveMenuId,addJob,deleteJob,allData,setAllData,postJob,editJob
         }}>
             {children}
         </JobContext.Provider>
