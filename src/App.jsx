@@ -54,6 +54,7 @@ import { PostJobForm } from './Components-Employer/PostJobForm'
 import { PostJobPreview } from './Components-Employer/PostJobPreview'
 import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
+import FindTalent2 from './Components-Employer/Findtalent2'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -267,6 +268,7 @@ const router = createBrowserRouter([{
   path: '/Job-portal/Employer/FindTalent',
   element: <FindTalent/>
 },
+
 ])
 
 function App() {
