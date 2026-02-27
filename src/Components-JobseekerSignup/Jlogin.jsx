@@ -37,7 +37,7 @@ export const Jlogin = () => {
 
     if (!formValues.password.trim()) {
       newErrors.password = "Password is required"
-    } 
+    }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -88,11 +88,10 @@ export const Jlogin = () => {
             <Link to="/Job-portal/jobseeker/login/forgotpassword" className='forgot-password'>Forgot Password?</Link>
           </div>
 
-          <button className="j-login-btn">Login</button>
+          <button type="submit" className="j-login-btn">Login</button>
 
           <div className="divider">Or Continue with</div>
-
-          <button className="google-btn">
+          <button type="button" className="google-btn">
             <img src={Google} alt="Google" />
             Google
           </button>

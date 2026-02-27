@@ -59,7 +59,6 @@ export const JobProvider = ({ children }) => {
         };
         setNotificationsData(prev => [newNotif, ...prev]);
     };
-
     
     const getFormattedDate = () => {
         return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
