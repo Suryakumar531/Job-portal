@@ -1,13 +1,11 @@
 import React, { createContext, useState, useContext } from 'react';
-import { Joblist } from './JobList';
-
-
+import { JobList } from './JobList';
 
 const JobContext = createContext();
 
 export const JobProvider = ({ children }) => {
     // Total JobList
-    const [jobs, setJobs] = useState(Joblist);
+    const [jobs, setJobs] = useState(JobList);
 
     // States to Toggle online status in chats
     const [onlineStatus, setOnlineStatus] = useState("yes");

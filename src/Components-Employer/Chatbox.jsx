@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chatbox.css";
 import { Header } from "../Components-LandingPage/Header";
-import { useJobs } from "../Jobcontext";
+import { useJobs } from "../JobContext";
 
 
 export const Chatbox = () => {

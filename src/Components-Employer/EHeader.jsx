@@ -17,7 +17,7 @@ export const EHeader = () => {
     ]
     return (
         <header className="header">
-            <div className="logo">job portal</div>
+            <Link className="logo" to='/Job-portal/Employer/Dashboard'>job portal</Link>
             <div className='E-Header-search'>
                 <img className="E-searchicon" src={search} alt="search icon" />
                 <input className="input" type="text" placeholder='Search for jobs and applicants' />

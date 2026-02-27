@@ -130,8 +130,8 @@ export const PostJobPreview = () => {
               <div className="jobpost-previous-vertical-separator"></div>
               <div className="jobpost-previous-info-item">
                 {/* Note: If you have a specific currency icon in assets, you can replace the text symbol below */}
-                <span style={{ fontWeight: 'bold', marginRight: '8px' }}>₹</span>
-                <span>{state.salary || 'Not disclosed'}</span>
+                <span style={{ fontWeight: 'bold', marginRight: '2px' }}>₹</span>
+                <span>{state.salary || 'Not disclosed'}LPA</span>
               </div>
             </div>
 
@@ -191,12 +191,12 @@ export const PostJobPreview = () => {
           </div>
 
           <div className="jobpost-previous-section-block">
-          <h4>Company Overview {companyProfile?.companyName || "Default Company"}</h4>
-  
-  <p className="jobpost-previous-description-text">
-    {companyProfile?.about || "We are a leading company in the industry providing excellent services."}
-  </p>
-        </div>
+            <h4>Company Overview {companyProfile?.companyName || "Default Company"}</h4>
+
+            <p className="jobpost-previous-description-text">
+              {companyProfile?.about || "We are a leading company in the industry providing excellent services."}
+            </p>
+          </div>
 
 
           <div className="jobpost-previous-section-block">
