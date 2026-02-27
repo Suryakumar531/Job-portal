@@ -26,7 +26,7 @@ import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
 import { Revoked } from './Components-Jobseeker/Revoked'
 import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
-import BlogCategory from './Components-LandingPage/BlogCategory'
+import { BlogCategory } from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
 import { ContactUs } from './Components-LandingPage/Contactus'
 import { FAQ } from './Components-LandingPage/FAQ'
@@ -54,7 +54,6 @@ import { PostJobForm } from './Components-Employer/PostJobForm'
 import { PostJobPreview } from './Components-Employer/PostJobPreview'
 import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
-import FindTalent2 from './Components-Employer/Findtalent2'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',

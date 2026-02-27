@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { JHeader } from "../Components-Jobseeker/JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./AboutYourCompany.css";
 import fileIcon from "../assets/Employer/fileIcon.png"
 import { useNavigate } from "react-router-dom";
 import { useJobs } from "../JobContext";
-
-
 
 export const AboutYourCompany = () => {
 
