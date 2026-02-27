@@ -1,5 +1,10 @@
-import React, { useState } from 'react'
-import './Blogpage.css'
+import React from 'react';
+import './Blogpage.css';
+import { useNavigate } from 'react-router-dom';
+import { Footer } from '../Components-LandingPage/Footer';
+import { Header } from '../Components-LandingPage/Header';
+
+// Assets import (kept same)
 import blogheadimg from "../assets/Blog_Images/bloghead.png";
 import blogimg from "../assets/Blog_Images/blog1.png";
 import bloggimg from "../assets/Blog_Images/blog2.png";
@@ -12,194 +17,91 @@ import blggcimg from "../assets/Blog_Images/blog8.png";
 import blogimgg from "../assets/Blog_Images/blog9.png";
 import bloggimgg from "../assets/Blog_Images/blog10.png";
 import blooggimgg from "../assets/Blog_Images/blog11.png";
-import { useNavigate } from 'react-router-dom';
-import { Footer } from '../Components-LandingPage/Footer';
-import { FHeader } from '../Components-Jobseeker/FHeader'
 
-  export const Blogpage = () => {
-    // const [showMore, setShowMore] = useState(false);
-    const navigate = useNavigate()
+export const Blogpage = () => {
+  const navigate = useNavigate();
+
+  // 1. Data arrays to avoid repetition
+  const featuredBlogs = [
+    { img: blogimg, title: "Lorem ipsum dolor sit amet...", desc: "Lorem ipsum dolor sit amet..." },
+    { img: bloggimg, title: "Lorem ipsum, dolor sit amet...", desc: "Lorem ipsum dolor sit amet..." },
+    { img: blggimg, title: "Lorem ipsum, dolor sit amet...", desc: "Lorem ipsum dolor sit amet..." },
+  ];
+
+  const categories = [
+    { img: blogcimg, title: "career" },
+    { img: bloggcimg, title: "Onboarding" },
+    { img: blogccimg, title: "tasks" },
+    { img: bloggccimg, title: "Worktype" },
+    { img: blggcimg, title: "Meetings" },
+    { img: blogimgg, title: "Environment" },
+  ];
+
+  const techBlogs = [
+    { img: bloggimgg, title: "Lorem ipsum dolor sit amet..." },
+    { img: blooggimgg, title: "Lorem ipsum, dolor sit amet..." },
+    { img: blggimg, title: "Lorem ipsum, dolor sit amet..." },
+    { img: blogimg, title: "Lorem ipsum dolor sit amet..." },
+    { img: bloggimg, title: "Lorem ipsum dolor sit amet..." },
+    { img: blggimg, title: "Lorem ipsum dolor sit amet..." },
+  ];
+
+  // 2. Reusable Card Component
+  const BlogCard = ({ img, title, desc, isCategory = false }) => (
+    <div className='content'>
+      <img src={img} alt="blog" width="300" />
+      <h3 className={isCategory ? 'card-title' : ''}>{title}</h3>
+      <p>{desc || "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, quibusdam."}</p>
+      <button>Read more</button>
+      <p className="extra-content">Lorem ipsum dolor sit amet...</p>
+      <p className="extra-content">Lorem ipsum dolor sit amet...</p>
+    </div>
+  );
+
   return (
-  <>
-  <FHeader/>
+    <>
+      <Header />
 
-  <div style={{marginTop:"150px"}} className='blogpage'>
-  <img src={blogheadimg} alt="blogpage" width="1450px" padding="25px"/>
-     
-  </div>
+      <div style={{ marginTop: "150px" }} className='blogpage'>
+        <img src={blogheadimg} alt="blogpage" width="1450px" style={{ padding: "25px" }} />
+      </div>
 
-  <div className='cat-con'>  
-  <div className='container'>
- 
-  <div className='content'>
-  <img src={blogimg} alt="blog" width="300"/>  
-  <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptas sunt aspernatur excepturi? Iusto, vero.</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, quibusdam.</p>
-  
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  
-  </div>
+      {/* Featured Section */}
+      <div className='cat-con'>
+        <div className='container2'>
+          {featuredBlogs.map((blog, index) => (
+            <BlogCard key={index} {...blog} />
+          ))}
+        </div>
+      </div>
 
-  <div className='content' >
-  <img src={bloggimg} alt="blog" width="300"/>  
-  <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, nesciunt ea deleniti esse quo laborum!</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
+      {/* Categories Section */}
+      <div className='cat-con'>
+        <div className='categories2'>
+          <h1>Categories</h1>
+          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Category')} className='view-all'>viewall</button>
+        </div>
+        <div className='container2'>
+          {categories.map((cat, index) => (
+            <BlogCard key={index} {...cat} isCategory={true} />
+          ))}
+        </div>
+      </div>
 
-  <div  className='content'>
-  <img src={blggimg} alt="blog" width="300"/>
-  <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, nesciunt ea deleniti esse quo laborum!</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
+      {/* Technology Blogs Section */}
+      <div className='cat-con'>
+        <div className='categories2'>
+          <h1>Technology Blogs</h1>
+          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Technology')} className='view-all'>viewall</button>
+        </div>
+        <div className='container2'>
+          {techBlogs.map((blog, index) => (
+            <BlogCard key={index} {...blog} />
+          ))}
+        </div>
+      </div>
 
-  </div>
-  </div>
-
-  <div className='cat-con'>
-  <div className='categories'>
-  <h1>Categories</h1>
-  <button onClick={()=>{navigate('/Job-portal/jobseeker/Blogs/Category')}} className='view-all'>viewall</button>
-  </div>
-    
-  <div className='container'>
-  <div className='content'>
-  <img src={blogcimg} alt="blog" width="300"/>
-  <h3 className='card-title'>career</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, quibusdam.</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={bloggcimg} alt="blog" width="300"/> 
-  <h3 className='card-title'>Onboarding</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content' >
-  <img src={blogccimg} alt="blog" width="300"/>
-  <h3 className='card-title'>tasks</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={bloggccimg} alt="blog" width="300"/> 
-  <h3 className='card-title'>Worktype</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, quibusdam.</p>
-  <button>Read more</button>
- <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={blggcimg} alt="blog" width="300"/>
-  <h3 className='card-title'>Meetings</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={blogimgg} alt="blog" width="300"/>
-  <h3 className='card-title'>Environment</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-  </div>
-  </div>
-
-  <div className='cat-con'>
-  <div className='categories'>
-  <h1>Technology Blogs</h1>
-  <button onClick={()=>{navigate('/Job-portal/jobseeker/Blogs/Technology')}} className='view-all'>viewall</button>
-  </div>
-   
-
-      
-  <div className='container'>
-  <div className='content'>
-  <img src={bloggimgg} alt="blog" width="300"/>
-  <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id voluptas sunt aspernatur excepturi? Iusto, vero.</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, quibusdam.</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={blooggimgg} alt="blog" width="300"/>
-  <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, nesciunt ea deleniti esse quo laborum!</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={blggimg} alt="blog" width="300"/>
-  <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, nesciunt ea deleniti esse quo laborum!</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-    
-     
-
-  <div className='content'>
-  <img src={blogimg} alt="blog" width="300"/> 
-  <h3 >Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil minima, non rem!</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, quibusdam.</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={bloggimg} alt="blog" width="300"/>
-  <h3 >Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit voluptatum cupiditate incidunt laborum amet molestiae.</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-
-  <div className='content'>
-  <img src={blggimg} alt="blog" width="300"/>
-  <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto voluptatum eligendi et velit nihil. Error.</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolores!</p>
-  <button>Read more</button>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  <p className="extra-content">Lorem ipsum dolor sit amet...</p>
-  </div>
-  
-  </div>
-  </div>
-     
-  <Footer/>
-    
-  
-
-  </>
-  )
-  }
-
-
+      <Footer />
+    </>
+  );
+};

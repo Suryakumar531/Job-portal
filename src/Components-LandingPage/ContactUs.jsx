@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { FHeader } from '../Components-Jobseeker/FHeader';
 import { Footer } from '../Components-LandingPage/Footer'
 import ContactImage from '../assets/Contactus.png'
 import './ContactUs.css'
+import { FHeader } from '../Components-LandingPage/FHeader'
 
 export const ContactUs = () => {
   const initialValues = { name: "", email: "", contact: "", message: "" }
@@ -46,7 +46,7 @@ export const ContactUs = () => {
 
   return (
     <div className="contact-page">
-      <FHeader />
+     <FHeader/>
 
       <div className="contact-container">
         <div className="contact-left">

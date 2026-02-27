@@ -5,12 +5,16 @@ import bell_dot from '../assets/header_bell_dot.png'
 import { useJobs } from "../JobContext";
 import { useNavigate } from "react-router-dom";
 
-export const JNotification = () => {
 
+
+export const JNotification = ({  }) => {
+    
+    
     const {notificationsData,setNotificationsData,showNotification, setShowNotification,activeMenuId,setActiveMenuId}   = useJobs()
 
-    const containerRef = useRef(null);
+    // const [notifications, setNotifications] = useState(notificationsData);
     const navigate = useNavigate();
+    const containerRef = useRef(null);
 
     const newNotificationsCount = notificationsData.filter(n => !n.isRead).length;
 
@@ -83,7 +87,7 @@ export const JNotification = () => {
                 <div className="notifications-heading-container">
                     <img
                         className="notification-header-icons"
-                        src={newNotificationsCount > 0 ? bell_dot : bell}
+                        src={newNotificationsCount > 0 ? bell_dot:  bell  }
                         alt="Notifications"
                     />
                     <h2>Notifications</h2>
@@ -113,6 +117,7 @@ export const JNotification = () => {
             <div className="notifications-list">
                 {notificationsData.map((notification) => (
                     <div
+                        
                         key={notification.id}
                         className={notification.isRead ? "notification-old-item" : "notification-new-item"}
                     >

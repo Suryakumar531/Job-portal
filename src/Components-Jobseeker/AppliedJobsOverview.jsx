@@ -37,50 +37,70 @@ export const AppliedJobsOverview = () => {
   const navigate = useNavigate();
   const job = appliedJobs.find(job => job.id === id)
 
+
   const [activeStep, setActiveStep] = useState(-1);
 
   const applicationStatus = [
     { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
-    { label: 'Resume Screening', sub: "Your resume is currently being reviewed (either by an automated system or a screener) to ensure your skills and qualifications match the core job requirements.", status: 'pending' },
-    { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience, portfolio, and background to determine potential fit for the role.", status: 'pending' },
-    { label: 'Shortlisted', sub: "You have passed the initial review stages and have been flagged as a top contender among the applicant pool.", status: 'pending' },
+    { label: 'Resume Screening', sub: "Your resume is currently being reviewed (either by an automated system or a screener) to ensure your skills and qualifications match the core job requirements.", status: 'completed' },
+    { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience, portfolio, and background to determine potential fit for the role.", status: 'completed' },
+    { label: 'Shortlisted', sub: "You have passed the initial review stages and have been flagged as a top contender among the applicant pool.", status: 'rejected' },
     { label: 'Interview Called', sub: "The hiring team has officially reached out to schedule a meeting, moving your status from 'Review' to active 'Engagement.'", status: 'pending' },
   ];
+  const rejectedIndex = applicationStatus.findIndex(step => step.status.toLowerCase() === 'rejected');
+  const isRejected = rejectedIndex !== -1;
+
+  const filteredStatus = isRejected
+    ? applicationStatus.slice(0, rejectedIndex + 1)
+    : applicationStatus;
 
   const withdrawApplication = (jobId) => {
     const jobToRestore = appliedJobs.find(j => j.id === jobId);
- 
+
     if (jobToRestore) {
-        const isConfirmed = window.confirm("Are you sure, you want to withdraw this application?");
-        if (isConfirmed) {
-          navigate ('/Job-portal/jobseeker/withdrawn')
-            const { appliedDate, status, applicationStatus, ...restoredJob } = jobToRestore;
-            setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId));
-            setJobs((prev) => {
-                if (prev.some(j => j.id === jobId)) return prev;
-                return [...prev, restoredJob];
-            });
- 
-            alert("Application withdrawn successfully.");
-           
-        }
+      const isConfirmed = window.confirm("Are you sure, you want to withdraw this application?");
+      if (isConfirmed) {
+        navigate('/Job-portal/jobseeker/withdrawn')
+        const { appliedDate, status, applicationStatus, ...restoredJob } = jobToRestore;
+        setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId));
+        setJobs((prev) => {
+          if (prev.some(j => j.id === jobId)) return prev;
+          return [...prev, restoredJob];
+
+        });
+
+        alert("Application withdrawn successfully.");
+
+      }
+    }
+  };
+
+  const removeRejectedJob = (jobId) => {
+    const isConfirmed = window.confirm("This application was rejected. Do you want to remove it from your history?");
+    if (isConfirmed) {
+        setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId)); 
+        navigate('/Job-portal/jobseeker/myjobs'); // Redirect panni vittudalam
+        alert("Application removed from your list.");
     }
 };
 
-  const completedCount = job.applicationStatus.filter(step =>
-    step.status.toLowerCase() === 'completed' || step.status.toLowerCase() === 'complete'
-  ).length;
+
+
   useEffect(() => {
+    const completedCount = job.applicationStatus.filter(step =>
+      ['completed', 'complete'].includes(step.status.toLowerCase())
+    ).length;
 
     const timer = setTimeout(() => {
-      setActiveStep(completedCount);
+      setActiveStep(isRejected ? rejectedIndex : completedCount);
     }, 500);
     return () => clearTimeout(timer);
-  }, []);
-  console.log(appliedJobs[0])
+  }, [isRejected, rejectedIndex]);
   return (
+
     <div >
       <Header />
+
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }} className='appliedjobsO-job-card'>
         <div >
           <div className="myjobs-card-header">
@@ -164,7 +184,7 @@ export const AppliedJobsOverview = () => {
         </div>
         <div className="status-container">
           <div className="status-header">
-            <img src={breifcase} className='card-icons' />
+            <img src={breifcase} className='card-icons' alt="status-icon" />
             <h3>Application status</h3>
           </div>
 
@@ -174,36 +194,75 @@ export const AppliedJobsOverview = () => {
               activeStep={activeStep}
               connector={<AnimatedConnector />}
             >
-              {applicationStatus.map((step, index) => (
-                <Step key={index}>
-                  <StepLabel
-                    optional={
-                      <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary' }}>
-                        {step.sub}
-                      </Typography>
-                    }
-                    sx={{
-                      '& .MuiStepLabel-label': {
-                        fontWeight: index <= activeStep ? 700 : 400,
-                        color: index <= activeStep ? '#1976d2' : 'inherit',
-                        transition: 'color 1.50s ease'
+              {filteredStatus.map((step, index) => {
+                const isStepRejected = step.status.toLowerCase() === 'rejected';
+
+                return (
+                  <Step key={index}>
+                    <StepLabel
+                      StepIconProps={{
+                        sx: isStepRejected ? {
+                          '&.Mui-active': { color: '#d32f2f' },
+                          '& .MuiStepIcon-text': { fill: '#fff' }
+                        } : {}
+                      }}
+                      // Logic: Rejected step-ah irundha 'null' return pannum, so 'sub' text kaataadhu
+                      optional={
+                        !isStepRejected ? (
+                          <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary' }}>
+                            {step.sub}
+                          </Typography>
+                        ) : <Typography variant="caption" sx={{ display: 'block', color: 'red' }}>
+                            better Luck Next Time
+                          </Typography>
                       }
-                    }}
-                  >
-                    {step.label}
-                  </StepLabel>
-                </Step>
-              ))}
+                      sx={{
+                        '& .MuiStepLabel-label': {
+                          fontWeight: index <= activeStep ? 700 : 400,
+                          color: isStepRejected ? '#d32f2f !important' : (index <= activeStep ? '#1976d2' : 'inherit'),
+                          transition: 'color 1.50s ease'
+                        }
+                      }}
+                    >
+                      {/* Step name: Rejected step-na "Rejected" mattum thaan varum */}
+                      {isStepRejected ? "Rejected" : step.label}
+                    </StepLabel>
+                  </Step>
+                );
+              })}
             </Stepper>
           </Box>
-          <button style={{
-            border: "none", outline: "None", marginTop: "50px",
-            padding: "10px 20px", borderRadius: "10px", background: "#1976d2", color: "snow", cursor: "pointer"
-          }}
-            onClick={(e) => {
-              e.stopPropagation()
-              withdrawApplication(job.id)}}
-          >Withdraw</button>
+
+          {/* Withdraw button: Only if not rejected */}
+          {isRejected ? (
+    // Rejected-ah irundha 'Remove' button mattum kaatu
+    <button 
+      style={{
+        border: "none", outline: "none", marginTop: "50px",
+        padding: "10px 20px", borderRadius: "10px", background: "#d32f2f", color: "snow", cursor: "pointer"
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        removeRejectedJob(job.id);
+      }}
+    >
+      Remove from Applied
+    </button>
+  ) : (
+    // Rejected illai na normal 'Withdraw' button kaatu
+    <button 
+      style={{
+        border: "none", outline: "none", marginTop: "50px",
+        padding: "10px 20px", borderRadius: "10px", background: "#1976d2", color: "snow", cursor: "pointer"
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        withdrawApplication(job.id);
+      }}
+    >
+      Withdraw
+    </button>
+  )}
         </div>
 
       </div>

@@ -26,9 +26,9 @@ import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
 import { Revoked } from './Components-Jobseeker/Revoked'
 import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
-import { BlogCategory } from './Components-LandingPage/BlogCategory'
+import BlogCategory from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
-import { ContactUs } from './Components-LandingPage/ContactUs'
+import { ContactUs } from './Components-LandingPage/Contactus'
 import { FAQ } from './Components-LandingPage/FAQ'
 import { HelpCenter } from './Components-Jobseeker/HelpCenter'
 import { RaiseTicket } from './Components-Jobseeker/RaiseTicket'
@@ -45,8 +45,16 @@ import { LoginIssuesHelp } from './Components-Jobseeker/LoginIssuesHelp'
 import { PageErrorsHelp } from './Components-Jobseeker/PageErrorsHelp'
 import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
-import { EMessenger } from './Components-Employer/EMessenger'
-import { JMessenger } from './Components-Jobseeker/JMessenger'
+import { Messenger } from './Components-Jobseeker/Messenger'
+import { Chatbox } from './Components-Employer/Chatbox'
+import {FindTalent} from './Components-Employer/FindTalent'
+import { AboutYourCompany } from './Components-Employer/AboutYourCompany'
+import { CompanyVerify } from './Components-Employer/CompanyVerify'
+import { PostJobForm } from './Components-Employer/PostJobForm'
+import { PostJobPreview } from './Components-Employer/PostJobPreview'
+import { PostedJobs } from './Components-Employer/PostedJobs'
+import { EditJob } from './Components-Employer/EditJob'
+import FindTalent2 from './Components-Employer/Findtalent2'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -141,8 +149,8 @@ const router = createBrowserRouter([{
   element: <Settings />
 },
 {
-  path: '/Job-portal/jobseeker/ContactUs',
-  element: <ContactUs />
+  path: '/Job-portal/jobseeker/Contact_Us',
+  element: <ContactUs/>
 },
 {
   path: '/Job-portal/jobseeker/FAQ',
@@ -150,7 +158,7 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/jobseeker/Blogs',
-  element: <Blogpage />
+  element: <Blogpage/>
 },
 {
   path: '/Job-portal/jobseeker/Blogs/Category',
@@ -222,16 +230,45 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/Employer/Dashboard',
-  element: <EmployerDashboard />
+  element: <EmployerDashboard/>
 },
 {
-  path: '/Job-portal/Employer/chat',
-  element: <EMessenger />
+  path: '/Job-portal/Employer/about-your-company',
+  element: <AboutYourCompany/>
 },
 {
-  path: '/Job-portal/jobseeker/chat',
-  element: <JMessenger />
+  path: '/Job-portal/Employer/about-your-company/company-verification',
+  element: <CompanyVerify />,
 },
+{
+  path: '/Job-portal/Employer/PostJob',
+  element: <PostJobForm />
+},
+{
+  path: '/Job-portal/Employer/PostJobpreview',
+  element: <PostJobPreview />
+},
+{
+  path: '/Job-portal/Employer/Postedjobs',
+  element: <PostedJobs />
+},
+{
+  path: '/Job-portal/Employer/EditJob',
+  element: <EditJob />
+},
+{
+  path: '/Job-portal/jobseeker/Chat',
+  element: <Messenger/>
+},
+{
+  path: '/Job-portal/Employer/Chat',
+  element: <Chatbox/>
+},
+{
+  path: '/Job-portal/Employer/FindTalent',
+  element: <FindTalent/>
+},
+
 ])
 
 function App() {

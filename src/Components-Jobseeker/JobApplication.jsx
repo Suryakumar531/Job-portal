@@ -6,36 +6,35 @@ import deleteIcon from "../assets/DeleteIcon.png";
 import time from "../assets/opportunity_time.png";
 import experience from "../assets/opportunity_bag.png";
 import place from "../assets/opportunity_location.png";
-import SampleResume from "../assets/John_Christopher_Resume.pdf"
 import './JobApplication.css'
 import { Header } from "../Components-LandingPage/Header";
 import { useJobs } from '../JobContext';
 
 export const JobApplication = () => {
 
-  const { applyForJob, jobs } = useJobs();
+  const {applyForJob,jobs,appliedJobs}= useJobs();
   const navigate = useNavigate();
   const { id } = useParams();
   const fileInputRef = useRef(null);
-
-  const job = jobs.find(singleJob => singleJob.id === id);
+  
+  const job = jobs.find(singleJob => singleJob.id === id) || appliedJobs.find(singleJob => singleJob.id === id);
 
   const [editableField, setEditableField] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "John Christopher",
-    dob: "1993-06-09",
+    dob: "1963-06-09",
     marital: "Unmarried",
     mobile: "8394759682",
-    email: "johnchristopher93@gmail.com",
+    email: "johnny.depp@gmail.com",
     street: "B-41, Koteshwar Palace, Koldongri Rd No 4, Opp.Garware House, Andheri(west)",
     city: "Mumbai",
     state: "Maharashtra",
     zip: "400069",
     country: "India",
     coverLetter: "",
-    resume: SampleResume,
-    resumeName: "John_Christopher_Resume.pdf",
+    resume: null,
+    resumeName: "John resume.pdf",
   });
 
   const handleChange = (e) => {
@@ -84,7 +83,6 @@ export const JobApplication = () => {
       "state",
       "zip",
       "country",
-      "resume"
     ];
 
     for (let field of requiredFields) {
@@ -113,18 +111,22 @@ export const JobApplication = () => {
 
     if (!window.confirm("Are you sure want to apply?")) return;
 
-    const newApplication = {
-      ...job,
-      applicantDetails: { ...formData }
-    };
-
-    if (applyForJob) {
-      applyForJob(newApplication);
-    }
-
+  const newApplication = {
+    ...job, 
+    appliedDate: new Date().toLocaleDateString('en-GB'),
+    status: {
+      type: "applied", 
+      text: "Applied"
+    },
+    applicantDetails: formData 
+  };
+  if (applyForJob) {
+    applyForJob(newApplication); 
+  }
+    
     navigate(`/Job-portal/jobseeker/submitted/${job.id}`);
   };
-
+ 
 
   return (
     <>
@@ -282,7 +284,7 @@ export const JobApplication = () => {
             <div className="apply-form-row">
               <div className="apply-form-label">Resume</div>
               <div className="apply-form-input">
-                {formData.resume ? (
+                {formData.resume || formData.resumeName ? (
                   <div className="apply-form-resume-box">
                     <span>
                       {formData.resume?.name || formData.resumeName}

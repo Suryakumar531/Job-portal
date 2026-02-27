@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './Header.css';
+import './Header.css'; 
 import { Link, NavLink, useLocation } from 'react-router-dom';
+
+// JHeader assets
 import breifcase from '../assets/header_case.png';
 import chat from '../assets/header_message.png';
 import bell from '../assets/header_bell.png';
-import bell_dot from '../assets/header_bell_dot.png';
 import home_icon from '../assets/home_icon.png';
+import belldot from '../assets/header_bell_dot.png'
 import { AvatarMenu } from '../Components-Jobseeker/AvatarMenu';
 import { JNotification } from '../Components-Jobseeker/JNotification';
 import { useJobs } from '../JobContext';
@@ -15,32 +17,35 @@ export const Header = () => {
   const location = useLocation();
   const {notificationsData, showNotification, setShowNotification}= useJobs();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+ 
   const isLoggedIn =
-    location.pathname.includes('/jobseeker') &&
+    location.pathname.includes('/jobseeker')&&
     !location.pathname.includes('/login') &&
-    !location.pathname.includes('/signup');
-
+    !location.pathname.includes('/signup')
+ 
   const navLinks = [
     { name: 'Home', path: '/Job-portal/jobseeker' },
     { name: 'Jobs', path: '/Job-portal/jobseeker/jobs' },
     { name: 'Companies', path: '/Job-portal/jobseeker/companies' },
   ];
-
+ 
   const navIcons = [
     { image: breifcase, path: '/Job-portal/jobseeker/myjobs' },
-    { image: chat, path: '/Job-portal/jobseeker/chat' },
+    { image: chat, path: '/Job-portal/jobseeker/Chat' },
   ];
-
   const newNotificationsCount = notificationsData
-    ? notificationsData.filter(n => n.isRead).length
+    ? notificationsData.filter(n => !n.isRead).length
     : 0;
 
+  console.log(newNotificationsCount)
+  console.log("Image to show:", newNotificationsCount > 0 ? "DOT ICON" : "NORMAL BELL");
+  //  const newNotificationsCount = notificationsData.filter(n => !n.isRead).length;
+ 
   const preventNav = (e) => {
     e.preventDefault();
     setMobileMenuOpen(false);
   };
-
+ 
   return (
     <header className="header">
       <div className="logo-container">
@@ -60,7 +65,7 @@ export const Header = () => {
           if (n.name === 'Home' && !isActive) {
             isActive = location.pathname === n.path + '/';
           }
-
+ 
           return (
             <NavLink
               key={n.name}
@@ -87,7 +92,7 @@ export const Header = () => {
                 }
               />
             </Link>
-
+ 
             {navIcons.map((IC, index) => {
               const isActive = location.pathname === IC.path;
               return (
@@ -100,17 +105,17 @@ export const Header = () => {
                 </Link>
               );
             })}
-
+ 
             <div onClick={() => setShowNotification(!showNotification)}>
               <img
-                src={newNotificationsCount > 0 ? bell_dot : bell}
+                src={newNotificationsCount > 0 ?  belldot : bell }
                 alt="Notifications"
                 className="jheader-icons"
               />
             </div>
-
+ 
             <AvatarMenu />
-
+ 
             <JNotification
               notificationsData={notificationsData || []}
               showNotification={showNotification}
@@ -132,7 +137,7 @@ export const Header = () => {
             <a href="#" onClick={preventNav} className="active">Home</a>
             <a href="#" onClick={preventNav}>Jobs</a>
             <a href="#" onClick={preventNav}>Companies</a>
-
+ 
             <Link to="/Job-portal/jobseeker/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
             <Link to="/Job-portal/jobseeker/signup" onClick={() => setMobileMenuOpen(false)}>Sign up</Link>
             <Link to="/Job-portal/employer/login" onClick={() => setMobileMenuOpen(false)}>For Employers</Link>

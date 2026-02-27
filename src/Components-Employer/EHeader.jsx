@@ -3,14 +3,16 @@ import './EHeader.css'
 import search from '../assets/icon_search.png'
 import chat from '../assets/header_message.png'
 import bell from '../assets/header_bell.png'
+import profile from '../assets/header_profile.png'
 import { Link, NavLink } from 'react-router-dom'
 
 
 export const EHeader = () => {
     const NavIcons = [
 
-        { image: chat, path: "/Job-portal/Employer/chat" },
+        { image: chat, path: "/Job-portal/Employer/Chat" },
         { image: bell, path: "" },
+
 
     ]
     return (
