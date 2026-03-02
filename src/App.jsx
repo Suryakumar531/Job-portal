@@ -28,7 +28,7 @@ import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
 import BlogCategory from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
-import { ContactUs } from './Components-LandingPage/Contactus'
+import { ContactUs } from './Components-LandingPage/ContactUs'
 import { FAQ } from './Components-LandingPage/FAQ'
 import { HelpCenter } from './Components-Jobseeker/HelpCenter'
 import { RaiseTicket } from './Components-Jobseeker/RaiseTicket'
@@ -45,8 +45,8 @@ import { LoginIssuesHelp } from './Components-Jobseeker/LoginIssuesHelp'
 import { PageErrorsHelp } from './Components-Jobseeker/PageErrorsHelp'
 import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
-import { Messenger } from './Components-Jobseeker/Messenger'
-import { Chatbox } from './Components-Employer/Chatbox'
+import { JMessenger } from './Components-Jobseeker/JMessenger'
+import { EMessenger } from './Components-Employer/EMessenger'
 import {FindTalent} from './Components-Employer/FindTalent'
 import { AboutYourCompany } from './Components-Employer/AboutYourCompany'
 import { CompanyVerify } from './Components-Employer/CompanyVerify'
@@ -55,6 +55,8 @@ import { PostJobPreview } from './Components-Employer/PostJobPreview'
 import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
 import FindTalent2 from './Components-Employer/Findtalent2'
+import { ProfileCard } from './Components-Employer/ProfileCard'
+import { JsProfileOverview } from './Components-Employer/JsProfileOverview'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -258,16 +260,24 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/jobseeker/Chat',
-  element: <Messenger/>
+  element: <JMessenger/>
 },
 {
-  path: '/Job-portal/Employer/Chat',
-  element: <Chatbox/>
+  path: '/Job-portal/employer-chat/:id',
+  element: <EMessenger/>
+},
+{
+  path: '/Job-portal/employer/chat',
+  element: <EMessenger/>
 },
 {
   path: '/Job-portal/Employer/FindTalent',
   element: <FindTalent/>
 },
+{
+  path: '/Job-portal/Employer/FindTalent/ProfileOverview/:id',
+  element: <JsProfileOverview/>
+}
 
 ])
 

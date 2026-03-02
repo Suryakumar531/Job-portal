@@ -13,6 +13,7 @@ import { Footer } from '../Components-LandingPage/Footer'
 import Shortlist from '../assets/Employer/EShortlist.png'
 import InterviewS from '../assets/Employer/EInterviewS.png'
 import ActiveJobs from '../assets/Employer/EActiveJobs.png'
+import Find from '../assets/icon_search.png'
 import TotalAPP from '../assets/Employer/ETotalAPP.png'
 import Close from '../assets/Employer/close.png'
 import ClockImage from '../assets/Employer/ClockImage.gif'
@@ -22,13 +23,18 @@ import { JHeader } from '../Components-Jobseeker/JHeader'
 import { PostedJobs } from './PostedJobs'
 import { ViewApplicants } from './ViewApplicants'
 import { useJobs } from '../JobContext'
+import { FindTalent } from './FindTalent'
+
 
 export const EmployerDashboard = () => {
 
     const navigate = useNavigate();
 
-    const { jobs } = useJobs();
+    const { jobs, chats } = useJobs();
     const [activeMenu, setActiveMenu] = useState(null);
+    const employer = chats.find(chat => chat.role === "employer");
+    const employerName = employer ? employer.name : "Employer"; // Default "Employer" fallback
+    const initialLetter = employerName.charAt(0).toUpperCase();
 
     const [activetab, setActiveTab] = useState('Dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -69,7 +75,7 @@ export const EmployerDashboard = () => {
                     <div className='EAside'>
                         <div>
                             <div style={{ display: "flex", justifyContent: "space-between", textAlign: "center", alignItems: "center", marginTop: "35px", marginBottom: "35px" }}>
-                                <h3 style={{ color: "snow", margin: "25px", fontWeight: "900" }} >Yamuna</h3>
+                                <h3 style={{ color: "snow", margin: "25px", fontWeight: "900" }}>{employerName}</h3>
                                 <img src={Close} width={10} style={{ backgroundColor: "white", padding: '5px', margin: "25px", borderRadius: "30px" }} onClick={() => ToggleSidebar()} />
                             </div>
                             <h3 className='Aside-Title'>Overview</h3>
@@ -92,6 +98,10 @@ export const EmployerDashboard = () => {
                                 <div onClick={() => !isVerifying && setActiveTab('My job post')} className={activetab === 'My job post' ? "Active" : 'Navbox'} >
                                     <img src={Mypost} height={15} width={15} alt="My Job Post" />
                                     <div className='Enav-item'>My Job Post</div>
+                                </div>
+                                <div onClick={() => !isVerifying && setActiveTab('Find a Talent')} className={activetab === 'Find a Talent' ? "Active" : 'Navbox'} >
+                                    <img src={Find} height={15} width={15} alt="My Job Post" />
+                                    <div className='Enav-item'>Find a Talent</div>
                                 </div>
                                 <div onClick={() => !isVerifying && setActiveTab('Analytics')} className={activetab === 'Analytics' ? "Active" : 'Navbox'} >
                                     <img src={Applicant} height={15} width={15} alt="Analytics" />
@@ -119,7 +129,7 @@ export const EmployerDashboard = () => {
                         <div className='EAside2'>
                             <div>
                                 <div style={{ display: "flex", flexDirection: "column-reverse", justifyContent: "space-between", alignItems: "center", textAlign: "center", marginTop: "15px", padding: "5px" }}>
-                                    <div className='EE-Name'><h3 style={{ margin: "15px", fontSize: "22px" }} >Y</h3></div>
+                                    <div className='EE-Name'><h3 style={{ margin: "15px", fontSize: "22px" }}>{initialLetter}</h3></div>
                                     <img src={jobpost} width={30} style={{ padding: '5px' }} onClick={() => ToggleSidebar()} />
                                 </div>
 
@@ -135,6 +145,9 @@ export const EmployerDashboard = () => {
                                     </div>
                                     <div onClick={() => !isVerifying && setActiveTab('My job post')} className={activetab === 'My job post' ? "Active1" : 'Navbox1'} >
                                         <img src={Mypost} height={20} width={20} alt="My Job Post" />
+                                    </div>
+                                    <div onClick={() => !isVerifying && setActiveTab('Find a Talent')} className={activetab === 'Find a Talent' ? "Active1" : 'Navbox1'} >
+                                        <img src={Applicant} height={20} width={20} alt="Analytics" />
                                     </div>
                                     <div onClick={() => !isVerifying && setActiveTab('Analytics')} className={activetab === 'Analytics' ? "Active1" : 'Navbox1'} >
                                         <img src={Applicant} height={20} width={20} alt="Analytics" />
@@ -154,26 +167,6 @@ export const EmployerDashboard = () => {
 
                                 </div>
 
-                                {/* <div className='Navbar' >
-
-                                    <div onClick={() => setActiveTab('Post a Job')} className={activetab === 'Post a Job' ? "Active" : 'Navbox'} >
-                                        <img src={PostJobs} height={15} width={15} alt="Post a Job" />
-                                        <div className='Enav-item'>Post a Job</div>
-                                    </div>
-                                    <div onClick={() => setActiveTab('My Job Post')} className={activetab === 'My Job Post' ? "Active" : 'Navbox'} style={{ display: "flex", alignItems: "center", fontFamily: "inter" }}>
-                                        <img src={Mypost} height={15} width={15} alt="My Job Post" />
-                                        <div className='Enav-item'>My Job Post</div>
-                                    </div>
-                                    <div onClick={() => setActiveTab('Applicants')} className={activetab === 'Applicants' ? "Active" : 'Navbox'} style={{ display: "flex", alignItems: "center", fontFamily: "inter" }}>
-                                        <img src={Applicant} height={15} width={15} alt="Applicants" />
-                                        <div className='Enav-item'>Applicants</div>
-                                    </div>
-                                    <div onClick={() => setActiveTab('Interviews')} className={activetab === 'Interviews' ? "Active" : 'Navbox'} style={{ display: "flex", alignItems: "center", fontFamily: "inter" }}>
-                                        <img src={Interview} height={18} width={18} alt="Interviews" />
-                                        <div className='Enav-item'>Interviews</div>
-                                    </div>
-                                </div> */}
-
                             </div>
                         </div>
                     )}
@@ -187,7 +180,7 @@ export const EmployerDashboard = () => {
                                 <div className="pending-main-section">
                                     <div className='Welcome-Note'>
                                         <div>
-                                            <h2>Hi Yamuna,</h2>
+                                            <h2>Hi {employerName},</h2>
                                             <p style={{ fontWeight: "600" }}>Here's, What's Going on... </p>
                                         </div>
                                     </div>
@@ -205,7 +198,7 @@ export const EmployerDashboard = () => {
                                 <>
                                     <div className='Welcome-Note'>
                                         <div>
-                                            <h2>Hi Yamuna,</h2>
+                                            <h2>Hi {employer.name},</h2>
                                             <p style={{ fontWeight: "600" }}>Here's, What's Going on... </p>
                                         </div>
                                         <button className='post-job-btn' onClick={handlePostaJobClick}>+ Post a Job</button>
@@ -248,7 +241,7 @@ export const EmployerDashboard = () => {
                                             </div>
 
                                             {jobs.length > 0 ? (
-                                                [...jobs].reverse().slice(0, 5).map((job) => (
+                                                [...jobs].slice(0, 5).map((job) => (
                                                     <div key={job.id} className="dashboard-job-row">
                                                         <div className="dashboard-job-info">
                                                             <strong>{job.jobTitle || job.title}</strong>
@@ -325,8 +318,12 @@ export const EmployerDashboard = () => {
                             onBack={() => setActiveTab('My job post')}
                         />
                     )}
+                    {activetab === 'Find a Talent' && (
+                        <>
+                            <FindTalent />
+                        </>)}
                     {activetab === 'Analytics' && (
-                        <h1>Applicants Section</h1>)}
+                        <h1>Analytics</h1>)}
                     {activetab === 'Billing' && (
                         <h1>Interview Section</h1>)}
                     {activetab === 'My Profile' && (
