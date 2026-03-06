@@ -28,7 +28,6 @@ import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
 import { BlogCategory } from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
-import { ContactUs } from './Components-LandingPage/Contactus'
 import { FAQ } from './Components-LandingPage/FAQ'
 import { HelpCenter } from './Components-Jobseeker/HelpCenter'
 import { RaiseTicket } from './Components-Jobseeker/RaiseTicket'
@@ -47,13 +46,14 @@ import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
 import { Messenger } from './Components-Jobseeker/Messenger'
 import { Chatbox } from './Components-Employer/Chatbox'
-import {FindTalent} from './Components-Employer/FindTalent'
+import { FindTalent } from './Components-Employer/FindTalent'
 import { AboutYourCompany } from './Components-Employer/AboutYourCompany'
 import { CompanyVerify } from './Components-Employer/CompanyVerify'
 import { PostJobForm } from './Components-Employer/PostJobForm'
 import { PostJobPreview } from './Components-Employer/PostJobPreview'
 import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
+import { ContactUs } from './Components-LandingPage/ContactUs'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -148,8 +148,8 @@ const router = createBrowserRouter([{
   element: <Settings />
 },
 {
-  path: '/Job-portal/jobseeker/Contact_Us',
-  element: <ContactUs/>
+  path: '/Job-portal/jobseeker/ContactUs',
+  element: <ContactUs />
 },
 {
   path: '/Job-portal/jobseeker/FAQ',

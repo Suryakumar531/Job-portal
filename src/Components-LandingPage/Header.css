@@ -100,8 +100,9 @@
 .emp-log-link {
   text-decoration: none;
   color: #032240;
-  font-size: 16px;
+  font-size: 22px;
   white-space: nowrap;
+  font-weight: 500;
 }
  
 .separator {

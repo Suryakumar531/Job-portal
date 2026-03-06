@@ -7,9 +7,7 @@ export const JMessenger = () => {
     const { chats, setChats, isChatEnded} = useJobs();
     const [input, setInput] = useState("");
     const scrollRef = useRef(null);
-    
-
-    
+     
     const employerChat = chats.find(c => c.role === "employer");
 
     useEffect(() => {
