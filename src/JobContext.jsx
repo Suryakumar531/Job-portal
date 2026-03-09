@@ -175,7 +175,8 @@ export const JobProvider = ({ children }) => {
         id: parseInt(user.id),
         name: user.profile.fullName,
         role: "jobseeker",
-        messages: []
+        messages: [],
+        isChatEnded: false
     }))
 ]);
 
