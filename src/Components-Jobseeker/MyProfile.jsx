@@ -1014,18 +1014,24 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
 
 
         setErrors(newErrors);
-        if (Object.keys(newErrors).length === 0) {
-            onSubmitFinal()
-            setAlluser((prevUsers) => {
-            const nextId = (prevUsers.length + 1).toString();
-            const newUser = {
-                id: nextId,
-                ...allData
-            };
-            return [...prevUsers, newUser];
-            
-        });
-        console.log(Alluser)
+       if (Object.keys(newErrors).length === 0) {
+    onSubmitFinal();
+
+    setAlluser((prevUsers) => {
+        const nextId = (prevUsers.length + 1).toString();
+
+        const newUser = {
+            id: nextId,
+            ...allData,
+            appliedJobs: allData.appliedJobs || [], 
+            savedJobs: allData.savedJobs || []
+        };
+        console.log(newUser)
+
+        console.log("New User Created with appliedJobs key:", newUser);
+        return [...prevUsers, newUser];
+    });
+        console.log(newUser)
         }
         alert("Profile Created and Added to User List!");
         navigate ('/Job-portal/jobseeker')

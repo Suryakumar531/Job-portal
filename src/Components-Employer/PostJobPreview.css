@@ -1,25 +1,25 @@
 
-
-.jobpost-previous-preview-page-wrapper {
-  /* background-color: #f4f7f9; */
-  padding-top: 102px;
-  min-height: 200vh;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  padding-bottom: 50px;
-  display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+.overview-job-company {
+  font-size: 16px;
+  color: #83858B;
+  text-align: left;
 }
 
+.review-divider {
+  margin: 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #EDEDED;
+}
 
 .jobpost-previous-preview-header {
   background: #f0f7ff;
-  padding: 15px 0 ;
+  padding: 15px 200px;
   text-align: center;
   border-bottom: 1px solid #eef0f2;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-  margin-bottom: 5px;
-  width: 40%;
+  margin-bottom: 30px;
+  width: fit-content;
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -34,10 +34,31 @@
 
 .jobpost-previous-preview-content-area {
   margin: 0 50px;
-  padding: 0 15px;
+  /* padding: 0px; */
   flex: 1;
 }
 
+.jobpost-overview-content {
+  margin-top: 14rem;
+  margin-bottom: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.jobpost-overview-main {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.jobpost-job-main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
 .jobpost-previous-card {
   background: #ffffff;
@@ -80,8 +101,8 @@
 .jobpost-previous-info-grid-row {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 20px 0;
+  gap: 1px;
+  margin: 0 10px;
 }
 
 .jobpost-previous-info-item-group {
@@ -117,7 +138,7 @@
 
 .jobpost-previous-job-type-tag {
   border: 1.5px solid #007bff;
-  padding: 4px 14px;
+  padding: 1px 14px;
   border-radius: 20px;
   color: #5371fa;
   display: inline-block;
@@ -126,6 +147,25 @@
   margin: 4px;
 }
 
+
+.jobpost-previous-job-type-tag1 {
+  display: flex;
+  justify-content: flex-end;
+  color: #5371fa;
+  font-size: 20px;
+  font-weight: 500;
+  width: 100%;
+}
+.Opportunities-job-meta1 {
+  font-size: 15px;
+  color: #83858B;
+  margin-bottom: 8px;
+  display: flex;             
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;       
+  width: 100%;  
+}
 .jobpost-previous-suggest-link {
   background: none;
   border: none;
@@ -151,7 +191,7 @@
 }
 
 .meta-item strong {
-  color: #959da5 ;
+  color: #959da5;
   font-weight: 400;
 }
 
@@ -176,9 +216,11 @@
   margin-top: 0;
 }
 
-.post-job-locationicon{
+.post-job-locationicon {
   width: 18px;
 }
+
+
 
 .jobpost-previous-highlights-callout ul {
   padding-left: 20px;
@@ -194,8 +236,8 @@
 
 .jobpost-previous-description-text,
 .jobpost-previous-description-list {
-  font-size: 13px;
-  color: #586069;
+  font-size: 15px;
+  color: #83858B;
   line-height: 1.6;
 }
 
@@ -203,8 +245,8 @@
   border: 1.5px solid #0000004D;
   padding: 4px 14px;
   border-radius: 8px;
-  font-size: 12px;
-  color: #586069;
+  font-size: 14px;
+  color:#0d1b2a;
   display: inline-block;
   margin: 4px;
 }
@@ -214,7 +256,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 20px;
-  font-size: 13px;
+  font-size: 15px;
+  color: #83858B;
 }
 
 .jobpost-previous-footer-actions {
@@ -227,7 +270,7 @@
 }
 
 .jobpost-previous-social-sharing span {
-  font-size: 12px;
+  font-size: 14px;
   color: #999;
   margin-right: 10px;
   display: block;
@@ -237,21 +280,21 @@
   /* color: #0077b5;
   font-size: 22px;
   cursor: pointer; */
-  width: 18px;
+  width: 30px;
 }
 
 .jobpost-previous-icon-fb {
   /* color: #1877f2;
   font-size: 22px;
   cursor: pointer; */
-  width: 18px;
+  width: 30px;
 }
 
 .jobpost-previous-icon-x {
   /* color: #000;
   font-size: 22px;
   cursor: pointer; */
-  width: 18px;
+  width: 30px;
 }
 
 .jobpost-previous-btn-group {
@@ -283,6 +326,7 @@
   cursor: pointer;
   transition: 0.2s ease;
 }
+
 .jobpost-previous-btn-post:hover {
   background: #f0f7ff;
 }

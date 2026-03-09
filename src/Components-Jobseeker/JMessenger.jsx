@@ -5,8 +5,8 @@ import { useJobs } from '../JobContext';
 //**JMessenger***//
 export const JMessenger = () => {
     
-    //{POV : Logged in as Harsha }
-    const CurrentUser = 1; //(here we can able to change the Profile in otherjobseekers view)
+    //{POV : Logged in as Ajeeth }
+    const CurrentUser = 2; //(here we can able to change the Profile in otherjobseekers view)
     
     const { chats, setChats, isChatEnded,setNotificationsData } = useJobs(); // from Context
 

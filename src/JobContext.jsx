@@ -8,6 +8,7 @@ const JobContext = createContext();
 export const JobProvider = ({ children }) => {
     // Total JobList
     const [jobs, setJobs] = useState(Joblist);
+    console.log(jobs)
 
     // States to Toggle online status in chats
     const [onlineStatus, setOnlineStatus] = useState("yes");
@@ -157,6 +158,11 @@ export const JobProvider = ({ children }) => {
 
 
     )
+     const [currentUser, setCurrentUser] = useState(
+
+        Alluser.find(user => user.id === "2") || Alluser[1]
+
+    );
 
 
     // Chats/messages between Employer and Jobseeker 1:1;
@@ -190,24 +196,73 @@ export const JobProvider = ({ children }) => {
     });
 
     const postJob = (newJobData) => {
+        const newId = jobs.length > 0 ? Math.max(...jobs.map(j => Number(j.id))) + 1 : 1;
+        const postingSource = "Company Jobs";
+
+        const stringId = String(newId);
+        // const postingSource = userType === "employer" ? "Company Jobs" : "Consultant Jobs";
+        const cleanIndustry = newJobData.category;
+        const cleanDept = newJobData.department;
+        const cleanEdu = newJobData.education;
+        const cleanSkills = newJobData.skills;
+        const cleanHighlights = newJobData.jobHighlights;
+        const cleanRes = newJobData.responsibilities;
+        const cleanOpenings = parseInt(newJobData.openings);
+        const cleanTags = [ newJobData.jobCategory ];
+        const JOB_STATUS = {
+            hiring: { text: 'Hiring in Progress', type: 'progress' },
+            reviewing: { text: 'Reviewing Application', type: 'reviewing' },
+            done: { text: 'Hiring Done', type: 'done' }
+        };
+
+
         const newJob = {
-            ...newJobData,
-            id: jobs.length > 0 ? Math.max(...jobs.map(j => j.id)) + 1 : 1,
-            postedDate: getFormattedDate(),
+            id: stringId,
+            title: newJobData.jobTitle,
+            company: "Infotech",
+            companyId: "INF008",
+            logo: "",
+            posted: new Date().toISOString(),
+            PostedBy: postingSource,
+            IndustryType: cleanIndustry,
+            Department: cleanDept,
+            EducationRequired: cleanEdu,
+            KeySkills: cleanSkills,
+            JobHighlights: cleanHighlights,
+            Responsibilities: cleanRes,
+            WorkType: newJobData.workType,
+            Shift: newJobData.shift,
+            duration: newJobData.workDuration,
+            salary: newJobData.salary,
+            experience: newJobData.experience,
+            location: newJobData.location,
+            openings: cleanOpenings,
+            applicants: newJobData.app,
+            ratings: 4.2,
+            reviewNo: 100,
+            tags: cleanTags,
+            companyOverview: "Infotech Overview",
+            jobDescription: newJobData.jobDescription,
+            status: JOB_STATUS.hiring
+            // status: { text: 'Hiring in Progress', type: 'progress' }
         };
         setJobs((prev) => [newJob, ...prev]);
-        alert(`Job "${newJob.jobTitle}" posted successfully!`);
+        alert(`Job "${newJob.title}" posted successfully!`);
     };
 
     // 2. Edit an Existing Job
-    const editJob = (jobId, updatedData) => {
+    const editJob = (jobId, status) => {
         setJobs((prev) =>
-            prev.map((job) => (job.id === jobId ? { ...job, ...updatedData } : job))
+            prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
         );
 
         // Also update saved jobs if the edited job was saved
         setSavedJobs((prev) =>
-            prev.map((job) => (job.id === jobId ? { ...job, ...updatedData } : job))
+            prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
+        );
+
+        setAppliedJobs((prev) =>
+            prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
         );
     };
 
@@ -243,25 +298,62 @@ export const JobProvider = ({ children }) => {
     };
 
     const isJobSaved = (jobId) => savedJobs.some((j) => j.id === jobId);
+    const isJobApplied = (jobId) => appliedJobs.some((j) => j.id === jobId);
 
     const applyForJob = (originalJob) => {
-        const newAppliedJob = {
-            ...originalJob,
-            appliedDate: `Applied on ${getFormattedDate()}`,
-            status: { text: 'Hiring in Progress', type: 'progress' },
-            applicationStatus: [
-                { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
-                { label: 'Resume Screening', sub: "Your resume is currently being reviewed...", status: 'pending' },
-                { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience...", status: 'pending' },
-                { label: 'Shortlisted', sub: "You have passed the initial review stages...", status: 'pending' },
-                { label: 'Interview Called', sub: "The hiring team has officially reached out...", status: 'pending' },
-            ]
-        };
-        setAppliedJobs((prev) => [...prev, newAppliedJob]);
-        setJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
-        setSavedJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
-        alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
+    setAlluser((prevUsers) =>
+        prevUsers.map((user) => {
+            // "2" is Ajeeth's ID
+            if (user.id === "2") {
+                const isAlreadyApplied = user.appliedJobs?.some(aj => aj.id === originalJob.id);
+               
+                if (!isAlreadyApplied) {
+                    return {
+                        ...user,
+                        appliedJobs: [
+                            ...(user.appliedJobs || []),
+                            {
+                                id: originalJob.id,
+                                status: "Application Submitted",
+                                appliedDate: getFormattedDate()
+                            }
+                        ]
+                    };
+                }
+            }
+            return user;
+        })
+    );
+ 
+    setJobs((prevJobs) =>
+        prevJobs.map((job) =>
+            job.id === originalJob.id
+                ? { ...job, applicants: (job.applicants || 0) + 1 }
+                : job
+        )
+    );
+ 
+    // 3. User side tracking
+    const newAppliedJob = {
+        ...originalJob,
+        appliedDate: `Applied on ${getFormattedDate()}`,
+        status: { text: 'Hiring in Progress', type: 'progress' },
+        applicationStatus: [
+            { label: 'Application Submitted', sub: "Success message...", status: 'completed' },
+            { label: 'Resume Screening', sub: "Reviewing...", status: 'pending' },
+            { label: 'Recruiter Review', sub: "Manual review...", status: 'pending' },
+            { label: 'Shortlisted', sub: "Passed initial stages...", status: 'pending' },
+            { label: 'Interview Called', sub: "Reached out...", status: 'pending' },
+        ]
     };
+ 
+    setAppliedJobs((prev) => {
+        const alreadyInList = prev.some(aj => aj.id === originalJob.id);
+        return alreadyInList ? prev : [...prev, newAppliedJob];
+    });
+ 
+    alert(`Successfully applied to ${originalJob.jobTitle} at ${originalJob.company}!`);
+};
 
     const toggleSaveJob = (originalJob) => {
         if (isJobSaved(originalJob.id)) {
@@ -274,6 +366,8 @@ export const JobProvider = ({ children }) => {
             setSavedJobs((prev) => [...prev, newSavedJob]);
         }
     };
+
+    
     const addJob = (newJob) => {
         setJobs((prevJobs) => [...prevJobs, newJob]);
     };
@@ -290,6 +384,56 @@ const addChatToSidebar = (userId) => {
     setActiveSidebarUsers(prev => [...prev, parseInt(userId)]);
   }
 };
+const updateApplicantStatus = (userId, jobId, newStatus) => {
+
+        setAlluser(prev => prev.map(user => {
+
+            if (user.id === userId) {
+
+                const updatedAppliedJobs = user.appliedJobs?.map(job =>
+
+                    job.id === jobId ? { ...job, status: newStatus } : job
+
+                );
+
+                return { ...user, appliedJobs: updatedAppliedJobs };
+
+            }
+
+            return user;
+
+        }));
+
+    };
+
+
+
+    const withdrawJobFromUser = (userId, jobId) => {
+
+        setAlluser(prevUsers =>
+
+            prevUsers.map(user => {
+
+                if (user.id === userId) {
+
+                    return {
+
+                        ...user,
+
+                        appliedJobs: user.appliedJobs.filter(aj => aj.id !== jobId)
+
+                    };
+
+                }
+
+                return user;
+
+            })
+
+        );
+
+    };
+
 
     return (
         <JobContext.Provider value={{
@@ -297,7 +441,7 @@ const addChatToSidebar = (userId) => {
             onlineStatus, setOnlineStatus, isJobSaved, isChatEnded, setIsChatEnded,
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
             activeMenuId, setActiveMenuId, addJob, deleteJob, allData, setAllData, postJob, editJob, Alluser,setAlluser,activeSidebarUsers, 
-            addChatToSidebar
+            addChatToSidebar,currentUser, setCurrentUser,withdrawJobFromUser,updateApplicantStatus,isJobApplied
         }}>
             {children}
         </JobContext.Provider>

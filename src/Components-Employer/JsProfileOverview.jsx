@@ -16,6 +16,7 @@ export const JsProfileOverview = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const currentUser = Alluser?.find((user) => String(user.id) === String(id));
+  console.log(currentUser)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -107,9 +108,10 @@ export const JsProfileOverview = () => {
           <div className="ready-to-work">
             <div className="toggle-content"><h4>Ready to work</h4></div>
             <div className="toggle-content">
-              <p className="block-header">{currentUser.readyToWork ? "Yes" : "No"}</p>
+              <p className="block-header">{currentUser.preferences[0]?.ready}</p>
             </div>
           </div>
+          {console.log(currentUser.preferences[0].ready)}
           
           <div className="footer-text">
             <button className='FindTalent-btn-view' onClick={handleConnect}>

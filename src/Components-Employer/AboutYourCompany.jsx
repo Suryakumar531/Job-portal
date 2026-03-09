@@ -5,6 +5,7 @@ import "./AboutYourCompany.css";
 import fileIcon from "../assets/Employer/fileIcon.png"
 import { useNavigate } from "react-router-dom";
 import { useJobs } from "../JobContext";
+import { EHeader } from "./EHeader";
 
 
 
@@ -76,7 +77,7 @@ export const AboutYourCompany = () => {
 
     return (
         <div>
-            <JHeader />
+            <EHeader />
 
             <div className="aboutcompany-container">
                 <h2 className="aboutcompany-title">About Your Company</h2>
