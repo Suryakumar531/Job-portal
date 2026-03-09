@@ -78,11 +78,11 @@ export const AppliedJobsOverview = () => {
   const removeRejectedJob = (jobId) => {
     const isConfirmed = window.confirm("This application was rejected. Do you want to remove it from your history?");
     if (isConfirmed) {
-        setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId)); 
-        navigate('/Job-portal/jobseeker/myjobs'); // Redirect panni vittudalam
-        alert("Application removed from your list.");
+      setAppliedJobs((prev) => prev.filter((j) => j.id !== jobId));
+      navigate('/Job-portal/jobseeker/myjobs'); 
+      alert("Application removed from your list.");
     }
-};
+  };
 
 
 
@@ -206,15 +206,14 @@ export const AppliedJobsOverview = () => {
                           '& .MuiStepIcon-text': { fill: '#fff' }
                         } : {}
                       }}
-                      // Logic: Rejected step-ah irundha 'null' return pannum, so 'sub' text kaataadhu
                       optional={
                         !isStepRejected ? (
                           <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary' }}>
                             {step.sub}
                           </Typography>
                         ) : <Typography variant="caption" sx={{ display: 'block', color: 'red' }}>
-                            better Luck Next Time
-                          </Typography>
+                          better Luck Next Time
+                        </Typography>
                       }
                       sx={{
                         '& .MuiStepLabel-label': {
@@ -224,7 +223,6 @@ export const AppliedJobsOverview = () => {
                         }
                       }}
                     >
-                      {/* Step name: Rejected step-na "Rejected" mattum thaan varum */}
                       {isStepRejected ? "Rejected" : step.label}
                     </StepLabel>
                   </Step>
@@ -235,34 +233,33 @@ export const AppliedJobsOverview = () => {
 
           {/* Withdraw button: Only if not rejected */}
           {isRejected ? (
-    // Rejected-ah irundha 'Remove' button mattum kaatu
-    <button 
-      style={{
-        border: "none", outline: "none", marginTop: "50px",
-        padding: "10px 20px", borderRadius: "10px", background: "#d32f2f", color: "snow", cursor: "pointer"
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-        removeRejectedJob(job.id);
-      }}
-    >
-      Remove from Applied
-    </button>
-  ) : (
-    // Rejected illai na normal 'Withdraw' button kaatu
-    <button 
-      style={{
-        border: "none", outline: "none", marginTop: "50px",
-        padding: "10px 20px", borderRadius: "10px", background: "#1976d2", color: "snow", cursor: "pointer"
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-        withdrawApplication(job.id);
-      }}
-    >
-      Withdraw
-    </button>
-  )}
+            <button
+              style={{
+                border: "none", outline: "none", marginTop: "50px",
+                padding: "10px 20px", borderRadius: "10px", background: "#d32f2f", color: "snow", cursor: "pointer"
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeRejectedJob(job.id);
+              }}
+            >
+              Remove from Applied
+            </button>
+          ) : (
+
+            <button
+              style={{
+                border: "none", outline: "none", marginTop: "50px",
+                padding: "10px 20px", borderRadius: "10px", background: "#1976d2", color: "snow", cursor: "pointer"
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                withdrawApplication(job.id);
+              }}
+            >
+              Withdraw
+            </button>
+          )}
         </div>
 
       </div>

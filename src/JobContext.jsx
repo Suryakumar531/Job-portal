@@ -185,21 +185,17 @@ export const JobProvider = ({ children }) => {
             preferences: [{ currentCTC: '', expectedCTC: '', jobType: 'Select', role: '', ready: '', relocate: '' }]
         });
 
-    const postJob = (newJobData, userType = "employer") => {
+    const postJob = (newJobData) => {
         const newId = jobs.length > 0 ? Math.max(...jobs.map(j => Number(j.id))) + 1 : 1;
-        const postingSource = SOURCE_MAP[userType];
+        const postingSource = "Company Jobs";
 
         const stringId = String(newId);
         // const postingSource = userType === "employer" ? "Company Jobs" : "Consultant Jobs";
-        const SOURCE_MAP = {
-            employer: "Company Jobs",
-            consultant: "Consultant Jobs"
-        };
         const cleanIndustry = newJobData.category;
         const cleanDept = newJobData.department;
         const cleanEdu = newJobData.education;
-        const cleanSkills = newJobData.skills;
-        const cleanHighlights = newJobData.jobHighlight;
+        const cleanSkills = newJobData.keySkills;
+        const cleanHighlights = newJobData.jobHighlights;
         const cleanRes = newJobData.responsibilities;
         const cleanOpenings = parseInt(newJobData.openings);
         const cleanTags = newJobData.jobCategory;
@@ -213,9 +209,9 @@ export const JobProvider = ({ children }) => {
         const newJob = {
             id: stringId,
             title: newJobData.jobTitle,
-            company: newJobData.companyName,
-            companyId: newJobData.companyId,
-            logo: newJobData.companyLogo,
+            company: "Infotech",
+            companyId: "INF008",
+            logo: "",
             posted: new Date().toISOString(),
             PostedBy: postingSource,
             IndustryType: cleanIndustry,
@@ -231,11 +227,11 @@ export const JobProvider = ({ children }) => {
             experience: newJobData.experience,
             location: newJobData.location,
             openings: cleanOpenings,
-            applicants: 0,
+            applicants: newJobData.app,
             ratings: 4.2,
-            reviewNo: "100+",
+            reviewNo: 100,
             tags: cleanTags,
-            companyOverview: newJobData.aboutCompany,
+            companyOverview: "Infotech Overview",
             jobDescription: newJobData.jobDescription,
             status: JOB_STATUS.hiring
             // status: { text: 'Hiring in Progress', type: 'progress' }

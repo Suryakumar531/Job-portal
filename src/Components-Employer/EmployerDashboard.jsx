@@ -106,7 +106,7 @@ export const EmployerDashboard = () => {
                                     <img src={Profile} height={15} width={15} alt="My Profile" />
                                     <div className='Enav-item'>My Profile</div>
                                 </div>
-                                <div onClick={() => !isVerifying && setActiveTab('Logout')} className={activetab === 'Logout' ? "Active" : 'Navbox'} >
+                                <div onClick={() => navigate('/Job-portal')} className={activetab === 'Logout' ? "Active" : 'Navbox'} >
                                     <img src={Logout} height={15} width={15} alt="Logout" />
                                     <div className='Enav-item'>Logout</div>
                                 </div>
@@ -143,7 +143,7 @@ export const EmployerDashboard = () => {
                                     <div onClick={() => !isVerifying && setActiveTab('My Profile')} className={activetab === 'My Profile' ? "Active1" : 'Navbox1'} >
                                         <img src={Profile} height={20} width={20} alt="My Profile" />
                                     </div>
-                                    <div onClick={() => !isVerifying && setActiveTab('Logout')} className={activetab === 'Logout' ? "Active1" : 'Navbox1'} >
+                                    <div onClick={() => navigate('/Job-portal')} className={activetab === 'Logout' ? "Active1" : 'Navbox1'} >
                                         <img src={Logout} height={20} width={20} alt="Logout" />
                                     </div>
                                 </div>

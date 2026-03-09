@@ -29,8 +29,8 @@ export const PostJobForm = () => {
     experience: '',
     location: '',
     openings: '',
-    jobCategory: '',
-    keySkills: '',
+    jobCategory: [],
+    keySkills: [],
     jobHighlights: [''],
     jobDescription: '',
     responsibilities: ['']
