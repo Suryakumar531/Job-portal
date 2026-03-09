@@ -15,6 +15,11 @@ export const EMessenger = () => {
 
   const scrollRef = useRef(null);
 
+  const toggleChatEnd = () => {
+  setChats(prev => prev.map(chat => 
+    chat.id === selectedId ? { ...chat, isChatEnded: !chat.isChatEnded } : chat
+  ));
+};
   // Sidebar filter logic 
   const sidebarDisplayUsers = Alluser.filter(user =>
     activeSidebarUsers.includes(parseInt(user.id))
@@ -86,22 +91,22 @@ export const EMessenger = () => {
                 <header className="web-chat-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <strong>{activeUser?.profile?.fullName}</strong>
                   <button
-                    onClick={() => setIsChatEnded(!isChatEnded)}
-                    className={isChatEnded ? "E-Start-Convo-Button" : "E-End-Convo-Button"}
+                    onClick={toggleChatEnd}
+                    className={activeChat?.isChatEnded ? "E-Start-Convo-Button" : "E-End-Convo-Button"}
                   >
-                    {isChatEnded ? "RESTART" : "END CHAT"}
+                    {activeChat?.isChatEnded  ? "RESTART" : "END CHAT"}
                   </button>
                 </header>
 
                 <div className="web-chat-window" ref={scrollRef}>
-                  {activeChat?.messages?.map((m) => (
+                  {activeChat.messages?.map((m) => (
                     <div key={m.id} className="web-msg-row">
                       <div className={`web-bubble ${m.sender === 'employer' ? 'web-me' : 'web-friend'}`}>
                         {m.text}
                       </div>
                     </div>
                   ))}
-                  {isChatEnded && <div className="chat-end-label">--- Conversation Ended ---</div>}
+                  {activeChat?.isChatEnded && <div className="chat-end-label">--- Conversation Ended ---</div>}
                 </div>
 
                 <form className="web-input-bar" onSubmit={handleSend}>
@@ -109,10 +114,10 @@ export const EMessenger = () => {
                     className="web-text-input"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    disabled={isChatEnded}
+                    disabled={activeChat?.isChatEnded }
                     placeholder="Type a message..."
                   />
-                  <button type="submit" className="web-send-button" disabled={isChatEnded}>SEND</button>
+                  <button type="submit" className="web-send-button" disabled={activeChat?.isChatEnded}>SEND</button>
                 </form>
               </>
             ) : (
