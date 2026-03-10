@@ -30,11 +30,12 @@ export const PostJobForm = () => {
     location: '',
     openings: '',
     jobCategory: [],
-    keySkills: [],
+    keySkills: [''],
     jobHighlights: [''],
     jobDescription: '',
     responsibilities: ['']
   });
+  console.log(formData)
 
   const [skillsList, setSkillsList] = useState([]);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -109,6 +110,7 @@ export const PostJobForm = () => {
         setFormData({ ...formData, keySkills: '' });
         setErrors({ ...errors, keySkills: "" });
       }
+
     }
   };
 
@@ -158,7 +160,7 @@ export const PostJobForm = () => {
 
   return (
     <div className="jobpost-page-title">
-      <EHeader />
+      {/* <EHeader /> */}
       <main className="jobpost-main-content">
         <header className="jobpost-form-header">
           <h1>Post a Job</h1>

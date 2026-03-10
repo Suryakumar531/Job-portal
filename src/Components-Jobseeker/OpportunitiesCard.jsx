@@ -30,8 +30,9 @@ export const OpportunitiesCard = (props) => {
         navigate(`/Job-portal/jobseeker/OpportunityOverview/${job.id}`)
     }
 
-    const { toggleSaveJob, isJobSaved } = useJobs();
+    const { toggleSaveJob, isJobSaved, isJobApplied } = useJobs();
     const isSaved = isJobSaved(job.id);
+    const isApplied = isJobApplied(job.id);
 
     return (
         <div className="Opportunities-job-card">
@@ -83,12 +84,14 @@ export const OpportunitiesCard = (props) => {
                     </button>
 
                     <button
-                        className="Opportunities-apply-btn"
+                        className={isApplied ? "Opportunities-save-btn":"Opportunities-apply-btn"}
+                        disabled={isApplied}
+                        
                         onClick={(e) => {
                              navigate (`/Job-portal/jobseeker/jobapplication/${job.id}`)
                         }}
                     >
-                        Apply
+                        {isApplied ?  "Applied" :"Apply" }
                     </button>
                 </div>
             </div>

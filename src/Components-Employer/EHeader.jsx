@@ -13,7 +13,6 @@ export const EHeader = () => {
         { image: chat, path: "/Job-portal/Employer/Chat" },
         { image: bell, path: "" },
 
-
     ]
     return (
         <header className="header">
