@@ -293,24 +293,6 @@ export const JobProvider = ({ children }) => {
     const isJobSaved = (jobId) => savedJobs.some((j) => j.id === jobId);
     const isJobApplied = (jobId) => appliedJobs.some((j) => j.id === jobId);
 
-    // const applyForJob = (originalJob) => {
-    //     const newAppliedJob = {
-    //         ...originalJob,
-    //         appliedDate: `Applied on ${getFormattedDate()}`,
-    //         applicationStatus: [
-    //             { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
-    //             { label: 'Resume Screening', sub: "Your resume is currently being reviewed...", status: 'pending' },
-    //             { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience...", status: 'pending' },
-    //             { label: 'Shortlisted', sub: "You have passed the initial review stages...", status: 'pending' },
-    //             { label: 'Interview Called', sub: "The hiring team has officially reached out...", status: 'pending' },
-    //         ]
-    //     };
-    //     setAppliedJobs((prev) => [...prev, newAppliedJob]);
-    //     setJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
-    //     setSavedJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
-    //     alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
-    // };
-
     const applyForJob = (originalJob) => {
         setAlluser((prevUsers) =>
             prevUsers.map((user) => {
@@ -325,14 +307,8 @@ export const JobProvider = ({ children }) => {
                                 ...(user.appliedJobs || []),
                                 {
                                     id: originalJob.id,
-                                    applicationStatus: [
-                                        { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
-                                        { label: 'Resume Screening', sub: "Your resume is currently being reviewed...", status: 'pending' },
-                                        { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience...", status: 'pending' },
-                                        { label: 'Shortlisted', sub: "You have passed the initial review stages...", status: 'pending' },
-                                        { label: 'Interview Called', sub: "The hiring team has officially reached out...", status: 'pending' },
-                                    ],
-                                    appliedDate: `Applied on ${getFormattedDate()}`
+                                    status: "Application Submitted",
+                                    appliedDate: getFormattedDate()
                                 }
                             ]
                         };
@@ -341,7 +317,36 @@ export const JobProvider = ({ children }) => {
                 return user;
             })
         );
-    }
+
+        setJobs((prevJobs) =>
+            prevJobs.map((job) =>
+                job.id === originalJob.id
+                    ? { ...job, applicants: (job.applicants || 0) + 1 }
+                    : job
+            )
+        );
+
+        // 3. User side tracking
+        const newAppliedJob = {
+            ...originalJob,
+            appliedDate: `Applied on ${getFormattedDate()}`,
+            status: { text: 'Hiring in Progress', type: 'progress' },
+            applicationStatus: [
+                { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
+                { label: 'Resume Screening', sub: "Your resume is currently being reviewed (either by an automated system or a screener) to ensure your skills and qualifications match the core job requirements.", status: 'pending' },
+                { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience, portfolio, and background to determine potential fit for the role.", status: 'pending' },
+                { label: 'Shortlisted', sub: "You have passed the initial review stages and have been flagged as a top contender among the applicant pool.", status: 'pending' },
+                { label: 'Interview Called', sub: "The hiring team has officially reached out to schedule a meeting, moving your status from 'Review' to active 'Engagement.", status: 'pending' },
+            ]
+        };
+
+        setAppliedJobs((prev) => {
+            const alreadyInList = prev.some(aj => aj.id === originalJob.id);
+            return alreadyInList ? prev : [...prev, newAppliedJob];
+        });
+
+        alert(`Successfully applied to ${originalJob.jobTitle} at ${originalJob.company}!`);
+    };
 
     const toggleSaveJob = (originalJob) => {
         if (isJobSaved(originalJob.id)) {
