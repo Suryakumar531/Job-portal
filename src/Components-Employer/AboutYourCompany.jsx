@@ -112,12 +112,12 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
 
     return (
         <>
-            <EHeader />
+            {!hideNavigation && <EHeader />}
 
             <div className="aboutcompany-container">
                 <h2 className="aboutcompany-title">About Your Company</h2>
 
-                <form className="aboutcompany-form" onSubmit={handleSubmit}>
+                <form className="aboutcompany-form">
 
                     <div className="aboutcompany-form-group">
                         <label>Company Name</label>
@@ -320,8 +320,8 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                         </div>)}
 
                     {hideNavigation && (
-                        <div>
-                            <button type="button" className="aboutcompany-save-btn"
+                        <div className="aboutcompany-form-buttons">
+                            <button type="button" className="aboutcompany-next-btn"
                                 onClick={handleSave}> Save </button>
                         </div>)}
 

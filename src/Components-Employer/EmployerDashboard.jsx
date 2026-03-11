@@ -23,6 +23,7 @@ import { ViewApplicants } from './ViewApplicants'
 import { useJobs } from '../JobContext'
 import { FindTalent } from './FindTalent'
 import { PostJobForm } from './PostJobForm'
+import { AboutYourCompany } from './AboutYourCompany'
 
 
 export const EmployerDashboard = () => {
