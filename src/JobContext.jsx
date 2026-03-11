@@ -19,6 +19,9 @@ export const JobProvider = ({ children }) => {
     // Using Id to Toggle Menu in Notification Window
     const [activeMenuId, setActiveMenuId] = useState(null);
 
+    //From About your company
+    const [companyProfile, setCompanyProfile] = useState([]);
+
     const [Alluser, setAlluser] = useState([
         {
             id: "1",
@@ -156,7 +159,7 @@ export const JobProvider = ({ children }) => {
 
     const [currentUser, setCurrentUser] = useState(
 
-        Alluser.find(user => user.id === "2") || Alluser[1]
+        Alluser.find(user => user.id === "4")
 
     );
 

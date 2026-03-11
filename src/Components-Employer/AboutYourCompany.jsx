@@ -6,7 +6,7 @@ import fileIcon from "../assets/Employer/fileIcon.png"
 import { useNavigate } from "react-router-dom";
 import { useJobs } from "../JobContext";
 
-export const AboutYourCompany = () => {
+export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
 
     const navigate = useNavigate();
     const { setCompanyProfile } = useJobs();
@@ -42,14 +42,14 @@ export const AboutYourCompany = () => {
         if (!formData.companyLogo) newErrors.companyLogo = "Company Logo is required";
 
         setErrors(newErrors);
-        
+
         console.log("Validation Errors detected: ", newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        
+
         // Clear error when user starts interacting
         setErrors(prev => ({ ...prev, [name]: "" }));
 
@@ -81,7 +81,21 @@ export const AboutYourCompany = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSave = (e) => {
+        e.preventDefault();
+
+        const isValid = validateForm();
+        if (!isValid) {
+            console.log("Form has errors. Stopping to save.");
+            return;
+        }
+
+        console.log("Saving Company Profile:", formData);
+        setCompanyProfile(formData);
+        setActiveTab("Dashboard");
+    };
+
+    const handleNext = (e) => {
         e.preventDefault();
 
         const isValid = validateForm();
@@ -91,6 +105,8 @@ export const AboutYourCompany = () => {
         }
 
         console.log("Form Data Ready for Backend:", formData);
+
+        setCompanyProfile(formData);
         navigate('/Job-portal/Employer/about-your-company/company-verification');
     };
 
@@ -296,15 +312,23 @@ export const AboutYourCompany = () => {
                         </div>
                     </div>
 
-                    <div className="aboutcompany-form-buttons">
-                        <button type="button" className="aboutcompany-back-btn" onClick={() => navigate(-1)}>Back</button>
-                        <button type="submit" className="aboutcompany-next-btn">Next</button>
-                    </div>
+                    {!hideNavigation && (
+                        <div className="aboutcompany-form-buttons">
+                            <button type="button" className="aboutcompany-back-btn"
+                                onClick={() => navigate(-1)}>Back</button>
+                            <button type="button" className="aboutcompany-next-btn" onClick={handleNext}>Next</button>
+                        </div>)}
+
+                    {hideNavigation && (
+                        <div>
+                            <button type="button" className="aboutcompany-save-btn"
+                                onClick={handleSave}> Save </button>
+                        </div>)}
 
                 </form>
             </div>
 
-            <Footer />
+            {!hideNavigation && <Footer />}
         </>
     );
 };

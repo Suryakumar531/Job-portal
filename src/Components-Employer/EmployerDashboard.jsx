@@ -107,7 +107,6 @@ export const EmployerDashboard = () => {
                                 <div
                                     onClick={() => !isVerifying && (
                                         setActiveTab('Post a Job')
-                                        // navigate('/Job-portal/Employer/PostJob')
                                     )}
                                     className={activetab === 'Post a Job' ? "Active" : 'Navbox'}
                                 >
@@ -348,7 +347,8 @@ export const EmployerDashboard = () => {
                     {activetab === 'Billing' && (
                         <h1>Interview Section</h1>)}
                     {activetab === 'My Profile' && (
-                        <h1>My Profile Section</h1>)}
+                        <AboutYourCompany hideNavigation={true}
+                            setActiveTab={setActiveTab} />)}
                     {activetab === 'Logout' && (
                         <h1>Logout Section</h1>)}
 
