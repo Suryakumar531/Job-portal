@@ -54,6 +54,7 @@ import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
 import { ContactUs } from './Components-LandingPage/ContactUs'
 import { EMessenger } from './Components-Employer/EMessenger'
+import { JsProfileOverview } from './Components-Employer/JsProfileOverview'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -267,7 +268,14 @@ const router = createBrowserRouter([{
   path: '/Job-portal/Employer/FindTalent',
   element: <FindTalent/>
 },
-
+{
+  path: '/Job-portal/Employer/FindTalent/ProfileOverview/:id',
+  element: <JsProfileOverview />
+},
+{
+  path: '/Job-portal/employer-chat/:id',
+  element: <EMessenger />
+},
 ])
 
 function App() {

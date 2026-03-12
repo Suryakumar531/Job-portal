@@ -79,7 +79,7 @@ export const Blogpage = () => {
       <div className='cat-con'>
         <div className='categories2'>
           <h1>Categories</h1>
-          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Category')} className='view-all'>viewall</button>
+          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Category')} className='view-all'>view all</button>
         </div>
         <div className='container2'>
           {categories.map((cat, index) => (
@@ -92,7 +92,7 @@ export const Blogpage = () => {
       <div className='cat-con'>
         <div className='categories2'>
           <h1>Technology Blogs</h1>
-          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Technology')} className='view-all'>viewall</button>
+          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Technology')} className='view-all'>view all</button>
         </div>
         <div className='container2'>
           {techBlogs.map((blog, index) => (

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./EMessenger.css";
 import { EHeader } from "./EHeader";
 import { useJobs } from "../JobContext";
+import { FHeader } from "../Components-Jobseeker/FHeader";
 
 
 export const EMessenger = () => {

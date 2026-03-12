@@ -21,7 +21,6 @@ export const BlogCategory = () => {
     <FHeader/>
       
       <div style={{margin:"120px 45px", boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)", borderRadius:"15px"}} className='search-backbtn-container'>
-          <button style={{marginLeft:"15px"}}  className="back-btn" onClick={() => navigate(-1)}>Back</button>
           <div style={{width:"80%", textAlign:"center",marginLeft:"80px"}} ><h1 className="main-title">Categories</h1></div>
         </div>
         <div className='cat-con'>

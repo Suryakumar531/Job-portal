@@ -1323,7 +1323,7 @@ export const MyProfile = () => {
                                         <div className="submenu">
                                             {item.subItems.map(subItem => (
                                                 <div key={subItem} className={`submenu-item ${activeItem === subItem ? 'active' : ''}`} onClick={(e) => { e.stopPropagation(); handleItemClick(subItem, item.title); }}>
-                                                    <span className="dot">•</span> {subItem}
+                                                    <span className="menu-dot-option">•</span> {subItem}
                                                 </div>
                                             ))}
                                         </div>

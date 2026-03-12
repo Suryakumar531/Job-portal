@@ -202,8 +202,8 @@ export const JobProvider = ({ children }) => {
         const cleanDept = newJobData.department;
         const cleanEdu = newJobData.education;
         const cleanSkills = newJobData.skills;
-        const cleanHighlights = newJobData.jobHighlights;
-        const cleanRes = newJobData.responsibilities;
+        const cleanHighlights = newJobData.jobHighlights.filter(item => item.trim() !== "");
+        const cleanRes = newJobData.responsibilities.filter(item => item.trim() !== "");
         const cleanOpenings = parseInt(newJobData.openings);
         const cleanTags = [newJobData.jobCategory];
         const JOB_STATUS = {
@@ -414,8 +414,8 @@ export const JobProvider = ({ children }) => {
             jobs, appliedJobs, setAppliedJobs, savedJobs, chats, setChats, setJobs,
             onlineStatus, setOnlineStatus, isJobSaved, isChatEnded, setIsChatEnded,
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
-            activeMenuId, setActiveMenuId, addJob, deleteJob, allData, setAllData, postJob, editJob, Alluser, setAlluser, activeSidebarUsers,
-            addChatToSidebar, currentUser, setCurrentUser, withdrawJobFromUser, updateApplicantStatus, isJobApplied
+            activeMenuId, setActiveMenuId, addJob, deleteJob, allData, setAllData, postJob, editJob, Alluser,setAlluser,activeSidebarUsers, 
+            addChatToSidebar,currentUser, setCurrentUser,withdrawJobFromUser,updateApplicantStatus,isJobApplied
         }}>
             {children}
         </JobContext.Provider>
