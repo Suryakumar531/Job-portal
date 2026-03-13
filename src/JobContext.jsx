@@ -4,24 +4,23 @@ import { JobList } from './JobList';
 const JobContext = createContext();
 
 export const JobProvider = ({ children }) => {
+
     // Total JobList
     const [jobs, setJobs] = useState(JobList);
 
-    // States to Toggle online status in chats
-    const [onlineStatus, setOnlineStatus] = useState("yes");
 
-    // Jobs to show when Applied
-    const [appliedJobs, setAppliedJobs] = useState([]);
-
-    // Jobs to show when Saved
-    const [savedJobs, setSavedJobs] = useState([]);
 
     // Using Id to Toggle Menu in Notification Window
     const [activeMenuId, setActiveMenuId] = useState(null);
 
+
+
     //From About your company
     const [companyProfile, setCompanyProfile] = useState([]);
 
+
+
+    // Jobseeker profiles
     const [Alluser, setAlluser] = useState([
         {
             id: "1",
@@ -34,7 +33,9 @@ export const JobProvider = ({ children }) => {
             skills: ["React", "JavaScript", "Tailwind CSS", "Git"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Fluent" }, { "name": "Malayalam", "proficiency": "Fluent" }],
             certs: [{ "name": "Meta Frontend Certificate", "file": "meta_fe.pdf" }],
-            preferences: [{ "currentCTC": "5 LPA", "expectedCTC": "8 LPA", "jobType": "Hybrid", "role": "Senior Frontend Developer", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "5 LPA", "expectedCTC": "8 LPA", "jobType": "Hybrid", "role": "Senior Frontend Developer", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "2",
@@ -47,7 +48,9 @@ export const JobProvider = ({ children }) => {
             skills: ["Python", "SQL", "Tableau", "Excel"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Professional" }, { "name": "Malayalam", "proficiency": "Fluent" }],
             certs: [{ "name": "Google Data Analytics", "file": "g_data.pdf" }],
-            preferences: [{ "currentCTC": "0", "expectedCTC": "4 LPA", "jobType": "Full-Time", "role": "Junior Data Analyst", "ready": "Yes", "relocate": "Yes" }]
+            preferences: [{ "currentCTC": "0", "expectedCTC": "4 LPA", "jobType": "Full-Time", "role": "Junior Data Analyst", "ready": "Yes", "relocate": "Yes" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "3",
@@ -60,7 +63,9 @@ export const JobProvider = ({ children }) => {
             skills: ["Node.js", "MongoDB", "AWS", "Docker"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Fluent" }],
             certs: [{ "name": "AWS Certified Developer", "file": "aws_dev.pdf" }],
-            preferences: [{ "currentCTC": "12 LPA", "expectedCTC": "18 LPA", "jobType": "Remote", "role": "Backend Lead", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "12 LPA", "expectedCTC": "18 LPA", "jobType": "Remote", "role": "Backend Lead", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "4",
@@ -73,7 +78,9 @@ export const JobProvider = ({ children }) => {
             skills: ["SEO", "Copywriting", "Canva", "WordPress"],
             languages: [{ "name": "English", "proficiency": "Fluent" }, { "name": "Tamil", "proficiency": "Native" }],
             certs: [{ "name": "HubSpot Content Marketing", "file": "hubspot.pdf" }],
-            preferences: [{ "currentCTC": "3.5 LPA", "expectedCTC": "5 LPA", "jobType": "Full-Time", "role": "Senior Content Strategist", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "3.5 LPA", "expectedCTC": "5 LPA", "jobType": "Full-Time", "role": "Senior Content Strategist", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "5",
@@ -86,7 +93,9 @@ export const JobProvider = ({ children }) => {
             skills: ["Kubernetes", "Jenkins", "Terraform", "Linux"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Fluent" }, { "name": "Telugu", "proficiency": "Basic" }],
             certs: [{ "name": "CKA Certification", "file": "cka.pdf" }],
-            preferences: [{ "currentCTC": "9 LPA", "expectedCTC": "13 LPA", "jobType": "Full-Time", "role": "DevOps Architect", "ready": "Yes", "relocate": "Yes" }]
+            preferences: [{ "currentCTC": "9 LPA", "expectedCTC": "13 LPA", "jobType": "Full-Time", "role": "DevOps Architect", "ready": "Yes", "relocate": "Yes" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "6",
@@ -99,11 +108,12 @@ export const JobProvider = ({ children }) => {
             skills: ["Agile", "Jira", "Market Research", "Product Strategy"],
             languages: [{ "name": "English", "proficiency": "Fluent" }, { "name": "Tamil", "proficiency": "Fluent" }, { "name": "Kannada", "proficiency": "Basic" }],
             certs: [{ "name": "CSPO", "file": "cspo.pdf" }],
-            preferences: [{ "currentCTC": "22 LPA", "expectedCTC": "28 LPA", "jobType": "Full-Time", "role": "Senior PM", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "22 LPA", "expectedCTC": "28 LPA", "jobType": "Full-Time", "role": "Senior PM", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "7",
-
             profile: { "fullName": "Sudhakar Kagitapu", "gender": "Male", "dob": "2002-01-20", "maritalStatus": "Single", "nationality": "Indian" },
             currentDetails: { "jobTitle": "QA Automation Engineer", "company": "TestX", experience: "Fresher", "currentLocation": "Chennai", "prefLocation": "Chennai" },
             contact: { "mobile": "+91 8080808080", "altMobile": "", "email": "Sudhakar.qa@email.com", "altEmail": "", "address": "T Nagar", "street": "Burkit Rd", "city": "Chennai", "state": "Tamil Nadu", "pincode": "600017", "country": "India" },
@@ -113,7 +123,9 @@ export const JobProvider = ({ children }) => {
             skills: ["Selenium", "Java", "Manual Testing", "Python"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Fluent" }],
             certs: [{ "name": "ISTQB Foundation", "file": "istqb.pdf" }],
-            preferences: [{ "currentCTC": "0", "expectedCTC": "4.5 LPA", "jobType": "Full-Time", "role": "QA Engineer", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "0", "expectedCTC": "4.5 LPA", "jobType": "Full-Time", "role": "QA Engineer", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "8",
@@ -126,7 +138,9 @@ export const JobProvider = ({ children }) => {
             skills: ["React", "Node.js", "Express", "PostgreSQL"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Fluent" }],
             certs: [{ "name": "MERN Stack Mastery", "file": "mern.pdf" }],
-            preferences: [{ "currentCTC": "7.5 LPA", "expectedCTC": "12 LPA", "jobType": "Remote", "role": "Senior Full Stack Developer", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "7.5 LPA", "expectedCTC": "12 LPA", "jobType": "Remote", "role": "Senior Full Stack Developer", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "9",
@@ -139,7 +153,9 @@ export const JobProvider = ({ children }) => {
             skills: ["Metasploit", "Ethical Hacking", "Python", "SOC"],
             languages: [{ "name": "English", "proficiency": "Fluent" }, { "name": "Tamil", "proficiency": "Native" }, { "name": "Hindi", "proficiency": "Conversational" }],
             certs: [{ "name": "CEH", "file": "ceh.pdf" }],
-            preferences: [{ "currentCTC": "18 LPA", "expectedCTC": "25 LPA", "jobType": "Full-Time", "role": "Security Manager", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "18 LPA", "expectedCTC": "25 LPA", "jobType": "Full-Time", "role": "Security Manager", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         },
         {
             id: "10",
@@ -152,23 +168,44 @@ export const JobProvider = ({ children }) => {
             skills: ["Recruitment", "Employee Engagement", "Payroll", "MS Office"],
             languages: [{ "name": "Tamil", "proficiency": "Native" }, { "name": "English", "proficiency": "Fluent" }],
             certs: [{ "name": "SHRM Certified", "file": "shrm.pdf" }],
-            preferences: [{ "currentCTC": "6 LPA", "expectedCTC": "9 LPA", "jobType": "Full-Time", "role": "HR Manager", "ready": "Yes", "relocate": "No" }]
+            preferences: [{ "currentCTC": "6 LPA", "expectedCTC": "9 LPA", "jobType": "Full-Time", "role": "HR Manager", "ready": "Yes", "relocate": "No" }],
+            appliedJobs: [],
+            savedJobs: []
         }
     ]
     )
 
+
+    // Jobseeker profile selector
+    const currentUserId = "10"
+
+
+
     const [currentUser, setCurrentUser] = useState(
-
-        Alluser.find(user => user.id === "4")
-
+        Alluser.find(user => user.id === currentUserId)
     );
+
+
+
+    const [currentEmployer, setCurrentEmployer] = useState({
+        id: "INT001",
+        name: "Infotech solutions",
+        hrName: "Sudhakar",
+        email: "hr@Infotech.com",
+        role: "employer",
+        companyLogo: "",
+        jobPosted: [],
+        messages: [],
+    });
+
 
 
     // Chats/messages between Employer and Jobseeker 1:1;
     const [chats, setChats] = useState([
         // Employer
-        { id: 0, name: "Sudhakar", role: "employer", messages: [] },
+        { id: currentEmployer.id, name: currentEmployer.hrName, role: "employer", messages: currentEmployer.messages },
 
+        // Jobseeker
         ...Alluser.map(user => ({
             id: parseInt(user.id),
             name: user.profile.fullName,
@@ -178,19 +215,7 @@ export const JobProvider = ({ children }) => {
         }))
     ]);
 
-    // Profile List from my profile
-    const [allData, setAllData] = useState({
-        profile: { fullName: '', gender: 'Select', dob: '', maritalStatus: 'Select', nationality: '' },
-        currentDetails: { jobTitle: '', company: '', experience: '', currentLocation: '', prefLocation: '' },
-        contact: { mobile: '', altMobile: '', email: '', altEmail: '', address: '', street: '', city: '', state: '', pincode: '', country: '' },
-        resume: { size: '', portfolio: '' },
-        education: { highestQual: 'Select', sslc: { institution: '', percentage: '', location: '', year: '' }, hsc: { stream: 'Select', institution: '', location: '', year: '', percentage: '' }, graduations: [{ id: 1, degree: '', status: 'Select', dept: '', percentage: '', startYear: '', endYear: '', college: '', city: '', state: '', country: '' }] },
-        experience: { status: 'Fresher', hasExperience: 'No', entries: [{ id: 1, title: '', company: '', startDate: '', endDate: '', industry: 'Select', jobType: 'Select', location: '', responsibilities: '' }] },
-        skills: ["User Research", "Problem solving", "Figma"],
-        languages: [{ name: "English", proficiency: "Fluent" }, { name: "Tamil", proficiency: "Native" }],
-        certs: [{ name: "Full-Stack Development", file: "cert1.pdf" }, { name: "UI/UX Design", file: "cert2.pdf" }],
-        preferences: [{ currentCTC: '', expectedCTC: '', jobType: 'Select', role: '', ready: '', relocate: '' }]
-    });
+
 
     const postJob = (newJobData) => {
         const newId = jobs.length > 0 ? Math.max(...jobs.map(j => Number(j.id))) + 1 : 1;
@@ -211,8 +236,6 @@ export const JobProvider = ({ children }) => {
             reviewing: { text: 'Reviewing Application', type: 'reviewing' },
             done: { text: 'Hiring Done', type: 'done' }
         };
-
-
         const newJob = {
             id: stringId,
             title: newJobData.jobTitle,
@@ -247,24 +270,36 @@ export const JobProvider = ({ children }) => {
         alert(`Job "${newJob.title}" posted successfully!`);
     };
 
+
+
     // 2. Edit status for an Existing Job 
     const editJob = (jobId, status) => {
         setJobs((prev) =>
             prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
         );
 
-        // Also update saved jobs if the edited job was saved
-        setSavedJobs((prev) =>
-            prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
-        );
+        // Update Current User & Sync to Alluser
+        setCurrentUser((prevUser) => {
+            const updatedUser = {
+                ...prevUser,
+                savedJobs: prevUser.savedJobs.map(j => j.id === jobId ? { ...j, ...statusUpdate } : j),
+                appliedJobs: prevUser.appliedJobs.map(j => j.id === jobId ? { ...j, ...statusUpdate } : j)
+            };
 
-        setAppliedJobs((prev) =>
-            prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
-        );
+            setAlluser((prevAll) =>
+                prevAll.map(u => u.id === currentUserId ? updatedUser : u)
+            );
+
+            return updatedUser;
+        });
     };
+
+
 
     // Toggle End Conversation Logic In Employer Chat Window
     const [isChatEnded, setIsChatEnded] = useState(false);
+
+
 
     // NotificationData previously passed from AfterLoginLanding page
     const [notificationsData, setNotificationsData] = useState([{
@@ -274,14 +309,19 @@ export const JobProvider = ({ children }) => {
         isRead: false,
     }]);
 
+
+
     // New Messages Notification Logic
     const [showNotification, setShowNotification] = useState(false);
 
+
+
     // to add NewNotification in NotificationData 
-    const addNotification = (text) => {
+    const addNotification = (text, targetId = null) => {
         const newNotif = {
             id: Date.now(),
             text: text,
+            targetId: targetId,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             isRead: false
         };
@@ -289,96 +329,119 @@ export const JobProvider = ({ children }) => {
     };
 
 
+
     const getFormattedDate = () => {
         return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
     };
 
-    const isJobSaved = (jobId) => savedJobs.some((j) => j.id === jobId);
-    const isJobApplied = (jobId) => appliedJobs.some((j) => j.id === jobId);
 
+
+    // Returns true if the job exists in the current user's saved list
+    const isJobSaved = (jobId) =>
+        currentUser?.savedJobs?.some((job) => job.id === jobId) || false;
+
+
+
+    // Returns true if the job exists in the current user's applied list
+    const isJobApplied = (jobId) =>
+        currentUser?.appliedJobs?.some((job) => job.id === jobId) || false;
+
+
+
+    // need to change for user's Applied jobs
     const applyForJob = (originalJob) => {
-        setAlluser((prevUsers) =>
-            prevUsers.map((user) => {
-                // "2" is Ajeeth's ID
-                if (user.id === "2") {
-                    const isAlreadyApplied = user.appliedJobs?.some(aj => aj.id === originalJob.id);
+        if (isJobApplied(originalJob.id)) return;
 
-                    if (!isAlreadyApplied) {
-                        return {
-                            ...user,
-                            appliedJobs: [
-                                ...(user.appliedJobs || []),
-                                {
-                                    id: originalJob.id,
-                                    status: "Application Submitted",
-                                    appliedDate: getFormattedDate()
-                                }
-                            ]
-                        };
-                    }
-                }
-                return user;
-            })
-        );
-
-        setJobs((prevJobs) =>
-            prevJobs.map((job) =>
-                job.id === originalJob.id
-                    ? { ...job, applicants: (job.applicants || 0) + 1 }
-                    : job
-            )
-        );
-
-        // 3. User side tracking
         const newAppliedJob = {
             ...originalJob,
             appliedDate: `Applied on ${getFormattedDate()}`,
-            status: { text: 'Hiring in Progress', type: 'progress' },
             applicationStatus: [
-                { label: 'Application Submitted', sub: "Your profile, resume, and cover letter have successfully entered the company's database, and an acknowledgment has been sent.", status: 'completed' },
-                { label: 'Resume Screening', sub: "Your resume is currently being reviewed (either by an automated system or a screener) to ensure your skills and qualifications match the core job requirements.", status: 'pending' },
-                { label: 'Recruiter Review', sub: "A hiring manager manually reviews your specific experience, portfolio, and background to determine potential fit for the role.", status: 'pending' },
-                { label: 'Shortlisted', sub: "You have passed the initial review stages and have been flagged as a top contender among the applicant pool.", status: 'pending' },
-                { label: 'Interview Called', sub: "The hiring team has officially reached out to schedule a meeting, moving your status from 'Review' to active 'Engagement.", status: 'pending' },
+                { label: 'Application Submitted', sub: "Profile entered database.", status: 'completed' },
+                { label: 'Resume Screening', sub: "Reviewing qualifications...", status: 'pending' },
+                { label: 'Recruiter Review', sub: "Hiring manager review...", status: 'pending' },
+                { label: 'Shortlisted', sub: "Flagged as top contender...", status: 'pending' },
+                { label: 'Interview Called', sub: "Scheduling meeting...", status: 'pending' },
             ]
         };
 
-        setAppliedJobs((prev) => {
-            const alreadyInList = prev.some(aj => aj.id === originalJob.id);
-            return alreadyInList ? prev : [...prev, newAppliedJob];
+        setCurrentUser((prevUser) => {
+            const updatedUser = {
+                ...prevUser,
+                appliedJobs: [...prevUser.appliedJobs, newAppliedJob]
+            };
+
+            // Sync to Alluser using functional update
+            setAlluser((prevAll) =>
+                prevAll.map(u => u.id === currentUserId ? updatedUser : u)
+            );
+
+            return updatedUser;
         });
 
-        alert(`Successfully applied to ${originalJob.jobTitle} at ${originalJob.company}!`);
+        alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
+
+        setJobs((prevJobs) =>
+            prevJobs.map((job) =>
+                job.id === originalJob.id ? { ...job, applicants: job.applicants + 1 } : job
+            )
+        );
     };
 
+
+
     const toggleSaveJob = (originalJob) => {
-        if (isJobSaved(originalJob.id)) {
-            setSavedJobs((prev) => prev.filter((j) => j.id !== originalJob.id));
-        } else {
-            const newSavedJob = {
-                ...originalJob,
-                savedDate: `Saved on ${getFormattedDate()}`
+        // We use the helper you wrote to determine the action
+        const currentlySaved = isJobSaved(originalJob.id);
+
+        setCurrentUser((prevUser) => {
+            const updatedUser = {
+                ...prevUser,
+                savedJobs: currentlySaved
+                    ? // If it was saved, remove it (Filter)
+                    prevUser.savedJobs.filter((j) => j.id !== originalJob.id)
+                    : // If it wasn't saved, add it (Spread)
+                    [...prevUser.savedJobs, {
+                        ...originalJob,
+                        savedDate: `Saved on ${getFormattedDate()}`
+                    }],
             };
-            setSavedJobs((prev) => [...prev, newSavedJob]);
-        }
+
+            // Sync the result to the main Alluser array
+            setAlluser((prevAll) =>
+                prevAll.map((u) => (u.id === currentUserId ? updatedUser : u))
+            );
+
+            return updatedUser;
+        });
     };
+
+
+
     const addJob = (newJob) => {
         setJobs((prevJobs) => [...prevJobs, newJob]);
     };
 
+
+
     const deleteJob = (jobId) => {
         setJobs((prev) => prev.filter((j) => j.id !== jobId));
-        setSavedJobs((prev) => prev.filter((j) => j.id !== jobId));
+        // iterate saved jobs and applied jobs of the users to delete the specific job
         addNotification("Job posting has been successfully deleted.");
     };
 
+
+
     const [activeSidebarUsers, setActiveSidebarUsers] = useState([]);
+
+
 
     const addChatToSidebar = (userId) => {
         if (!activeSidebarUsers.includes(parseInt(userId))) {
             setActiveSidebarUsers(prev => [...prev, parseInt(userId)]);
         }
     };
+
+
 
     const updateApplicantStatus = (userId, jobId, newStatus) => {
         setAlluser(prev => prev.map(user => {
@@ -391,7 +454,6 @@ export const JobProvider = ({ children }) => {
             return user;
         }));
     };
-
 
 
     const withdrawJobFromUser = (userId, jobId) => {
@@ -409,13 +471,37 @@ export const JobProvider = ({ children }) => {
     };
 
 
+
+    const getJobStats = (jobId) => {
+        const jobApplicants = Alluser.filter(user =>
+            user.appliedJobs?.some(aj => aj.id === jobId)
+        );
+
+        const getCountByStatus = (statusList) => {
+            return jobApplicants.filter(user => {
+                const jobInfo = user.appliedJobs.find(aj => aj.id === jobId);
+                return statusList.includes(jobInfo?.status);
+            }).length;
+        };
+
+        return {
+            total: jobApplicants.length,
+
+            new: getCountByStatus(["Application Submitted"]),
+            screening: getCountByStatus(["Resume Screening", "Recruiter Review", "Shortlisted"]),
+            interview: getCountByStatus(["Interview Called"]),
+            rejected: getCountByStatus(["Rejected"])
+        };
+    };
+
     return (
         <JobContext.Provider value={{
-            jobs, appliedJobs, setAppliedJobs, savedJobs, chats, setChats, setJobs,
-            onlineStatus, setOnlineStatus, isJobSaved, isChatEnded, setIsChatEnded,
-            setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
-            activeMenuId, setActiveMenuId, addJob, deleteJob, allData, setAllData, postJob, editJob, Alluser,setAlluser,activeSidebarUsers, 
-            addChatToSidebar,currentUser, setCurrentUser,withdrawJobFromUser,updateApplicantStatus,isJobApplied
+            jobs, setJobs, activeMenuId, setActiveMenuId, companyProfile, setCompanyProfile,
+            Alluser, setAlluser, currentUserId, currentUser, setCurrentUser, currentEmployer, setCurrentEmployer, chats, setChats, postJob, editJob, isChatEnded, setIsChatEnded,
+            notificationsData, setNotificationsData, showNotification, setShowNotification,
+            addNotification, getFormattedDate, isJobSaved, isJobApplied, applyForJob,
+            toggleSaveJob, addJob, deleteJob, activeSidebarUsers, setActiveSidebarUsers,
+            addChatToSidebar, updateApplicantStatus, withdrawJobFromUser, getJobStats
         }}>
             {children}
         </JobContext.Provider>
