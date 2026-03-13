@@ -6,6 +6,7 @@ import uploadIcon from '../assets/UploadIcon.png'
 import deleteIcon from '../assets/DeleteIcon.png'
 import resumeIcon from '../assets/resume_icon.png'
 import { Header } from '../Components-LandingPage/Header'
+import { useJobs } from '../JobContext'
 
 // --- REUSABLE COMPONENTS ---
 
@@ -1067,6 +1068,7 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
 export const MyProfile = () => {
     const [openDropdown, setOpenDropdown] = useState('Basic Details');
     const [activeItem, setActiveItem] = useState('Profile');
+    const [Alluser, setAlluser] = useJobs()
 
     // ORDER of Steps for Navigation
     const steps = [
@@ -1112,8 +1114,6 @@ export const MyProfile = () => {
         const today = new Date().toISOString().split('T')[0];
         const AlphaOnlyreg = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
         const percentageReg = /^(\d{1,2}(\.\d{1,2})?|100(\.0{1,2})?)%?$/;
-
-
 
         // --- 1. Current Details VALIDATION ---
 
@@ -1204,6 +1204,19 @@ export const MyProfile = () => {
         // --- FINAL EXECUTION ---
         if (isProfileValid && isSslcValid && isHscValid && isWorkValid) {
             console.log("FINAL SUBMISSION DATA:", allData);
+
+            setAlluser((prev) => {
+                const nextId = (prevUsers.length + 1).toString();
+
+                const newUser = {
+                    id: nextId,
+                    ...allData,
+                    appliedJobs: [],
+                    savedJobs: []
+                };
+
+                return [...prevUsers, newUser];
+            })
 
             alert("Your profile has been saved successfully!");
         }
