@@ -13,13 +13,14 @@ export const EditJob = () => {
   
   const navigate = useNavigate();
   const location = useLocation();
-  const { editJob } = useJobs();
+  const { editJob,jobs } = useJobs();
 
-  const existingJobData = location.state || null;
+  //const existingJobData = location.state || null;
+  const existingJobData = jobs.find(job => job.id === location.state?.id);
 
   const [selectedStatusType, setSelectedStatusType] = useState(existingJobData?.status?.type || 'reviewing');
   
-  const [currentStatus, setCurrentStatus] = useState(existingJobData?.status);
+  const [currentStatus, setCurrentStatus] = useState(existingJobData?.jobStatus);
 
   const statusOptions = [
     { text: 'Hiring in Progress', type: 'progress' },
@@ -35,8 +36,7 @@ export const EditJob = () => {
   const handleSubmit = () => {
     const newStatus = statusOptions.find(opt => opt.type === selectedStatusType);
     setCurrentStatus(newStatus);
-    editJob(existingJobData.id, { status: newStatus });
-
+    editJob(existingJobData.id, { jobStatus: newStatus });
     alert("Status updated successfully!");
     setTimeout(()=>{
     navigate('/Job-portal/Employer/Dashboard')

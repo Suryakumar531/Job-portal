@@ -42,7 +42,7 @@ export const AppliedJobCard = ({ opp }) => {
         <div className='applied-app-status-container'>
           <p className='myjobs-saved-date'>{opp.appliedDate}</p>
           <span className="Opportunities-divider">|</span>
-          <span className={`applied-application-status status-${opp.status.type}`}>{opp.status.text}</span>
+          <span className={`applied-application-status status-${opp.jobStatus.type}`}>{opp.jobStatus.text}</span>
         </div>
 
         <div className="Opportunities-job-actions">

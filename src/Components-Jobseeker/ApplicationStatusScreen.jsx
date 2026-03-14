@@ -17,7 +17,7 @@ export const ApplicationStatusScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/Job-portal/jobseeker");
-    }, 5000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, [navigate]);
 

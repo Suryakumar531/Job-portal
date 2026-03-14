@@ -177,7 +177,7 @@ export const PostJobPreview = () => {
 
                   <div className="Opportunities-job-footer">
                     <div className="Opportunities-job-meta1">
-                      <p>{formatPostedDate(job.posted)} <span className="Opportunities-divider">|</span> Openings: {job.openings} <span className="Opportunities-divider">|</span> Applicants: {job.applicants}</p>
+                      <p>Just Now <span className="Opportunities-divider">|</span> Openings: {job.openings} <span className="Opportunities-divider">|</span> Applicants: {job.applicants}</p>
                     </div>
                   </div>
                 </div>

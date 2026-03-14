@@ -60,7 +60,6 @@ export const ProfileCard = ({ user, showActions = false }) => {
         <div className="FindTalent-card-bottom">
                 <p className="FindTalent-timestamp">Resume updated: 2 days ago</p>
                 <div className="FindTalent-actions">
-                  <button className="FindTalent-btn-save">Save</button>
                   <button onClick={()=>{navigate(`/Job-portal/Employer/FindTalent/ProfileOverview/${user.id}`)}} className="FindTalent-btn-view">View profile</button>
                 </div>
               </div>

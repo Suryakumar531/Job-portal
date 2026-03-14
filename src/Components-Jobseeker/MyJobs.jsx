@@ -7,7 +7,9 @@ import { Header } from '../Components-LandingPage/Header';
 import { useJobs } from '../JobContext';
 
 export const MyJobs = () => {
-    const { savedJobs, appliedJobs } = useJobs();
+    const { currentUser } = useJobs();
+    const savedJobs= currentUser.savedJobs;
+    const appliedJobs= currentUser.appliedJobs;
 
     const [activeTab, setActiveTab] = useState("saved");
 

@@ -996,7 +996,7 @@ const Certifications = ({ certs, onAdd, onUpdate, onDelete, onReset, onNext }) =
 
 // --- FINAL SUBMIT BUTTON SECTION ---
 const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
-    const {Alluser,setAlluser,allData}=useJobs()
+    const {setAlluser,allData}=useJobs()
     const NumRegix = /[^0-9]/;
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -1092,7 +1092,7 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
 export const MyProfile = () => {
     const [openDropdown, setOpenDropdown] = useState('Basic Details');
     const [activeItem, setActiveItem] = useState('Profile');
-    const {allData,setAllData,Alluser,setAlluser} = useJobs();
+    const [setAlluser]=useJobs()
     // ORDER of Steps for Navigation
     const steps = [
         'Profile',
@@ -1107,18 +1107,18 @@ export const MyProfile = () => {
         'Preferences / Career Details'
     ];
 
-    // const [allData, setAllData] = useState({
-    //     profile: { fullName: '', gender: 'Select', dob: '', maritalStatus: 'Select', nationality: '' },
-    //     currentDetails: { jobTitle: '', company: '', experience: '', currentLocation: '', prefLocation: '' },
-    //     contact: { mobile: '', altMobile: '', email: '', altEmail: '', address: '', street: '', city: '', state: '', pincode: '', country: '' },
-    //     resume: { size: '', portfolio: '' },
-    //     education: { highestQual: 'Select', sslc: { institution: '', percentage: '', location: '', year: '' }, hsc: { stream: 'Select', institution: '', location: '', year: '', percentage: '' }, graduations: [{ id: 1, degree: '', status: 'Select', dept: '', percentage: '', startYear: '', endYear: '', college: '', city: '', state: '', country: '' }] },
-    //     experience: { status: 'Fresher', hasExperience: 'No', entries: [{ id: 1, title: '', company: '', startDate: '', endDate: '', industry: 'Select', jobType: 'Select', location: '', responsibilities: '' }] },
-    //     skills: ["User Research", "Problem solving", "Figma"],
-    //     languages: [{ name: "English", proficiency: "Fluent" }, { name: "Tamil", proficiency: "Native" }],
-    //     certs: [{ name: "Full-Stack Development", file: "cert1.pdf" }, { name: "UI/UX Design", file: "cert2.pdf" }],
-    //     preferences: [{ currentCTC: '', expectedCTC: '', jobType: 'Select', role: '', ready: '', relocate: '' }]
-    // });
+    const [allData, setAllData] = useState({
+        profile: { fullName: '', gender: 'Select', dob: '', maritalStatus: 'Select', nationality: '' },
+        currentDetails: { jobTitle: '', company: '', experience: '', currentLocation: '', prefLocation: '' },
+        contact: { mobile: '', altMobile: '', email: '', altEmail: '', address: '', street: '', city: '', state: '', pincode: '', country: '' },
+        resume: { size: '', portfolio: '' },
+        education: { highestQual: 'Select', sslc: { institution: '', percentage: '', location: '', year: '' }, hsc: { stream: 'Select', institution: '', location: '', year: '', percentage: '' }, graduations: [{ id: 1, degree: '', status: 'Select', dept: '', percentage: '', startYear: '', endYear: '', college: '', city: '', state: '', country: '' }] },
+        experience: { status: 'Fresher', hasExperience: 'No', entries: [{ id: 1, title: '', company: '', startDate: '', endDate: '', industry: 'Select', jobType: 'Select', location: '', responsibilities: '' }] },
+        skills: ["User Research", "Problem solving", "Figma"],
+        languages: [{ name: "English", proficiency: "Fluent" }, { name: "Tamil", proficiency: "Native" }],
+        certs: [{ name: "Full-Stack Development", file: "cert1.pdf" }, { name: "UI/UX Design", file: "cert2.pdf" }],
+        preferences: [{ currentCTC: '', expectedCTC: '', jobType: 'Select', role: '', ready: '', relocate: '' }]
+    });
 
     // --- NAVIGATION LOGIC ---
     
@@ -1230,6 +1230,21 @@ export const MyProfile = () => {
         // --- FINAL EXECUTION ---
         if (isProfileValid && isSslcValid && isHscValid && isWorkValid) {
             console.log("FINAL SUBMISSION DATA:", allData);
+
+        setAlluser((prevUsers) => {
+        const nextId = (prevUsers.length + 1).toString();
+
+        const newUser = {
+            id: nextId,
+            ...allData,
+            appliedJobs: allData.appliedJobs || [], 
+            savedJobs: allData.savedJobs || []
+        };
+        console.log(newUser)
+
+        console.log("New User Created with appliedJobs key:", newUser);
+        return [...prevUsers, newUser];
+    });
 
             alert("Your profile has been saved successfully!");
         }
