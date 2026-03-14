@@ -6,29 +6,30 @@ import { useJobs } from '../JobContext';
 export const JMessenger = () => {
     
     //{POV : Logged in as Ajeeth }
-    const CurrentUser = 2; //(here we can able to change the Profile in otherjobseekers view)
+   // const CurrentUser = 2; //(here we can able to change the Profile in otherjobseekers view)
     
-    const { chats, setChats, isChatEnded,setNotificationsData } = useJobs(); // from Context
+    const {chats, setChats, currentUserId, isChatEnded, setNotificationsData} = useJobs(); // from Context
 
     const [input, setInput] = useState("");
 
     const scrollRef = useRef(null);
     
-    const myChatData = chats.find(c => c.id === CurrentUser);
-
+    const myChatData = chats.find(c => String(c.id) === String(currentUserId));
     const employerProfile = chats.find(c => c.role === "employer");
 
     const hasMessages = myChatData?.messages && myChatData.messages.length > 0;
 
-    useEffect(() => {
-        if (myChatData?.messages.length > 0) {
-            setNotificationsData(prev => 
-                prev.map(notif => 
-                    notif.targetId === CurrentUser ? { ...notif, isRead: true } : notif
-                )
-            );
-        }
-    }, [myChatData?.messages.length]);
+  useEffect(() => {
+    if (myChatData?.messages && myChatData.messages.length > 0) {
+        
+        setNotificationsData(prev => 
+            prev.map(notif => {
+                const isMatch = String(notif.targetId) === String(currentUserId);
+                return isMatch ? { ...notif, isRead: true } : notif;
+            })
+        );
+    }
+}, [myChatData?.messages.length, currentUserId, setNotificationsData]);
 
     useEffect(() => {
         if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -46,7 +47,9 @@ export const JMessenger = () => {
         };
 
         setChats(prev => prev.map(chat => 
-            chat.id === CurrentUser ? { ...chat, messages: [...chat.messages, newMsg] } : chat
+            String(chat.id) === String(currentUserId) 
+            ? { ...chat, messages: [...chat.messages, newMsg] } 
+            : chat
         ));
         setInput("");
     };

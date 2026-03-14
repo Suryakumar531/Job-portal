@@ -7,7 +7,7 @@ import { useJobs } from "../JobContext";
 
 export const EMessenger = () => {
 
-  const { chats, setChats, isChatEnded, setIsChatEnded, Alluser, activeSidebarUsers, addNotification } = useJobs(); //From JobContext
+const { chats, setChats, Alluser, currentEmployer, addNotification, activeSidebarUsers } = useJobs() //From JobContext
 
   const [input, setInput] = useState("");
 
@@ -26,7 +26,7 @@ export const EMessenger = () => {
   );
 
   // Active chat and user details
-  const activeChat = chats.find(c => parseInt(c.id) === selectedId);
+  const activeChat = chats.find(c => String(c.id) === String(selectedId));
 
   const activeUser = Alluser.find(u => parseInt(u.id) === selectedId);
 
@@ -37,23 +37,22 @@ export const EMessenger = () => {
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!input.trim() || isChatEnded || !selectedId) return;
+    if (!input.trim() || activeChat?.isChatEnded || !selectedId) return;
 
     const employerReply = {
       id: Date.now(),
-      text: input,
-      sender: "employer",
+      text: input.trim(),
+      sender: currentEmployer.role, // "employer" - dynamic from context
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
     setChats(prev => prev.map(chat =>
-      chat.id === selectedId ? { ...chat, messages: [...chat.messages, employerReply] } : chat
+      String(chat.id) === String(selectedId) 
+        ? { ...chat, messages: [...chat.messages, employerReply] } 
+        : chat
     ));
 
-    if (addNotification) {
-      addNotification(`Employer Sent a Message: ${input}`, selectedId);
-    }
-
+    addNotification?.(`New message from ${currentEmployer.hrName}`, selectedId);
     setInput("");
   };
 

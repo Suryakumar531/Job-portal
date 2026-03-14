@@ -10,15 +10,15 @@ import { useNavigate } from "react-router-dom";
 export const JNotification = ({  }) => {
     
     
-    const {notificationsData,setNotificationsData,showNotification, setShowNotification,activeMenuId,setActiveMenuId}   = useJobs()
+    const {notificationsData,setNotificationsData,showNotification, setShowNotification,activeMenuId,setActiveMenuId,currentUserId}   = useJobs()
 
     
     const navigate = useNavigate();
     const containerRef = useRef(null);
-    const CurrentUser = 2;
+    // const CurrentUser = 2;
 
     const myPersonalNotifs = notificationsData.filter(n => 
-        n.targetId === CurrentUser || n.targetId === undefined || n.targetId === null
+        String(n.targetId) === String(currentUserId) || n.targetId === undefined || n.targetId === null
     );
 
     const newNotificationsCount = myPersonalNotifs.filter(n => !n.isRead).length;
@@ -58,12 +58,14 @@ export const JNotification = ({  }) => {
 
     // CLEAR ALL
     const handleClearAll = () => {
-        setNotificationsData([]);
+        setNotificationsData(prev => 
+            prev.filter(n => String(n.targetId) !== String(currentUserId) && n.targetId !== null && n.targetId !== undefined)
+        );
         setActiveMenuId(null);
     };
 
     // CLOSE ON OUTSIDE CLICK
-    useEffect(() => {
+        useEffect(() => {
         const handleClickOutside = (event) => {
             if (
                 containerRef.current &&
@@ -80,7 +82,7 @@ export const JNotification = ({  }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [showNotification, setShowNotification]);
+        }, [showNotification, setShowNotification]);
 
 
     return (
