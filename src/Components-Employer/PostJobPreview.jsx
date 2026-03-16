@@ -15,7 +15,7 @@ import { useJobs } from '../JobContext';
 
 export const PostJobPreview = () => {
   const { state } = useLocation();
-  const { postJob, editJob, jobs } = useJobs();
+  const { postJob, editJob, currentEmployer } = useJobs();
   const navigate = useNavigate();
   const { id } = useParams();
   const [step, setStep] = useState('preview');
@@ -36,14 +36,15 @@ export const PostJobPreview = () => {
     return labels.length > 0 ? labels.join(', ') : 'Not specified';
   };
 
-  const formatPostedDate = (date) => {
-    return "Just now";
-  };
+  // const formatPostedDate = (date) => {
+  //   return "Just now";
+  // };
 
    const job = state ? {
     // ...state,
     title: state.jobTitle,
-    company: "Infotech",
+    company: currentEmployer.company,
+    companyId:currentEmployer.companyId,
     ratings: 4.2, // Mock value for preview
     reviewNo: 100, // Mock value for preview
     logo: "",
