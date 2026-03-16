@@ -7,7 +7,7 @@ import { useJobs } from '../JobContext';
 export const PostedJobs = ({ onViewApplicants }) => {
   const navigate = useNavigate();
 
-  const { jobs, setJobs, getJobStats, currentEmployer, setCurrentEmployer } = useJobs();
+  const { jobs, setJobs, getJobStats, currentEmployer,deleteJob, setCurrentEmployer ,setAlluser} = useJobs();
 
   const [activeMenu, setActiveMenu] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -29,14 +29,21 @@ export const PostedJobs = ({ onViewApplicants }) => {
     setSelectedJobId(id);
     setShowDeleteModal(true);
     setActiveMenu(null);
-  };
-
-  const confirmDelete = () => {
     setJobs(jobs.filter(job => job.id !== selectedJobId));
+    setAlluser((prevUsers) =>
+            prevUsers.map((user) => ({
+                ...user,
+                savedJobs: user.savedJobs.filter((job) => job.id !== job),
+                appliedJobs: user.appliedJobs.filter((job) => job.id !== job),
+            }))
+        );
     setCurrentEmployer(prev => ({
       ...prev,
       jobPosted: prev.jobPosted.filter(job => job.id !== selectedJobId)
     }));
+  };
+
+  const confirmDelete = () => {
     setShowDeleteModal(false);
     setShowSuccessToast(true);
     setTimeout(() => setShowSuccessToast(false), 3000);
@@ -119,7 +126,7 @@ export const PostedJobs = ({ onViewApplicants }) => {
 
       {showSuccessToast && (
         <div className="postedjobs-toast">
-          Your job post has been removed <span className="close-icon" onClick={() => setShowSuccessToast(false)}>⊗</span>
+          Your job post has been removed <span className="close-icon" onClick={() => setShowSuccessToast(false)}>X</span>
         </div>
       )}
     </div>
