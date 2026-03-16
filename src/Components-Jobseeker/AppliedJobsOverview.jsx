@@ -32,10 +32,11 @@ const AnimatedConnector = styled(StepConnector)(({ theme }) => ({
 export const AppliedJobsOverview = () => {
 
   const { id } = useParams();
-  const { appliedJobs, setJobs, currentEmployer,currentUserId,currentUser,setCurrentEmployer, setAlluser } = useJobs();
+  const { Alluser,currentUserId,currentUser,withdrawApplication, removeRejectedJob } = useJobs();
+
 
   const navigate = useNavigate();
-  const job = appliedJobs.find(job => job.id === id);
+  const job = Alluser.find(user => user.id === currentUserId)?.appliedJobs?.find(job => job.id === id);
   // const currentUser = Alluser.find(u => u.id === currentUserId);
   const liveJobData = currentUser?.appliedJobs?.find(aj => aj.id === id);
   const liveStatus = liveJobData?.status || "Application Submitted";;
@@ -79,74 +80,7 @@ useEffect(() => {
 
   if (!job) return <div>Job not found!</div>;
   
-  const withdrawApplication = (originalJob) => {
-    // 1. Remove from User's applied list
-    if (window.confirm("Are you sure you want to withdraw?")){
-    setAlluser((prevUsers) =>
-      prevUsers.map((user) => {
-        if (user.id === currentUserId) {
-          return {
-            ...user,
-            appliedJobs: (user.appliedJobs || []).filter(
-              (job) => job.id !== originalJob.id
-            ),
-          };
-        }
-
-        // 2. Decrement applicant count for the employer
-        if (currentEmployer.id === originalJob.companyId) {
-          return {
-            ...user,
-            jobPosted: user.jobPosted.map((job) =>
-              job.id === originalJob.id
-                ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
-                : job
-            ),
-          };
-        }
-        return user;
-      })
-    );
-
-    // 3. Update Global Jobs List
-    setJobs((prevJobs) =>
-      prevJobs.map((job) =>
-        job.id === originalJob.id
-          ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
-          : job
-      )
-    );
-
-    // 4. Update Local Employer State
-    if (currentEmployer.id === originalJob.companyId) {
-      setCurrentEmployer((prev) => ({
-        ...prev,
-        jobPosted: prev.jobPosted.map((job) =>
-          job.id === originalJob.id
-            ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
-            : job
-        ),
-      }));
-    }
-    alert(`Successfully withdrawn your application for ${originalJob.title}.`);
-    navigate('/Job-portal/jobseeker/withdrawn');
-  }};
-const removeRejectedJob = (originalJob) => {
-      if (window.confirm("Remove this rejected application from history?")) {
-        // Update User's appliedJobs
-        setAlluser(prev => prev.map(user => {
-          if (user.id === currentUserId) {
-            return {
-              ...user,
-              appliedJobs: user.appliedJobs?.filter(j => j.id !== originalJob.id)
-            };
-          }
-          return user;
-        }));
-
-        navigate('/Job-portal/jobseeker/myjobs');
-      }
-    };
+  
 
   return (
     <div>
