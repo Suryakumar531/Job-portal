@@ -1,43 +1,58 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./EMessenger.css";
-import { EHeader } from "./EHeader";
+import "./Chatbox.css";
 import { useJobs } from "../JobContext";
-import { FHeader } from "../Components-Jobseeker/FHeader";
 
+
+//***EMessenger//
 
 export const EMessenger = () => {
-  const { chats, setChats,isChatEnded, setIsChatEnded,addNotification } = useJobs();
+
+const { chats, setChats, Alluser, currentEmployer, addNotification, activeSidebarUsers } = useJobs() //From JobContext
+
   const [input, setInput] = useState("");
-  
-   
+
+  const [selectedId, setSelectedId] = useState(null);
+
   const scrollRef = useRef(null);
 
-  const jobseekerChat = chats.find(c => c.role === "jobseeker");
-  const employerData = chats.find(c => c.role === "employer");
+  const toggleChatEnd = () => {
+  setChats(prev => prev.map(chat => 
+    chat.id === selectedId ? { ...chat, isChatEnded: !chat.isChatEnded } : chat
+  ));
+};
+  // Sidebar filter logic 
+  const sidebarDisplayUsers = Alluser.filter(user =>
+    activeSidebarUsers.includes(parseInt(user.id))
+  );
 
+  // Active chat and user details
+  const activeChat = chats.find(c => String(c.id) === String(selectedId));
+
+  const activeUser = Alluser.find(u => parseInt(u.id) === selectedId);
+
+  // Auto scroll logic
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [employerData.messages]);
+  }, [activeChat?.messages]);
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!input.trim() || isChatEnded) return; 
+    if (!input.trim() || activeChat?.isChatEnded || !selectedId) return;
 
     const employerReply = {
       id: Date.now(),
-      text: input,
-      sender: "friend", 
+      text: input.trim(),
+      sender: currentEmployer.role, // "employer" - dynamic from context
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    // Chat updates
-    setChats(prev => prev.map(chat => 
-      chat.role === "employer" ? { ...chat, messages: [...chat.messages, employerReply] } : chat
+    setChats(prev => prev.map(chat =>
+      String(chat.id) === String(selectedId) 
+        ? { ...chat, messages: [...chat.messages, employerReply] } 
+        : chat
     ));
 
-    // 2. Sending datas Notification
-    addNotification(`New message from Employer: ${input}`);
-
+    addNotification?.(`New message from ${currentEmployer.hrName}`, selectedId);
     setInput("");
   };
 
@@ -45,59 +60,72 @@ export const EMessenger = () => {
     <>
       <div className="messages-container">
         <div className="EChat-Mainsec">
-            <div className="E-chat-name">
-                <div style={{ height: "100vh" }} className="web-sidebar">
-                    <div className="sidebar-item active">
-                        <strong>{jobseekerChat.name}</strong>
+          <div className="E-chat-name">
+            <div className="web-sidebar">
+              <div className="sidebar-header">
+                <h3 style={{ color: "#007bff", textAlign: "center" }}>Active Chats</h3>
+              </div>
+              {sidebarDisplayUsers.length > 0 ? (
+                sidebarDisplayUsers.map(user => (
+                  <div
+                    key={user.id}
+                    className={`sidebar-item ${selectedId === parseInt(user.id) ? 'active' : ''}`}
+                    onClick={() => setSelectedId(parseInt(user.id))}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <strong>{user.profile.fullName}</strong>
+                      <p style={{ fontSize: '11px', margin: 0 }}>{user.currentDetails?.jobTitle}</p>
                     </div>
-                </div>
+                  </div>
+                ))
+              ) : (
+                <div style={{ padding: '20px', color: '#888', textAlign: 'center' }}>No active chats</div>
+              )}
             </div>
-            <div className="web-main-chat">
+          </div>
+
+          <div className="web-main-chat">
+            {selectedId ? (
+              <>
                 <header className="web-chat-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <strong>{jobseekerChat.name}</strong>
-                    
-                    {/* End / Restart Button Logic */}
-                    <button 
-                      onClick={() => setIsChatEnded(!isChatEnded)}
-                      className={ isChatEnded ? "E-Start-Convo-Button" : "E-End-Convo-Button"}
-                    >
-                      {isChatEnded ? "RESTART CONVERSATION" : "END CONVERSATION"}
-                    </button>
+                  <strong>{activeUser?.profile?.fullName}</strong>
+                  <button
+                    onClick={toggleChatEnd}
+                    className={activeChat?.isChatEnded ? "E-Start-Convo-Button" : "E-End-Convo-Button"}
+                  >
+                    {activeChat?.isChatEnded  ? "RESTART" : "END CHAT"}
+                  </button>
                 </header>
 
                 <div className="web-chat-window" ref={scrollRef}>
-                  {employerData.messages.map((m) => (
+                  {activeChat.messages?.map((m) => (
                     <div key={m.id} className="web-msg-row">
-                      <div className={`web-bubble ${m.sender === 'friend' ? 'web-me' : 'web-friend'}`}>
+                      <div className={`web-bubble ${m.sender === 'employer' ? 'web-me' : 'web-friend'}`}>
                         {m.text}
                       </div>
                     </div>
                   ))}
-                  {isChatEnded && (
-                    <div style={{ textAlign: "center", padding: "10px", color: "gray", fontSize: "12px" }}>
-                      --- Conversation Ended ---
-                    </div>
-                  )}
+                  {activeChat?.isChatEnded && <div className="chat-end-label">--- Conversation Ended ---</div>}
                 </div>
 
                 <form className="web-input-bar" onSubmit={handleSend}>
-                  <input 
-                    className="web-text-input" 
-                    value={input} 
+                  <input
+                    className="web-text-input"
+                    value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    disabled={isChatEnded}
-                    placeholder={isChatEnded ? "Chat is ended. Restart to type." : "Type a message..."}
+                    disabled={activeChat?.isChatEnded }
+                    placeholder="Type a message..."
                   />
-                  <button 
-                    type="submit" 
-                    className="web-send-button"
-                    disabled={isChatEnded}
-                    style={{ opacity: isChatEnded ? 0.5 : 1 }}
-                  >
-                    SEND
-                  </button>
+                  <button type="submit" className="web-send-button" disabled={activeChat?.isChatEnded}>SEND</button>
                 </form>
-            </div>
+              </>
+            ) : (
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color: '#888', flexDirection: 'column' }}>
+                <h3>Chat Section</h3>
+                <p>Connect with a job seeker to start a conversation.</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -17,10 +17,10 @@ export const ApplicationStatusScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/Job-portal/jobseeker");
-    }, 3000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, [navigate]);
-  
+
   return (
     <div className="success-page">
       <Header />

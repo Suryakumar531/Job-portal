@@ -13,10 +13,11 @@ export const EHeader = () => {
         { image: chat, path: "/Job-portal/Employer/Chat" },
         { image: bell, path: "" },
 
+
     ]
     return (
         <header className="header">
-            <Link className="logo" to='/Job-portal/Employer/Dashboard'>job portal</Link>
+            <div className="logo">job portal</div>
             <div className='E-Header-search'>
                 <img className="E-searchicon" src={search} alt="search icon" />
                 <input className="input" type="text" placeholder='Search for jobs and applicants' />

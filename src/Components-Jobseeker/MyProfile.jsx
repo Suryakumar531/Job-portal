@@ -5,8 +5,10 @@ import editIcon from '../assets/EditIcon.png'
 import uploadIcon from '../assets/UploadIcon.png'
 import deleteIcon from '../assets/DeleteIcon.png'
 import resumeIcon from '../assets/resume_icon.png'
+import { JHeader } from './JHeader';
 import { Header } from '../Components-LandingPage/Header'
 import { useJobs } from '../JobContext'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 // --- REUSABLE COMPONENTS ---
 
@@ -446,7 +448,7 @@ const EducationDetails = ({ data, onUpdateSSLC, onUpdateHSC, onUpdateGrad, onAdd
     const toggleSection = (id) => setOpenSection(openSection === id ? null : id);
     const today = new Date().toISOString().split('T')[0];
     const percentageReg = /^(\d{1,2}(\.\d{1,2})?|100(\.0{1,2})?)%?$/
-
+    const AlphaOnlyreg = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
 
     const [errors, setErrors] = useState({});
 
@@ -994,8 +996,10 @@ const Certifications = ({ certs, onAdd, onUpdate, onDelete, onReset, onNext }) =
 
 // --- FINAL SUBMIT BUTTON SECTION ---
 const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
+    const {setAlluser,allData}=useJobs()
     const NumRegix = /[^0-9]/;
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
 
         const newErrors = {};
@@ -1010,10 +1014,30 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
 
 
         setErrors(newErrors);
-        if (Object.keys(newErrors).length === 0) {
-            onSubmitFinal()
+       if (Object.keys(newErrors).length === 0) {
+    onSubmitFinal();
+
+    setAlluser((prevUsers) => {
+        const nextId = (prevUsers.length + 1).toString();
+
+        const newUser = {
+            id: nextId,
+            ...allData,
+            appliedJobs: allData.appliedJobs || [], 
+            savedJobs: allData.savedJobs || []
+        };
+        console.log(newUser)
+
+        console.log("New User Created with appliedJobs key:", newUser);
+        return [...prevUsers, newUser];
+    });
+        console.log(newUser)
         }
-    };
+        alert("Profile Created and Added to User List!");
+        navigate ('/Job-portal/jobseeker')
+    }
+
+
 
     return (
         <form className="content-card" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
@@ -1068,8 +1092,7 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
 export const MyProfile = () => {
     const [openDropdown, setOpenDropdown] = useState('Basic Details');
     const [activeItem, setActiveItem] = useState('Profile');
-    const [Alluser, setAlluser] = useJobs()
-
+    const {setAlluser} = useJobs();
     // ORDER of Steps for Navigation
     const steps = [
         'Profile',
@@ -1098,6 +1121,7 @@ export const MyProfile = () => {
     });
 
     // --- NAVIGATION LOGIC ---
+    
     const handleNextStep = () => {
         const currentIndex = steps.indexOf(activeItem);
         if (currentIndex < steps.length - 1) {
@@ -1114,6 +1138,8 @@ export const MyProfile = () => {
         const today = new Date().toISOString().split('T')[0];
         const AlphaOnlyreg = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
         const percentageReg = /^(\d{1,2}(\.\d{1,2})?|100(\.0{1,2})?)%?$/;
+
+
 
         // --- 1. Current Details VALIDATION ---
 
@@ -1205,18 +1231,20 @@ export const MyProfile = () => {
         if (isProfileValid && isSslcValid && isHscValid && isWorkValid) {
             console.log("FINAL SUBMISSION DATA:", allData);
 
-            setAlluser((prev) => {
-                const nextId = (prevUsers.length + 1).toString();
+        setAlluser((prevUsers) => {
+        const nextId = (prevUsers.length + 1).toString();
 
-                const newUser = {
-                    id: nextId,
-                    ...allData,
-                    appliedJobs: [],
-                    savedJobs: []
-                };
+        const newUser = {
+            id: nextId,
+            ...allData,
+            appliedJobs: allData.appliedJobs || [], 
+            savedJobs: allData.savedJobs || []
+        };
+        console.log(newUser)
 
-                return [...prevUsers, newUser];
-            })
+        console.log("New User Created with appliedJobs key:", newUser);
+        return [...prevUsers, newUser];
+    });
 
             alert("Your profile has been saved successfully!");
         }
@@ -1283,6 +1311,7 @@ export const MyProfile = () => {
         setAllData(prev => ({ ...prev, [section]: defaults[section] }));
 
     };
+    console.log(allData)
 
     const handleDropdownClick = (title) => setOpenDropdown(openDropdown === title ? null : title);
     const handleItemClick = (title, parent = null) => { setActiveItem(title); if (parent) setOpenDropdown(parent); };
@@ -1336,7 +1365,7 @@ export const MyProfile = () => {
                                         <div className="submenu">
                                             {item.subItems.map(subItem => (
                                                 <div key={subItem} className={`submenu-item ${activeItem === subItem ? 'active' : ''}`} onClick={(e) => { e.stopPropagation(); handleItemClick(subItem, item.title); }}>
-                                                    <span className="menu-dot-option">•</span> {subItem}
+                                                    <span className="dot">•</span> {subItem}
                                                 </div>
                                             ))}
                                         </div>

@@ -5,12 +5,12 @@ import "./AboutYourCompany.css";
 import fileIcon from "../assets/Employer/fileIcon.png"
 import { useNavigate } from "react-router-dom";
 import { useJobs } from "../JobContext";
-
-export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
-
+ 
+export const AboutYourCompany = ({ hideNavigation = false, setActiveTab  }) => {
+ 
     const navigate = useNavigate();
     const { setCompanyProfile } = useJobs();
-
+ 
     const [formData, setFormData] = useState({
         companyName: "",
         companyMoto: "",
@@ -24,12 +24,12 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
         about: "",
         companyLogo: null
     });
-
+ 
     const [errors, setErrors] = useState({});
-
+ 
     const validateForm = () => {
         const newErrors = {};
-
+ 
         if (!formData.companyName?.trim()) newErrors.companyName = "Company Name is required";
         if (!formData.companyMoto?.trim()) newErrors.companyMoto = "Company Moto is required";
         if (!formData.contactPerson?.trim()) newErrors.contactPerson = "Contact Person is required";
@@ -40,39 +40,39 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
         if (!formData.address1?.trim()) newErrors.address1 = "Company Address is required";
         if (!formData.about?.trim()) newErrors.about = "About Company is required";
         if (!formData.companyLogo) newErrors.companyLogo = "Company Logo is required";
-
+ 
         setErrors(newErrors);
-
+       
         console.log("Validation Errors detected: ", newErrors);
         return Object.keys(newErrors).length === 0;
     };
-
+ 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-
+       
         // Clear error when user starts interacting
         setErrors(prev => ({ ...prev, [name]: "" }));
-
+ 
         if (files) {
             const file = files[0];
-
+ 
             const allowedTypes = [
                 "image/png",
                 "image/jpeg",
                 "image/jpg",
                 "image/webp"
             ];
-
+ 
             if (!allowedTypes.includes(file.type)) {
                 alert("Only image files (PNG, JPG, JPEG, WEBP) are allowed!");
                 return;
             }
-
+ 
             setFormData({
                 ...formData,
                 [name]: file
             });
-
+ 
         } else {
             setFormData({
                 ...formData,
@@ -80,45 +80,58 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
             });
         }
     };
-
-    const handleSave = (e) => {
+ 
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        const isValid = validateForm();
-        if (!isValid) {
-            console.log("Form has errors. Stopping to save.");
-            return;
-        }
-
-        console.log("Saving Company Profile:", formData);
-        setCompanyProfile(formData);
-        setActiveTab("Dashboard");
-    };
-
-    const handleNext = (e) => {
-        e.preventDefault();
-
+ 
         const isValid = validateForm();
         if (!isValid) {
             console.log("Form has errors. Stopping navigation.");
             return;
         }
-
+ 
         console.log("Form Data Ready for Backend:", formData);
-
+        navigate('/Job-portal/Employer/about-your-company/company-verification');
+    };
+ 
+    const handleSave = (e) => {
+        e.preventDefault();
+ 
+        const isValid = validateForm();
+        if (!isValid) {
+            console.log("Form has errors. Stopping to save.");
+            return;
+        }
+ 
+        console.log("Saving Company Profile:", formData);
+        setCompanyProfile(formData);
+        setActiveTab("Dashboard");
+    };
+ 
+    const handleNext = (e) => {
+    e.preventDefault();
+ 
+        const isValid = validateForm();
+        if (!isValid) {
+            console.log("Form has errors. Stopping navigation.");
+            return;
+        }
+ 
+        console.log("Form Data Ready for Backend:", formData);
+ 
         setCompanyProfile(formData);
         navigate('/Job-portal/Employer/about-your-company/company-verification');
     };
-
+ 
     return (
         <>
             {!hideNavigation && <EHeader />}
-
+ 
             <div className="aboutcompany-container">
                 <h2 className="aboutcompany-title">About Your Company</h2>
-
-                <form className="aboutcompany-form">
-
+ 
+                <form className="aboutcompany-form" onSubmit={handleSubmit}>
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Name</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -133,7 +146,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.companyName && <span className="error-msg">{errors.companyName}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Moto</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -147,7 +160,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.companyMoto && <span className="error-msg">{errors.companyMoto}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Contact Person</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -162,7 +175,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.contactPerson && <span className="error-msg">{errors.contactPerson}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Contact Number</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -177,7 +190,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.contactNumber && <span className="error-msg">{errors.contactNumber}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Mail Id</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -192,7 +205,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.companyMail && <span className="error-msg">{errors.companyMail}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Web Site</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -207,12 +220,12 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.website && <span className="error-msg">{errors.website}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Logo</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <div className={`aboutcompany-file-upload-box ${errors.companyLogo ? "input-error" : ""}`} style={errors.companyLogo ? { borderColor: '#d93025' } : {}}>
-
+ 
                                 {/* Hidden Input */}
                                 <input
                                     type="file"
@@ -222,21 +235,21 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                                     onChange={handleChange}
                                     hidden
                                 />
-
+ 
                                 {/* If No File */}
                                 {!formData.companyLogo && (
                                     <label htmlFor="logoUpload" className="aboutcompany-upload-placeholder">
                                         Click to Upload Logo
                                     </label>
                                 )}
-
+ 
                                 {/* If File Selected */}
                                 {formData.companyLogo && (
                                     <div className="aboutcompany-file-preview">
-
+ 
                                         <label htmlFor="logoUpload" className="aboutcompany-file-left clickable-area">
                                             <img src={fileIcon} alt="file" />
-
+ 
                                             <div>
                                                 <p>{formData.companyLogo.name}</p>
                                                 <span>
@@ -244,16 +257,16 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                                                 </span>
                                             </div>
                                         </label>
-
+ 
                                     </div>
                                 )}
-
+ 
                             </div>
                             {errors.companyLogo && <span className="error-msg">{errors.companyLogo}</span>}
                         </div>
                     </div>
-
-
+ 
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Size</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -268,7 +281,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.companySize && <span className="error-msg">{errors.companySize}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Address</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -283,7 +296,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.address1 && <span className="error-msg">{errors.address1}</span>}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>Company Address 2</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -297,7 +310,7 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {/* Typically optional, no validation error shown here */}
                         </div>
                     </div>
-
+ 
                     <div className="aboutcompany-form-group">
                         <label>About Company</label>
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -311,24 +324,25 @@ export const AboutYourCompany = ({ hideNavigation = false, setActiveTab }) => {
                             {errors.about && <span className="error-msg">{errors.about}</span>}
                         </div>
                     </div>
-
+ 
                     {!hideNavigation && (
-                        <div className="aboutcompany-form-buttons">
-                            <button type="button" className="aboutcompany-back-btn"
-                                onClick={() => navigate(-1)}>Back</button>
-                            <button type="button" className="aboutcompany-next-btn" onClick={handleNext}>Next</button>
-                        </div>)}
-
+                    <div className="aboutcompany-form-buttons">
+                        <button type="button" className="aboutcompany-back-btn"
+                        onClick={() => navigate(-1)}>Back</button>
+                        <button type="button" className="aboutcompany-next-btn"onClick={handleNext}>Next</button>
+                    </div>)}
+ 
                     {hideNavigation && (
-                        <div className="aboutcompany-form-buttons">
-                            <button type="button" className="aboutcompany-next-btn"
-                                onClick={handleSave}> Save </button>
-                        </div>)}
-
+                    <div>
+                        <button type="button" className="aboutcompany-save-btn"
+                        onClick={handleSave}> Save </button>
+                    </div>)}
+ 
                 </form>
             </div>
-
+ 
             {!hideNavigation && <Footer />}
         </>
     );
 };
+ 

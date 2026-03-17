@@ -153,8 +153,7 @@
 
 .FindTalent-card-top {
   display: flex;
-  justify-content: space-between;
-  /* Parallel Name and Image */
+  justify-content: space-between; /* Parallel Name and Image */
   align-items: flex-start;
   margin-bottom: 20px;
 }

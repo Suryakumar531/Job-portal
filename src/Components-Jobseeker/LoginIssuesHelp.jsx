@@ -1,8 +1,9 @@
 import React from "react";
+import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./TechnicalIssues.css";
 import LoginSupportImg from "../assets/loginissue.png";
-import { FHeader } from "./FHeader";
+import { Header } from "../Components-LandingPage/Header";
 
 export const LoginIssuesHelp = () => {
   const loginIssueData = {
@@ -65,7 +66,7 @@ export const LoginIssuesHelp = () => {
 
   return (
       <>
-      <FHeader />
+      <Header />
       <div className="technicalhelp-page">
       <div className="technicalhelp-container">
         <h1 className="technicalhelp-title">{loginIssueData.title}</h1>

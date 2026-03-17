@@ -7,8 +7,7 @@ import InfyLogo from './assets/INFY_BIG.png'
 import Tcs from './assets/TCS.png'
 import metaLogo from './assets/META_BIG.png'
 
-
-export const JobList = [
+export const Joblist = [
   {
     id: "62",
     title: "Software Engineer",
@@ -53,9 +52,9 @@ export const JobList = [
       "Monitor and troubleshoot production issues and implement long-term solutions.",
       "Contribute to system architecture and technical design documentation."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "70",
@@ -99,9 +98,9 @@ export const JobList = [
       "Serve as the primary point of contact for client communication and stakeholder reporting.",
       "Ensure compliance with organizational standards and project management methodologies (Agile/Waterfall)."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "76",
@@ -145,9 +144,9 @@ export const JobList = [
       "Ensure data quality and integrity across reporting processes.",
       "Present findings to project teams in a clear and concise manner."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "81",
@@ -191,9 +190,9 @@ export const JobList = [
       "Document data sources, definitions, and analysis methodologies.",
       "Assist in the preparation of client presentations detailing project metrics."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "86",
@@ -237,9 +236,9 @@ export const JobList = [
       "Assist in the preparation of presentations for product managers and engineering leads.",
       "Document methodology and findings for repeatability and knowledge transfer."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "96",
@@ -283,9 +282,9 @@ export const JobList = [
       "Contribute to the documentation of technical designs and API specifications.",
       "Mentor and guide junior engineers and interns on technical tasks."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "95",
@@ -329,9 +328,9 @@ export const JobList = [
       "Document design specifications and interaction patterns.",
       "Contribute to the organization and maintenance of the design system library."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "71",
@@ -375,9 +374,9 @@ export const JobList = [
       "Assist in A/B testing analysis and report on test results.",
       "Document data sources, data dictionaries, and analytical methodologies."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "1",
@@ -425,9 +424,9 @@ export const JobList = [
       "Conduct layout adjustments based on user feedback.",
       "Adhere to style standards on fonts, colors, and images."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "2",
@@ -471,9 +470,9 @@ export const JobList = [
       "Assist in troubleshooting and resolving production issues quickly.",
       "Optimize application for maximum speed and scalability."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "3",
@@ -517,9 +516,9 @@ export const JobList = [
       "Assist in managing the company's content calendar.",
       "Perform competitive analysis to identify market trends."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "4",
@@ -563,9 +562,9 @@ export const JobList = [
       "Conduct variance analysis between actual results and budget/forecast.",
       "Support the M&A due diligence process as required."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "5",
@@ -609,9 +608,9 @@ export const JobList = [
       "Analyze product performance data to inform future iterations.",
       "Manage the product backlog and participate in Scrum ceremonies."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "6",
@@ -655,9 +654,9 @@ export const JobList = [
       "Ensure security best practices are followed across all cloud resources.",
       "Participate in on-call rotation for high-priority issues."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "7",
@@ -701,9 +700,9 @@ export const JobList = [
       "Ensure all content adheres to brand voice and style guidelines.",
       "Manage and adhere to a strict content production schedule."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "8",
@@ -747,9 +746,9 @@ export const JobList = [
       "Ensure compliance with all safety regulations and SOPs.",
       "Collaborate with cross-functional teams including chemistry and toxicology."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "9",
@@ -793,9 +792,9 @@ export const JobList = [
       "Assist in the deployment and configuration of client systems remotely.",
       "Maintain high customer satisfaction scores and adherence to SLAs."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "10",
@@ -839,9 +838,9 @@ export const JobList = [
       "Maintain excellent customer relations post-sale for referrals.",
       "Stay updated on product specifications, features, and competitor offerings."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "11",
@@ -885,9 +884,9 @@ export const JobList = [
       "Research and summarize academic papers on cutting-edge ML techniques.",
       "Contribute to documentation of model architecture and training process."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "12",
@@ -931,9 +930,9 @@ export const JobList = [
       "Ensure strict compliance with safety regulations and environmental guidelines.",
       "Prepare site reports, progress documentation, and material procurement lists."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "13",
@@ -977,9 +976,9 @@ export const JobList = [
       "Maintain and update candidate information in the Applicant Tracking System (ATS).",
       "Build talent pipelines for future hiring needs."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "14",
@@ -1023,9 +1022,9 @@ export const JobList = [
       "Ensure technical feasibility of UI/UX designs.",
       "Integrate front-end logic with server-side APIs (REST/GraphQL)."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "15",
@@ -1069,9 +1068,9 @@ export const JobList = [
       "Lead, mentor, and train a large team of supervisors and ground staff.",
       "Ensure compliance with transportation, safety, and labor regulations."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "16",
@@ -1115,9 +1114,9 @@ export const JobList = [
       "Collaborate with design engineers to optimize structures for weight and performance.",
       "Support testing activities and correlate test results with analytical models."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "17",
@@ -1161,9 +1160,9 @@ export const JobList = [
       "Educate patients and their families about health conditions and treatment plans.",
       "Maintain strict adherence to infection control and patient safety protocols."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "18",
@@ -1207,9 +1206,9 @@ export const JobList = [
       "Drive continuous improvement in financial reporting and planning processes.",
       "Manage and develop a team of junior financial analysts."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "19",
@@ -1253,9 +1252,9 @@ export const JobList = [
       "Adhere to strict safety standards and operational procedures (LOTO).",
       "Respond promptly to system failures and emergencies."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "20",
@@ -1299,9 +1298,9 @@ export const JobList = [
       "Simulate real-world attacks to test organizational defenses (Red Teaming).",
       "Collaborate with development teams to ensure security is built into the SDLC."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "21",
@@ -1346,9 +1345,9 @@ export const JobList = [
       "Content planning.",
       "Report marketing performance."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "22",
@@ -1393,9 +1392,9 @@ export const JobList = [
       "System troubleshooting.",
       "Security updates."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   }, {
     id: "23",
     title: "Customer Support Executive",
@@ -1439,9 +1438,9 @@ export const JobList = [
       "Document interactions.",
       "Maintain SLAs."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "24",
@@ -1486,9 +1485,9 @@ export const JobList = [
       "Client reporting.",
       "Risk management."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "25",
@@ -1533,9 +1532,9 @@ export const JobList = [
       "Coordinate with dev teams.",
       "Test automation scripts."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "26",
@@ -1580,9 +1579,9 @@ export const JobList = [
       "Handle vendor payments.",
       "Prepare monthly statements."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "27",
@@ -1627,9 +1626,9 @@ export const JobList = [
       "Support field sales.",
       "Maintain client relations."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "28",
@@ -1674,7 +1673,7 @@ export const JobList = [
       "Coordinate with designers.",
       "Support paid ads."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "29",
@@ -1719,7 +1718,7 @@ export const JobList = [
       "Troubleshoot outages.",
       "Document configurations."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "30",
@@ -1764,7 +1763,7 @@ export const JobList = [
       "Document findings.",
       "Support ongoing projects."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "31",
@@ -1809,7 +1808,7 @@ export const JobList = [
       "Conduct data profiling to identify anomalies and ensure data quality.",
       "Document data dictionaries, models, and BI solution architectures."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "32",
@@ -1854,7 +1853,7 @@ export const JobList = [
       "Use Python (Scikit-learn, TensorFlow/PyTorch) for model implementation.",
       "Collaborate with engineering teams for model deployment."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "33",
@@ -1899,7 +1898,7 @@ export const JobList = [
       "Create and maintain product performance dashboards using Looker/Tableau.",
       "Present findings and strategic recommendations to the product management team."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "34",
@@ -1944,7 +1943,7 @@ export const JobList = [
       "Build dashboards focused on budget pacing and channel performance.",
       "Utilize Excel and basic statistical methods for variance analysis."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "35",
@@ -1989,7 +1988,7 @@ export const JobList = [
       "Use SQL and specialized statistical software (SAS/R) for complex data manipulation.",
       "Create clear, auditable reports adhering to industry regulatory standards."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "36",
@@ -2034,7 +2033,7 @@ export const JobList = [
       "Manage landing page optimization and A/B testing efforts for improved conversion.",
       "Monitor market trends and competitor activities to maintain a competitive edge."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "37",
@@ -2079,7 +2078,7 @@ export const JobList = [
       "Develop and track metrics related to product launches and feature adoption.",
       "Maintain a deep understanding of competitor products and market trends."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "38",
@@ -2124,7 +2123,7 @@ export const JobList = [
       "Measure content performance using metrics like organic traffic, time on page, and conversions.",
       "Collaborate with the sales team to produce relevant bottom-of-funnel content."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "39",
@@ -2169,7 +2168,7 @@ export const JobList = [
       "Ensure all communication is compliant with GDPR/CAN-SPAM regulations.",
       "Work with the design team to ensure email templates are responsive and engaging."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "40",
@@ -2214,7 +2213,7 @@ export const JobList = [
       "Create localized marketing collateral and presentations.",
       "Report on the ROI of all field marketing spend and activities."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "41",
@@ -2259,7 +2258,7 @@ export const JobList = [
       "Troubleshoot complex production issues across distributed systems.",
       "Drive system design discussions and documentation (e.g., ADRs)."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "42",
@@ -2304,7 +2303,7 @@ export const JobList = [
       "Maintain and evolve the internal component library (Storybook).",
       "Participate in agile ceremonies and provide accurate estimates for feature development."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "43",
@@ -2349,7 +2348,7 @@ export const JobList = [
       "Evaluate and integrate new big data technologies into the existing ecosystem.",
       "Mentor and coach multiple senior and principal engineers."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "44",
@@ -2394,7 +2393,7 @@ export const JobList = [
       "Drive architectural decisions (MVVM/VIPER/Clean Architecture) for new modules.",
       "Manage app store submissions and continuous integration (CI) workflows."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "45",
@@ -2439,7 +2438,7 @@ export const JobList = [
       "Automate repetitive tasks and reduce manual toil across the engineering organization.",
       "Perform periodic chaos engineering tests and participate in incident response."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "46",
@@ -2484,7 +2483,7 @@ export const JobList = [
       "Develop and maintain the internal design system for consistency and scalability.",
       "Present design concepts and articulate design rationale to stakeholders."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "47",
@@ -2529,7 +2528,7 @@ export const JobList = [
       "Iterate designs based on feedback from user testing and data analytics.",
       "Prepare and hand off assets to engineering teams via tools like Zeplin or Figma."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "48",
@@ -2574,7 +2573,7 @@ export const JobList = [
       "Collaborate with the design team to brainstorm solutions based on research data.",
       "Manage participant recruitment and consent processes for research studies."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "49",
@@ -2619,7 +2618,7 @@ export const JobList = [
       "Collaborate with engineering to ensure technical feasibility of interactions.",
       "Conduct heuristic evaluations of existing mobile app screens."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "50",
@@ -2664,7 +2663,7 @@ export const JobList = [
       "Help prepare assets for development hand-off and ensure quality control.",
       "Maintain adherence to brand guidelines and accessibility standards."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "51",
@@ -2709,7 +2708,7 @@ export const JobList = [
       "Optimize frontend performance.",
       "Participate in daily standups."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "52",
@@ -2754,7 +2753,7 @@ export const JobList = [
       "Debug backend issues.",
       "Improve system performance."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "53",
@@ -2799,7 +2798,7 @@ export const JobList = [
       "Improve user flows.",
       "Support senior designers."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "54",
@@ -2844,7 +2843,7 @@ export const JobList = [
       "Implement microservices.",
       "Collaborate with QA teams."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "55",
@@ -2889,7 +2888,7 @@ export const JobList = [
       "Work with SQL databases.",
       "Present insights clearly."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "56",
@@ -2934,7 +2933,7 @@ export const JobList = [
       "Test app functionality.",
       "Deploy apps on stores."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "57",
@@ -2979,7 +2978,7 @@ export const JobList = [
       "Work with content teams.",
       "Make revisions as needed."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "58",
@@ -3024,7 +3023,7 @@ export const JobList = [
       "Maintain MIS reports.",
       "Coordinate with managers."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "59",
@@ -3069,7 +3068,7 @@ export const JobList = [
       "Maintain cloud security.",
       "Solve platform issues."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "60",
@@ -3114,7 +3113,7 @@ export const JobList = [
       "Prepare reports.",
       "Coordinate with stakeholders."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "61",
@@ -3162,7 +3161,7 @@ export const JobList = [
       "Conduct layout adjustments based on user feedback.",
       "Adhere to style standards on fonts, colors, and images."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "63",
@@ -3207,7 +3206,7 @@ export const JobList = [
       "Work closely with engineers during development to ensure pixel-perfect implementation and address any design compromises.",
       "Champion accessibility and inclusive design principles throughout the product lifecycle."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' }, // status: { text: 'Reviewing Application', type: 'reviewing' }, // status: { text: 'Hiring Done', type: 'done' }
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' }, // jobStatus: { text: 'Reviewing Application', type: 'reviewing' }, // jobStatus: { text: 'Hiring Done', type: 'done' }
   },
   {
     id: "64",
@@ -3242,19 +3241,19 @@ export const JobList = [
       "Expertise in Agile methodologies and process optimization"
     ],
     companyOverview: "Apple is a global technology leader dedicated to bringing the best user experience to customers through innovative **hardware, software, and services** (iPhone, Mac, Watch, App Store, iCloud). Apple India (**Apple IN**) is a rapidly expanding strategic pillar, focusing on **local manufacturing** (aligning with 'Make in India'), **R&D and engineering support** from its centers in Bengaluru and Hyderabad, and expanding **direct retail presence** to serve the fast-growing Indian consumer market.",
-    jobDescription: "We are looking for a highly skilled Technical Program Manager (TPM) to drive complex, cross-functional engineering programs from inception to launch. You will define the technical strategy, coordinate resources across multiple teams (Engineering, Product, Operations), manage dependencies, and communicate program status to senior leadership. Success requires deep technical understanding and exceptional leadership.",
+    jobDescription: "We are looking for a highly skilled Technical Program Manager (TPM) to drive complex, cross-functional engineering programs from inception to launch. You will define the technical strategy, coordinate resources across multiple teams (Engineering, Product, Operations), manage dependencies, and communicate program jobStatus to senior leadership. Success requires deep technical understanding and exceptional leadership.",
     Responsibilities: [
       "Define and manage the end-to-end technical roadmap for complex product features or infrastructure initiatives.",
       "Lead and coordinate engineering teams across different functions and geographies to ensure on-time delivery.",
       "Identify, track, and mitigate technical risks and dependencies across the program portfolio.",
       "Establish and drive adoption of engineering best practices, processes, and tools (Agile/Scrum/Kanban).",
-      "Communicate program status, risks, and trade-offs clearly to all levels of the organization, including executive stakeholders.",
+      "Communicate program jobStatus, risks, and trade-offs clearly to all levels of the organization, including executive stakeholders.",
       "Facilitate technical discussions and design reviews to ensure alignment and quality of solutions.",
       "Drive process improvements to increase engineering velocity and efficiency."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "65",
@@ -3299,9 +3298,9 @@ export const JobList = [
       "Ensure compliance with internal financial policies and assist with external audit requests.",
       "Drive process efficiencies in financial reporting and planning tools."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "66",
@@ -3345,9 +3344,9 @@ export const JobList = [
       "Work with management to prioritize business and information needs.",
       "Create and present dashboards and reports for internal stakeholders."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "67",
@@ -3391,9 +3390,9 @@ export const JobList = [
       "Implement security and data protection settings.",
       "Work closely with DevOps to deploy and monitor applications."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "68",
@@ -3437,9 +3436,9 @@ export const JobList = [
       "Conduct security audits and compliance reviews (e.g., ISO, SOC 2).",
       "Provide guidance to engineering teams on secure coding and infrastructure practices."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "69",
@@ -3483,9 +3482,9 @@ export const JobList = [
       "Participate in testing and quality assurance activities.",
       "Support product owner in prioritizing the backlog and managing scope changes."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "71",
@@ -3529,9 +3528,9 @@ export const JobList = [
       "Assist in A/B testing analysis and report on test results.",
       "Document data sources, data dictionaries, and analytical methodologies."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "72",
@@ -3575,9 +3574,9 @@ export const JobList = [
       "Conduct thorough code reviews and advocate for best development practices.",
       "Drive improvements in performance, scalability, and system reliability."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "73",
@@ -3621,9 +3620,9 @@ export const JobList = [
       "Collaborate closely with SDEs and Product Managers to ensure design fidelity during implementation.",
       "Contribute to and maintain the product's design system and component library."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "74",
@@ -3667,9 +3666,9 @@ export const JobList = [
       "Support the annual operating plan (AOP) creation.",
       "Ensure data integrity and accuracy in financial reporting systems."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "75",
@@ -3713,9 +3712,9 @@ export const JobList = [
       "Manage and organize marketing assets and content calendars.",
       "Collaborate with the Data Analyst team to extract meaningful insights from campaign data."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "77",
@@ -3759,9 +3758,9 @@ export const JobList = [
       "Prepare and produce releases of software components.",
       "Support continuous improvement by investigating alternatives and technologies."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "78",
@@ -3805,9 +3804,9 @@ export const JobList = [
       "Serve as a trusted advisor to clients throughout the engagement lifecycle.",
       "Support pre-sales activities, including proposal writing and presentations."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "79",
@@ -3851,9 +3850,9 @@ export const JobList = [
       "Document operational procedures and runbooks.",
       "Participate in incident response and root cause analysis under supervision."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "80",
@@ -3895,11 +3894,11 @@ export const JobList = [
       "Manage a team of QA engineers, assigning tasks and conducting performance reviews.",
       "Integrate automated tests into the CI/CD pipeline.",
       "Oversee all types of testing (functional, performance, security, regression).",
-      "Generate detailed reports on testing status, defects, and quality metrics for project management."
+      "Generate detailed reports on testing jobStatus, defects, and quality metrics for project management."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "82",
@@ -3943,9 +3942,9 @@ export const JobList = [
       "Troubleshoot, debug, and upgrade existing systems.",
       "Participate in daily stand-ups and sprint planning sessions."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "83",
@@ -3989,9 +3988,9 @@ export const JobList = [
       "Lead client workshops and present technical solutions to C-level executives.",
       "Stay current with emerging cloud technologies and integrate them into service offerings."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "84",
@@ -4035,9 +4034,9 @@ export const JobList = [
       "Maintain a high degree of customer service and professional etiquette.",
       "Follow defined processes (SOPs/SOWs) and adhere to all Service Level Agreements (SLAs)."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "85",
@@ -4081,9 +4080,9 @@ export const JobList = [
       "Maintain accurate and up-to-date candidate records in the Applicant Tracking System (ATS).",
       "Participate in employer branding activities and campus recruitment drives."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "87",
@@ -4127,9 +4126,9 @@ export const JobList = [
       "Drive system design reviews and advocate for engineering best practices.",
       "Optimize data storage and processing for efficiency and performance."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "88",
@@ -4173,9 +4172,9 @@ export const JobList = [
       "Contribute to the development and maintenance of Meta's internal design systems.",
       "Work directly with engineers to ensure design implementation quality."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "89",
@@ -4216,12 +4215,12 @@ export const JobList = [
       "Create and maintain the execution schedule, tracking progress against milestones.",
       "Identify, analyze, and mitigate cross-team dependencies and technical risks.",
       "Facilitate technical design discussions and ensure alignment on architecture.",
-      "Provide regular, clear, and concise status updates to executive leadership.",
+      "Provide regular, clear, and concise jobStatus updates to executive leadership.",
       "Drive continuous process improvements to enhance engineering productivity."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "90",
@@ -4265,10 +4264,10 @@ export const JobList = [
       "Conduct literature reviews and summarize research findings.",
       "Prepare a final report and presentation on project results and impact."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "91",
@@ -4312,9 +4311,9 @@ export const JobList = [
       "Assist in documentation of data sources and analytical processes.",
       "Present analysis findings to internal project teams."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "92",
@@ -4358,9 +4357,9 @@ export const JobList = [
       "Collaborate with QA teams to debug and resolve system defects.",
       "Deploy and manage applications in a cloud environment."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "93",
@@ -4404,9 +4403,9 @@ export const JobList = [
       "Automate deployment, scaling, and operational tasks using scripting languages.",
       "Ensure compliance with security standards and implement DevSecOps practices."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "94",
@@ -4450,9 +4449,9 @@ export const JobList = [
       "Support the development team during implementation and the QA team during testing.",
       "Manage changes to requirements and project scope throughout the development lifecycle."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "97",
@@ -4496,9 +4495,9 @@ export const JobList = [
       "Develop and deliver technical presentations and workshops to customer teams.",
       "Act as a trusted technical advisor, ensuring client satisfaction and consumption of GCP services."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "98",
@@ -4542,9 +4541,9 @@ export const JobList = [
       "Prepare research findings, reports, and compelling presentations.",
       "Manage participant recruitment and communication logistics."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   },
   {
     id: "99",
@@ -4588,8 +4587,9 @@ export const JobList = [
       "Communicate product strategy and updates to executive leadership and stakeholders.",
       "Conduct competitive analysis and market research to identify new opportunities."
     ],
-    status: { text: 'Hiring in Progress', type: 'progress' },
-    // status: { text: 'Reviewing Application', type: 'reviewing' },
-    // status: { text: 'Hiring Done', type: 'done' },
+    jobStatus: { text: 'Hiring in Progress', type: 'progress' },
+    // jobStatus: { text: 'Reviewing Application', type: 'reviewing' },
+    // jobStatus: { text: 'Hiring Done', type: 'done' },
   }
 ];
+

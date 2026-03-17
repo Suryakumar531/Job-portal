@@ -1,8 +1,9 @@
 import React from "react";
+import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./JobEmployerHelp.css";
 import SubscriptionImg from "../assets/subscriptionissues.png";
-import { FHeader } from "./FHeader";
+import { Header } from "../Components-LandingPage/Header";
 
 export const SubscriptionIssuesHelp = () => {
   const subscriptionData = {
@@ -38,7 +39,7 @@ export const SubscriptionIssuesHelp = () => {
 
   return (
       <>
-      <FHeader />
+      <Header />
       <div className="jobemployerhelp-page">
       <div className="jobemployerhelp-container">
         <h1 className="jobemployerhelp-title">{subscriptionData.title}</h1>

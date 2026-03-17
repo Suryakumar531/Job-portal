@@ -28,12 +28,13 @@ export const PostJobForm = () => {
     salary: '',
     experience: '',
     location: '',
-    openings: '',
+    openings: Number(''),
     jobCategory: [],
     keySkills: [''],
     jobHighlights: [''],
     jobDescription: '',
-    responsibilities: ['']
+    responsibilities: [''],
+    app:Number('')
   });
   console.log(formData)
 
@@ -107,10 +108,10 @@ export const PostJobForm = () => {
       const newSkill = formData.keySkills.trim();
       if (newSkill && !skillsList.includes(newSkill)) {
         setSkillsList([...skillsList, newSkill]);
-        setFormData({ ...formData, keySkills: '' });
+         setFormData({ ...formData, keySkills: '' });
         setErrors({ ...errors, keySkills: "" });
       }
-
+      
     }
   };
 
@@ -159,8 +160,10 @@ export const PostJobForm = () => {
   };
 
   return (
+    <>
+    {/* <EHeader />  */}
     <div className="jobpost-page-title">
-      {/* <EHeader /> */}
+      {/* */}
       <main className="jobpost-main-content">
         <header className="jobpost-form-header">
           <h1>Post a Job</h1>
@@ -435,7 +438,9 @@ export const PostJobForm = () => {
           <button type="button" className="jobpost-btn-preview" onClick={handleSubmit}>Preview</button>
         </div>
       </main>
-      <Footer />
+      
     </div>
+    {/* <Footer /> */}
+    </>
   );
 };

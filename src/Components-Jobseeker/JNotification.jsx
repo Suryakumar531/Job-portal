@@ -10,13 +10,19 @@ import { useNavigate } from "react-router-dom";
 export const JNotification = ({  }) => {
     
     
-    const {notificationsData,setNotificationsData,showNotification, setShowNotification,activeMenuId,setActiveMenuId}   = useJobs()
+    const {notificationsData,setNotificationsData,showNotification, setShowNotification,activeMenuId,setActiveMenuId,currentUserId}   = useJobs()
 
-    // const [notifications, setNotifications] = useState(notificationsData);
+    
     const navigate = useNavigate();
     const containerRef = useRef(null);
+    // const CurrentUser = 2;
 
-    const newNotificationsCount = notificationsData.filter(n => !n.isRead).length;
+    const myPersonalNotifs = notificationsData.filter(n => 
+        String(n.targetId) === String(currentUserId) || n.targetId === undefined || n.targetId === null
+    );
+
+    const newNotificationsCount = myPersonalNotifs.filter(n => !n.isRead).length;
+    console.log(newNotificationsCount)
 
     // Toggle 3-dot menu
     const toggleMenu = (id, event) => {
@@ -52,12 +58,14 @@ export const JNotification = ({  }) => {
 
     // CLEAR ALL
     const handleClearAll = () => {
-        setNotificationsData([]);
+        setNotificationsData(prev => 
+            prev.filter(n => String(n.targetId) !== String(currentUserId) && n.targetId !== null && n.targetId !== undefined)
+        );
         setActiveMenuId(null);
     };
 
     // CLOSE ON OUTSIDE CLICK
-    useEffect(() => {
+        useEffect(() => {
         const handleClickOutside = (event) => {
             if (
                 containerRef.current &&
@@ -74,7 +82,7 @@ export const JNotification = ({  }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [showNotification, setShowNotification]);
+        }, [showNotification, setShowNotification]);
 
 
     return (
@@ -115,7 +123,7 @@ export const JNotification = ({  }) => {
 
             {/* NOTIFICATION LIST */}
             <div className="notifications-list">
-                {notificationsData.map((notification) => (
+                {myPersonalNotifs.map((notification) => (
                     <div
                         
                         key={notification.id}
@@ -164,7 +172,7 @@ export const JNotification = ({  }) => {
                     </div>
                 ))}
 
-                {notificationsData.length === 0 && (
+                {myPersonalNotifs.length === 0 && (
                     <p style={{ padding: "20px", textAlign: "center", color: "#777" }}>
                         No notifications for you
                     </p>

@@ -2,6 +2,7 @@ import React from 'react';
 import './Blogpage.css';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../Components-LandingPage/Footer';
+import { Header } from '../Components-LandingPage/Header';
 
 // Assets import (kept same)
 import blogheadimg from "../assets/Blog_Images/bloghead.png";
@@ -16,7 +17,6 @@ import blggcimg from "../assets/Blog_Images/blog8.png";
 import blogimgg from "../assets/Blog_Images/blog9.png";
 import bloggimgg from "../assets/Blog_Images/blog10.png";
 import blooggimgg from "../assets/Blog_Images/blog11.png";
-import { FHeader } from '../Components-Jobseeker/FHeader';
 
 export const Blogpage = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ export const Blogpage = () => {
 
   return (
     <>
-      <FHeader />
+      <Header />
 
       <div style={{ marginTop: "150px" }} className='blogpage'>
         <img src={blogheadimg} alt="blogpage" width="1450px" style={{ padding: "25px" }} />
@@ -79,7 +79,7 @@ export const Blogpage = () => {
       <div className='cat-con'>
         <div className='categories2'>
           <h1>Categories</h1>
-          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Category')} className='view-all'>view all</button>
+          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Category')} className='view-all'>viewall</button>
         </div>
         <div className='container2'>
           {categories.map((cat, index) => (
@@ -92,7 +92,7 @@ export const Blogpage = () => {
       <div className='cat-con'>
         <div className='categories2'>
           <h1>Technology Blogs</h1>
-          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Technology')} className='view-all'>view all</button>
+          <button onClick={() => navigate('/Job-portal/jobseeker/Blogs/Technology')} className='view-all'>viewall</button>
         </div>
         <div className='container2'>
           {techBlogs.map((blog, index) => (

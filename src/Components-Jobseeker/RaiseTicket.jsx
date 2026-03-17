@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Reportsubmitted from '../assets/Report_Submitted.png'
 import './RaiseTicket.css';
 import { Footer } from '../Components-LandingPage/Footer';
-import { FHeader } from './FHeader';
+import { JHeader } from './JHeader';
+import { Header } from '../Components-LandingPage/Header';
+
 
 
 export const RaiseTicket = () => {
@@ -53,7 +55,7 @@ export const RaiseTicket = () => {
     if (step === 'success') {
         return (
             <div>
-                <FHeader />
+                <JHeader />
                 <div className="Raiseticket-status-container">
                     {step === 'loading' ? (
                         <div className="Raiseticket-loader"></div>
@@ -73,7 +75,7 @@ export const RaiseTicket = () => {
 
     return (
         <>
-            <FHeader />
+            <Header />
             <div className="Raiseticket-main-wrapper">
 
                 <div className="Raiseticket-page">

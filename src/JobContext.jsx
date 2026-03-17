@@ -1,26 +1,14 @@
 import React, { createContext, useState, useContext } from 'react';
-import { JobList } from './JobList';
+import { Joblist } from './JobList';
 
 const JobContext = createContext();
 
 export const JobProvider = ({ children }) => {
+    
+    const [jobs, setJobs] = useState(Joblist); // Total JobList common for jobseeker and employer   
+    const [activeMenuId, setActiveMenuId] = useState(null); // Using Id to Toggle Menu in Notification Window
+    const [companyProfile, setCompanyProfile] = useState([]); //From About your company
 
-    // Total JobList
-    const [jobs, setJobs] = useState(JobList);
-
-
-
-    // Using Id to Toggle Menu in Notification Window
-    const [activeMenuId, setActiveMenuId] = useState(null);
-
-
-
-    //From About your company
-    const [companyProfile, setCompanyProfile] = useState([]);
-
-
-
-    // Jobseeker profiles
     const [Alluser, setAlluser] = useState([
         {
             id: "1",
@@ -174,38 +162,27 @@ export const JobProvider = ({ children }) => {
         }
     ]
     )
-
-
-    // Jobseeker profile selector
-    const currentUserId = "10"
-
-
-
-    const [currentUser, setCurrentUser] = useState(
-        Alluser.find(user => user.id === currentUserId)
-    );
-
-
-
+    const currentUserId = "2";
+    const currentUser = Alluser.find(user => user.id === currentUserId);
+    const savedJobs = currentUser.savedJobs;  //created to show the data in Myjobs.jsx
+    const appliedJobs = currentUser.appliedJobs; //created to show the data in Myjobs.jsx
+    //static employer data
     const [currentEmployer, setCurrentEmployer] = useState({
-        id: "INT001",
-        name: "Infotech solutions",
+        id: "EMP001",
+        companyId: "INF008",
+        company: "Infotech",
         hrName: "Sudhakar",
-        email: "hr@Infotech.com",
+        email: "hr@pixellogic.com",
         role: "employer",
         companyLogo: "",
         jobPosted: [],
         messages: [],
     });
-
-
-
     // Chats/messages between Employer and Jobseeker 1:1;
     const [chats, setChats] = useState([
         // Employer
         { id: currentEmployer.id, name: currentEmployer.hrName, role: "employer", messages: currentEmployer.messages },
 
-        // Jobseeker
         ...Alluser.map(user => ({
             id: parseInt(user.id),
             name: user.profile.fullName,
@@ -214,9 +191,7 @@ export const JobProvider = ({ children }) => {
             isChatEnded: false
         }))
     ]);
-
-
-
+    // Logic to post a Job from postpreview.jsx
     const postJob = (newJobData) => {
         const newId = jobs.length > 0 ? Math.max(...jobs.map(j => Number(j.id))) + 1 : 1;
         const postingSource = "Company Jobs";
@@ -239,8 +214,8 @@ export const JobProvider = ({ children }) => {
         const newJob = {
             id: stringId,
             title: newJobData.jobTitle,
-            company: "Infotech",
-            companyId: "INF008",
+            company: currentEmployer.company,
+            companyId: currentEmployer.companyId,
             logo: "",
             posted: new Date().toISOString(),
             PostedBy: postingSource,
@@ -263,44 +238,52 @@ export const JobProvider = ({ children }) => {
             tags: cleanTags,
             companyOverview: "Infotech Overview",
             jobDescription: newJobData.jobDescription,
-            status: JOB_STATUS.hiring
+            jobStatus: JOB_STATUS.hiring
             // status: { text: 'Hiring in Progress', type: 'progress' }
         };
         setJobs((prev) => [newJob, ...prev]);
+        
+        setCurrentEmployer((prevEmployer) => ({
+            ...prevEmployer,
+            jobPosted: [newJob, ...prevEmployer.jobPosted]
+        }));
+        console.log(newJob)
         alert(`Job "${newJob.title}" posted successfully!`);
     };
-
-
-
-    // 2. Edit status for an Existing Job 
+    // 2. Edit status for an Existing Job, found in Postedjob.jsx
     const editJob = (jobId, status) => {
         setJobs((prev) =>
             prev.map((job) => (job.id === jobId ? { ...job, ...status } : job))
         );
 
-        // Update Current User & Sync to Alluser
-        setCurrentUser((prevUser) => {
-            const updatedUser = {
-                ...prevUser,
-                savedJobs: prevUser.savedJobs.map(j => j.id === jobId ? { ...j, ...statusUpdate } : j),
-                appliedJobs: prevUser.appliedJobs.map(j => j.id === jobId ? { ...j, ...statusUpdate } : j)
-            };
+        setAlluser((prevUsers) =>
+            prevUsers.map((user) => {
+                if (user.id === currentUserId) {
+                    return {
+                        ...user,
+                        savedJobs: user.savedJobs.map((job) =>
+                            job.id === jobId ? { ...job, ...status } : job
+                        ),
+                        appliedJobs: user.appliedJobs.map((job) =>
+                            job.id === jobId ? { ...job, ...status } : job
+                        ),
 
-            setAlluser((prevAll) =>
-                prevAll.map(u => u.id === currentUserId ? updatedUser : u)
-            );
-
-            return updatedUser;
-        });
+                    };
+                }
+                return user;
+            })
+            
+        );
+        setCurrentEmployer((prev) => ({
+        ...prev,
+        jobPosted: prev.jobPosted.map((job) =>
+            job.id === jobId ? { ...job, ...status } : job
+        ),
+    }));
+        {console.log( currentEmployer.jobPosted)}
     };
-
-
-
     // Toggle End Conversation Logic In Employer Chat Window
     const [isChatEnded, setIsChatEnded] = useState(false);
-
-
-
     // NotificationData previously passed from AfterLoginLanding page
     const [notificationsData, setNotificationsData] = useState([{
         id: Date.now(),
@@ -308,15 +291,9 @@ export const JobProvider = ({ children }) => {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         isRead: false,
     }]);
-
-
-
     // New Messages Notification Logic
     const [showNotification, setShowNotification] = useState(false);
-
-
-
-    // to add NewNotification in NotificationData 
+    // to add NewNotification in NotificationData
     const addNotification = (text, targetId = null) => {
         const newNotif = {
             id: Date.now(),
@@ -327,113 +304,142 @@ export const JobProvider = ({ children }) => {
         };
         setNotificationsData(prev => [newNotif, ...prev]);
     };
-
-
-
     const getFormattedDate = () => {
         return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
     };
+    const isJobSaved = (jobId) => {
+        const user = Alluser.find(u => u.id === currentUserId);
+        return user ? user.savedJobs.some((job) => job.id === jobId) : false;
+    };
+    const isJobApplied = (jobId) => {
+        const user = Alluser.find(u => u.id === currentUserId);
+        return user ? user.appliedJobs.some((job) => job.id === jobId) : false;
+    };
 
-
-
-    // Returns true if the job exists in the current user's saved list
-    const isJobSaved = (jobId) =>
-        currentUser?.savedJobs?.some((job) => job.id === jobId) || false;
-
-
-
-    // Returns true if the job exists in the current user's applied list
-    const isJobApplied = (jobId) =>
-        currentUser?.appliedJobs?.some((job) => job.id === jobId) || false;
-
-
-
-    // need to change for user's Applied jobs
+    //When jobseeker apply, adding some data in Schema both in joblist, appliedbos and also in employerposted jobs//
     const applyForJob = (originalJob) => {
+        // 1. Check if already applied
         if (isJobApplied(originalJob.id)) return;
+        console.log(originalJob)
+        setAlluser((prevUsers) =>
+            prevUsers.map((user) => {
+                if (user.id === currentUserId) {
+                    return {
+                        ...user,
+                        appliedJobs: [
+                            ...(user.appliedJobs || []),
+                            {
+                                ...originalJob,
+                                applicants: (originalJob.applicants || 0) + 1,
+                                appliedDate: `Applied on ${getFormattedDate()}`,
+                                status: "Application Submitted",
+                                jobStatus: originalJob.jobStatus,
+                                applicationStatus: [
+                                    { label: 'Application Submitted', sub: "Success message...", status: 'completed' },
+                                    { label: 'Resume Screening', sub: "Reviewing...", status: 'pending' },
+                                    { label: 'Recruiter Review', sub: "Manual review...", status: 'pending' },
+                                    { label: 'Shortlisted', sub: "Passed initial stages...", status: 'pending' },
+                                    { label: 'Interview Called', sub: "Reached out...", status: 'pending' },
+                                ]
+                            }
+                        ]
+                    };
+                }
+                return user;
+            })
+            
+        );
 
-        const newAppliedJob = {
-            ...originalJob,
-            appliedDate: `Applied on ${getFormattedDate()}`,
-            applicationStatus: [
-                { label: 'Application Submitted', sub: "Profile entered database.", status: 'completed' },
-                { label: 'Resume Screening', sub: "Reviewing qualifications...", status: 'pending' },
-                { label: 'Recruiter Review', sub: "Hiring manager review...", status: 'pending' },
-                { label: 'Shortlisted', sub: "Flagged as top contender...", status: 'pending' },
-                { label: 'Interview Called', sub: "Scheduling meeting...", status: 'pending' },
-            ]
-        };
-
-        setCurrentUser((prevUser) => {
-            const updatedUser = {
-                ...prevUser,
-                appliedJobs: [...prevUser.appliedJobs, newAppliedJob]
-            };
-
-            // Sync to Alluser using functional update
-            setAlluser((prevAll) =>
-                prevAll.map(u => u.id === currentUserId ? updatedUser : u)
-            );
-
-            return updatedUser;
-        });
-
-        alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
-
+        // 2. Update Global Jobs List
         setJobs((prevJobs) =>
             prevJobs.map((job) =>
-                job.id === originalJob.id ? { ...job, applicants: job.applicants + 1 } : job
+                job.id === originalJob.id
+                    ? { ...job, applicants: (job.applicants || 0) + 1 }
+                    : job
             )
+        );
+
+        // 3. Update Local Employer State (for the logged-in employer)
+        if (currentEmployer.companyId === originalJob.companyId) {
+            setCurrentEmployer(prev => ({
+                ...prev,
+                jobPosted: prev.jobPosted.map(job =>
+                    job.id === originalJob.id
+                        ? {
+                            ...job,
+                            applicants: (job.applicants || 0) + 1,
+                            applicantsList: [
+                                ...(job.applicantsList || []),
+                                {
+                                    userId: currentUserId,
+                                    status: "Application Submitted", 
+                                    appliedDate: getFormattedDate()
+                                }
+                            ]
+                        }
+                        : job
+                )
+            }));
+        }
+
+        alert(`Successfully applied to ${originalJob.title} at ${originalJob.company}!`);
+    };
+
+    const toggleSaveJob = (originalJob) => {
+        setAlluser((prevUsers) =>
+            prevUsers.map((user) => {
+                if (user.id === currentUserId) {
+                    const isSaved = user.savedJobs.some((job) => job.id === originalJob.id);
+
+                    if (isSaved) {
+                        return {
+                            ...user,
+                            savedJobs: user.savedJobs.filter((job) => job.id !== originalJob.id),
+                        };
+                    } else {
+                        const newSavedJob = {
+                            ...originalJob,
+                            savedDate: `Saved on ${getFormattedDate()}`,
+                        };
+                        return {
+                            ...user,
+                            savedJobs: [...user.savedJobs, newSavedJob],
+                        };
+                    }
+                }
+                return user;
+            })
         );
     };
 
-
-
-    const toggleSaveJob = (originalJob) => {
-        // We use the helper you wrote to determine the action
-        const currentlySaved = isJobSaved(originalJob.id);
-
-        setCurrentUser((prevUser) => {
-            const updatedUser = {
-                ...prevUser,
-                savedJobs: currentlySaved
-                    ? // If it was saved, remove it (Filter)
-                    prevUser.savedJobs.filter((j) => j.id !== originalJob.id)
-                    : // If it wasn't saved, add it (Spread)
-                    [...prevUser.savedJobs, {
-                        ...originalJob,
-                        savedDate: `Saved on ${getFormattedDate()}`
-                    }],
-            };
-
-            // Sync the result to the main Alluser array
-            setAlluser((prevAll) =>
-                prevAll.map((u) => (u.id === currentUserId ? updatedUser : u))
-            );
-
-            return updatedUser;
-        });
-    };
-
-
-
+    //*Note : need to check this function used in a component..?
     const addJob = (newJob) => {
         setJobs((prevJobs) => [...prevJobs, newJob]);
     };
 
-
-
+    //**Delete job from Joblist,Jobseeker Applied/saved list, and also in employerposted jobs */
     const deleteJob = (jobId) => {
         setJobs((prev) => prev.filter((j) => j.id !== jobId));
-        // iterate saved jobs and applied jobs of the users to delete the specific job
+
+        setAlluser((prevUsers) =>
+            prevUsers.map((user) => ({
+                ...user,
+                savedJobs: user.savedJobs.filter((job) => job.id !== jobId),
+                appliedJobs: user.appliedJobs.filter((job) => job.id !== jobId),
+            }))
+        );
+        if (currentEmployer) {
+        setCurrentEmployer((prev) => ({
+            ...prev,
+            jobPosted: (prev.jobPosted).filter((job) => job.id !== jobId)
+        }));
+        
+    }
+
         addNotification("Job posting has been successfully deleted.");
     };
 
-
-
     const [activeSidebarUsers, setActiveSidebarUsers] = useState([]);
-
-
 
     const addChatToSidebar = (userId) => {
         if (!activeSidebarUsers.includes(parseInt(userId))) {
@@ -441,21 +447,68 @@ export const JobProvider = ({ children }) => {
         }
     };
 
-
-
+    //**Update Dynamic application status, update status in both appliedjobs and employer postedjobs array */
     const updateApplicantStatus = (userId, jobId, newStatus) => {
-        setAlluser(prev => prev.map(user => {
-            if (user.id === userId) {
-                const updatedAppliedJobs = user.appliedJobs?.map(job =>
-                    job.id === jobId ? { ...job, status: newStatus } : job
-                );
-                return { ...user, appliedJobs: updatedAppliedJobs };
-            }
-            return user;
+        const workflow = [
+            "Application Submitted",
+            "Resume Screening",
+            "Recruiter Review",
+            "Shortlisted",
+            "Interview Called"
+        ];
+
+        const currentIndex = workflow.indexOf(newStatus);
+        const isRejected = newStatus === "Rejected";
+
+        setAlluser(prevUsers =>
+            prevUsers.map(user => {
+                // SEEKER UPDATE
+                if (user.id === userId) {
+                    return {
+                        ...user,
+                        appliedJobs: user.appliedJobs.map(aj =>
+                            aj.id === jobId
+                                ? {
+                                    ...aj,
+                                    status: newStatus,
+                                    applicationStatus: aj.applicationStatus.map((step, idx) => ({
+                                        ...step,
+                                        status: isRejected
+                                            ? (idx <= currentIndex ? 'completed' : 'hidden')
+                                            : (idx <= currentIndex ? 'completed' : 'pending')
+                                    }))
+                                }
+                                : aj
+                        )
+                    };
+                }
+                if (currentEmployer) {
+        setCurrentEmployer(prev => ({
+            ...prev,
+            jobPosted: prev.jobPosted.map(job =>
+                job.id === jobId
+                    ? { ...job,applicants: job.applicants  } 
+                    : job
+            )
         }));
+    }
+                // if (user.role === "employer" && user.id === currentEmployer?.id) {
+                //     return {
+                //         ...user,
+                //         jobPosted: user.jobPosted.map(job =>
+                //             job.id === jobId
+                //                 ? { ...job, applicants: job.applicants } 
+                //                 : job
+                //         )
+                //     };
+                // }
+                return user;
+            })
+        );
+        
     };
 
-
+    //**Not yet used In anycomponent need to check/ Remove */
     const withdrawJobFromUser = (userId, jobId) => {
         setAlluser(prevUsers =>
             prevUsers.map(user => {
@@ -470,9 +523,64 @@ export const JobProvider = ({ children }) => {
         );
     };
 
+    const withdrawApplication = (originalJob) => {
+    // 1. Remove from User's applied list
+    if (window.confirm("Are you sure you want to withdraw?")){
+    setAlluser((prevUsers) =>
+      prevUsers.map((user) => {
+        if (user.id === currentUserId) {
+          return {
+            ...user,
+            appliedJobs: (user.appliedJobs || []).filter(
+              (job) => job.id !== originalJob.id
+            ),
+          };
+        }
 
+        // 2. Decrement applicant count for the employer
+        if (currentEmployer.id === originalJob.companyId) {
+          return {
+            ...user,
+            jobPosted: user.jobPosted.map((job) =>
+              job.id === originalJob.id
+                ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
+                : job
+            ),
+          };
+        }
+        return user;
+      })
+    );
 
+    // 3. Update Global Jobs List
+    setJobs((prevJobs) =>
+      prevJobs.map((job) =>
+        job.id === originalJob.id
+          ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
+          : job
+      )
+    );
+
+    // 4. Update Local Employer State
+    if (currentEmployer.id === originalJob.companyId) {
+      setCurrentEmployer((prev) => ({
+        ...prev,
+        jobPosted: prev.jobPosted.map((job) =>
+          job.id === originalJob.id
+            ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
+            : job
+        ),
+      }));
+    }
+    alert(`Successfully withdrawn your application for ${originalJob.title}.`);
+    navigate('/Job-portal/jobseeker/withdrawn');
+  }};
+
+    //Dynamic Action count used in EDashboard & postedjobs Component//
     const getJobStats = (jobId) => {
+        const jobExists = jobs.some(j => j.id === jobId);
+    if (!jobExists) return { total: 0, new: 0, screening: 0, interview: 0, rejected: 0 };
+    
         const jobApplicants = Alluser.filter(user =>
             user.appliedJobs?.some(aj => aj.id === jobId)
         );
@@ -494,14 +602,30 @@ export const JobProvider = ({ children }) => {
         };
     };
 
+    const removeRejectedJob = (originalJob) => {
+          if (window.confirm("Remove this rejected application from history?")) {
+            // Update User's appliedJobs
+            setAlluser(prev => prev.map(user => {
+              if (user.id === currentUserId) {
+                return {
+                  ...user,
+                  appliedJobs: user.appliedJobs?.filter(j => j.id !== originalJob.id)
+                };
+              }
+              return user;
+            }));
+    
+            navigate('/Job-portal/jobseeker/myjobs');
+          }
+        };
+
     return (
         <JobContext.Provider value={{
-            jobs, setJobs, activeMenuId, setActiveMenuId, companyProfile, setCompanyProfile,
-            Alluser, setAlluser, currentUserId, currentUser, setCurrentUser, currentEmployer, setCurrentEmployer, chats, setChats, postJob, editJob, isChatEnded, setIsChatEnded,
-            notificationsData, setNotificationsData, showNotification, setShowNotification,
-            addNotification, getFormattedDate, isJobSaved, isJobApplied, applyForJob,
-            toggleSaveJob, addJob, deleteJob, activeSidebarUsers, setActiveSidebarUsers,
-            addChatToSidebar, updateApplicantStatus, withdrawJobFromUser, getJobStats
+            jobs, chats, setChats, setJobs, isJobSaved, isChatEnded, setIsChatEnded,
+            setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
+            activeMenuId, setActiveMenuId, addJob, deleteJob, postJob, editJob, Alluser, setAlluser, activeSidebarUsers,
+            addChatToSidebar, currentUser, withdrawJobFromUser, updateApplicantStatus, isJobApplied, companyProfile, setCompanyProfile, currentEmployer,
+            getJobStats, savedJobs, appliedJobs, currentUserId, setCurrentEmployer,withdrawApplication,removeRejectedJob
         }}>
             {children}
         </JobContext.Provider>
@@ -509,3 +633,4 @@ export const JobProvider = ({ children }) => {
 };
 
 export const useJobs = () => useContext(JobContext);
+

@@ -1,8 +1,9 @@
 import React from "react";
-import "./JobApplyIssuesHelp.css"; 
+import "./JobApplyIssuesHelp.css"; // Consolidated CSS file
+import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import InterviewImg from "../assets/interviewschedule.png";
-import { FHeader } from './FHeader';
+import { Header } from "../Components-LandingPage/Header";
 
 export const InterviewSchedulingHelp = () => {
   const interviewData = {
@@ -65,7 +66,7 @@ export const InterviewSchedulingHelp = () => {
   return (
     <>
     
-      <FHeader />
+      <Header />
       <div className="Jobseekerhelp-page">
       <div className="Jobseekerhelp-container">
         <h1 className="Jobseekerhelp-title">{interviewData.title}</h1>

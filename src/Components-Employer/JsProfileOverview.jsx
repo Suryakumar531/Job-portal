@@ -10,12 +10,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useJobs } from '../JobContext';
 
 export const JsProfileOverview = () => {
-  const { Alluser, addChatToSidebar } = useJobs();
+  const { Alluser, addChatToSidebar } = useJobs(); 
   const { id } = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentUser = Alluser.find((user) => String(user.id) === String(id));
+  const currentUser = Alluser?.find((user) => String(user.id) === String(id));
   console.log(currentUser)
 
   const toggleDropdown = () => {
@@ -24,9 +24,9 @@ export const JsProfileOverview = () => {
 
   const handleConnect = () => {
     if (currentUser) {
-
+      
       addChatToSidebar(id);
-
+      
       navigate(`/Job-portal/employer-chat/${id}`);
     }
   };
@@ -68,10 +68,10 @@ export const JsProfileOverview = () => {
                 <h3>Qualifications</h3>
                 <p className="sub-text">View skills and work experience.</p>
               </div>
-              <img
-                src={Arrow}
-                alt="Arrow"
-                className={`arrow-icon ${isOpen ? '' : 'rotate'}`}
+              <img 
+                src={Arrow} 
+                alt="Arrow" 
+                className={`arrow-icon ${isOpen ? '' : 'rotate'}`} 
               />
             </div>
 
@@ -112,7 +112,7 @@ export const JsProfileOverview = () => {
             </div>
           </div>
           {console.log(currentUser.preferences[0].ready)}
-
+          
           <div className="footer-text">
             <button className='FindTalent-btn-view' onClick={handleConnect}>
               Chat with {currentUser.profile?.fullName}

@@ -23,7 +23,7 @@ export const Footer = () => {
           <h3>Quick Links</h3>
           <ul>
             <li onClick={()=>navigate('/Job-portal/jobseeker/aboutus')}>About Us</li>
-            <li onClick={()=>navigate('/Job-portal/jobseeker/ContactUs')}>Contact Us</li>
+            <li onClick={()=>navigate('/Job-portal/jobseeker/Contact_Us')}>Contact Us</li>
             <li onClick={()=>{navigate('/Job-portal/jobseeker/FAQ')}} >FAQs</li>
             <li onClick={()=>{navigate('/Job-portal/jobseeker/Blogs')}}>Blog</li>
           </ul>
@@ -43,7 +43,7 @@ export const Footer = () => {
           <h3>Employers</h3>
           <ul>
             <li>Post a Job</li>
-            <li>Find Talent</li>
+            <li onClick={()=>{navigate('/Job-portal/Employer/FindTalent')}}>Find Talent</li>
             <li>Employer Dashboard</li>
           </ul>
         </div>

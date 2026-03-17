@@ -140,7 +140,7 @@ export const Header = () => {
  
             <Link to="/Job-portal/jobseeker/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
             <Link to="/Job-portal/jobseeker/signup" onClick={() => setMobileMenuOpen(false)}>Sign up</Link>
-            <Link to="/Job-portal/employer/login" className="emp-log-link" onClick={() => setMobileMenuOpen(false)}>For Employers</Link>
+            <Link to="/Job-portal/employer/login" onClick={() => setMobileMenuOpen(false)}>For Employers</Link>
           </div>
         </div>
       )}

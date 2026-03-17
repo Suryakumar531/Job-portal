@@ -26,8 +26,9 @@ import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
 import { Revoked } from './Components-Jobseeker/Revoked'
 import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
-import { BlogCategory } from './Components-LandingPage/BlogCategory'
+import BlogCategory from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
+import { ContactUs } from './Components-LandingPage/ContactUs'
 import { FAQ } from './Components-LandingPage/FAQ'
 import { HelpCenter } from './Components-Jobseeker/HelpCenter'
 import { RaiseTicket } from './Components-Jobseeker/RaiseTicket'
@@ -45,15 +46,16 @@ import { PageErrorsHelp } from './Components-Jobseeker/PageErrorsHelp'
 import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
 import { JMessenger } from './Components-Jobseeker/JMessenger'
-import { FindTalent } from './Components-Employer/FindTalent'
+import { EMessenger } from './Components-Employer/EMessenger'
+import {FindTalent} from './Components-Employer/FindTalent'
 import { AboutYourCompany } from './Components-Employer/AboutYourCompany'
 import { CompanyVerify } from './Components-Employer/CompanyVerify'
 import { PostJobForm } from './Components-Employer/PostJobForm'
 import { PostJobPreview } from './Components-Employer/PostJobPreview'
 import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
-import { ContactUs } from './Components-LandingPage/ContactUs'
-import { EMessenger } from './Components-Employer/EMessenger'
+// import FindTalent2 from './Components-Employer/Findtalent2'
+// import { ProfileCard } from './Components-Employer/ProfileCard'
 import { JsProfileOverview } from './Components-Employer/JsProfileOverview'
 
 const router = createBrowserRouter([{
@@ -149,8 +151,8 @@ const router = createBrowserRouter([{
   element: <Settings />
 },
 {
-  path: '/Job-portal/jobseeker/ContactUs',
-  element: <ContactUs />
+  path: '/Job-portal/jobseeker/Contact_Us',
+  element: <ContactUs/>
 },
 {
   path: '/Job-portal/jobseeker/FAQ',
@@ -261,8 +263,12 @@ const router = createBrowserRouter([{
   element: <JMessenger/>
 },
 {
-  path: '/Job-portal/Employer/Chat',
-  element: <EMessenger />
+  path: '/Job-portal/employer-chat/:id',
+  element: <EMessenger/>
+},
+{
+  path: '/Job-portal/employer/chat',
+  element: <EMessenger/>
 },
 {
   path: '/Job-portal/Employer/FindTalent',
@@ -270,12 +276,13 @@ const router = createBrowserRouter([{
 },
 {
   path: '/Job-portal/Employer/FindTalent/ProfileOverview/:id',
-  element: <JsProfileOverview />
+  element: <JsProfileOverview/>
 },
 {
-  path: '/Job-portal/employer-chat/:id',
-  element: <EMessenger />
-},
+  path:'/Job-portal/Employer/about-your-company/company-verification',
+  element: <CompanyVerify/>
+}
+
 ])
 
 function App() {

@@ -1,8 +1,9 @@
 import React from "react";
+import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./JobEmployerHelp.css";
 import InvoiceImg from "../assets/Invoicepayment.png";
-import { FHeader } from './FHeader';
+import { Header } from "../Components-LandingPage/Header";
 
 export const InvoicePaymentHelp = () => {
   const paymentData = {
@@ -38,7 +39,7 @@ export const InvoicePaymentHelp = () => {
 
   return (
     <>
-    <FHeader />
+    <Header />
     <div className="jobemployerhelp-page">
       
       <div className="jobemployerhelp-container">

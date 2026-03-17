@@ -37,6 +37,8 @@ export const JobApplication = () => {
     resumeName: "John resume.pdf",
   });
 
+  console.log()
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -114,10 +116,10 @@ export const JobApplication = () => {
   const newApplication = {
     ...job, 
     appliedDate: new Date().toLocaleDateString('en-GB'),
-    status: {
-      type: "applied", 
-      text: "Applied"
-    },
+    // status: {
+    //   type: "applied", 
+    //   text: "Applied"
+    // },
     applicantDetails: formData 
   };
   if (applyForJob) {

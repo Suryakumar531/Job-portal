@@ -9,7 +9,7 @@ export const ViewApplicants = ({ job }) => {
   const [viewMode, setViewMode] = useState("list");
   const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
-
+  console.log(job)
   const statusOptions = [
     "Application Submitted",
     "Resume Screening",
@@ -55,6 +55,7 @@ export const ViewApplicants = ({ job }) => {
 
   const handleViewDetails = (user) => {
     const jobSpecificInfo = user.appliedJobs?.find(aj => aj.id === job?.id);
+    console.log(jobSpecificInfo)
     setSelectedUser({ 
       ...user, 
       status: jobSpecificInfo?.status || "Application Submitted" 
@@ -88,7 +89,6 @@ export const ViewApplicants = ({ job }) => {
               <h2>Applicants for {job?.jobTitle}</h2>
               <p className="subtitle">{stats.total} Total Jobseekers applied</p>
             </div>
-            {/* Optional: Add status badges here if needed */}
           </div>
 
           <table className="applicants-table">
@@ -103,20 +103,20 @@ export const ViewApplicants = ({ job }) => {
             <tbody>
               {applicantsForThisJob.length > 0 ? (
                 applicantsForThisJob.map((user) => {
-                  const currentJobStatus = user.appliedJobs?.find(aj => aj.id === job?.id)?.status;
+                  const currentStatus = user.appliedJobs?.find(aj => aj.id === job?.id)?.status;
                   return (
                     <tr key={user.id}>
                       <td className="candidate-cell">
                         <img src={UserIcon} alt="avatar" className="table-avatar" />
                         <div className="name-stack">
                           <span className="name">{user.profile?.fullName || "N/A"}</span>
-                          <span className="designation">{user.currentDetails?.jobTitle}</span>
+                          <span className="designation">{user.currentStatus?.title}</span>
                         </div>
                       </td>
                       <td>{user.currentDetails?.experience}</td>
                       <td>
-                        <span className={`status-pill ${getStatusClass(currentJobStatus)}`}>
-                          {currentJobStatus || "Application Submitted"}
+                        <span className={`status-pill ${getStatusClass(currentStatus)}`}>
+                          {currentStatus || "Application Submitted"}
                         </span>
                       </td>
                       <td>

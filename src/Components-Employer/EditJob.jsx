@@ -10,16 +10,17 @@ import { useJobs } from '../JobContext';
 import starIcon from '../assets/Star_icon.png'
 
 export const EditJob = () => {
-
+  
   const navigate = useNavigate();
   const location = useLocation();
-  const { editJob } = useJobs();
+  const { editJob,jobs } = useJobs();
 
-  const existingJobData = location.state || null;
+  //const existingJobData = location.state || null;
+  const existingJobData = jobs.find(job => job.id === location.state?.id);
 
   const [selectedStatusType, setSelectedStatusType] = useState(existingJobData?.status?.type || 'reviewing');
-
-  const [currentStatus, setCurrentStatus] = useState(existingJobData?.status);
+  
+  const [currentStatus, setCurrentStatus] = useState(existingJobData?.jobStatus);
 
   const statusOptions = [
     { text: 'Hiring in Progress', type: 'progress' },
@@ -35,12 +36,11 @@ export const EditJob = () => {
   const handleSubmit = () => {
     const newStatus = statusOptions.find(opt => opt.type === selectedStatusType);
     setCurrentStatus(newStatus);
-    editJob(existingJobData.id, { status: newStatus });
-
+    editJob(existingJobData.id, { jobStatus: newStatus });
     alert("Status updated successfully!");
-    setTimeout(() => {
-      navigate('/Job-portal/Employer/Dashboard')
-    }, 5000)
+    setTimeout(()=>{
+    navigate('/Job-portal/Employer/Dashboard')
+    },5000)
   };
 
   if (!existingJobData) return <div>No Job Data Found</div>;
@@ -60,11 +60,11 @@ export const EditJob = () => {
             <div>
               <h3 className="Opportunities-job-title">{existingJobData.title}</h3>
               <p className="Opportunities-job-company">
-                {existingJobData.company} <span className="Opportunities-divider">|</span>
-                <span className="star"><img src={starIcon} alt="star" /></span> {existingJobData.ratings}
-                <span className="Opportunities-divider">|</span>
-                <span className="opp-reviews"> {existingJobData.reviewNo} Reviews</span>
-              </p>
+              {existingJobData.company} <span className="Opportunities-divider">|</span>
+              <span className="star"><img src={starIcon} alt="star" /></span> {existingJobData.ratings}
+              <span className="Opportunities-divider">|</span>
+              <span className="opp-reviews"> {existingJobData.reviewNo} Reviews</span>
+            </p>
             </div>
             {logoContent}
           </div>

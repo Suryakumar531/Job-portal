@@ -7,8 +7,12 @@ import { Header } from '../Components-LandingPage/Header';
 import { useJobs } from '../JobContext';
 
 export const MyJobs = () => {
-    const { savedJobs, appliedJobs } = useJobs();
+    const { Alluser , currentUserId } = useJobs()
 
+    const currentUser = Alluser.find(user => user.id === currentUserId);
+    const savedJobs = currentUser?.savedJobs ;
+    const appliedJobs = currentUser?.appliedJobs ;
+    
     const [activeTab, setActiveTab] = useState("saved");
 
     return (

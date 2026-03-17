@@ -1,8 +1,9 @@
 import React from "react";
+import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./ProfileCreationHelp.css";
 import ProfileHelp from '../assets/profile-help.png'
-import { FHeader } from "./FHeader";
+import { Header } from "../Components-LandingPage/Header";
 
 export const ProfileCreationHelp = () => {
 
@@ -85,7 +86,7 @@ export const ProfileCreationHelp = () => {
 
   return (
       <>
-      <FHeader />
+      <Header />
       <div className="profilehelp-page">
       <div className="profilehelp-container">
         <h1 className="profilehelp-title">

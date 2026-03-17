@@ -4,7 +4,9 @@ import faqImage from '../assets/FAQ.png';
 import BackIcon from '../assets/BackICON.png';
 import { Footer } from '../Components-LandingPage/Footer';
 import { useLocation } from 'react-router-dom';
-import { FHeader } from '../Components-Jobseeker/FHeader'
+import { Header } from './Header';
+
+
 
 export const FAQ = () => {
     const FAQ_DATA = [
@@ -31,7 +33,7 @@ export const FAQ = () => {
 
     return (
         <div>
-            <FHeader />
+            <Header />
             <div className="FAQpage-main-wrapper">
                 <div className="faq-page-content">
                     <section
