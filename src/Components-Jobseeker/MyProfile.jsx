@@ -1092,7 +1092,7 @@ const Preferences = ({ data, onChange, onReset, onSubmitFinal }) => {
 export const MyProfile = () => {
     const [openDropdown, setOpenDropdown] = useState('Basic Details');
     const [activeItem, setActiveItem] = useState('Profile');
-    const [setAlluser]=useJobs()
+    const {setAlluser} = useJobs();
     // ORDER of Steps for Navigation
     const steps = [
         'Profile',
