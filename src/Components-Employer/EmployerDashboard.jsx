@@ -33,10 +33,12 @@ import Findtalent from '../assets/Employer/FindTalent.png'
 import FindTalentAct from '../assets/Employer/FindTalent_Active.png'
 import { AboutYourCompany } from './AboutYourCompany'
 import place from '../assets/opportunity_location.png'
-
+import { LogoutModal } from '../Components-Jobseeker/LogoutModal'
 
 export const EmployerDashboard = () => {
     const { currentEmployer, getJobStats } = useJobs();
+
+     const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     const PostedJob = currentEmployer.jobPosted;
     
@@ -57,6 +59,11 @@ const jobStats = useMemo(() => {
     
     const [activeMenu, setActiveMenu] = useState(null);
     const initialLetter = currentEmployer?.hrName.charAt(0).toUpperCase();
+
+    const handleLogoutConfirm = () => {
+        setShowLogoutModal(false);
+        navigate('/Job-portal');
+    };
 
     const [activetab, setActiveTab] = useState('Dashboard');
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -141,7 +148,7 @@ const jobStats = useMemo(() => {
                                 </div>
                                 <div onClick={() => !isVerifying && setActiveTab('Logout')} className={activetab === 'Logout' ? "Active" : 'Navbox'} >
                                     {activetab === 'Logout' ? <img src={LogoutAct} height={15} width={15} alt="Logout" /> : <img src={Logout} height={15} width={15} alt="Logout" />}
-                                    <div onClick={()=>navigate('/Job-portal')} className='Enav-item'>Logout</div>
+                                    <div className='Enav-item'>Logout</div>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +185,7 @@ const jobStats = useMemo(() => {
                                     <div onClick={() => !isVerifying && setActiveTab('My Profile')} className={activetab === 'My Profile' ? "Active1" : 'Navbox1'} >
                                         {activetab === 'My Profile' ? <img src={ProfileAct} height={15} width={15} alt="My Profile" /> : <img src={Profile} height={15} width={15} alt="My Profile" />}
                                     </div>
-                                    <div onClick={() => !isVerifying && setActiveTab('Logout')} className={activetab === 'Logout' ? "Active1" : 'Navbox1'} >
+                                    <div onClick={() => !isVerifying && setShowLogoutModal(true)} className={activetab === 'Logout' ? "Active1" : 'Navbox1'} style={{ cursor: 'pointer' }}>
                                         {activetab === 'Logout' ? <img src={LogoutAct} height={15} width={15} alt="Logout" /> : <img src={Logout} height={15} width={15} alt="Logout" />}
                                     </div>
                                 </div>
@@ -317,6 +324,7 @@ const jobStats = useMemo(() => {
                 </div>
 
             </div>
+            <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} onConfirm={handleLogoutConfirm} />
             <Footer />
         </>
     );

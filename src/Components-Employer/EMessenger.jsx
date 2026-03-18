@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chatbox.css";
 import { useJobs } from "../JobContext";
-
+import home from "../assets/home_icon.png"
+import { Link } from 'react-router-dom';
 
 //***EMessenger//
 
@@ -63,6 +64,7 @@ const { chats, setChats, Alluser, currentEmployer, addNotification, activeSideba
           <div className="E-chat-name">
             <div className="web-sidebar">
               <div className="sidebar-header">
+                <Link to="/Job-portal/Employer/Dashboard"><img src={home} style={{ height: "20px" }}/></Link>
                 <h3 style={{ color: "#007bff", textAlign: "center" }}>Active Chats</h3>
               </div>
               {sidebarDisplayUsers.length > 0 ? (
