@@ -1,5 +1,4 @@
 import React from "react";
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./ProfileCreationHelp.css";
 import ProfileHelp from '../assets/profile-help.png'

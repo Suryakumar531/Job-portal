@@ -1,5 +1,4 @@
 import React from "react";
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./TechnicalIssues.css";
 import PageErrorImg from "../assets/pageerror.png";

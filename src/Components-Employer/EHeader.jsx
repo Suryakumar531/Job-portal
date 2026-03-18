@@ -3,34 +3,58 @@ import './EHeader.css'
 import search from '../assets/icon_search.png'
 import chat from '../assets/header_message.png'
 import bell from '../assets/header_bell.png'
-import profile from '../assets/header_profile.png'
-import { Link, NavLink } from 'react-router-dom'
-
+import { Link, useLocation } from 'react-router-dom'
+import { ENotification } from './ENotification'
+import { useJobs } from '../JobContext'
 
 export const EHeader = () => {
-    const NavIcons = [
 
-        { image: chat, path: "/Job-portal/Employer/Chat" },
-        { image: bell, path: "" },
+    const { employershowNotification, setEmployerShowNotification } = useJobs();
+    const location = useLocation();
 
+    const toggleNotification = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setEmployerShowNotification(!employershowNotification);
+    };
 
-    ]
     return (
         <header className="header">
             <div className="logo">job portal</div>
+
             <div className='E-Header-search'>
                 <img className="E-searchicon" src={search} alt="search icon" />
                 <input className="input" type="text" placeholder='Search for jobs and applicants' />
             </div>
 
             <div className="auth-links">
-                {NavIcons.map((IC, index) => {
-                    const isActive = Location.pathname === IC.path
-                    return (
-                        <Link key={index} to={IC.path}><img className={isActive ? 'jheader-icons-active' : 'jheader-icons'} src={IC.image} width={40} alt='My Jobs' /></Link>)
-                })}
-            </div>
+                {/* Chat Icon */}
+                <Link to="/Job-portal/Employer/Chat">
+                    <img
+                        className={location.pathname === "/Job-portal/Employer/Chat" ? 'jheader-icons-active' : 'jheader-icons'}
+                        src={chat}
+                        width={40}
+                        alt='Chat'
+                    />
+                </Link>
 
+                {/* Notification Bell Icon */}
+                <div className="notification-wrapper" style={{ position: 'relative' }}>
+                    <Link to="#" onClick={toggleNotification}>
+                        <img
+                            className={employershowNotification ? 'jheader-icons-active' : 'jheader-icons'}
+                            src={bell}
+                            width={40}
+                            alt='Notifications'
+                        />
+                    </Link>
+
+                    {/* ENotification kulla ippo context moolama data pogum, props thevai illa */}
+                    {employershowNotification && <ENotification />}
+                </div>
+            </div>
         </header>
     )
 }
+
+

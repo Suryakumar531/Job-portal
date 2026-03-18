@@ -1,5 +1,4 @@
 import { useEffect, useState, useMemo } from 'react'
-import { JHeader } from './JHeader'
 import './SearchResults.css'
 import { SearchResultsCard } from './SearchResultsCard'
 import { Footer } from '../Components-LandingPage/Footer'

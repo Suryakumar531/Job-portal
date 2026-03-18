@@ -7,6 +7,7 @@ export const JobProvider = ({ children }) => {
 
     const [jobs, setJobs] = useState(Joblist); // Total JobList common for jobseeker and employer   
     const [activeMenuId, setActiveMenuId] = useState(null); // Using Id to Toggle Menu in Notification Window
+    const [employeractiveMenuId, setEmployerActiveMenuId] = useState(null);
     const [companyProfile, setCompanyProfile] = useState([]); //From About your company
 
     const [Alluser, setAlluser] = useState([
@@ -291,8 +292,18 @@ export const JobProvider = ({ children }) => {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         isRead: false,
     }]);
+
+    const [employerNotifications, setEmployerNotifications] = useState([{
+        id: "emp_initial",
+        text: "Welcome Employer! Start posting jobs to find the best candidates.",
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        isRead: false,
+    }]);
     // New Messages Notification Logic
     const [showNotification, setShowNotification] = useState(false);
+
+    const [employershowNotification, setEmployerShowNotification] = useState(false);
+
     // to add NewNotification in NotificationData
     const addNotification = (text, targetId = null) => {
         const newNotif = {
@@ -304,6 +315,17 @@ export const JobProvider = ({ children }) => {
         };
         setNotificationsData(prev => [newNotif, ...prev]);
     };
+
+    const addEmployerNotification = (text) => {
+        const newNotif = {
+            id: msg.id,
+            text: text,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            isRead: false
+        };
+        setEmployerNotifications(prev => [newNotif, ...prev]);
+    };
+
     const getFormattedDate = () => {
         return new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
     };
@@ -612,7 +634,8 @@ export const JobProvider = ({ children }) => {
 
     return (
         <JobContext.Provider value={{
-            jobs, chats, setChats, setJobs, isJobSaved, isChatEnded, setIsChatEnded,
+            jobs, chats, setChats, setJobs, isJobSaved, isChatEnded, setIsChatEnded, employeractiveMenuId, setEmployerActiveMenuId,
+            employerNotifications, setEmployerNotifications, employershowNotification, setEmployerShowNotification,
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
             activeMenuId, setActiveMenuId, addJob, deleteJob, postJob, editJob, Alluser, setAlluser, activeSidebarUsers,
             addChatToSidebar, currentUser, withdrawJobFromUser, updateApplicantStatus, isJobApplied, companyProfile, setCompanyProfile, currentEmployer,

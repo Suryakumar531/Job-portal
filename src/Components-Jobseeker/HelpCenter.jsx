@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { JHeader } from './JHeader'
 import { Footer } from '../Components-LandingPage/Footer'
 import "./HelpCenter.css";
 import Helpcenterimg from "../assets/Helpcenter.png";

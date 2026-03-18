@@ -1,6 +1,5 @@
 import React from "react";
 import "./JobApplyIssuesHelp.css"; // Consolidated CSS file
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import InterviewImg from "../assets/interviewschedule.png";
 import { Header } from "../Components-LandingPage/Header";

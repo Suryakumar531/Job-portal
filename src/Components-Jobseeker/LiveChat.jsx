@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LiveChat.css";
-import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import SilverStar from "../assets/SilverStar.png"
 import GoldStar from "../assets/GoldStar.png"

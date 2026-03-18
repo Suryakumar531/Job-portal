@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Reportsubmitted from '../assets/Report_Submitted.png'
 import './RaiseTicket.css';
 import { Footer } from '../Components-LandingPage/Footer';
-import { JHeader } from './JHeader';
 import { Header } from '../Components-LandingPage/Header';
-
 
 
 export const RaiseTicket = () => {
