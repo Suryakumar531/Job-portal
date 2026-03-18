@@ -45,6 +45,7 @@ export const ContactUs = () => {
   }
 
   return (
+    <>
     <div className="contact-page">
      <FHeader/>
 
@@ -126,5 +127,6 @@ export const ContactUs = () => {
       </div>
       <Footer />
     </div>
+    </>
   )
 }

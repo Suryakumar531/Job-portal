@@ -13,12 +13,13 @@ import SuccessBlog from "../assets/Blog_Images/SuccessBlog.png";
 import { Header } from '../Components-LandingPage/Header';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../Components-LandingPage/Footer';
+import { FHeader } from '../Components-LandingPage/FHeader'
 
-const BlogCategory = () => {
+export const BlogCategory = () => {
   const navigate = useNavigate()
   return (
     <>
-    <Header/>
+    <FHeader/>
       
       <div style={{margin:"120px 45px", boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)", borderRadius:"15px"}} className='search-backbtn-container'>
           <button style={{marginLeft:"15px"}}  className="back-btn" onClick={() => navigate(-1)}>Back</button>
@@ -135,4 +136,4 @@ const BlogCategory = () => {
   );
 };
 
-export default BlogCategory;
+ 

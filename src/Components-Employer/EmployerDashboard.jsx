@@ -35,7 +35,6 @@ import { AboutYourCompany } from './AboutYourCompany'
 import place from '../assets/opportunity_location.png'
 
 
-
 export const EmployerDashboard = () => {
     const { currentEmployer, getJobStats } = useJobs();
 
@@ -216,7 +215,7 @@ const jobStats = useMemo(() => {
                                     </div>
 
                                     <div className='E-DashB-Over-View'>
-                                        <h2 style={{ marginLeft: "40px" }}>OverView</h2>
+                                        <h2 style={{ marginLeft: "40px" }}>Overview</h2>
                                         <div className='EDashB-Application-Counts'>
                                             <div className='E-DashB-No-Counts'>
                                                 <div><img src={ActiveJobs} width={40} alt="" /></div>

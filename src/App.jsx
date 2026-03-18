@@ -12,6 +12,7 @@ import { Esignup } from './Components-EmployerSignup/Esignup'
 import { Eforgotpassword } from './Components-EmployerSignup/Eforgotpassword'
 import { Ecreatepassword } from './Components-EmployerSignup/Ecreatepassword'
 import { OpportunityOverview } from './Components-Jobseeker/OpportunityOverview'
+import { ReportAJob } from './Components-Jobseeker/ReportAJob'
 import { MyJobs } from './Components-Jobseeker/MyJobs'
 import { JobsTab } from './Components-Jobseeker/JobsTab'
 import { CompaniesTab } from './Components-Jobseeker/CompaniesTab'
@@ -26,7 +27,7 @@ import { AppliedJobsOverview } from './Components-Jobseeker/AppliedJobsOverview'
 import { Revoked } from './Components-Jobseeker/Revoked'
 import { Settings } from './Components-Jobseeker/Settings'
 import { Blogpage } from './Components-LandingPage/BlogPage'
-import BlogCategory from './Components-LandingPage/BlogCategory'
+import { BlogCategory } from './Components-LandingPage/BlogCategory'
 import { TechnologyBlog } from './Components-LandingPage/TechnologyBlog'
 import { ContactUs } from './Components-LandingPage/ContactUs'
 import { FAQ } from './Components-LandingPage/FAQ'
@@ -47,16 +48,15 @@ import { FileUploadHelp } from './Components-Jobseeker/FileUploadHelp'
 import { EmployerDashboard } from './Components-Employer/EmployerDashboard'
 import { JMessenger } from './Components-Jobseeker/JMessenger'
 import { EMessenger } from './Components-Employer/EMessenger'
-import {FindTalent} from './Components-Employer/FindTalent'
+import { FindTalent } from './Components-Employer/FindTalent'
 import { AboutYourCompany } from './Components-Employer/AboutYourCompany'
 import { CompanyVerify } from './Components-Employer/CompanyVerify'
 import { PostJobForm } from './Components-Employer/PostJobForm'
 import { PostJobPreview } from './Components-Employer/PostJobPreview'
 import { PostedJobs } from './Components-Employer/PostedJobs'
 import { EditJob } from './Components-Employer/EditJob'
-// import FindTalent2 from './Components-Employer/Findtalent2'
-// import { ProfileCard } from './Components-Employer/ProfileCard'
 import { JsProfileOverview } from './Components-Employer/JsProfileOverview'
+import { OtpVerification } from './Components-JobseekerSignup/OtpVerification'
 
 const router = createBrowserRouter([{
   path: '/Job-portal',
@@ -69,6 +69,10 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/jobseeker/login/forgotpassword',
   element: <Jforgotpassword />,
+},
+{
+  path: '/Job-portal/login/otpverification',
+  element: <OtpVerification />,
 },
 {
   path: '/Job-portal/jobseeker/signup',
@@ -101,6 +105,10 @@ const router = createBrowserRouter([{
 {
   path: '/Job-portal/jobseeker/OpportunityOverview/:id',
   element: <OpportunityOverview />,
+},
+{
+  path: '/Job-portal/jobseeker/ReportAJob',
+  element: <ReportAJob />,
 },
 {
   path: '/Job-portal/jobseeker/myjobs',

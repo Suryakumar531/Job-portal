@@ -4,7 +4,7 @@ import { Joblist } from './JobList';
 const JobContext = createContext();
 
 export const JobProvider = ({ children }) => {
-    
+
     const [jobs, setJobs] = useState(Joblist); // Total JobList common for jobseeker and employer   
     const [activeMenuId, setActiveMenuId] = useState(null); // Using Id to Toggle Menu in Notification Window
     const [companyProfile, setCompanyProfile] = useState([]); //From About your company
@@ -242,7 +242,7 @@ export const JobProvider = ({ children }) => {
             // status: { text: 'Hiring in Progress', type: 'progress' }
         };
         setJobs((prev) => [newJob, ...prev]);
-        
+
         setCurrentEmployer((prevEmployer) => ({
             ...prevEmployer,
             jobPosted: [newJob, ...prevEmployer.jobPosted]
@@ -272,15 +272,15 @@ export const JobProvider = ({ children }) => {
                 }
                 return user;
             })
-            
+
         );
         setCurrentEmployer((prev) => ({
-        ...prev,
-        jobPosted: prev.jobPosted.map((job) =>
-            job.id === jobId ? { ...job, ...status } : job
-        ),
-    }));
-        {console.log( currentEmployer.jobPosted)}
+            ...prev,
+            jobPosted: prev.jobPosted.map((job) =>
+                job.id === jobId ? { ...job, ...status } : job
+            ),
+        }));
+        { console.log(currentEmployer.jobPosted) }
     };
     // Toggle End Conversation Logic In Employer Chat Window
     const [isChatEnded, setIsChatEnded] = useState(false);
@@ -347,7 +347,7 @@ export const JobProvider = ({ children }) => {
                 }
                 return user;
             })
-            
+
         );
 
         // 2. Update Global Jobs List
@@ -372,7 +372,7 @@ export const JobProvider = ({ children }) => {
                                 ...(job.applicantsList || []),
                                 {
                                     userId: currentUserId,
-                                    status: "Application Submitted", 
+                                    status: "Application Submitted",
                                     appliedDate: getFormattedDate()
                                 }
                             ]
@@ -429,12 +429,12 @@ export const JobProvider = ({ children }) => {
             }))
         );
         if (currentEmployer) {
-        setCurrentEmployer((prev) => ({
-            ...prev,
-            jobPosted: (prev.jobPosted).filter((job) => job.id !== jobId)
-        }));
-        
-    }
+            setCurrentEmployer((prev) => ({
+                ...prev,
+                jobPosted: (prev.jobPosted).filter((job) => job.id !== jobId)
+            }));
+
+        }
 
         addNotification("Job posting has been successfully deleted.");
     };
@@ -483,29 +483,19 @@ export const JobProvider = ({ children }) => {
                     };
                 }
                 if (currentEmployer) {
-        setCurrentEmployer(prev => ({
-            ...prev,
-            jobPosted: prev.jobPosted.map(job =>
-                job.id === jobId
-                    ? { ...job,applicants: job.applicants  } 
-                    : job
-            )
-        }));
-    }
-                // if (user.role === "employer" && user.id === currentEmployer?.id) {
-                //     return {
-                //         ...user,
-                //         jobPosted: user.jobPosted.map(job =>
-                //             job.id === jobId
-                //                 ? { ...job, applicants: job.applicants } 
-                //                 : job
-                //         )
-                //     };
-                // }
+                    setCurrentEmployer(prev => ({
+                        ...prev,
+                        jobPosted: prev.jobPosted.map(job =>
+                            job.id === jobId
+                                ? { ...job, applicants: job.applicants }
+                                : job
+                        )
+                    }));
+                }
                 return user;
             })
         );
-        
+
     };
 
     //**Not yet used In anycomponent need to check/ Remove */
@@ -524,63 +514,64 @@ export const JobProvider = ({ children }) => {
     };
 
     const withdrawApplication = (originalJob) => {
-    // 1. Remove from User's applied list
-    if (window.confirm("Are you sure you want to withdraw?")){
-    setAlluser((prevUsers) =>
-      prevUsers.map((user) => {
-        if (user.id === currentUserId) {
-          return {
-            ...user,
-            appliedJobs: (user.appliedJobs || []).filter(
-              (job) => job.id !== originalJob.id
-            ),
-          };
+        // 1. Remove from User's applied list
+        if (window.confirm("Are you sure you want to withdraw?")) {
+            setAlluser((prevUsers) =>
+                prevUsers.map((user) => {
+                    if (user.id === currentUserId) {
+                        return {
+                            ...user,
+                            appliedJobs: (user.appliedJobs || []).filter(
+                                (job) => job.id !== originalJob.id
+                            ),
+                        };
+                    }
+
+                    // 2. Decrement applicant count for the employer
+                    if (currentEmployer.id === originalJob.companyId) {
+                        return {
+                            ...user,
+                            jobPosted: user.jobPosted.map((job) =>
+                                job.id === originalJob.id
+                                    ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
+                                    : job
+                            ),
+                        };
+                    }
+                    return user;
+                })
+            );
+
+            // 3. Update Global Jobs List
+            setJobs((prevJobs) =>
+                prevJobs.map((job) =>
+                    job.id === originalJob.id
+                        ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
+                        : job
+                )
+            );
+
+            // 4. Update Local Employer State
+            if (currentEmployer.id === originalJob.companyId) {
+                setCurrentEmployer((prev) => ({
+                    ...prev,
+                    jobPosted: prev.jobPosted.map((job) =>
+                        job.id === originalJob.id
+                            ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
+                            : job
+                    ),
+                }));
+            }
+            alert(`Successfully withdrawn your application for ${originalJob.title}.`);
+            navigate('/Job-portal/jobseeker/withdrawn');
         }
-
-        // 2. Decrement applicant count for the employer
-        if (currentEmployer.id === originalJob.companyId) {
-          return {
-            ...user,
-            jobPosted: user.jobPosted.map((job) =>
-              job.id === originalJob.id
-                ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
-                : job
-            ),
-          };
-        }
-        return user;
-      })
-    );
-
-    // 3. Update Global Jobs List
-    setJobs((prevJobs) =>
-      prevJobs.map((job) =>
-        job.id === originalJob.id
-          ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
-          : job
-      )
-    );
-
-    // 4. Update Local Employer State
-    if (currentEmployer.id === originalJob.companyId) {
-      setCurrentEmployer((prev) => ({
-        ...prev,
-        jobPosted: prev.jobPosted.map((job) =>
-          job.id === originalJob.id
-            ? { ...job, applicants: Math.max((job.applicants || 0) - 1, 0) }
-            : job
-        ),
-      }));
-    }
-    alert(`Successfully withdrawn your application for ${originalJob.title}.`);
-    navigate('/Job-portal/jobseeker/withdrawn');
-  }};
+    };
 
     //Dynamic Action count used in EDashboard & postedjobs Component//
     const getJobStats = (jobId) => {
         const jobExists = jobs.some(j => j.id === jobId);
-    if (!jobExists) return { total: 0, new: 0, screening: 0, interview: 0, rejected: 0 };
-    
+        if (!jobExists) return { total: 0, new: 0, screening: 0, interview: 0, rejected: 0 };
+
         const jobApplicants = Alluser.filter(user =>
             user.appliedJobs?.some(aj => aj.id === jobId)
         );
@@ -603,21 +594,21 @@ export const JobProvider = ({ children }) => {
     };
 
     const removeRejectedJob = (originalJob) => {
-          if (window.confirm("Remove this rejected application from history?")) {
+        if (window.confirm("Remove this rejected application from history?")) {
             // Update User's appliedJobs
             setAlluser(prev => prev.map(user => {
-              if (user.id === currentUserId) {
-                return {
-                  ...user,
-                  appliedJobs: user.appliedJobs?.filter(j => j.id !== originalJob.id)
-                };
-              }
-              return user;
+                if (user.id === currentUserId) {
+                    return {
+                        ...user,
+                        appliedJobs: user.appliedJobs?.filter(j => j.id !== originalJob.id)
+                    };
+                }
+                return user;
             }));
-    
+
             navigate('/Job-portal/jobseeker/myjobs');
-          }
-        };
+        }
+    };
 
     return (
         <JobContext.Provider value={{
@@ -625,7 +616,7 @@ export const JobProvider = ({ children }) => {
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
             activeMenuId, setActiveMenuId, addJob, deleteJob, postJob, editJob, Alluser, setAlluser, activeSidebarUsers,
             addChatToSidebar, currentUser, withdrawJobFromUser, updateApplicantStatus, isJobApplied, companyProfile, setCompanyProfile, currentEmployer,
-            getJobStats, savedJobs, appliedJobs, currentUserId, setCurrentEmployer,withdrawApplication,removeRejectedJob
+            getJobStats, savedJobs, appliedJobs, currentUserId, setCurrentEmployer, withdrawApplication, removeRejectedJob
         }}>
             {children}
         </JobContext.Provider>
