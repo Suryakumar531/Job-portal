@@ -146,7 +146,7 @@ const jobStats = useMemo(() => {
                                     {activetab === 'My Profile' ? <img src={ProfileAct} height={15} width={15} alt="My Profile" /> : <img src={Profile} height={15} width={15} alt="My Profile" />}
                                     <div className='Enav-item'>My Profile</div>
                                 </div>
-                                <div onClick={() => !isVerifying && setActiveTab('Logout')} className={activetab === 'Logout' ? "Active" : 'Navbox'} >
+                                <div onClick={() => !isVerifying && setShowLogoutModal(true)} className={activetab === 'Logout' ? "Active" : 'Navbox'}>
                                     {activetab === 'Logout' ? <img src={LogoutAct} height={15} width={15} alt="Logout" /> : <img src={Logout} height={15} width={15} alt="Logout" />}
                                     <div className='Enav-item'>Logout</div>
                                 </div>
