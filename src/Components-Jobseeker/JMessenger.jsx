@@ -53,6 +53,8 @@ export const JMessenger = () => {
             ? { ...chat, messages: [...chat.messages, newMsg] } 
             : chat
         ));
+
+        addEmployerNotification(`New message from ${currentUser.profile?.fullName}`, employerProfile?.id);
         setInput("");
     };
 

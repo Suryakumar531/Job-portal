@@ -316,10 +316,11 @@ export const JobProvider = ({ children }) => {
         setNotificationsData(prev => [newNotif, ...prev]);
     };
 
-    const addEmployerNotification = (text) => {
+    const addEmployerNotification = (text, targetId = null) => {
         const newNotif = {
-            id: msg.id,
+            id: Date.now(),
             text: text,
+            targetId: targetId,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             isRead: false
         };
