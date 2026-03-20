@@ -10,7 +10,7 @@ export const JMessenger = () => {
     //{POV : Logged in as Ajeeth }
    // const CurrentUser = 2; //(here we can able to change the Profile in otherjobseekers view)
     
-    const {chats, setChats, currentUserId, isChatEnded, setNotificationsData} = useJobs(); // from Context
+    const {chats, setChats,currentUser, currentUserId, isChatEnded, setNotificationsData, addEmployerNotification} = useJobs(); // from Context
 
     const [input, setInput] = useState("");
 

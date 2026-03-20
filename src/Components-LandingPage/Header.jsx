@@ -36,10 +36,6 @@ export const Header = () => {
   const newNotificationsCount = notificationsData
     ? notificationsData.filter(n => !n.isRead).length
     : 0;
-
-  console.log(newNotificationsCount)
-  console.log("Image to show:", newNotificationsCount > 0 ? "DOT ICON" : "NORMAL BELL");
-  //  const newNotificationsCount = notificationsData.filter(n => !n.isRead).length;
  
   const preventNav = (e) => {
     e.preventDefault();

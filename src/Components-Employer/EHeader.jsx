@@ -3,14 +3,19 @@ import './EHeader.css'
 import search from '../assets/icon_search.png'
 import chat from '../assets/header_message.png'
 import bell from '../assets/header_bell.png'
+import belldot from '../assets/header_bell_dot.png'
 import { Link, useLocation } from 'react-router-dom'
 import { ENotification } from './ENotification'
 import { useJobs } from '../JobContext'
 
 export const EHeader = () => {
 
-    const { employershowNotification, setEmployerShowNotification } = useJobs();
+    const { employershowNotification, setEmployerShowNotification, employerNotifications } = useJobs();
     const location = useLocation();
+
+    const newNotificationsCount = employerNotifications
+    ? employerNotifications.filter(n => !n.isRead).length
+    : 0;
 
     const toggleNotification = (e) => {
         e.preventDefault();
@@ -43,13 +48,12 @@ export const EHeader = () => {
                     <Link to="#" onClick={toggleNotification}>
                         <img
                             className={employershowNotification ? 'jheader-icons-active' : 'jheader-icons'}
-                            src={bell}
+                            src={newNotificationsCount > 0 ?  belldot : bell }
                             width={40}
                             alt='Notifications'
                         />
                     </Link>
 
-                    {/* ENotification kulla ippo context moolama data pogum, props thevai illa */}
                     {employershowNotification && <ENotification />}
                 </div>
             </div>

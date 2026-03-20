@@ -148,7 +148,7 @@ export const JobProvider = ({ children }) => {
         },
         {
             id: "10",
-            profile: { "fullName": "Lithin and Boys", "gender": "male", "dob": "1997-11-11", "maritalStatus": "Single", "nationality": "Indian" },
+            profile: { "fullName": "Lithin", "gender": "male", "dob": "1997-11-11", "maritalStatus": "Single", "nationality": "Indian" },
             currentDetails: { "jobTitle": "HR Generalist", "company": "Global Talent", experience: "4 Years", "currentLocation": "Chennai", "prefLocation": "Chennai" },
             contact: { "mobile": "+91 9333222111", "altMobile": "", "email": "Lithinandco.hr@email.com", "altEmail": "", "address": "Mylapore", "street": "Luz Church Rd", "city": "Chennai", "state": "Tamil Nadu", "pincode": "600004", "country": "India" },
             resume: { "size": "1.2MB", "portfolio": "" },
@@ -635,7 +635,7 @@ export const JobProvider = ({ children }) => {
     return (
         <JobContext.Provider value={{
             jobs, chats, setChats, setJobs, isJobSaved, isChatEnded, setIsChatEnded, employeractiveMenuId, setEmployerActiveMenuId,
-            employerNotifications, setEmployerNotifications, employershowNotification, setEmployerShowNotification,
+            employerNotifications, setEmployerNotifications, employershowNotification, setEmployerShowNotification, addEmployerNotification,
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
             activeMenuId, setActiveMenuId, addJob, deleteJob, postJob, editJob, Alluser, setAlluser, activeSidebarUsers,
             addChatToSidebar, currentUser, withdrawJobFromUser, updateApplicantStatus, isJobApplied, companyProfile, setCompanyProfile, currentEmployer,
