@@ -10,8 +10,8 @@ ChartJS.register(ArcElement, ChartTooltip);
 export const AnalyticsPage = () => {
   const { Alluser, currentEmployer } = useJobs();
 
+  const months = [];
   const getRecentMonths = () => {
-    const months = [];
     const date = new Date();
 
     for (let i = 2; i >= 0; i--) {
@@ -30,10 +30,12 @@ export const AnalyticsPage = () => {
     sep: "September", oct: "October", nov: "November", dec: "December"
   };
 
+  getRecentMonths()
+
   // const fullName = monthsMap["jan".toLowerCase()];
-  const firstMonthFullName = monthsMap[getRecentMonths[0].toLowerCase()];
-  const secondMonthFullName = monthsMap[getRecentMonths[1].toLowerCase()];
-  const thirdMonthFullName = monthsMap[getRecentMonths[2].toLowerCase()];
+  const firstMonthFullName = monthsMap[months[0].toLowerCase()];
+  const secondMonthFullName = monthsMap[months[1].toLowerCase()];
+  const thirdMonthFullName = monthsMap[months[2].toLowerCase()];
 
   const dynamicLineData = useMemo(() => {
     const stages = [
@@ -50,8 +52,8 @@ export const AnalyticsPage = () => {
     return stages.map(stage => {
       const row = { stage: stage.key };
 
-      getRecentMonths.forEach(m => {
-        const monthLabel = m === getRecentMonths[0] ? firstMonthFullName : m === getRecentMonths[1] ? secondMonthFullName : thirdMonthFullName;
+      months.forEach(m => {
+        const monthLabel = m === months[0] ? firstMonthFullName : m === months[1] ? secondMonthFullName : thirdMonthFullName;
 
         row[monthLabel] = Alluser.reduce((acc, user) => {
           const matchingApplications = user.appliedJobs?.filter(aj => {
@@ -60,7 +62,7 @@ export const AnalyticsPage = () => {
             const isCorrectStatus = stage.status.some(s =>
               aj.status?.trim().toLowerCase() === s.trim().toLowerCase()
             );
-            const isCorrectMonth = aj.appliedDate?.toLowerCase().includes(m.toLowerCase()) || aj.appliedDate?.includes(`0${getRecentMonths.indexOf(m) + 1}`);
+            const isCorrectMonth = aj.appliedDate?.toLowerCase().includes(m.toLowerCase()) || aj.appliedDate?.includes(`0${months.indexOf(m) + 1}`);
 
             return isOurJob && isCorrectStatus && isCorrectMonth;
           });
@@ -120,8 +122,8 @@ export const AnalyticsPage = () => {
 
     return levels.map((level) => {
       const row = { level };
-      getRecentMonths.forEach((m) => {
-        const monthFull = m === getRecentMonths[0] ? firstMonthFullName : m === getRecentMonths[1] ? secondMonthFullName : thirdMonthFullName;
+      months.forEach((m) => {
+        const monthFull = m === months[0] ? firstMonthFullName : m === months[1] ? secondMonthFullName : thirdMonthFullName;
 
         row[monthFull] = Alluser.reduce((acc, user) => {
           const expString = user.currentDetails?.experience || "Fresher";
@@ -150,7 +152,7 @@ export const AnalyticsPage = () => {
       <div className="title-banner">
         <h1 className="page-title">Analytics</h1>
       </div>
-      {/* //firstMonthFullName = monthsMap[getRecentMonths[0].toLowerCase()]; */}
+      {/* //firstMonthFullName = monthsMap[months[0].toLowerCase()]; */}
       <div className="analytics-content">
         {/* Dynamic Area Chart */}
         <div className="card line-card">
@@ -171,9 +173,9 @@ export const AnalyticsPage = () => {
             </AreaChart>
           </ResponsiveContainer>
           <div className="custom-legend-horizontal">
-            <div className="legend-item"><span className="triangle-legend jan"></span> {getRecentMonths[0]}</div>
-            <div className="legend-item"><span className="triangle-legend feb"></span> {getRecentMonths[1]}</div>
-            <div className="legend-item"><span className="triangle-legend mar"></span> {getRecentMonths[2]}</div>
+            <div className="legend-item"><span className="triangle-legend jan"></span> {months[0]}</div>
+            <div className="legend-item"><span className="triangle-legend feb"></span> {months[1]}</div>
+            <div className="legend-item"><span className="triangle-legend mar"></span> {months[2]}</div>
           </div>
           <p className="chart-label">Applicants overview</p>
         </div>
@@ -209,9 +211,9 @@ export const AnalyticsPage = () => {
               </BarChart>
             </ResponsiveContainer>
             <div className="custom-legend-horizontal">
-              <div className="legend-item"><span className="square purple"></span> {getRecentMonths[0]}</div>
-              <div className="legend-item"><span className="square green"></span> {getRecentMonths[1]}</div>
-              <div className="legend-item"><span className="square mar"></span> {getRecentMonths[2]}</div>
+              <div className="legend-item"><span className="square purple"></span> {months[0]}</div>
+              <div className="legend-item"><span className="square green"></span> {months[1]}</div>
+              <div className="legend-item"><span className="square mar"></span> {months[2]}</div>
             </div>
             <p className="chart-label">Experience levels</p>
           </div>
