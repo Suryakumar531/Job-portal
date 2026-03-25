@@ -241,8 +241,15 @@ export const SearchResults = () => {
                 job.company?.toLowerCase().includes(appliedFilters.query.toLowerCase()) ||
                 job.KeySkills.some(skill => skill.toLowerCase().includes(appliedFilters.query));
 
-            const matchesSearchBarLocation = appliedFilters.location === "" ||
-                job.location?.toLowerCase().includes(appliedFilters.location.toLowerCase());
+            const matchesSearchBarLocation =
+                appliedFilters.location === "" ||
+                (Array.isArray(job.location)
+                    ? job.location.some(loc =>
+                        loc.toLowerCase().includes(appliedFilters.location.toLowerCase())
+                    )
+                    : job.location
+                        ? job.location.toLowerCase().includes(appliedFilters.location.toLowerCase())
+                        : false);
 
             const JobExp = job.experience ? parseInt(job.experience.match(/\d+/)) : 0;
             let matchesSearchExp = true;
