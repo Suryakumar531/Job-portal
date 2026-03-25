@@ -39,25 +39,25 @@ import { AnalyticsPage } from './AnalyticsPage'
 export const EmployerDashboard = () => {
     const { currentEmployer, getJobStats } = useJobs();
 
-     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     const PostedJob = currentEmployer.jobPosted;
-    
-const jobStats = useMemo(() => {
-    return currentEmployer?.jobPosted?.reduce((acc, job) => {
-        const stats = getJobStats(job.id)
-        acc.totalApps += (stats.total || 0);
-        acc.totalShortlisted += (stats.screening || 0); 
-        acc.totalInterview += (stats.interview || 0);
-        return acc;
-    }, { totalApps: 0, totalShortlisted: 0, totalInterview: 0 });
-}, [currentEmployer?.jobPosted, getJobStats]);
+
+    const jobStats = useMemo(() => {
+        return currentEmployer?.jobPosted?.reduce((acc, job) => {
+            const stats = getJobStats(job.id)
+            acc.totalApps += (stats.total || 0);
+            acc.totalShortlisted += (stats.screening || 0);
+            acc.totalInterview += (stats.interview || 0);
+            return acc;
+        }, { totalApps: 0, totalShortlisted: 0, totalInterview: 0 });
+    }, [currentEmployer?.jobPosted, getJobStats]);
 
 
     const activeJobsCount = currentEmployer.jobPosted.length;
 
     const navigate = useNavigate();
-    
+
     const [activeMenu, setActiveMenu] = useState(null);
     const initialLetter = currentEmployer?.hrName.charAt(0).toUpperCase();
 
@@ -208,7 +208,7 @@ const jobStats = useMemo(() => {
                                         </div>
                                     </div>
                                     <div className="pending-section">
-                                        <img src={ClockImage} alt="pending" className="pending-icon"/>
+                                        <img src={ClockImage} alt="pending" className="pending-icon" />
                                         <h2>Pending Verification</h2>
                                     </div>
                                 </div>
@@ -219,7 +219,7 @@ const jobStats = useMemo(() => {
                                             <h2>Hi {currentEmployer?.hrName},</h2>
                                             <p style={{ fontWeight: "600" }}>Here's, What's Going on... </p>
                                         </div>
-                                        <button className='post-job-btn' onClick={()=>{setActiveTab('Post a Job')}}>+ Post a Job</button>
+                                        <button className='post-job-btn' onClick={() => { setActiveTab('Post a Job') }}>+ Post a Job</button>
                                     </div>
 
                                     <div className='E-DashB-Over-View'>
@@ -246,82 +246,84 @@ const jobStats = useMemo(() => {
 
                                     {/* Recently posted jobs */}
                                     <div>
-                                     <div className='ERecent-Post-Cont'>
-                                        <h3 style={{ marginleft: "40px" }}>Recently Posted Jobs</h3>
-                                        <div className='ERecent-Post-Table-Container'>
-                                            {PostedJob.length>0 ? <>
-                                                  <div className="postedjobs-grid-layout postedjobs-table-header">
-                                                    <div />
-                                                    <span className="postedjobs-label">Applicants</span>
-                                                    <span className="postedjobs-label">New</span>
-                                                    <span className="postedjobs-label">Shortlisted</span>
-                                                    <span className="postedjobs-label">Interview</span>
-                                                    <span className="postedjobs-label">Rejected</span>
-                                                    <div />
-                                                  </div>
-                                            
-                                                  <div className="postedjobs-list">
-                                                    {PostedJob.slice(0,5).map((job) => {
-                                                      const stats = getJobStats(job.id)
-                                            
-                                                      return (
-                                                        <div key={job.id} className="postedjobs-grid-layout postedjobs-card">
-                                                          <div className="postedjobs-info">
-                                                            <h3>{job.jobTitle || job.title}</h3>
-                                                            <p className="postedjobs-loc flex items-center gap-2">
-                                                              <img src={place} alt="location" className="post-job-locationicon" />
-                                                              {job.location}
-                                                            </p>
-                                                            <small>Created on: {job.postedDate || job.posted}</small>
-                                                          </div> 
-                                                          <span className="postedjobs-badge">{stats.total}</span>
-                                                          <span className="postedjobs-badge">{stats.new}</span>
-                                                          <span className="postedjobs-badge">{stats.screening}</span>
-                                                          <span className="postedjobs-badge">{stats.interview}</span>
-                                                          <span className="postedjobs-badge">{stats.rejected}</span>
-                                            
-                                                          <div className="postedjobs-actions">
-                                                            <button className="postedjobs-view-btn"onClick={() => handleViewApplicants(job)}>
-                                                            View applicants </button>
-                                                          </div>
-                                                        </div>
-                                                      );
-                                                    })}
-                                                  </div>
-                                                  </>
-                                                  :
-                                                  <>
-                                                  <h2 style={{display:"flex",justifyContent:"center",alignItems:"center",height:'50vh'}}>No Jobs posted by you</h2>
-                                                  </>
-                                                  }
-                                            {currentEmployer.jobPosted.length > 0 && (
-                                                <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                                    <button className="view-more-link" onClick={() => setActiveTab('My job post')}>
-                                                     View more...</button> 
-                                                </div>
-                                            )}
+                                        <div className='ERecent-Post-Cont'>
+                                            <h3 style={{ marginleft: "40px" }}>Recently Posted Jobs</h3>
+                                            <div className='ERecent-Post-Table-Container'>
+                                                {PostedJob.length > 0 ? <>
+                                                    <div className="postedjobs-grid-layout postedjobs-table-header">
+                                                        <div />
+                                                        <span className="postedjobs-label">Applicants</span>
+                                                        <span className="postedjobs-label">New</span>
+                                                        <span className="postedjobs-label">Shortlisted</span>
+                                                        <span className="postedjobs-label">Interview</span>
+                                                        <span className="postedjobs-label">Rejected</span>
+                                                        <div />
+                                                    </div>
+
+                                                    <div className="postedjobs-list">
+                                                        {PostedJob.slice(0, 5).map((job) => {
+                                                            const stats = getJobStats(job.id)
+
+                                                            return (
+                                                                <div key={job.id} className="postedjobs-grid-layout postedjobs-card">
+                                                                    <div className="postedjobs-info">
+                                                                        <h3>{job.jobTitle || job.title}</h3>
+                                                                        <p className="postedjobs-loc flex items-center gap-2">
+                                                                            <img src={place} alt="location" className="post-job-locationicon" />
+                                                                            {Array.isArray(job.location)
+                                                                                ? job.location.join(", ")
+                                                                                : job.location || "N/A"}
+                                                                        </p>
+                                                                        <small>Created on: {job.postedDate || job.posted}</small>
+                                                                    </div>
+                                                                    <span className="postedjobs-badge">{stats.total}</span>
+                                                                    <span className="postedjobs-badge">{stats.new}</span>
+                                                                    <span className="postedjobs-badge">{stats.screening}</span>
+                                                                    <span className="postedjobs-badge">{stats.interview}</span>
+                                                                    <span className="postedjobs-badge">{stats.rejected}</span>
+
+                                                                    <div className="postedjobs-actions">
+                                                                        <button className="postedjobs-view-btn" onClick={() => handleViewApplicants(job)}>
+                                                                            View applicants </button>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </>
+                                                    :
+                                                    <>
+                                                        <h2 style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '50vh' }}>No Jobs posted by you</h2>
+                                                    </>
+                                                }
+                                                {currentEmployer.jobPosted.length > 0 && (
+                                                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                                                        <button className="view-more-link" onClick={() => setActiveTab('My job post')}>
+                                                            View more...</button>
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </>
                             )}
                         </>
                     )}
-                       
+
                     {activetab === 'Post a Job' && (<PostJobForm />)}
-                        
-                    {activetab === 'My job post' && (<PostedJobs onViewApplicants={(job) => { setSelectedJob(job); setActiveTab('ViewApplicants');}}/>)}
-                        
-                    {activetab === 'ViewApplicants' && (<ViewApplicants job={selectedJob} onBack={() => setActiveTab('My job post')}/>)}
-                        
+
+                    {activetab === 'My job post' && (<PostedJobs onViewApplicants={(job) => { setSelectedJob(job); setActiveTab('ViewApplicants'); }} />)}
+
+                    {activetab === 'ViewApplicants' && (<ViewApplicants job={selectedJob} onBack={() => setActiveTab('My job post')} />)}
+
                     {activetab === 'Find a Talent' && (<FindTalent />)}
-                        
+
                     {activetab === 'Analytics' && (<AnalyticsPage />)}
-                        
+
                     {activetab === 'Billing' && (<h1>Billing Section</h1>)}
-                        
+
                     {activetab === 'My Profile' && (<AboutYourCompany hideNavigation={true} setActiveTab={setActiveTab} />)}
-                        
+
                 </div>
 
             </div>

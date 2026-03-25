@@ -96,7 +96,7 @@ export const OpportunityOverview = () => {
               <div className="Opportunities-job-details">
                 <p className='Opportunities-detail-line'><img src={time} className='card-icons' alt="time" />{job.duration}<span className="Opportunities-divider">|</span>₹ {job.salary} Lpa</p>
                 <p className='Opportunities-detail-line'><img src={experience} className='card-icons' alt="exp" />{job.experience} years of experience</p>
-                <p className='Opportunities-detail-line'><img src={place} className='card-icons' alt="loc" />{job.location}</p>
+                <p className='Opportunities-detail-line'><img src={place} className='card-icons' alt="loc" />{Array.isArray(job.location) ? job.location.join(", ") : job.location || "N/A"}</p>
               </div>
 
               <div className='Opportunities-details-bottom'>
@@ -171,7 +171,7 @@ export const OpportunityOverview = () => {
               <p><strong>Industry Type:</strong> {job.IndustryType.join(", ")}</p>
               <p><strong>Department:</strong> {job.Department.join(", ")}</p>
               <p><strong>Job Type:</strong> {job.WorkType}</p>
-              <p><strong>Location:</strong> {job.location}</p>
+              <p><strong>Location:</strong> {Array.isArray(job.location) ? job.location.join(", ") : job.location || "N/A"}</p>
               <p><strong>Shift:</strong> {job.Shift}</p>
 
               <h3>Key Skills</h3>
@@ -208,7 +208,7 @@ export const OpportunityOverview = () => {
                 </div>
                 <div className="Opportunities-job-details">
                   <p className='Opportunities-detail-line'>{sim.tags.join(", ")} - {sim.experience} years of experience</p>
-                  <p className='Opportunities-detail-line'><img src={place} className='card-icons' alt="loc" />{sim.location}</p>
+                  <p className='Opportunities-detail-line'><img src={place} className='card-icons' alt="loc" />{Array.isArray(sim.location) ? sim.location.join(", ") : sim.location || "N/A"}</p>
                 </div>
                 <div className="similar-job-footer">
                   <div className="Opportunities-job-type">

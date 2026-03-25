@@ -48,7 +48,7 @@ export const OpportunitiesCard = (props) => {
                 <div className="Opportunities-job-details">
                     <p className='Opportunities-detail-line'><img src={time} className='card-icons' />{job.duration}<span className="Opportunities-divider">|</span>₹ {job.salary} Lpa</p>
                     <p className='Opportunities-detail-line'><img src={experience} className='card-icons' />{job.experience} years of experience</p>
-                    <p className='Opportunities-detail-line'><img src={place} className='card-icons' />{job.location}</p>
+                    <p className='Opportunities-detail-line'><img src={place} className='card-icons' />{Array.isArray(job.location) ? job.location.join(", ") : job.location || "N/A"}</p>
                 </div>
 
                 <div className='Opportunities-details-bottom'>

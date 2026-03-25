@@ -48,6 +48,14 @@ export const SearchResults = () => {
             return acc;
         }, {});
     };
+    const locationCounts = countPropertyOccurrences(
+        jobs.flatMap((item) =>
+            Array.isArray(item.location)
+                ? item.location.map((loc) => ({ ...item, location: loc }))
+                : [{ ...item, location: item.location }]
+        ),
+        'location'
+    );
     const educationCounts = jobs.reduce((acc, item) => {
         item.EducationRequired.forEach((edu) => {
             const degree = edu.toLowerCase();
@@ -64,7 +72,6 @@ export const SearchResults = () => {
     }, {});
 
     // ... [Data Prep] ...
-    const locationCounts = countPropertyOccurrences(jobs, 'location');
     const workTypeCounts = countPropertyOccurrences(jobs, 'WorkType');
     const PostedbyCounts = countPropertyOccurrences(jobs, 'PostedBy')
     const CompanyCounts = countPropertyOccurrences(jobs, 'company');
@@ -247,8 +254,15 @@ export const SearchResults = () => {
             // Sidebar Filters (Using the Applied State)
             const sf = appliedSidebarFilters;
 
-            const jobLocation = job.location ? job.location.toLowerCase() : 'unknown location';
-            const matchesLocation = sf.locations.length === 0 || sf.locations.includes(jobLocation);
+            const jobLocations = Array.isArray(job.location)
+                ? job.location.map(loc => loc.toLowerCase())
+                : job.location
+                    ? [job.location.toLowerCase()]
+                    : ['unknown location'];
+
+            const matchesLocation =
+                sf.locations.length === 0 ||
+                jobLocations.some(loc => sf.locations.includes(loc));
 
             const jobWorkType = job.WorkType ? job.WorkType.toLowerCase() : 'unknown worktype';
             const matchesWorkType = sf.workType.length === 0 || sf.workType.includes(jobWorkType);

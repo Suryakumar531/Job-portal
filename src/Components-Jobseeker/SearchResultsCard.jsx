@@ -36,7 +36,7 @@ export function SearchResultsCard(props) {
                 <p className='SearchResults-job-card-detail-line'><img src={time} className='SearchResults-job-card-icons' />{job.duration}
                     <span className="SearchResults-job-card-divider">|</span>₹ {job.salary} Lpa
                     <span className="SearchResults-job-card-divider">|</span><img src={experience} className='SearchResults-job-card-icons' /> {job.experience} year of experience
-                    <span className="SearchResults-job-card-divider">|</span><img src={place} className='SearchResults-job-card-icons' />{job.location}</p>
+                    <span className="SearchResults-job-card-divider">|</span><img src={place} className='SearchResults-job-card-icons' />{Array.isArray(job.location) ? job.location.join(", ") : job.location || "N/A"}</p>
                 <p className='SearchResults-job-card-detail-line'><img src={time} className='SearchResults-job-card-icons' />shift : {job.Shift}
                     <span className="SearchResults-job-card-divider">|</span><img src={experience} className='SearchResults-job-card-icons' /> {job.WorkType}
                 </p>
