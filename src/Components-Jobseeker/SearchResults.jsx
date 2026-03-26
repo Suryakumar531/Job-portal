@@ -187,6 +187,15 @@ export const SearchResults = () => {
             minExp: minExp,
             maxExp: maxExp
         });
+
+        setSearchLocation("");
+        setSearchExp("");
+
+        setAppliedFilters((prev)=>({
+            ...prev,
+            location: "",
+            experience: ""
+        }));
     };
 
     const HandleClear = () => {
