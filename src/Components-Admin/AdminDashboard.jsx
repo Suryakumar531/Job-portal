@@ -35,6 +35,7 @@ import { JobMonitoring } from './JobMonitoring'
 import { RolePermission } from './RolePermission'
 import { RoleManagement } from './RoleManagement'
 import { Membership } from './Membership'
+import { AdminSettings } from './AdminSettings'
 
 export const AdminDashboard = () => {
     const { jobs, Alluser, currentEmployer } = useJobs();
@@ -372,7 +373,7 @@ export const AdminDashboard = () => {
                     {activetab === 'Membership' && (<Membership/> )}
                     {activetab === 'Tickets' && (<h3>Tickets</h3>)}
                     {activetab === 'Reports' && (<AdminReports/>)}
-                    {activetab === 'settings' && (<h3>settings</h3>)}
+                    {activetab === 'settings' && (<AdminSettings/>)}
                 </div>
             </div>
         </>

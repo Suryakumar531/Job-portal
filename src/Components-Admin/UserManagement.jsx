@@ -72,8 +72,8 @@ export const UserManagement = () => {
   return (
     <div className="user-management-container">
       <div style={{ marginBottom: "25px" }} className='Admin-Welcome-Container'>
-        <p className='Admin-Welcome-Note' >User Management</p>
-        <p className='Admin-Welcome-para'>Manage and monitor all platform members and their activity.</p>
+        <p style={{margin:"5px 0"}} className='Admin-Welcome-Note' >User Management</p>
+        <p style={{margin:"5px 0"}} className='Admin-Welcome-para'>Manage and monitor all platform members and their activity.</p>
       </div>
 
       <div className="um-stats">
