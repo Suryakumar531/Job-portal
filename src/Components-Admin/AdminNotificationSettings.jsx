@@ -40,6 +40,7 @@ export const AdminNotificationSettings = () => {
   const [startTime, setStartTime] = useState("22:00");
   const [endTime, setEndTime] = useState("07:00");
   const [activeDays, setActiveDays] = useState(["Mon", "Tue", "Wed", "Thu", "Fri"]);
+  const [timezone, setTimezone] = useState("(UTC +05:30) Asia/Kolkata");
 
 
   const [tablePreferences, setTablePreferences] = useState(
@@ -52,12 +53,29 @@ export const AdminNotificationSettings = () => {
     }, {})
   );
 
+
   const [quickSetup, setQuickSetup] = useState(
     quickChannels.reduce((acc, channel) => {
       acc[channel.id] = false;
       return acc;
     }, {})
   );
+
+  const handleSave = () => {
+  const finalData = {
+    preferences: tablePreferences, 
+    globalChannels: quickSetup,
+    quietHours: {
+      start: startTime,
+      end: endTime,
+      days: activeDays
+    },
+    timezone: timezone
+  };
+
+  console.log("Current Notification Settings:", finalData);
+  alert("Settings saved successfully!");
+};
 
   const handleTableChange = (typeId, channelName) => {
     setTablePreferences(prev => ({
@@ -68,6 +86,7 @@ export const AdminNotificationSettings = () => {
       }
     }));
   };
+
 
   const handleQuickChange = (channelId) => {
     setQuickSetup(prev => ({
@@ -83,7 +102,7 @@ export const AdminNotificationSettings = () => {
           <h1 className="Adm-Not-title">Notification preferences</h1>
           <p className="Adm-Not-subtitle">Choose what notification you want to receive and how.</p>
         </div>
-        <button className="Adm-Not-save-btn">Save changes</button>
+        <button className="Adm-Not-save-btn" onClick={handleSave}>Save changes</button>
       </header>
 
       <div className="Adm-Not-main-content">
@@ -125,7 +144,6 @@ export const AdminNotificationSettings = () => {
           </table>
         </div>
 
-        {/* Sidebar */}
         <div className="Adm-Not-sidebar">
           <div className="Adm-Not-panel Adm-Not-channels-panel">
             <h2 className="Adm-Not-panel-title">Notification Channels</h2>
@@ -148,7 +166,6 @@ export const AdminNotificationSettings = () => {
               ))}
             </div>
           </div>
-
           <div className="Adm-Not-panel Adm-Not-quiet-hours-panel">
             <h2 className="Adm-Not-panel-title">Quiet Hours</h2>
             <p className="Adm-Not-panel-subtitle">Set quiet hours to avoid notification at certain times</p>
@@ -179,7 +196,7 @@ export const AdminNotificationSettings = () => {
             </div>
 
             <div className="Adm-Not-timezone-select-wrapper">
-              <select className="Adm-Not-timezone-select">
+              <select className="Adm-Not-timezone-select" value={timezone} onChange={(e) => setTimezone(e.target.value)}>
                 <option>(UTC +05:30) Asia/Kolkata</option>
                 <option>(UTC -08:00) America/Los_Angeles</option>
                 <option>(UTC +00:00) UTC</option>

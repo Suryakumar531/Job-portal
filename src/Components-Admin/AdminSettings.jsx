@@ -4,18 +4,15 @@ import { AdminNotificationSettings } from './AdminNotificationSettings'
 import { AdminSecuritySettings } from './AdminSecuritySettings'
 import { AdminSecurity } from './AdminSecurity'
 import { EmployerSettings } from './EmployerSettings'
+import { JobSeekerSettings } from './JobSeekerSettings'
 
 export const AdminSettings = () => {
-    const [activeTab, setActiveTab] = useState("Account Settings")
+    const [activeTab, setActiveTab] = useState("Jobseeker & Employer Settings")
     const [selectTab, setselectTab] = useState("Jobseeker Settings")
     return (
         <div>
             {/* <h1>Settings</h1> */}
             <div style={{ display: "flex", justifyContent: "space-around", gap: "10px", border: "1px solid rgba(0, 0, 0, 0.15)", padding: "28px 45px", borderRadius: "10px" }}>
-                {/* <button
-                    className={`Ad-Settings-select ${activeTab === "Account Settings" ? "Ad-Settings-active" : ""}`}
-                    onClick={() => setActiveTab("Account Settings")}
-                >Account Settings</button> */}
 
                 <button
                     className={`Ad-Settings-select ${activeTab === "Jobseeker & Employer Settings" ? "Ad-Settings-active" : ""}`}
@@ -32,11 +29,6 @@ export const AdminSettings = () => {
                 >Security Settings</button>
             </div>
 
-
-
-            {activeTab === "Account Settings" && (
-                <><h3>Account Settings</h3></>
-            )}
             {activeTab === "Jobseeker & Employer Settings" && (
                 <>
                 <div style={{marginTop:"35px", display:"flex", justifyContent:"center",gap:"80px"}}>
@@ -52,7 +44,7 @@ export const AdminSettings = () => {
                 </div>
                 
                  {selectTab==="Jobseeker Settings"&&(
-                    <h1>Jobseeker Settings</h1>
+                    <JobSeekerSettings/>
                  )}  
 
                  {selectTab==="Employer Settings"&&(

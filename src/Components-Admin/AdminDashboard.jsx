@@ -29,18 +29,49 @@ import { AdminExperience } from './AdminExperience'
 import { Calendar } from './Calender'
 import { useJobs } from '../JobContext'
 import { UserManagement } from './UserManagement'
-import {ActivityMonitor} from './ActivityMonitor'
+import { ActivityMonitor } from './ActivityMonitor'
 import { AdminReports } from './AdminReports'
 import { JobMonitoring } from './JobMonitoring'
 import { RolePermission } from './RolePermission'
 import { RoleManagement } from './RoleManagement'
 import { Membership } from './Membership'
 import { AdminSettings } from './AdminSettings'
+import { useNavigate } from 'react-router-dom'
 
 export const AdminDashboard = () => {
     const { jobs, Alluser, currentEmployer } = useJobs();
     const [activetab, setActiveTab] = useState('Dashboard');
+    const navigate = useNavigate();
 
+    const overviewStats = [
+        { label: 'All Jobs', count: jobs.length, icon: TotalJobs },
+        { label: 'Total Companies', count: 50, icon: TotalCompanies },
+        { label: 'Total Employers', count: 50, icon: TotalEmployers ,query:"Employers" },
+        { label: 'Total Jobseekers', count: Alluser.length, icon: TotalJobseekers,query:"Jobseeker"  },
+    ];
+
+    const jobAds = [
+        { title: "Investment ESG Analyst", code: "W1", new: 185, waiting: 0, total: 250 },
+        { title: "Finance Analyst", code: "W1", new: 120, waiting: 20, total: 180 },
+        { title: "Marketing Specialist", code: "W1", new: 140, waiting: 15, total: 210 },
+        { title: "Software Engineer", code: "W1", new: 135, waiting: 25, total: 200 },
+    ];
+
+
+const handleViewMore = (stat) => {
+    if (!stat.query) {
+        return;
+    }
+    
+    let roleQuery = '';
+    if (stat.query === "Employers") {
+        roleQuery = 'employer';
+    } else if (stat.query === "Jobseeker") {
+        roleQuery = 'candidate';
+    }
+    setActiveTab('User Management');
+    navigate('/Job-portal/admin/Dashboard', { state: { filterRole: roleQuery } }); 
+};
     return (
         <>
             <EHeader />
@@ -70,7 +101,7 @@ export const AdminDashboard = () => {
                                 <div className='Enav-item'>Activity Monitoring</div>
                             </div>
                         </div>
-                        <div onClick={() => setActiveTab('User Management')} className={activetab === "User Management" ? "Admin-Active" : 'Admin-Navbar'}>
+                        <div onClick={() => {setActiveTab('User Management'),navigate('/Job-portal/admin/Dashboard')}} className={activetab === "User Management" ? "Admin-Active" : 'Admin-Navbar'}>
                             <div className='Admin-Navbox'>
                                 {activetab === "User Management" ? <img src={UserManagementACT} width={15} height={15} alt="dashboard" />
                                     : <img src={UserManagements} width={15} height={15} alt="User Management" />}
@@ -110,7 +141,7 @@ export const AdminDashboard = () => {
                             <div className='Admin-Navbox'>
                                 {activetab === "settings" ? <img src={SettingsAct} width={15} height={15} alt="dashboard" />
                                     : <img src={Settings} width={15} height={15} alt="settings" />}
-                                <div className='Enav-item'>settings</div>
+                                <div className='Enav-item'>Settings</div>
                             </div>
                         </div>
                     </div>
@@ -118,262 +149,84 @@ export const AdminDashboard = () => {
                 </div>
                 <div className='Admin-MainSec'>
                     {activetab === 'Dashboard' && (
-                        <div>
-                            <div className='Admin-Welcome-Container'>
-                                <p className='Admin-Welcome-Note' >Welcome Back, Admin</p>
-                                <p className='Admin-Welcome-para'>Your team’s success start here. lets make progress together!</p>
-                            </div>
+                    <div>
+                        <div className='Admin-Welcome-Container'>
+                            <p className='Admin-Welcome-Note'>Welcome Back, Admin</p>
+                            <p className='Admin-Welcome-para'>Your team’s success start here. lets make progress together!</p>
+                        </div>
 
-                            <div className='Admin-Overview'>
-                                <div className='Admin-Overview-Container'>
+                        <div className='Admin-Overview'>
+                            {overviewStats.map((stat, index) => (
+                                <div className='Admin-Overview-Container' key={index}>
                                     <div className='Admin-Overview-Data'>
                                         <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center" }}>
-                                            <img src={TotalJobs} width={25} height={25} alt="Jobs" />
-                                            <p style={{ fontSize: "24px", fontWeight: "700", color: "#484848" }}>{jobs.length}</p>
+                                            <img src={stat.icon} width={25} height={25} alt={stat.label} />
+                                            <p style={{ fontSize: "24px", fontWeight: "700", color: "#484848" }}>{stat.count}</p>
                                         </div>
                                         <div>
-                                            <p style={{ fontWeight: "bold", color: "#484848" }}>All Jobs</p>
+                                            <p style={{ fontWeight: "bold", color: "#484848" }}>{stat.label}</p>
                                         </div>
                                     </div>
                                     <div className='Admin-Viewmore'>
-                                        <p style={{ fontSize: "14px", fontWeight: "500" }}>View more</p>
-                                        <img src={ViewMore} width={30} height={30} alt="Viewmore" />
-                                    </div>
-
-                                </div>
-                                <div className='Admin-Overview-Container'>
-                                    <div className='Admin-Overview-Data'>
-                                        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                            <img src={TotalCompanies} width={25} height={25} alt="Jobs" />
-                                            <p style={{ fontSize: "24px", fontWeight: "700", color: "#484848" }}>50</p>
-                                        </div>
-                                        <div>
-                                            <p style={{ fontWeight: "bold", color: "#484848" }}>Total Companies</p>
-                                        </div>
-                                    </div>
-                                    <div className='Admin-Viewmore'>
-                                        <p style={{ fontSize: "14px", fontWeight: "500" }}>View more</p>
-                                        <img src={ViewMore} width={30} height={30} alt="Viewmore" />
+                                        <p onClick={()=>handleViewMore(stat)}
+                                        style={{ fontSize: "14px", fontWeight: "500" }  }>View more</p>
+                                        <img  src={ViewMore} width={30} height={30} alt="Viewmore" />
                                     </div>
                                 </div>
-                                <div className='Admin-Overview-Container'>
-                                    <div className='Admin-Overview-Data'>
-                                        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                            <img src={TotalEmployers} width={25} height={25} alt="Jobs" />
-                                            <p style={{ fontSize: "24px", fontWeight: "700", color: "#484848" }}>50</p>
-                                        </div>
-                                        <div>
-                                            <p style={{ fontWeight: "bold", color: "#484848" }} >Total Employers</p>
-                                        </div>
-                                    </div>
-
-                                    <div className='Admin-Viewmore'>
-                                        <p style={{ fontSize: "14px", fontWeight: "500" }}>View more</p>
-                                        <img src={ViewMore} width={30} height={30} alt="Viewmore" />
-                                    </div>
-
-                                </div>
-                                <div className='Admin-Overview-Container'>
-                                    <div className='Admin-Overview-Data'>
-                                        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                            <img src={TotalJobseekers} width={25} height={25} alt="Total Jobseekers" />
-                                            <p style={{ fontSize: "24px", fontWeight: "700", color: "#484848" }}>{Alluser.length}</p>
-                                        </div>
-                                        <div>
-                                            <p style={{ fontWeight: "bold", color: "#484848" }}>Total Jobseekers</p>
-                                        </div>
-                                    </div>
-
-                                    <div className='Admin-Viewmore'>
-                                        <p style={{ fontSize: "14px", fontWeight: "500" }}>View more</p>
-                                        <img src={ViewMore} width={30} height={30} alt="Viewmore" />
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>            
-                            <div className='Admin-Job-Ads-Cont'>
-                                    <div className="Admin-jobads-header">
-                                        <h2>Your Job Ads</h2>
-                                        <div className="Admin-jobads-buttons">
-                                            <button className="Admin-view-btn">VIEW ALL</button>
-                                            <button className="Admin-create-btn">Create Job Ad +</button>
-                                        </div>
-                                    </div>
-                                    <div className="Admin-job-card">
-                                        <div className="Admin-job-left">
-                                            <p className="Admin-job-title">Investment ESG Analyst</p>
-                                            <span className="Admin-job-under">W1</span>
-                                        </div>
-                                        <div className="Admin-job-right">
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">185</p>
-                                                <span>New</span>
-                                            </div>
-
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">0</p>
-                                                <span>Waiting</span>
-                                            </div>
-
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">250</p>
-                                                <span>Total</span>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <div className="Admin-job-card">
-                                        <div className="Admin-job-left">
-                                            <p className="Admin-job-title">Finance Analyst</p>
-                                            <span className="Admin-job-under">W1</span>
-                                        </div>
-                                        <div className="Admin-job-right">
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">120</p>
-                                                <span>New</span>
-                                            </div>
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">20</p>
-                                                <span>Waiting</span>
-                                            </div>
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">180</p>
-                                                <span>Total</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="Admin-job-card">
-                                        <div className="Admin-job-left">
-                                            <p className="Admin-job-title">
-                                                Marketing Specialist
-                                            </p>
-                                            <span className="Admin-job-under">
-                                                W1
-                                            </span>
-                                        </div>
-                                        <div className="Admin-job-right">
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">140</p>
-                                                <span>New</span>
-                                            </div>
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">15</p>
-                                                <span>Waiting</span>
-                                            </div>
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">210</p>
-                                                <span>Total</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="Admin-job-card">
-
-                                        <div className="Admin-job-left">
-                                            <p className="Admin-job-title">
-                                                Software Engineer
-                                            </p>
-                                            <span className="Admin-job-under">
-                                                W1
-                                            </span>
-                                        </div>
-
-                                        <div className="Admin-job-right">
-
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">135</p>
-                                                <span>New</span>
-                                            </div>
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">25</p>
-                                                <span>Waiting</span>
-                                            </div>
-
-                                            <div className="Ads-Count-Cont">
-                                                <p className="Ads-Count">200</p>
-                                                <span>Total</span>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-                                <div className='Admin-Experience'><AdminExperience /></div>
-                                
-
-                                <div className='Admin-overview-cont' > <TotalOverview /></div>
-                                {/* <div className="Admin-Amount-bal-cont">
-
-                                    <div className="balance-card">
-                                        <h3 className="card-title">Account Balance</h3>
-                                        <hr className="divider" />
-                                        <div className="stats-row">
-                                            <div className="stat-item">
-                                                <span className="stat-value">264</span>
-                                                <span className="stat-label">Purchased</span>
-                                            </div>
-                                            <div className="stat-item border-left">
-                                                <span className="stat-value">250</span>
-                                                <span className="stat-label">Remaining</span>
-                                            </div>
-                                        </div>
-                                        <p className="footer-link">
-                                            Subscription(s) <a href="#">Expiry Dates</a>
-                                        </p>
-                                    </div>
-
-
-                                    <div className="balance-card margin-top">
-                                        <h3 className="card-title">Video Resume & CV Database</h3>
-                                        <hr className="divider" />
-                                        <p className="card-desc">
-                                            Buy 1 month Access online or <a href="#">get in touch</a> <br /> with your account Manager
-                                        </p>
-                                    </div>
-                                </div> */}
-                            </div>
-                            
-                            {/* <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-                                
-                                <div className='Adminpending-total'>
-                                    <div className="Adminpending-container">
-                                        <div className='Adminpending-head'>
-                                            <h4>Pending quizs</h4>
-                                        </div>
-                                        <div className='Adminpending-subhead'>
-                                            <p>Applicants By Experience Level</p>
-                                        </div><hr />
-                                        <div className='Adminquiz-content'>
-                                            <p>Which type of work environment do you prefer?</p>
-                                        </div><hr />
-                                        <div className='Adminquiz-content'>
-                                            <p>What type of task do you enjoy the most?</p>
-                                        </div><hr />
-                                        <div className='Adminquiz-content'>
-                                            <p>Which industry are you most interested in working?</p>
-                                        </div><hr />
-                                        <div className='Adminquiz-content'>
-                                            <p>How do you pressure and tight deadlines?</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className='Admin-calender'><Calendar /></div>
-                            </div> */}
+                            ))}
                         </div>
+ 
+                        <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+                            <div className='Admin-Job-Ads-Cont'>
+                                <div className="Admin-jobads-header">
+                                    <h2>Your Job Ads</h2>
+                                    <div className="Admin-jobads-buttons">
+                                        <button className="Admin-create-btn">VIEW ALL</button>
+                                        {/* <button className="Admin-create-btn">Create Job Ad +</button> */}
+                                    </div>
+                                </div>
+
+                                {jobAds.map((job, index) => (
+                                    <div className="Admin-job-card" key={index}>
+                                        <div className="Admin-job-left">
+                                            <p className="Admin-job-title">{job.title}</p>
+                                            <span className="Admin-job-under">{job.code}</span>
+                                        </div>
+                                        <div className="Admin-job-right">
+                                            <div className="Ads-Count-Cont">
+                                                <p className="Ads-Count">{job.new}</p>
+                                                <span>Highlighted</span>
+                                            </div>
+                                            <div className="Ads-Count-Cont">
+                                                <p className="Ads-Count">{job.waiting}</p>
+                                                <span>Non-Highlighted</span>
+                                            </div>
+                                            <div className="Ads-Count-Cont">
+                                                <p className="Ads-Count">{job.total}</p>
+                                                <span>Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        
+                        <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+                            <div className='Admin-Experience'><AdminExperience /></div>
+                            <div className='Admin-overview-cont'><TotalOverview /></div>
+                        </div>
+                    </div>
                     )}
-                    {activetab === 'Job Monitoring' && <JobMonitoring/>}
-                    {activetab === 'Activity Monitoring' && ( <ActivityMonitor/> )}
-                    {activetab === 'User Management' && ( <UserManagement/>)}
-                    {activetab === 'Role Management' && (<RoleManagement/>)}
-                    {activetab === 'Membership' && (<Membership/> )}
+
+                    {activetab === 'Job Monitoring' && <JobMonitoring />}
+                    {activetab === 'Activity Monitoring' && (<ActivityMonitor />)}
+                    {activetab === 'User Management' && (<UserManagement />)}
+                    {activetab === 'Role Management' && (<RoleManagement />)}
+                    {activetab === 'Membership' && (<Membership />)}
                     {activetab === 'Tickets' && (<h3>Tickets</h3>)}
-                    {activetab === 'Reports' && (<AdminReports/>)}
-                    {activetab === 'settings' && (<AdminSettings/>)}
+                    {activetab === 'Reports' && (<AdminReports />)}
+                    {activetab === 'settings' && (<AdminSettings />)}
                 </div>
             </div>
         </>
