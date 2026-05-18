@@ -331,7 +331,7 @@ export const EmployerDashboard = () => {
             </div>
             <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} onConfirm={handleLogoutConfirm}
             />
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };

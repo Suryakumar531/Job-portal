@@ -6,17 +6,21 @@ import { MembershipPlans } from './MembershipPlans';
 import { PaymentMethods } from './PaymentMethods';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { useJobs } from '../JobContext';
 
 export const PlansBilling = () => {
     const [pendingInvoices, setPendingInvoices] = useState([]);
     const [view, setView] = useState('overview');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [planStatus, setPlanStatus] = useState('ACTIVE');
+    // const [planStatus, setPlanStatus] = useState('ACTIVE');
     const [paymentTab, setPaymentTab] = useState('card');
     const [isCardOnly, setIsCardOnly] = useState(false);
     const [cardToDelete, setCardToDelete] = useState(null);
     const [additionalPlan, setAdditionalPlan] = useState(null);
+    const {currentEmployer,setCurrentEmployer}=useJobs()
 
+    const planStatus = currentEmployer?.membership?.active ? 'ACTIVE' : 'CANCELLED';
+    const membershipData = currentEmployer?.membership;
 
     const getLiveStatus = (itemDate, currentStatus) => {
         if (currentStatus === "CANCELLED" || currentStatus === "ON-HOLD") return currentStatus;
@@ -33,27 +37,40 @@ export const PlansBilling = () => {
 
 
     // ---  BILLING HISTORY STATE (With detailed data for PDF) ---
+    // const [billingHistory, setBillingHistory] = useState([
+    //     {
+    //         id: "INV-1111",
+    //         plan: "BASIC / STARTER",
+    //         date: "DECEMBER 10, 2025",
+    //         price: "699.00",
+    //         status: "ACTIVE",
+    //         method: "CARD",
+    //         subtotal: "592.37",
+    //         cgst: "53.31",
+    //         sgst: "53.31"
+    //     }
+    // ]);
+
     const [billingHistory, setBillingHistory] = useState([
         {
-            id: "INV-1111",
-            plan: "BASIC / STARTER",
-            date: "DECEMBER 10, 2025",
-            price: "699.00",
-            status: "ACTIVE",
+            id: membershipData.lastPaymentId || "INV-0000",
+            plan: membershipData.planName || "PREVIOUS PLAN",
+            date: membershipData.startDate || "N/A",
+            price: membershipData.price || "0.00",
+            status: planStatus,
             method: "CARD",
-            subtotal: "592.37",
-            cgst: "53.31",
-            sgst: "53.31"
+            subtotal: (membershipData.price * 0.82).toFixed(2), 
+            cgst: (membershipData.price * 0.09).toFixed(2),
+            sgst: (membershipData.price * 0.09).toFixed(2)
         }
     ]);
 
-    const [activePlan, setActivePlan] = useState({
-        name: 'Premium / Enterprise',
-        price: '699.00',
-        status: 'ACTIVE',
-        nextInvoice: 'April 10, 2026',
-        planType: 'Monthly'
-    });
+    const [activePlan, setActivePlan] = useState(currentEmployer.membership)
+        // name: 'Premium / Enterprise',
+        // price: '699.00',
+        // status: 'ACTIVE',
+        // nextInvoice: 'April 10, 2026',
+        // planType: 'Monthly'
 
     const [savedCards, setSavedCards] = useState([
         { id: 1, name: 'James Calzon', number: '**** 8721', expiry: '12/2006', type: 'visa', isDefault: true }
@@ -191,6 +208,8 @@ export const PlansBilling = () => {
     const handleUpgrade = (newPlan, billingCycle) => {
         const baseMonthly = parseInt(newPlan.price.replace(/[^0-9]/g, '')) || 0;
         let multiplier = billingCycle === 'Yearly' ? 12 : (billingCycle === '6 Months' ? 6 : 1);
+        const today = new Date();
+        const expiry = new Date();
 
         const subtotal = baseMonthly * multiplier;
         const tax = subtotal * 0.18;
@@ -204,16 +223,19 @@ export const PlansBilling = () => {
             return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         };
 
-        setAdditionalPlan({
-            name: newPlan.name,
-            price: totalAmount.toFixed(2),
-            subtotal: subtotal.toFixed(2),
-            cgst: (tax / 2).toFixed(2),
-            sgst: (tax / 2).toFixed(2),
-            planType: billingCycle,
-            nextInvoice: calculateNextInvoice(billingCycle)
-        });
 
+        setAdditionalPlan({
+        name: newPlan.name,
+        level: newPlan.level,
+        price: totalAmount.toFixed(2),
+        subtotal: subtotal.toFixed(2),
+        cgst: (tax / 2).toFixed(2),
+        sgst: (tax / 2).toFixed(2),
+        planType: newPlan.billingCycle,
+        startDate: today.toISOString().split('T')[0],
+        expiryDate: expiry.toISOString().split('T')[0],
+        nextInvoice: calculateNextInvoice(newPlan.billingCycle)
+    });
         setIsCardOnly(false);
         setView('payment');
     };
@@ -239,6 +261,7 @@ export const PlansBilling = () => {
 
         if (additionalPlan) {
             const newInvoiceId = generateInvoiceId();
+
             const newEntry = {
                 id: newInvoiceId,
                 plan: additionalPlan.name,
@@ -273,16 +296,46 @@ export const PlansBilling = () => {
                 ]);
 
                 setPendingInvoices(prev => [...prev, newEntry]);
-                setActivePlan({
-                    name: additionalPlan.name,
+            
+
+           setCurrentEmployer(prev => ({
+                ...prev,
+                membership: {
+                    planLevel: additionalPlan.level,
+                    planName: additionalPlan.name,
+                    active: true,
+                    startDate: new Date().toISOString().split('T')[0],
+                    expiryDate: additionalPlan.nextInvoice, 
+                    billingCycle: additionalPlan.planType,
                     price: additionalPlan.price,
-                    status: 'ACTIVE',
-                    nextInvoice: additionalPlan.nextInvoice,
-                    planType: additionalPlan.planType
-                });
+                    lastPaymentId: freshInvoiceId
+                }
+            }));
+
+            // const newEntry = {
+            //     id: freshInvoiceId,
+            //     plan: additionalPlan.name,
+            //     date: getCurrentDateFormatted(),
+            //     price: additionalPlan.price,
+            //     status: "ACTIVE",
+            //     method: newMethod.brand.toUpperCase()
+            // };
+            // setBillingHistory(prev => [newEntry, ...prev]);
+            
+            // setView('overview');
+            // alert("Plan successfully upgraded in Employer Profile!");
+        
+                setActivePlan({
+                name: additionalPlan.name,
+                price: additionalPlan.price,
+                status: 'ACTIVE',
+                nextInvoice: additionalPlan.nextInvoice,
+                planType: additionalPlan.planType
+            });
+            
 
                 setAdditionalPlan(null);
-                setPlanStatus('ACTIVE');
+               
                 setView('overview');
                 alert(`Payment successful via ${newMethod.brand}`);
             }, 1500);
@@ -296,23 +349,69 @@ export const PlansBilling = () => {
     const handleAddCard = () => { setPaymentTab('card'); setView('payment'); };
     const handleToggleModal = () => setIsModalOpen(!isModalOpen);
 
-
     const handleConfirmCancellation = () => {
-        setPlanStatus('CANCELLED');
-        setBillingHistory(prev => prev.map((item, index) => {
-            if (index === 0 && item.status === "ACTIVE") {
-                return { ...item, status: "CANCELLED" };
-            }
-            return item;
-        }));
-        setIsModalOpen(false);
-    };
-    const handleReactivate = () => {
-        setPlanStatus('ACTIVE');
-        setActivePlan(prev => ({ ...prev, status: 'ACTIVE' }));
+    const cancelDate = getCurrentDateFormatted();
+    
+    const cancellationEntry = {
+        id: membershipData.lastPaymentId || "INV-0000",
+        plan: membershipData.planName, 
+        date: cancelDate, 
+        price: "0.00", 
+        status: "CANCELLED",
+        method: "N/A",
+        subtotal: "0.00",
+        cgst: "0.00",
+        sgst: "0.00"
     };
 
-    // Call this if payment gateway returns "Processing"
+    setBillingHistory(prev => [cancellationEntry, ...prev]);
+
+    setCurrentEmployer(prev => ({
+        ...prev,
+        membership: {
+            ...prev.membership,
+            active: false,
+        }
+    }));
+
+    setActivePlan(prev => ({
+        ...prev,
+        status: 'CANCELLED'
+    }));
+
+    setIsModalOpen(false);
+};
+
+    
+    const handleReactivate = () => {
+    const reactivateDate = getCurrentDateFormatted();
+    
+    const reactivateEntry = {
+        id: currentEmployer?.membership?.lastPaymentId || generateInvoiceId(),
+        plan: currentEmployer?.membership?.planName || activePlan.name,
+        date: reactivateDate, 
+        price: "0.00", 
+        status: "ACTIVE",
+        method: "N/A",
+        subtotal: "0.00",
+        cgst: "0.00",
+        sgst: "0.00"
+    };
+
+    setBillingHistory(prev => [reactivateEntry, ...prev]);
+
+    setCurrentEmployer(prev => ({
+        ...prev,
+        membership: {
+            ...prev.membership,
+            active: true,
+        }
+    }));
+    setActivePlan(prev => ({ 
+        ...prev, 
+        status: 'ACTIVE' 
+    }));
+};
     const handlePaymentProcessing = (planData) => {
         const procEntry = {
             ...planData,
@@ -400,7 +499,7 @@ export const PlansBilling = () => {
                 <div className="PlansBilling-plan-info">
                     <p className="PlansBilling-label">Current Plan</p>
                     <div className="PlansBilling-title-row">
-                        <h2 className="PlansBilling-plan-name">{activePlan.name}</h2>
+                        <h2 className="PlansBilling-plan-name">{membershipData.planName}</h2>
                         <span className={`PlansBilling-status-badge ${planStatus === 'ACTIVE' ? 'PlansBilling-status-active' : 'PlansBilling-status-cancelled'}`}>
                             {planStatus}
                         </span>
@@ -409,7 +508,7 @@ export const PlansBilling = () => {
                 </div>
                 <div className="PlansBilling-plan-actions">
                     <span className="PlansBilling-main-price">
-                        ₹ {activePlan.price} <small>/{activePlan.planType === 'Monthly' ? 'month' : activePlan.planType === '6 Months' ? '6 months' : 'year'}</small>
+                        ₹ {membershipData.price} <small>/{membershipData.billingCycle === 'Monthly' ? 'Month' : membershipData.billingCycle === '6 Months' ? '6 months' : 'Year'}</small>
                     </span>
                     <div className="PlansBilling-button-group">
                         {planStatus === 'ACTIVE' ? (
@@ -423,20 +522,7 @@ export const PlansBilling = () => {
             </div>
 
             <div className="PlansBilling-grid-row">
-                {/* <div className="PlansBilling-card PlansBilling-invoice-box">
-                    <h3 className="PlansBilling-section-title">Next Invoices</h3>
-                    <p className="PlansBilling-invoice-price">₹ {additionalPlan ? additionalPlan.price : "0.00"}/-</p>
-                    <div className="PlansBilling-invoice-details">
-                        <div className="PlansBilling-detail-item">
-                            <span className="PlansBilling-detail-label">Plan Type</span>
-                            <span className="PlansBilling-detail-value">: {activePlan.planType}</span>
-                        </div>
-                        <div className="PlansBilling-detail-item">
-                            <span className="PlansBilling-detail-label">Next Invoice</span>
-                            <span className="PlansBilling-detail-value">: {planStatus === 'ACTIVE' ? activePlan.nextInvoice : 'N/A'}</span>
-                        </div>
-                    </div>
-                </div> */}
+                
                 <div className="PlansBilling-card PlansBilling-invoice-box" style={{ position: 'relative' }}>
                     <h3 className="PlansBilling-section-title">Next Invoices</h3>
 

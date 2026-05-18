@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './MembershipPlans.css';
+import { useJobs } from '../JobContext';
 
 export const MembershipPlans = ({ onSelectPlan }) => {
     const [activeTab, setActiveTab] = useState('Monthly');
+    const{getFeaturesForPlan}=useJobs()
 
 
     const pricingData = {
@@ -31,42 +33,42 @@ export const MembershipPlans = ({ onSelectPlan }) => {
     };
 
 
-    const getFeaturesForPlan = (planLevel) => {
-        if (planLevel === 1) { // Starter
-            return [
-                { text: '3 Jobs Posting', isIncluded: true },
-                { text: 'Basic Employer Profile', isIncluded: true },
-                { text: 'Standard Support', isIncluded: true },
-                { text: 'Account Manager', isIncluded: false },
-                { text: 'Analytics', isIncluded: false },
-                { text: 'Candidate Search', isIncluded: false },
-                { text: 'Highlight Your Job Listing', isIncluded: false },
-            ];
-        }
-        if (planLevel === 2) { // Business
-            return [
-                { text: '30 Jobs Posting', isIncluded: true },
-                { text: 'Featured Employer Profile', isIncluded: true },
-                { text: 'Resume Database Access', isIncluded: true },
-                { text: 'Priority Support', isIncluded: true },
-                { text: 'Basic Account Manager', isIncluded: true },
-                { text: 'Basic Analytics', isIncluded: true },
-                { text: 'Limited Candidate Search', isIncluded: true },
-                { text: 'Highlight Your Job Listing', isIncluded: false },
-            ];
-        }
-        // Enterprise 
-        return [
-            { text: 'Unlimited Jobs Posting', isIncluded: true },
-            { text: 'Premium Employer Profile', isIncluded: true },
-            { text: 'Full Resume Database Access', isIncluded: true },
-            { text: 'Priority Support', isIncluded: true },
-            { text: 'Dedicated Account Manager', isIncluded: true },
-            { text: 'Advanced Analytics', isIncluded: true },
-            { text: 'Unlimited Candidate Search', isIncluded: true },
-            { text: 'Highlight Your Job Listing', isIncluded: true },
-        ];
-    };
+    // const getFeaturesForPlan = (planLevel) => {
+    //     if (planLevel === 1) { // Starter
+    //         return [
+    //             { text: '3 Jobs Posting', isIncluded: true },
+    //             { text: 'Basic Employer Profile', isIncluded: true },
+    //             { text: 'Standard Support', isIncluded: true },
+    //             { text: 'Account Manager', isIncluded: false },
+    //             { text: 'Analytics', isIncluded: false },
+    //             { text: 'Candidate Search', isIncluded: false },
+    //             { text: 'Highlight Your Job Listing', isIncluded: false },
+    //         ];
+    //     }
+    //     if (planLevel === 2) { // Business
+    //         return [
+    //             { text: '30 Jobs Posting', isIncluded: true },
+    //             { text: 'Featured Employer Profile', isIncluded: true },
+    //             { text: 'Resume Database Access', isIncluded: true },
+    //             { text: 'Priority Support', isIncluded: true },
+    //             { text: 'Basic Account Manager', isIncluded: true },
+    //             { text: 'Basic Analytics', isIncluded: true },
+    //             { text: 'Limited Candidate Search', isIncluded: true },
+    //             { text: 'Highlight Your Job Listing', isIncluded: false },
+    //         ];
+    //     }
+    //     // Enterprise 
+    //     return [
+    //         { text: 'Unlimited Jobs Posting', isIncluded: true },
+    //         { text: 'Premium Employer Profile', isIncluded: true },
+    //         { text: 'Full Resume Database Access', isIncluded: true },
+    //         { text: 'Priority Support', isIncluded: true },
+    //         { text: 'Dedicated Account Manager', isIncluded: true },
+    //         { text: 'Advanced Analytics', isIncluded: true },
+    //         { text: 'Unlimited Candidate Search', isIncluded: true },
+    //         { text: 'Highlight Your Job Listing', isIncluded: true },
+    //     ];
+    // };
 
     return (
         <div className="MembershipPlans">
@@ -116,10 +118,12 @@ export const MembershipPlans = ({ onSelectPlan }) => {
                             <button
                                 className={`MembershipPlans-btn-start ${plan.color}`}
                                 onClick={() => {
-                                    const baseMonthly = parseInt(plan.price.replace(/[^0-9]/g, '')) || 0;
+                                    const baseMonthly = parseFloat(plan.price.replace(/[^0-9]/g, '')) || 0;
                                     let multiplier = 1;
-                                    if (activeTab === '6 Months') multiplier = 6;
-                                    if (activeTab === 'Yearly') multiplier = 12;
+                                    let monthsToAdd = 1;
+
+                                    if (activeTab === '6 Months') multiplier = 6;monthsToAdd = 6;
+                                    if (activeTab === 'Yearly') multiplier = 12;monthsToAdd = 12;
 
                                     const subtotal = baseMonthly * multiplier;
                                     const cgst = subtotal * 0.09; // 9% CGST
@@ -131,8 +135,10 @@ export const MembershipPlans = ({ onSelectPlan }) => {
                                         subtotal,
                                         totalWithTax,
                                         cgst,
-                                        sgst
-                                    }, activeTab);
+                                        sgst,
+                                        billingCycle: activeTab,
+                                        status: 'active'
+                                    });
                                 }}
                             >
                                 Get started

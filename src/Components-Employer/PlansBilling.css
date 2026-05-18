@@ -671,8 +671,10 @@ Container .PlansBilling-container {
 
 .status-pill.cancelled {
     text-align: center;
-    background: #FD7E14;
+    background: #ffedd5;
     border-radius: 9999px;
+    color: #f97316;
+    border: 1px solid #fed7aa;
 }
 
 .status-pill.pending {
