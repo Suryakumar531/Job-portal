@@ -57,11 +57,12 @@ export const ContactUs = () => {
     contact: formValues.contact,
     message: formValues.message,
     status: "Pending",
-    date: new Date().toLocaleDateString()
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   };
 
   setEnquiries((prevEnquiries) => [...prevEnquiries, newEnquiry]);
-  alert("Message sent successfully!");
+  alert("Submitted Succesfully!");
   setFormValues(initialValues);
 };
   return (

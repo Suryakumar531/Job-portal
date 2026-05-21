@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import './AdminTickets.css';
 import TicketIcon from '../assets/AdminAssets/TicketsIcon.png';
+import Priority from '../assets/AdminAssets/Priority.png';
+import AdminCategory from '../assets/AdminAssets/AdminCategory.png';
+import AdminStatus from '../assets/AdminAssets/AdminStatus.png';
+import Enq from '../assets/AdminAssets/ApplicationSet.png';
+import dwd from '../assets/AdminAssets/Download.png';
 import { useJobs } from '../JobContext';
 
 export const AdminTickets = () => {
@@ -92,7 +97,7 @@ const handleDeleteTicket = () => {
                                 <td>{ticket.subject}</td>
                                 <td>{ticket.name}</td>
                                 <td>{ticket.category}</td>
-                                <td><span  className={`Escalation-priority ${ticket.priority}`}>{ticket.priority}</span></td>
+                                <td><span style={{display:"flex",justifyContent:"center"}} className={`Escalation-priority ${ticket.priority}`}>{ticket.priority}</span></td>
                                 <td>{ticket.date}</td>
                                 <td>{ticket.resolvedon? ticket.resolvedon : ticket.status}</td>
                                 <td><button style={{background:"#1E88E5",color:"white",borderRadius:"5px",
@@ -126,18 +131,20 @@ const handleDeleteTicket = () => {
           </div>
           
         </div>
-
         <div className="Adm-tic-meta-info">
           <div className="Adm-tic-meta-row">
-            <span className="Adm-tic-meta-label">Priority :</span>
+            <img src={Priority}  width={15} height={15} alt="Priority" />
+            <span style={{paddingLeft:"15px"}} className="Adm-tic-meta-label"> Priority :</span>
             <span className="Adm-tic-meta-value Adm-tic-priority-medium">{selectedTickets.priority}</span>
           </div>
           <div className="Adm-tic-meta-row">
-            <span className="Adm-tic-meta-label">Category :</span>
+             <img src={AdminCategory} width={15} height={15} alt="AdminCategory" />
+            <span style={{paddingLeft:"15px"}} className="Adm-tic-meta-label"> Category :</span>
             <span className="Adm-tic-meta-value">{selectedTickets.category}</span>
           </div>
           <div className="Adm-tic-meta-row">
-            <span className="Adm-tic-meta-label">Status :</span>
+             <img  src={AdminStatus} width={15} height={15} alt="AdminStatus" />
+            <span style={{paddingLeft:"15px"}} className="Adm-tic-meta-label"> Status :</span>
             <span  className={`AdminTickets-status ${selectedTickets.status.replace(/\s/g, "")}`}>{selectedTickets.status}</span>
           </div>
         </div>
@@ -145,27 +152,27 @@ const handleDeleteTicket = () => {
        <div className="Adm-tic-user-section">
             <h2 className="Adm-tic-section-title">User Information</h2>
             <div className="Adm-tic-user-grid">
-              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Name :</span><span className="Adm-tic-grid-val Adm-tic-link">{selectedTickets.name}</span></div>
-              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mobile number :</span><span className="Adm-tic-grid-val">+91 9876543210</span></div>
-              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mail ID :</span><span className="Adm-tic-grid-val">{selectedTickets.email}</span></div>
-              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">User :</span><span className="Adm-tic-grid-val">Jobseeker</span></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Name :</span> <input type="text" disabled value={selectedTickets.name} /></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mobile number :</span><input type='text' disabled value={selectedTickets.mobile}/></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mail ID :</span><input disabled value={selectedTickets.email}/></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">User :</span><input disabled value={selectedTickets.category}/></div>
             </div>
           </div>
 
       <div className="Adm-tic-main-content">
         <div className="Adm-tic-left-panel">
           <div className="Adm-tic-details-section">
-            <h2 className="Adm-tic-section-title">Description</h2>
+            <h2 className="Adm-tic-section-title">Description :</h2>
             <p className="Adm-tic-description">{selectedTickets.message}</p>
             
             
             <div className="Adm-tic-attachment-block">
               <span className="Adm-tic-attachment-label">Attachment</span>
               <div className="Adm-tic-attachment-card">
-                <span className="Adm-tic-file-icon">📄</span>
+                <img style={{paddingRight:"10px"}} src={Enq} width={15} alt="AdminStatus" />
                 <span className="Adm-tic-file-name">Screenshot_2026-05-11.png</span>
                 <span className="Adm-tic-file-size">245 KB</span>
-                <button className="Adm-tic-download-btn">📥</button>
+                <img src={dwd} width={15}alt='download' className="Adm-tic-download-btn"/>
               </div>
             </div>
           </div>
@@ -173,7 +180,7 @@ const handleDeleteTicket = () => {
         
       </div>
       <div className="Adm-tic-top-actions">
-          <button onClick={()=>setIsModalOpen(true)} className="Adm-tic-btn-action">Edit Status</button>
+          <button onClick={()=>setIsModalOpen(!isModalOpen)} className="Adm-tic-btn-action">Edit Status</button>
           <button onClick={handleDeleteTicket} className="Adm-tic-btn-action Adm-tic-btn-delete">Delete</button>
         </div>
 
@@ -181,19 +188,20 @@ const handleDeleteTicket = () => {
         <div className="status-modal-overlay">
             <div className="status-modal-content">
                 <h3>Select Status</h3>
-                
+               
                 <div className="status-modal-options">
                     <button onClick={() => handleStatusSelection("In Progress")}>In Progress</button>
                     <button onClick={() => handleStatusSelection("Hold")}>Hold</button>
                     <button onClick={() => handleStatusSelection("Resolved")}>Resolved</button>
                 </div>
-
+ 
                 <button className="status-modal-cancel" onClick={() => setIsModalOpen(false)}>
                     Cancel
                 </button>
             </div>
         </div>
-    )}
+        )}
+    
     </div>
 )}
 

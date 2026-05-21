@@ -54,7 +54,7 @@
     color: #111827;
     border-bottom: 1px solid #f1f5f9;
     text-align: left;
-    font-weight: 500;
+    font-weight: 400;
 }
  
 .AdminTickets-status{
@@ -70,16 +70,26 @@
 .AdminTickets-status.Pending{
     background: #fef3c7;
     color: #92400e;
+    width: 50px;
+    padding-left: 10px;
 }
  
 .AdminTickets-status.Resolved{
     background: #dcfce7;
     color: #166534;
+    width: 50px;
+    padding-left: 10px;
 }
  
 .AdminTickets-status.InProgress{
     background: #dbeafe;
     color: #1d4ed8;
+}
+.AdminTickets-status.Hold{
+    background: #f5d72c;
+    color: #535249;
+    width: 50px;
+    padding-left: 10px;
 }
  
 .AdminTickets-status option{
@@ -88,11 +98,10 @@
 }
 
 .Adm-tic-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  background: #ffffff;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
 }
 
 .Adm-tic-top-nav {
@@ -100,6 +109,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+  
 }
 
 .Adm-tic-btn-back {
@@ -145,14 +155,15 @@
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 25px;
+  padding: 25px 15px;
   margin-bottom: 25px;
+  border: 1px solid #e5e7eb;;
+  border-radius: 10px;
 }
 
 .Adm-tic-title-block {
   display: flex;
   gap: 15px;
-
   align-items: center;
 }
 
@@ -233,6 +244,10 @@
   line-height: 1.6;
   font-size: 15px;
   margin-bottom: 20px;
+  height: 100px;
+  border: 1px solid #e5e7eb;;
+  border-radius: 10px;
+  padding: 25px 10px;
 }
 
 .Adm-tic-attachment-block {
@@ -290,7 +305,12 @@
 
 .Adm-tic-grid-row {
   display: flex;
-  font-size: 15px;
+  align-items: center;
+}
+.Adm-tic-grid-row input{
+  width: 50%;
+  height: 10px;
+  color: #0084ff;
 }
 
 .Adm-tic-grid-label {
@@ -301,12 +321,75 @@
 .Adm-tic-grid-val {
   color: #222222;
   font-weight: 500;
+  height: 50px;
 }
 
 .Adm-tic-link {
   color: #0084ff;
   cursor: pointer;
 }
+
+/* .status-modal-overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.status-modal-content {
+    background: #ad1010;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 260px;
+    text-align: center;
+    
+}
+
+.status-modal-options {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 8px;
+    margin: 15px 0;
+    display: flex;
+    position: relative;
+    top: 0;
+    left:0;
+    background-color: #979494;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 9999;
+}
+
+.status-modal-options button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #898989;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    width: 100px;
+}
+
+.status-modal-options button:hover {
+    background: #eeeeee;
+}
+
+.status-modal-cancel {
+    border: none;
+    color: #ba1717;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 5px;
+    text-align: center;
+} */
 
 .status-modal-overlay {
     position: fixed;
@@ -320,7 +403,7 @@
     align-items: center;
     z-index: 9999;
 }
-
+ 
 /* Modal box content */
 .status-modal-content {
     background: #ffffff;
@@ -330,13 +413,13 @@
     width: 260px;
     text-align: center;
 }
-
+ 
 .status-modal-options {
     display: flex;
     gap: 8px;
     margin: 15px 0;
 }
-
+ 
 .status-modal-options button {
     padding: 10px;
     border: 1px solid #ddd;
@@ -345,11 +428,11 @@
     cursor: pointer;
     font-weight: 500;
 }
-
+ 
 .status-modal-options button:hover {
     background: #eeeeee;
 }
-
+ 
 .status-modal-cancel {
     background: none;
     border: none;
@@ -357,4 +440,30 @@
     text-decoration: underline;
     cursor: pointer;
     margin-top: 5px;
+}
+.Escalation-priority{
+    padding: 6px 20px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    width: 100px;
+   
+}
+ 
+.Escalation-priority.High{
+    background: #fee2e2;
+    color: #b91c1c;
+    width: 90px;
+}
+ 
+.Escalation-priority.Medium{
+    background: #fef3c7;
+    color: #92400e;
+    width: 90px;
+}
+ 
+.Escalation-priority.Low{
+    background: #dcfce7;
+    color: #166534;
+    width: 90px;
 }
