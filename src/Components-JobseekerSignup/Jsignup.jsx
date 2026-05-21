@@ -204,7 +204,6 @@ export const Jsignup = () => {
     }
 
     return (
-    <>
       <div className="otp-modal-overlay">
         <div className="otp-modal-content">
           <button className="back-arrow" onClick={() => {
@@ -313,12 +312,10 @@ export const Jsignup = () => {
           </p> */}
         </div>
       </div>
-      </>
     );
   }
 
   return (
-    <>
     <div className="j-sign-up-page">
       {/* Modals trigger based on state */}
       {showEmailOtp && renderOtpModal('email')}
@@ -444,6 +441,5 @@ export const Jsignup = () => {
         </form>
       </div>
     </div>
-   </>
   );
 }

@@ -5,7 +5,8 @@ import BackIcon from '../assets/BackICON.png';
 import { Footer } from '../Components-LandingPage/Footer';
 import { useLocation } from 'react-router-dom';
 import { Header } from './Header';
-import { FHeader } from '../Components-LandingPage/FHeader'
+import { FHeader } from './FHeader';
+
 
 
 export const FAQ = () => {

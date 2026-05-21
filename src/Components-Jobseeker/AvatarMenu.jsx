@@ -1,21 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import avatarIcon from "../assets/header_profile.png";
 import profileIcon from "../assets/icon_profile.png";
-import { LogoutModal } from "./LogoutModal";
 import settingsIcon from "../assets/icon_settings.png";
 import helpIcon from "../assets/icon_help.png";
 import "./AvatarMenu.css";
-
+import {LogoutModal} from "../Components-JobseekerSignup/LogoutModal";
 
 export const AvatarMenu = () => {
   const navigate = useNavigate();
-
   const [open, setOpen] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false); // Modal state
   const menuRef = useRef(null);
 
+  // Click outside logic to close menu
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -26,6 +24,7 @@ export const AvatarMenu = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
   const handleLogoutConfirm = () => {
     setShowLogoutModal(false);
     navigate('/Job-portal');
@@ -33,7 +32,6 @@ export const AvatarMenu = () => {
 
   return (
     <div className="avatar-container" ref={menuRef}>
-
       <img
         src={avatarIcon}
         alt="avatar"
@@ -60,21 +58,22 @@ export const AvatarMenu = () => {
 
           <div className="menu-divider"></div>
 
-          <button
+          <button 
             onClick={() => {
               setShowLogoutModal(true);
-              setOpen(false);
-            }}
+              setOpen(false); 
+            }} 
             className="avatar-logout-btn"
           >
             Logout
           </button>
         </div>
       )}
-      <LogoutModal
-        show={showLogoutModal}
-        onClose={() => setShowLogoutModal(false)}
-        onConfirm={handleLogoutConfirm}
+
+      <LogoutModal 
+        show={showLogoutModal} 
+        onClose={() => setShowLogoutModal(false)} 
+        onConfirm={handleLogoutConfirm} 
       />
     </div>
   );

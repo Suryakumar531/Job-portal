@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './PaymentMethods.css';
-
-// ----------------- UPI & TAB ASSETS -----------------
-import amazonpay from '../assets/Billing/amazonpay.png';
+import amazonpay from '../assets/Billing/Amazon_upi_logo.png';
 import phonepe from '../assets/Billing/phonepe.png';
 import paytm from '../assets/Billing/paytm.png';
 import Gpay from '../assets/Billing/Gpay.png';
 import netbanking_icon from '../assets/Billing/netbanking_icon.png';
 import upi_icon from '../assets/Billing/upi_icon.png';
 import creditcard_icon from '../assets/Billing/creditcard_icon.png';
-
-// ----------------- BANK LOGO ASSETS -----------------
 import kotak_mahindra_logo from '../assets/Billing/Kotak Mahindra.png';
 import uco_bank_logo from '../assets/Billing/UCO Bank.png';
 import deutsche_bank_logo from '../assets/Billing/Deutsche Bank.png';
@@ -22,7 +18,6 @@ import bank_of_maharashtra_logo from '../assets/Billing/Bank of Maharashtra.png'
 import tmb_logo from '../assets/Billing/TMB.png';
 import central_bank_of_india_logo from '../assets/Billing/Central Bank of India.png';
 import karur_vysya_logo from '../assets/Billing/Karur Vysya.png';
-
 import dbs_logo from '../assets/Billing/DBS.png';
 import obc_logo from '../assets/Billing/OBC.png';
 import saraswat_bank_logo from '../assets/Billing/Saraswat Bank.png';
@@ -34,7 +29,6 @@ import idfc_logo from '../assets/Billing/IDFC.png';
 import bank_of_india_logo from '../assets/Billing/Bank of India.png';
 import vijaya_bank_logo from '../assets/Billing/Vijaya Bank.png';
 import canara_bank_logo from '../assets/Billing/Canara Bank.png';
-
 import dena_bank_logo from '../assets/Billing/Dena Bank.png';
 import union_bank_logo from '../assets/Billing/Union Bank.png';
 import rbl_logo from '../assets/Billing/RBL.png';
@@ -295,8 +289,9 @@ export const PaymentMethods = ({ onBack, onSave, onCancel, cardOnlyMode = false,
                                                     <div className="info-col"><span>Name</span><p>{card.name}</p></div>
                                                     <div className="info-col"><span>Expiry</span><p>{card.expiry}</p></div>
                                                 </div>
+                                                
                                             </div>
-                                            <button type="button" className="btn-make-default" onClick={(e) => {
+                                            <button  type="button" className="btn-make-default" onClick={(e) => {
                                                 e.stopPropagation(); 
                                                 onMakeDefault(card.id);  
                                             }}>
@@ -462,4 +457,3 @@ export const PaymentMethods = ({ onBack, onSave, onCancel, cardOnlyMode = false,
         </div>
     );
 };
-

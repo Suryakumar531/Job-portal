@@ -1,4 +1,5 @@
 import React from "react";
+import { JHeader } from "./JHeader";
 import { Footer } from "../Components-LandingPage/Footer";
 import "./JobEmployerHelp.css";
 import InvoiceImg from "../assets/Invoicepayment.png";

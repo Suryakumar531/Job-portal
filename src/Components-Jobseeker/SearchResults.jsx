@@ -17,7 +17,6 @@ export const SearchResults = () => {
     const [maxExp, setMaxExp] = useState(30);
     const location = useLocation();
 
-    // ... [Helper functions remain unchanged] ...
     const getPercent = (value) => Math.round(((value - 0) / (100 - 0)) * 100);
     const countPropertyOccurrences = (data, property) => {
         return data.reduce((acc, item) => {
@@ -161,7 +160,8 @@ export const SearchResults = () => {
         minSalary: 0,
         maxSalary: 100,
         minExp: 0,
-        maxExp: 30
+        maxExp: 30,
+
     });
 
     const handleSearchButtonClick = () => {
@@ -174,6 +174,7 @@ export const SearchResults = () => {
 
     // --- THE APPLY FUNCTION ---
     const HandleApplyFilter = () => {
+
         setAppliedSidebarFilters({
             locations: selectedLocations,
             workType: selectedWorkType,
@@ -185,12 +186,8 @@ export const SearchResults = () => {
             minSalary: minVal,
             maxSalary: maxVal,
             minExp: minExp,
-            maxExp: maxExp
+            maxExp: maxExp,
         });
-
-        setSearchLocation("");
-        setSearchExp("");
-
         setAppliedFilters((prev)=>({
             ...prev,
             location: "",
@@ -261,28 +258,42 @@ export const SearchResults = () => {
     // --- CHECKBOX HANDLERS (Update UI state only) ---
     const handleLocationChange = (event) => {
         const val = event.target.value.toLowerCase();
+
+        // --- (`RECENT UPDATE #AJ`) ---
+        const isChecked = event.target.checked;
         setSelectedLocations((prev) => event.target.checked ? [...prev, val] : prev.filter((item) => item !== val));
+        // --- (`RECENT UPDATE #AJ`) ---
+        if (!isChecked && searchLocation.toLowerCase() === val) {
+            setSearchLocation("");
+            setAppliedFilters(prev => ({ ...prev, location: "" }));
+        }
     };
+
     const HandleWorkType = (event) => {
         const val = event.target.value;
         setselectedWorkType(prev => event.target.checked ? [...prev, val] : prev.filter(item => item !== val));
     };
+
     const HandlePostedby = (event) => {
         const val = event.target.value;
         setSelectedPostedby(prev => event.target.checked ? [...prev, val] : prev.filter(item => item !== val));
     };
+
     const HandleCompany = (event) => {
         const val = event.target.value;
         setSelectedCompany(prev => event.target.checked ? [...prev, val] : prev.filter(item => item !== val));
     };
+
     const HandleEducation = (event) => {
         const val = event.target.value;
         setSelectedEducation(prev => event.target.checked ? [...prev, val] : prev.filter(item => item !== val));
     };
+
     const HandlePostedDate = (event) => {
         const val = event.target.value;
         setSelectedPostDate(prev => event.target.checked ? [...prev, val] : prev.filter(item => item !== val));
     };
+
     const HandleIndustryType = (event) => {
         const val = event.target.value;
         setSelectedIndustryType(prev => event.target.checked ? [...prev, val] : prev.filter(item => item !== val));
@@ -296,16 +307,6 @@ export const SearchResults = () => {
                 job.title?.toLowerCase().includes(appliedFilters.query.toLowerCase()) ||
                 job.company?.toLowerCase().includes(appliedFilters.query.toLowerCase()) ||
                 job.KeySkills.some(skill => skill.toLowerCase().includes(appliedFilters.query));
-
-            {/*const matchesSearchBarLocation =
-                appliedFilters.location === "" ||
-                (Array.isArray(job.location)
-                    ? job.location.some(loc =>
-                        loc.toLowerCase().includes(appliedFilters.location.toLowerCase())
-                    )
-                    : job.location
-                        ? job.location.toLowerCase().includes(appliedFilters.location.toLowerCase())
-                        : false); */}
 
             const JobExp = job.experience ? parseInt(job.experience.match(/\d+/)) : 0;
             let matchesSearchExp = true;
@@ -330,8 +331,11 @@ export const SearchResults = () => {
                     ? [job.location.toLowerCase()]
                     : ['unknown location'];
 
-            const matchesCombinedLocation = (appliedFilters.location === "" && sf.locations.length === 0) ||
-                jobLocations.some(loc => (appliedFilters.location && loc.includes(appliedFilters.location.toLowerCase())) || sf.locations.includes(loc));
+             const matchesCombinedLocation = (appliedFilters.location === "" && sf.locations.length === 0) ||
+             jobLocations.some(loc => (appliedFilters.location !== "" && loc.includes(appliedFilters.location.toLowerCase())) || 
+             sf.locations.includes(loc));
+
+            
 
             const jobWorkType = job.WorkType ? job.WorkType.toLowerCase() : 'unknown worktype';
             const matchesWorkType = sf.workType.length === 0 || sf.workType.includes(jobWorkType);

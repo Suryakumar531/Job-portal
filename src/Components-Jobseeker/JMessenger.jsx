@@ -10,7 +10,7 @@ export const JMessenger = () => {
     //{POV : Logged in as Ajeeth }
    // const CurrentUser = 2; //(here we can able to change the Profile in otherjobseekers view)
     
-    const {chats, setChats,currentUser, currentUserId, isChatEnded, setNotificationsData, addEmployerNotification} = useJobs(); // from Context
+    const {chats, setChats,currentUser, currentUserId, isChatEnded, setNotificationsData,addEmployerNotification} = useJobs(); // from Context
 
     const [input, setInput] = useState("");
 
@@ -54,17 +54,17 @@ export const JMessenger = () => {
             : chat
         ));
 
-        addEmployerNotification(`New message from ${currentUser.profile?.fullName}`, employerProfile?.id);
+        addEmployerNotification(`New message from ${currentUser.profile?.fullName}`, employerProfile?.id, `/Job-portal/employer-chat/${currentUserId}`);
         setInput("");
     };
 
     return (
-        <>
         <div className="messages-container">
             <div className="E-chat-name">
                 <div style={{ height: "100vh" }} className="web-sidebar">
-                    <Link to="/Job-portal/jobseeker/"><img src={home} style={{ height: "20px" }}/></Link>
-                    <div className="sidebar-header"><h2 style={{color:"#007bff",textAlign:"center"}}>Messages</h2></div>
+                    <div className="sidebar-header">
+                        <Link to="/Job-portal/jobseeker/"><img src={home} style={{ height: "20px" }}/></Link>
+                        <h2 style={{color:"#007bff",textAlign:"center"}}>Messages</h2></div>
                     {hasMessages && (
                         <div className="sidebar-item active">
                             <strong>{employerProfile?.name}</strong>
@@ -112,6 +112,5 @@ export const JMessenger = () => {
                 )}
             </div>
         </div>
-        </>
     );
 };
