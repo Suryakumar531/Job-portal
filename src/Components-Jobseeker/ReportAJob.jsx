@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './ReportAJob.css';
 import { Header } from '../Components-LandingPage/Header';
 import { Footer } from '../Components-LandingPage/Footer';
@@ -9,6 +9,7 @@ import { useJobs } from '../JobContext';
 export const ReportAJob = () => {
     const navigate = useNavigate();
     const { setReports } = useJobs();
+    const { id } = useParams();
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -77,7 +78,7 @@ export const ReportAJob = () => {
                 status: "Pending",
                 priority: "High",
                 date: new Date().toLocaleDateString('en-GB'),
-                jobId: jobId
+                jobId: id
             };
 
             setReports((prevReports) => [...prevReports, newReport]);
