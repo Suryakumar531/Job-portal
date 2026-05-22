@@ -8,7 +8,7 @@ import { useJobs } from '../JobContext';
 // Named export to match your App.jsx import
 export const ReportAJob = () => {
     const navigate = useNavigate();
-    const {setReports}=useJobs();
+    const { setReports } = useJobs();
     const initialValues = {
         firstName: "",
         lastName: "",
@@ -63,15 +63,6 @@ export const ReportAJob = () => {
         if (errors[name]) setErrors({ ...errors, [name]: "" });
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (validate()) {
-    //         alert("Report submitted successfully!");
-    //         setFormValues(initialValues);
-    //         navigate("/Job-portal/jobseeker");
-    //     }
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -85,11 +76,12 @@ export const ReportAJob = () => {
                 explanation: formValues.explanation,
                 status: "Pending",
                 priority: "High",
-                date: new Date().toLocaleDateString('en-GB')
+                date: new Date().toLocaleDateString('en-GB'),
+                jobId: jobId
             };
- 
+
             setReports((prevReports) => [...prevReports, newReport]);
- 
+
             alert("Report submitted successfully!");
             setFormValues(initialValues);
             navigate("/Job-portal/jobseeker");
@@ -100,7 +92,7 @@ export const ReportAJob = () => {
         <>
             <Header />
             <div className="report-container">
-                <h2 className="report-title">“Complaint Form”</h2>
+                <h2 className="report-title">Escalation</h2>
                 <form className="report-card" onSubmit={handleSubmit}>
                     <div className="report-row">
                         <label>Name</label>
@@ -169,7 +161,7 @@ export const ReportAJob = () => {
                         </div>
                     </div>
                     <div className="report-actions">
-                        <button type="button" className="btn-cancel" onClick={() => navigate(-1)}>Cancel</button>
+                        <button type="button" className="btn-tocancel" onClick={() => navigate(-1)}>Cancel</button>
                         <button type="submit" className="btn-submit">Submit</button>
                     </div>
                 </form>
