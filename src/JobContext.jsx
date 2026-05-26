@@ -21,13 +21,13 @@ export const JobProvider = ({ children }) => {
             duration: 30,
             color: '#1e90ff',
             features: [
-                { text: '0 Jobs Posting', isInclude: true },
-                { text: 'Basic Employer Profile', isInclude: true },
-                { text: 'Standard Support', isInclude: true },
-                { text: 'Account Manager', isInclude: false },
-                { text: 'Analytics', isInclude: false },
-                { text: 'Candidate Search', isInclude: false },
-                { text: 'Highlight Your Job Listing', isInclude: false },
+                { text: 'Jobs Posting',value: '0', isInclude: true },
+                { text: 'Basic Employer Profile',value: '', isInclude: true },
+                { text: 'Standard Support',value: '', isInclude: true },
+                { text: 'Account Manager',value: '', isInclude: false },
+                { text: 'Analytics',value: '', isInclude: false },
+                { text: 'Candidate Search',value: '', isInclude: false },
+                { text: 'Highlight Your Job Listing',value: '', isInclude: false },
             ],
             isTrialEnabled: false,
             isAutoRenewal: false,
@@ -41,20 +41,20 @@ export const JobProvider = ({ children }) => {
             planLevel: 2,
             badge: 'Basic Plan',
             price: '499',
-            discount: 10,
+            discount: 0,
             tax: 18,
             billingCycle: 'Monthly',
             duration: 30,
             color: '#ff6c00',
             features: [
-                { text: '30 Jobs Posting', isInclude: true },
-                { text: 'Featured Employer Profile', isInclude: true },
-                { text: 'Resume Database Access', isInclude: true },
-                { text: 'Priority Support', isInclude: true },
-                { text: 'Basic Account Manager', isInclude: true },
-                { text: 'Basic Analytics', isInclude: true },
-                { text: 'Limited Candidate Search', isInclude: true },
-                { text: 'Highlight Your Job Listing', isInclude: false },
+                { text: 'Jobs Posting',value: '30', isInclude: true },
+                { text: 'Featured Employer Profile',value: '', isInclude: true },
+                { text: 'Resume Database Access',value: '', isInclude: true },
+                { text: 'Priority Support',value: '', isInclude: true },
+                { text: 'Basic Account Manager',value: '', isInclude: true },
+                { text: 'Basic Analytics',value: '', isInclude: true },
+                { text: 'Limited Candidate Search',value: '', isInclude: true },
+                { text: 'Highlight Your Job Listing',value: '', isInclude: false },
             ],
             isTrialEnabled: false,
             isAutoRenewal: false,
@@ -68,20 +68,20 @@ export const JobProvider = ({ children }) => {
             badge: 'Professional Plan',
             planLevel: 3,
             price: '999',
-            discount: 10,
+            discount: 0,
             tax: 18,
             billingCycle: 'Monthly',
             duration: 30,
             color: '#8a2be2',
             features: [
-                { text: 'Unlimited Jobs Posting', isInclude: true },
-                { text: 'Premium Employer Profile', isInclude: true },
-                { text: 'Full Resume Database Access', isInclude: true },
-                { text: 'Priority Support', isInclude: true },
-                { text: 'Dedicated Account Manager', isInclude: true },
-                { text: 'Advanced Analytics', isInclude: true },
-                { text: 'Unlimited Candidate Search', isInclude: true },
-                { text: 'Highlight Your Job Listing', isInclude: true },
+                { text: 'Jobs Posting',value: 'Unlimited', isInclude: true },
+                { text: 'Premium Employer Profile',value: '', isInclude: true },
+                { text: 'Full Resume Database Access',value: '', isInclude: true },
+                { text: 'Priority Support',value: '', isInclude: true },
+                { text: 'Dedicated Account Manager',value: '', isInclude: true },
+                { text: 'Advanced Analytics',value: '', isInclude: true },
+                { text: 'Unlimited Candidate Search',value: '', isInclude: true },
+                { text: 'Highlight Your Job Listing',value: '', isInclude: true },
             ],
             isTrialEnabled: false,
             isAutoRenewal: false,
@@ -304,7 +304,7 @@ export const JobProvider = ({ children }) => {
             message:"Apply button on the jobs tab is not working properly unable to apply for the jobs",
             priority:"Medium",
             date: "18/05/2026",
-            mobile:7010156680
+            mobile:"7010156680"
         },
         {
             id: "#TK1002",
@@ -362,7 +362,8 @@ export const JobProvider = ({ children }) => {
             explanation: "This company looks suspicious",
             status: "Pending",
             priority: "High",
-            date: "18/05/2026"
+            date: "18/05/2026",
+            JobId:"001"
         },
         {
             id: "#ES100223",
@@ -374,7 +375,8 @@ export const JobProvider = ({ children }) => {
             explanation: "Asking money for interview",
             status: "Resolved",
             priority: "Medium",
-            date: "17/05/2026"
+            date: "17/05/2026",
+            JobId:"001"
         }]
 
     const [raisedTickets, setRaisedTickets] = useState(Tickets);
@@ -396,35 +398,38 @@ export const JobProvider = ({ children }) => {
 
     const postJob = (newJobData) => {
 
-        const planLevel = currentEmployer.membership.planLevel;
-        if (!currentEmployer.membership.active) {
-            alert("Your membership is inactive. Please reactivate or upgrade!");
-            return;
-        }
-        const currentPlan = publishedPlans.find(p => p.planLevel === planLevel);
+    const planLevel = currentEmployer.membership.planLevel;
+    
+    if (!currentEmployer.membership.active) {
+        alert("Your membership is inactive. Please reactivate or upgrade!");
+        return;
+    }
 
-        let maxJobs = 0;
+    const currentPlan = allPlans.find(p => p.planLevel === planLevel); 
 
-        if (currentPlan) {
-            const jobFeature = currentPlan.features.find(f => f.text.toLowerCase().includes('jobs posting'));
+    let maxJobs = 0;
+    if (currentPlan) {
+        const jobFeature = currentPlan.features.find(f => f.text.toLowerCase().includes('jobs posting'));
 
-            if (jobFeature) {
-                if (jobFeature.text.toLowerCase().includes('unlimited')) {
-                    maxJobs = Infinity;
-                } else {
-                    const match = jobFeature.text.match(/\d+/);
-                    maxJobs = match ? parseInt(match[0], 10) : 0;
-                }
+        if (jobFeature && jobFeature.isInclude) {
+            const limitVal = String(jobFeature.value).toLowerCase().trim();
+            
+            if (limitVal === 'unlimited' || limitVal === 'infinity') {
+                maxJobs = Infinity;
+            } else {
+                maxJobs = parseInt(limitVal, 10);
+                if (isNaN(maxJobs)) maxJobs = 0; // Empty ya iruntha 0 aakidurom
             }
         }
+    }
 
-        const currentPostedCount = currentEmployer.jobPosted.length;
+    const currentPostedCount = currentEmployer.jobPosted.length;
 
-        if (currentPostedCount >= maxJobs) {
-    const limitText = maxJobs === Infinity ? "Unlimited" : maxJobs;
-    throw new Error(`As per your Current Plan, you can only post ${limitText} jobs. Please upgrade your plan!`);
-  }
-
+    if (currentPostedCount >= maxJobs) {
+        const limitText = maxJobs === Infinity ? "Unlimited" : maxJobs;
+        alert(`As per your Current Plan, you can only post ${limitText} jobs. Please upgrade your plan!`);
+        return; 
+    }
         const newId = jobs.length > 0 ? Math.max(...jobs.map(j => Number(j.id))) + 1 : 1;
         const postingSource = "Company Jobs";
 
@@ -874,49 +879,79 @@ export const JobProvider = ({ children }) => {
             navigate('/Job-portal/jobseeker/myjobs');
         }
     };
-    const onSelectPlan = (membershipDetails) => {
-        setCurrentEmployer(prev => ({
-            ...prev,
-            membership: {
-                planLevel: membershipDetails.level,
-                planName: membershipDetails.name,
-                startDate: membershipDetails.startDate,
-                expiryDate: membershipDetails.expiryDate,
-                billingCycle: membershipDetails.billingCycle,
-                status: membershipDetails.status,
-                paymentDetails: {
-                    subtotal: membershipDetails.subtotal,
-                    tax: membershipDetails.cgst + membershipDetails.sgst,
-                    total: membershipDetails.totalWithTax
-                }
-            }
-        }));
+    // const onSelectPlan = (membershipDetails) => {
+    //     console.log("Upgrading to Level:", membershipDetails.level);
+    //     setCurrentEmployer(prev => ({
+    //         ...prev,
+    //         membership: {
+    //             planLevel: membershipDetails.level,
+    //             planName: membershipDetails.name,
+    //             startDate: membershipDetails.startDate,
+    //             expiryDate: membershipDetails.expiryDate,
+    //             billingCycle: membershipDetails.billingCycle,
+    //             status: membershipDetails.status,
+    //             paymentDetails: {
+    //                 subtotal: membershipDetails.subtotal,
+    //                 tax: membershipDetails.cgst + membershipDetails.sgst,
+    //                 total: membershipDetails.totalWithTax
+    //             }
+    //         }
+    //     }));
 
-        alert(`${membershipDetails.name} activated successfully!`);
+    //     alert(`${membershipDetails.name} activated successfully!`);
 
-    };
+    // };
 
 
     const toggleHighlight = (jobId) => {
-        const planLevel = currentEmployer.membership.planLevel;
+    const planLevel = currentEmployer.membership.planLevel;
+    const currentPlan = allPlans.find(p => p.planLevel === planLevel); 
 
-        let highlightLimit = 0;
-        if (planLevel === 1) highlightLimit = 0;
-        else if (planLevel === 2) highlightLimit = 5;
-        else if (planLevel === 3) highlightLimit = 10;
+    let highlightLimit = 0;
 
-        const currentlyHighlighted = currentEmployer.jobPosted.filter(j => j.isHighlighted).length;
-        const targetJob = currentEmployer.jobPosted.find(j => j.id === jobId);
+    if (currentPlan) {
+        const highlightFeature = currentPlan.features.find(f => 
+            f.text.toLowerCase().includes('highlight')
+        );
 
-        if (!targetJob) return;
-        if (!targetJob.isHighlighted && currentlyHighlighted >= highlightLimit) {
-            alert(`Please upgrade your plan to highlight more than ${highlightLimit} jobs.`);
-            return;
+        if (highlightFeature && highlightFeature.isInclude) {
+            const limitVal = String(highlightFeature.value || '').toLowerCase().trim();
+            
+            if (limitVal === 'unlimited' || limitVal === 'infinity') {
+                highlightLimit = Infinity;
+            } else {
+                highlightLimit = parseInt(limitVal, 10);
+                if (isNaN(highlightLimit)) highlightLimit = 0; 
+            }
         }
+    }
 
-        const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    const targetJob = currentEmployer.jobPosted.find(j => j.id === jobId);
+    if (!targetJob) return;
 
-        setJobs(prevJobs => prevJobs.map(job => {
+    const currentlyHighlighted = currentEmployer.jobPosted.filter(j => j.isHighlighted).length;
+    if (!targetJob.isHighlighted && currentlyHighlighted >= highlightLimit) {
+        const limitText = highlightLimit === Infinity ? "Unlimited" : highlightLimit;
+        alert(`As per your current plan, you can only highlight up to ${limitText} jobs. Please upgrade your plan!`);
+        return;
+    }
+
+    const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+    setJobs(prevJobs => prevJobs.map(job => {
+        if (job.id === jobId) {
+            const nextState = !job.isHighlighted;
+            return {
+                ...job,
+                isHighlighted: nextState,
+                highlightOn: nextState ? today : null
+            };
+        }
+        return job;
+    }));
+
+    setCurrentEmployer(prev => {
+        const updatedEmployerJobs = prev.jobPosted.map(job => {
             if (job.id === jobId) {
                 const nextState = !job.isHighlighted;
                 return {
@@ -926,30 +961,19 @@ export const JobProvider = ({ children }) => {
                 };
             }
             return job;
-        }));
-
-        setCurrentEmployer(prev => {
-            const updatedEmployerJobs = prev.jobPosted.map(job => {
-                if (job.id === jobId) {
-                    const nextState = !job.isHighlighted;
-                    return {
-                        ...job,
-                        isHighlighted: nextState,
-                        highlightOn: nextState ? today : null
-                    };
-                }
-                return job;
-            });
-
-            return { ...prev, jobPosted: updatedEmployerJobs };
         });
-    };
+
+        return { ...prev, jobPosted: updatedEmployerJobs };
+    });
+};
+
     const getFeaturesForPlan = (planLevel) => {
-        const plan = publishedPlans.find(p => p.planLevel === planLevel);
+        const plan = allPlans.find(p => p.planLevel === planLevel);
 
         if (!plan) return [];
         return plan.features.map(f => ({
             text: f.text,
+            value: f.value,
             isIncluded: f.isInclude !== undefined ? f.isInclude : f.isIncluded
         }));
     };
@@ -960,9 +984,9 @@ export const JobProvider = ({ children }) => {
             setNotificationsData, addNotification, toggleSaveJob, applyForJob, notificationsData, showNotification, setShowNotification,
             activeMenuId, setActiveMenuId, addJob, deleteJob, postJob, editJob, Alluser, setAlluser, activeSidebarUsers, isUserAccessible,
             addChatToSidebar, currentUser, withdrawJobFromUser, updateApplicantStatus, isJobApplied, currentEmployer,
-            getJobStats, savedJobs, appliedJobs, currentUserId, withdrawApplication, removeRejectedJob, addEmployerNotification, setCurrentEmployer, onSelectPlan,
+            getJobStats, savedJobs, appliedJobs, currentUserId, withdrawApplication, removeRejectedJob, addEmployerNotification, setCurrentEmployer, 
             toggleHighlight, getFeaturesForPlan, publishedPlans, allPlans, setAllPlans,raisedTickets,setRaisedTickets,reports,setReports,
-            enquiries,setEnquiries//companyProfile, setCompanyProfile, 
+            enquiries,setEnquiries//companyProfile, setCompanyProfile,onSelectPlan, 
         }}>
             {children}
         </JobContext.Provider>

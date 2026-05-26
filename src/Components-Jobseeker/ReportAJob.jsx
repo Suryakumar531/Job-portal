@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './ReportAJob.css';
 import { Header } from '../Components-LandingPage/Header';
 import { Footer } from '../Components-LandingPage/Footer';
 import { useJobs } from '../JobContext';
 
-// Named export to match your App.jsx import
 export const ReportAJob = () => {
     const navigate = useNavigate();
+    const {jobId}=useParams();
     const {setReports}=useJobs();
     const initialValues = {
+        jobId: jobId,
         firstName: "",
         lastName: "",
         mobile: "",
@@ -85,7 +86,8 @@ export const ReportAJob = () => {
                 explanation: formValues.explanation,
                 status: "Pending",
                 priority: "High",
-                date: new Date().toLocaleDateString('en-GB')
+                date: new Date().toLocaleDateString('en-GB'),
+                jobId:jobId
             };
  
             setReports((prevReports) => [...prevReports, newReport]);
@@ -169,8 +171,8 @@ export const ReportAJob = () => {
                         </div>
                     </div>
                     <div className="report-actions">
-                        <button type="button" className="btn-cancel" onClick={() => navigate(-1)}>Cancel</button>
-                        <button type="submit" className="btn-submit">Submit</button>
+                        <button type="button" className="report-btn-cancel" onClick={() => navigate(-1)}>Cancel</button>
+                        <button type="submit" className="report-btn-submit">Submit</button>
                     </div>
                 </form>
             </div>

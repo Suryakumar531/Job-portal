@@ -64,7 +64,7 @@ export const Enquiries = () => {
                 </div>
                 <div className="enq-details-actions-bar">
                     <button className="enq-back-to-contact-btn" onClick={() => setSelectedEnquiry(null)}>
-                        ← Back to Contact Us
+                        Back to Contact Us
                     </button>
                     <button className="enq-delete-action-btn" onClick={() => handleDelete(selectedEnquiry.id)}>
                         <img src={Delete} alt="Delete" /> Delete
@@ -73,7 +73,7 @@ export const Enquiries = () => {
  
                 <div className="enq-details-main-content">
                     <div className="enq-details-left-pane">
-                        <div className="enq-ticket-meta-box">
+                        <div style={{border:"1px solid #e5e7eb",padding:"35px 10px",margin:"15px 0",borderRadius:"10px"}} className="enq-ticket-meta-box">
                             <img src={Enquiry} alt="Enquiry" className="enq-details-status-img" />
                             <div>
                                 <h3 className="enq-details-id-title">
@@ -86,18 +86,36 @@ export const Enquiries = () => {
                                 </p>
                             </div>
                         </div>
+                        
+                        <div style={{marginTop:"25px"}} className="Adm-tic-user-section">
+            <h2 className="Adm-tic-section-title">User Information</h2>
+            <div className="Adm-tic-user-grid">
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Name :</span> <input type="text" disabled value={selectedEnquiry.name} /></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mobile number :</span><input type='text' disabled value={selectedEnquiry.contact}/></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mail ID :</span><input disabled value={selectedEnquiry.email}/></div>
+              {/* <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">User :</span><input disabled value={selectedEnquiry.category}/></div> */}
+            </div>
+          </div>
+
+                        <div className="Adm-tic-main-content">
+                                <div className="Adm-tic-left-panel">
+                                  <div className="Adm-tic-details-section">
+                                    <h2 className="Adm-tic-section-title">Enquiry details :</h2>
+                                    <p className="Adm-tic-description">{selectedEnquiry.message}</p>
+                                    
+                                    
+                            
+                                  </div>
+                                </div>
+                                
+                              </div>
  
-                        <div className="enq-details-msg-block">
-                            <h4>Enquiry details</h4>
-                            <p className="enq-details-msg-text">{selectedEnquiry.message || selectedEnquiry.explanation}</p>
-                        </div>
- 
-                        <div className="enq-details-user-block">
+                        {/* <div className="enq-details-user-block">
                             <h4>User Information</h4>
                             <div className="enq-details-user-grid">
                                 <span className="enq-grid-label">Name</span>
                                 <span className="enq-grid-value blue-name">
-                                    : {selectedEnquiry.name || `${selectedEnquiry.firstName || ''} ${selectedEnquiry.lastName || ''}`.trim()}
+                                    : {selectedEnquiry.name.trim()}
                                 </span>
  
                                 <span className="enq-grid-label">Mobile number</span>
@@ -106,7 +124,7 @@ export const Enquiries = () => {
                                 <span className="enq-grid-label">Mail ID</span>
                                 <span className="enq-grid-value">: {selectedEnquiry.email}</span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -150,17 +168,20 @@ export const Enquiries = () => {
                                             {formatDate(item.date)}
                                         </div>
                                         <div style={{ color: '#6b7280', fontSize: '13px', marginTop: '3px' }}>
-                                            {item.time || "10:15 PM"}
+                                            {item.time}
                                         </div>
                                     </td>
  
                                     <td>
-                                        <button
+                                        {/* <button
                                             className="enq-table-view-action-btn"
-                                            onClick={() => setSelectedEnquiry(item)}
+                                            
                                         >
                                             <img src={ViewButton} alt="View" /> View
-                                        </button>
+                                        </button> */}
+                                        <button style={{background:"#1E88E5",color:"white",borderRadius:"5px",
+                                    padding:"7px 10px",outline:"none",border:"none"
+                                }} onClick={() => setSelectedEnquiry(item)}>View Details</button>
                                     </td>
                                 </tr>
                             ))

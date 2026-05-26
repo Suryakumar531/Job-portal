@@ -110,7 +110,7 @@ const router = createBrowserRouter([{
   element: <OpportunityOverview />,
 },
 {
-  path: '/Job-portal/jobseeker/ReportAJob',
+  path: '/Job-portal/jobseeker/ReportAJob/:id',
   element: <ReportAJob />,
 },
 {

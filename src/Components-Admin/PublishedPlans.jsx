@@ -8,90 +8,6 @@ import { useJobs } from '../JobContext';
 
 export const PublishedPlans = () => {
   const {allPlans,setAllPlans}=useJobs()
-  // const publishedPlans = [
-  //   {
-  //     id: 'starter',
-  //     PlanName: 'STARTER PLAN',
-  //     badge: 'Limited Access',
-  //     planLevel:1,
-  //     price: '0',
-  //     discount: 0,
-  //     tax: 18,
-  //     billingCycle: 'Monthly',
-  //     duration: 30,
-  //     color: '#1e90ff',
-  //     features: [
-  //       { text: '3 Jobs Posting', isInclude: true },
-  //       { text: 'Basic Employer Profile', isInclude: true },
-  //       { text: 'Standard Support', isInclude: true },
-  //       { text: 'Account Manager', isInclude: false },
-  //       { text: 'Analytics', isInclude: false },
-  //       { text: 'Candidate Search', isInclude: false },
-  //       { text: 'Highlight Your Job Listing', isInclude: false },
-  //     ],
-  //     isTrialEnabled:false,
-  //     isAutoRenewal:false,
-  //     GraceTime :"",
-  //     planTags: ["popular", "Recommended"],
-  //     TrailDuration:"7"
-  //   },
-  //   {
-  //     id: 'business',
-  //     PlanName: 'BUSINESS PLAN',
-  //     planLevel:2,
-  //     badge: 'Basic Plan',
-  //     price: '499',
-  //     discount: 10,
-  //     tax: 18,
-  //     billingCycle: 'Monthly',
-  //     duration: 30,
-  //     color: '#ff6c00',
-  //     features: [
-  //       { text: '30 Jobs Posting', isInclude: true },
-  //       { text: 'Featured Employer Profile', isInclude: true },
-  //       { text: 'Resume Database Access', isInclude: true },
-  //       { text: 'Priority Support', isInclude: true },
-  //       { text: 'Basic Account Manager', isInclude: true },
-  //       { text: 'Basic Analytics', isInclude: true },
-  //       { text: 'Limited Candidate Search', isInclude: true },
-  //       { text: 'Highlight Your Job Listing', isInclude: false },
-  //     ],
-  //     isTrialEnabled:false,
-  //     isAutoRenewal:false,
-  //     GraceTime :"2",
-  //     planTags: ["popular", "Recommended"],
-  //     TrailDuration:"7"
-  //   },
-  //   {
-  //     id: 'enterprise',
-  //     PlanName: 'ENTERPRISE PLAN',
-  //     badge: 'Professional Plan',
-  //     planLevel:3,
-  //     price: '999',
-  //     discount: 10,
-  //     tax: 18,
-  //     billingCycle: 'Yearly',
-  //     duration: 365,
-  //     color: '#8a2be2',
-  //     features: [
-  //       { text: 'Unlimited Jobs Posting', isInclude: true },
-  //       { text: 'Premium Employer Profile', isInclude: true },
-  //       { text: 'Full Resume Database Access', isInclude: true },
-  //       { text: 'Priority Support', isInclude: true },
-  //       { text: 'Dedicated Account Manager', isInclude: true },
-  //       { text: 'Advanced Analytics', isInclude: true },
-  //       { text: 'Unlimited Candidate Search', isInclude: true },
-  //       { text: 'Highlight Your Job Listing', isInclude: true },
-  //     ],
-  //     isTrialEnabled:false,
-  //     isAutoRenewal:false,
-  //     GraceTime :"2",
-  //     planTags: ["popular", "Recommended"],
-  //     TrailDuration:"7"
-  //   }
-  // ];
-
-  // const [allPlans, setAllPlans] = useState(publishedPlans);
   const [selectedPlanId, setSelectedPlanId] = useState(null);
   const [editPlan, setEditPlan] = useState(null);
   const [previewPlan, setPreviewPlan] = useState(null);
@@ -107,7 +23,7 @@ export const PublishedPlans = () => {
       price = price * 12;
     }
 
-    const hasDiscount = billingCycle === '6 Months' || billingCycle === 'Yearly';
+    const hasDiscount = billingCycle === '6 months' || billingCycle === 'Yearly';
     const activeDiscountPercent = hasDiscount ? (parseFloat(discountPercent) || 0) : 0;
 
     const discountAmt = price * (activeDiscountPercent / 100);
@@ -119,6 +35,16 @@ export const PublishedPlans = () => {
     return finalTotal.toFixed(2);
   };
 
+  const handleFeatureValueChange = (featureIdx, value) => {
+    const updatedFeatures = editPlan.features.map((feature, i) => {
+      if (i === featureIdx) {
+        return { ...feature, value: value };
+      }
+      return feature;
+    });
+    setEditPlan(prev => ({ ...prev, features: updatedFeatures }));
+  };
+
   const handleSelectPlan = (plan) => {
     setSelectedPlanId(plan.id);
     const CopiedPlan = JSON.parse(JSON.stringify(plan));
@@ -126,15 +52,37 @@ export const PublishedPlans = () => {
     setPreviewPlan(CopiedPlan);
   };
 
+  // const handleInputChange = (field, value) => {
+  //   setEditPlan(prev => {
+  //     const updated = { ...prev, [field]: value };
+  //     if (field === 'billingCycle') {
+  //       updated.duration = value === 'Monthly'&& 30 ;
+  //       updated.duration = value === '6 months'&& 180;
+  //       updated.duration = value === 'yearly'&& 365;
+  //     }
+  //     return updated;
+  //   });
+  // };
+
   const handleInputChange = (field, value) => {
-    setEditPlan(prev => {
-      const updated = { ...prev, [field]: value };
-      if (field === 'billingCycle') {
-        updated.duration = value === 'Monthly' ? 30 : 365;
+  setEditPlan(prev => {
+    const updated = { ...prev, [field]: value };
+
+    if (field === 'billingCycle') {
+      const durationMap = {
+        'Monthly': 30,
+        '6 Months': 180,
+        'Yearly': 365
+      };
+      
+      if (durationMap[value] !== undefined) {
+        updated.duration = durationMap[value];
       }
-      return updated;
-    });
-  };
+    }
+
+    return updated;
+  });
+};
 
   const handleToggleFeature = (featureIdx) => {
     const updatedFeatures = editPlan.features.map((feature, i) => {
@@ -194,6 +142,11 @@ export const PublishedPlans = () => {
       prevPlans.map(plan => plan.id === selectedPlanId ? { ...editPlan } : plan)
     );
     alert("Changes saved successfully to the plan database!");
+  };
+
+  const handleDeleteFeature = (featureIdx) => {
+    const updatedFeatures = editPlan.features.filter((_, i) => i !== featureIdx);
+    setEditPlan(prev => ({ ...prev, features: updatedFeatures }));
   };
 
  
@@ -288,10 +241,21 @@ export const PublishedPlans = () => {
                       onChange={(e) => handleInputChange('billingCycle', e.target.value)}
                       readOnly
                     >
+                    </input>
+                    </div>
                       {/* <option value="Monthly">Monthly</option> */}
                      
-                    </input>
-                  </div>
+                    
+                    {/* <div className="membership-cr-input-group">
+                      <label>Billing Cycle*</label>
+                    <select name="Billing cycle" value={editPlan?.billingCycle || 'Monthly'} 
+                      onChange={(e) => handleInputChange('billingCycle', e.target.value)}
+                      readOnly>
+                      <option value="Monthly">Monthly</option>
+                      <option value="6 Months">6 Months</option>
+                      <option value="Yearly">Yearly</option>
+                    </select>
+                  </div> */}
                   <div className="membership-cr-input-group">
                     <label>Duration (Days)*</label>
                     <input 
@@ -302,14 +266,14 @@ export const PublishedPlans = () => {
                   </div>
                 </div>
                 <div className="membership-cr-row">
-                  {/* <div className="membership-cr-input-group">
+                  <div className="membership-cr-input-group">
                     <label>Discount (%)</label>
                     <input 
                       type="number" 
-                      value={editPlan.billingCycle === 'Yearly' ? editPlan.discount : 0} 
+                      value={editPlan.billingCycle === 'Yearly' ? editPlan.discount : 0 || editPlan.billingCycle ==="6 Months" ? editPlan.discount : 0} 
                       onChange={(e) => handleInputChange('discount', e.target.value)}
                     />
-                  </div> */}
+                  </div>
                   <div className="membership-cr-input-group">
                     <label>Tax (%)</label>
                     <input 
@@ -332,7 +296,7 @@ export const PublishedPlans = () => {
                 </div>
               </div>
 
-              <div className="membership-cr-form-card">
+              {/* <div className="membership-cr-form-card">
                 <div className="membership-cr-section-title">
                   <span className="membership-cr-step-num">3</span> Features & Limits
                 </div>
@@ -368,7 +332,83 @@ export const PublishedPlans = () => {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </div> */}
+              <div className="membership-cr-form-card">
+              <div className="membership-cr-section-title">
+                  <span className="membership-cr-step-num">3</span> Features & Limits
+                </div>
+              <table className="membership-cr-features-table">
+  <thead>
+    <tr >
+      <th style={{ textAlign: 'left', padding: '10px' }}>Feature Name</th>
+      <th style={{ textAlign: 'center', padding: '10px' }}>Value / Limit</th>
+      <th style={{ textAlign: 'center', padding: '10px' }}>Included</th>
+      <th style={{ textAlign: 'center', padding: '10px' }}>Action</th>
+    </tr>
+  </thead>
+  <tbody style={{border:"1px solid #f0f0ff"}}>
+    {editPlan?.features.map((item, i) => (
+      <tr key={i}>
+        {/* Feature Name */}
+        <td style={{ padding: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <img src={SixDots} alt="" className="membership-cr-drag-dots" width="12" />
+            <input
+              type="text"
+              value={item.text}
+              className="membership-cr-feature-label-input"
+              onChange={(e) => handleFeatureTextChange(i, e.target.value)}
+              style={{ border: '1px solid #ddd', padding: '5px', borderRadius: '4px', width: '90%', outline: 'none' }}
+            />
+          </div>
+        </td>
+        <td style={{ textAlign: 'center', padding: '10px' }}>
+          {item.isInclude ? (
+            <input
+              type="text"
+              value={item.value || ''}
+              onChange={(e) => handleFeatureValueChange(i, e.target.value)}
+              placeholder="e.g. 30"
+              style={{ width: '60px', padding: '5px', textAlign: 'center', border: '1px solid #ddd', borderRadius: '4px' }}
+            />
+          ) : (
+            <span style={{ color: '#aaa', fontSize: '12px' }}>-</span>
+          )}
+        </td>
+
+        <td style={{ textAlign: 'center', padding: '10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div
+              className={`membership-cr-toggle-switch ${item.isInclude ? "membership-cr-active" : ""}`}
+              onClick={() => handleToggleFeature(i)}
+            ></div>
+          </div>
+        </td>
+
+        {/* Action / Delete Button */}
+        <td style={{ textAlign: 'center', padding: '10px' }}>
+          <button 
+            onClick={() => handleDeleteFeature(i)}
+            style={{ background: 'transparent', border: 'none', color: '#ff4d4f', cursor: 'pointer', fontWeight: 'bold' }}
+            title="Delete Feature"
+          >
+           Delete
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+{/* Add Feature Button */}
+{/* <div style={{ padding: '10px', textAlign: 'left' }}>
+  <button 
+    onClick={handleAddFeature}
+    style={{ background: '#eef2ff', color: '#5c6bc0', border: '1px solid #5c6bc0', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontWeight: '600' }}
+  >
+    + Add New Feature
+  </button>
+</div> */}
 
               <div className="membership-cr-form-card membership-cr-mini-section">
             <div className="membership-cr-section-title"><span className="membership-cr-step-num">4</span> Trial Settings</div>
@@ -465,7 +505,6 @@ export const PublishedPlans = () => {
               </div>
             </div>
 
-            {/* Preview Sidebar (Remains unaffected by /Month or /Yearly suffix text) */}
             <div className="membership-cr-preview-sidebar">
               {previewPlan && (
                 <div className="published-plan-preview-card">
@@ -498,7 +537,10 @@ export const PublishedPlans = () => {
                           <span className="published-plan-icon">
                             <img src={feature.isInclude ? Tick : RedCross} alt={feature.isInclude ? "yes" : "no"} width={15} />
                           </span>
-                          <span className="published-plan-feature-text">{feature.text}</span>
+                          <span className="published-plan-feature-text">
+  {feature.value && feature.isInclude ? <strong style={{marginRight: '5px'}}>{feature.value}</strong> : null}
+  {feature.text}
+</span>
                         </li>
                       ))}
                     </ul>

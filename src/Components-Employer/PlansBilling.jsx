@@ -172,7 +172,7 @@ export const PlansBilling = () => {
             startDate: today.toISOString().split('T')[0],
             nextInvoice: calculateNextInvoiceDate(computedPlan.duration)
         });
-
+         
         setIsCardOnly(false);
         setView('payment');
     };
