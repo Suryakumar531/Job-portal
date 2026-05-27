@@ -10,12 +10,15 @@ import eye from '../assets/AdminAssets/EyeIcon.png';
 import Priority from '../assets/AdminAssets/Priority.png';
 import AdminCategory from '../assets/AdminAssets/AdminCategory.png';
 import AdminStatus from '../assets/AdminAssets/AdminStatus.png';
+import { JobMonitorOverview } from './JobMonitorOverview';
 ;
 
 export const Escalation = () => {
     const { reports, setReports } = useJobs();
     const [selectedReport, setSelectedReport] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showJobOverviewId, setShowJobOverviewId] = useState(null);
+    console.log(selectedReport)
 
     const handleStatusChange = (ticketId, value) => {
         setReports((prev) =>
@@ -34,6 +37,27 @@ export const Escalation = () => {
             setIsModalOpen(false);
         }
     };
+
+    if (showJobOverviewId){
+        return (
+            <div className="RepAJob-detail-container">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                    <h2 className="RepAJob-main-title">Job ID: {showJobOverviewId}</h2>
+                    <button 
+                        className="RepAJob-btn-back" 
+                        onClick={() => setShowJobOverviewId(null)}
+                        style={{ backgroundColor: '#6c757d', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                    >
+                        Back to Report Details
+                    </button>
+                </div>
+                
+                <div style={{ background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+                    <JobMonitorOverview jobId={showJobOverviewId} />
+                </div>
+            </div>
+        );
+    }
 
     if (selectedReport) {
         const currentStatus = selectedReport.status;
@@ -57,7 +81,7 @@ export const Escalation = () => {
                         </div>
                         <div className="RepAJob-ticket-header">
                             <h3>{selectedReport.reason || "Unable to submit the project status"}</h3>
-                            <span className="RepAJob-ticket-id">{selectedReport.id}</span>
+                            <span className="RepAJob-ticket-id">{selectedReport.RepId}</span>
                             <p className="RepAJob-timestamp">Created on : {selectedReport.date}</p>
                         </div>
                     </div>
@@ -85,7 +109,7 @@ export const Escalation = () => {
                             <span style={{ paddingLeft: "15px" }} className="meta-label">JobId</span>
                             <span className="meta-separator">:</span>
                             <span className="meta-value-priority" data-priority={currentPriority.toLowerCase()}>
-                                {selectedReport.JobId}
+                                {selectedReport.id}
                             </span>
                         </div>
                     </div>
@@ -131,6 +155,10 @@ export const Escalation = () => {
                         <img src={deleteIcon} alt="delete-icon" className="RepAJob-btn-icon-img" style={{ marginRight: '6px' }} />
                         Delete
                     </button>
+                    <button style={{background:"#2b8bf9"}}  onClick={() => setShowJobOverviewId(selectedReport.jobId)} className="RepAJob-btn-action">
+                        <img src={deleteIcon} alt="delete-icon" className="RepAJob-btn-icon-img" style={{ marginRight: '6px' }} />
+                        View this Job
+                    </button>
                 </div>
 
                 {isModalOpen && (
@@ -139,14 +167,15 @@ export const Escalation = () => {
                             <h3>Select Status</h3>
 
                             <div className="RepAJob-status-modal-options">
-                                <button onClick={() => handleStatusChange(selectedReport.id, "Pending")}>Pending</button>
-                                <button onClick={() => handleStatusChange(selectedReport.id, "In Progress")}>In Progress</button>
-                                <button onClick={() => handleStatusChange(selectedReport.id, "Resolved")}>Resolved</button>
+                                <button onClick={() => handleStatusChange(selectedReport.RepId, "Pending")}>Pending</button>
+                                <button onClick={() => handleStatusChange(selectedReport.RepId, "In Progress")}>In Progress</button>
+                                <button onClick={() => handleStatusChange(selectedReport.RepId, "Resolved")}>Resolved</button>
                             </div>
 
                             <button className="RepAJob-status-modal-cancel" onClick={() => setIsModalOpen(false)}>
                                 Cancel
                             </button>
+                            
                         </div>
                     </div>
                 )}
@@ -181,8 +210,8 @@ export const Escalation = () => {
                             reports.map((item, index) => {
                                 const itemPriority = item.priority || 'Medium';
                                 return (
-                                    <tr key={item.id || index}>
-                                        <td>{item.id}</td>
+                                    <tr key={item.RepId || index}>
+                                        <td>{item.RepId}</td>
                                         <td>{item.reason || "Progress, project & status reports"}</td>
                                         <td>{item.firstName} {item.lastName}</td>
                                         <td>Report</td>

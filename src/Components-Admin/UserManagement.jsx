@@ -40,14 +40,30 @@ export const UserManagement = () => {
   
   const roleFilter = location.state?.filterRole || 'all'; 
 
- const filteredUsers = usersList.filter((user) => {
-        const role = user.role?.toLowerCase() || "candidate";
-        if (roleFilter === 'employer') return role === 'employer';
-        if (roleFilter === 'candidate') return role === 'candidate';
-        return true;
-    });
+//  const filteredUsers = usersList.filter((user) => {
+//         const role = user.role?.toLowerCase() || "candidate";
+//         if (roleFilter === 'employer') return role === 'employer';
+//         if (roleFilter === 'candidate') return role === 'candidate';
+//         return true;
+//     });
 
-  
+  const filteredUsers = usersList.filter((user) => {
+    const role = user.role?.toLowerCase() || "candidate";
+    
+    if (roleFilter === 'employer' && role !== 'employer') return false;
+    if (roleFilter === 'candidate' && role !== 'candidate') return false;
+
+    const searchLower = search.toLowerCase();
+    const fullName = user.profile?.fullName?.toLowerCase() || "";
+    const email = user.contact?.email?.toLowerCase() || "";
+
+    return (
+      fullName.includes(searchLower) ||
+      email.includes(searchLower) ||
+      role.includes(searchLower)
+    );
+  });
+
   const totalUsers = usersList.length
   const candidates = usersList.filter(u => u.role !== "employer").length
   const employers = usersList.filter(u => u.role === "employer").length
