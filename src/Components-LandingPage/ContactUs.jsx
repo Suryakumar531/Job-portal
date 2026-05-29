@@ -62,7 +62,7 @@ export const ContactUs = () => {
   };
 
   setEnquiries((prevEnquiries) => [...prevEnquiries, newEnquiry]);
-  alert("Message sent successfully!");
+  alert("Submitted Succesfully!");
   setFormValues(initialValues);
 };
   return (

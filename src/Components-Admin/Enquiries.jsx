@@ -4,18 +4,18 @@ import ViewButton from '../assets/AdminAssets/EyeIcon.png';
 import Enquiry from '../assets/AdminAssets/Enquires.png';
 import Delete from '../assets/AdminAssets/DeleteIcon.png';
 import { useJobs } from '../JobContext';
-
+ 
 export const Enquiries = () => {
     const { enquiries, setEnquiries } = useJobs()
     const [selectedEnquiry, setSelectedEnquiry] = useState(null)
-
+ 
     const formatDate = (dateStr) => {
         if (!dateStr) return "May 15, 2026";
         try {
             if (isNaN(Number(dateStr.split('/')[0])) && isNaN(Number(dateStr.split('-')[0]))) {
                 return dateStr;
             }
-
+           
             let parsedDate;
             if (dateStr.includes('/')) {
                 const [day, month, year] = dateStr.split('/');
@@ -23,9 +23,9 @@ export const Enquiries = () => {
             } else {
                 parsedDate = new Date(dateStr);
             }
-
+ 
             if (isNaN(parsedDate.getTime())) return dateStr;
-
+ 
             return parsedDate.toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
@@ -35,7 +35,7 @@ export const Enquiries = () => {
             return dateStr;
         }
     };
-
+   
     const getSortedEnquiries = () => {
         if (!enquiries || enquiries.length === 0) return [];
         return [...enquiries].sort((a, b) => {
@@ -44,7 +44,7 @@ export const Enquiries = () => {
             return 0;
         });
     };
-
+ 
     const handleDelete = (id) => {
         if (window.confirm("Are you sure you want to delete this enquiry?")) {
             const updatedEnquiries = enquiries.filter(item => item.id !== id);
@@ -52,7 +52,7 @@ export const Enquiries = () => {
             setSelectedEnquiry(null);
         }
     };
-
+ 
     const sortedData = getSortedEnquiries();
     if (selectedEnquiry) {
         return (
@@ -64,16 +64,16 @@ export const Enquiries = () => {
                 </div>
                 <div className="enq-details-actions-bar">
                     <button className="enq-back-to-contact-btn" onClick={() => setSelectedEnquiry(null)}>
-                        ← Back to Contact Us
+                        Back to Contact Us
                     </button>
                     <button className="enq-delete-action-btn" onClick={() => handleDelete(selectedEnquiry.id)}>
                         <img src={Delete} alt="Delete" /> Delete
                     </button>
                 </div>
-
+ 
                 <div className="enq-details-main-content">
                     <div className="enq-details-left-pane">
-                        <div className="enq-ticket-meta-box">
+                        <div style={{border:"1px solid #e5e7eb",padding:"35px 10px",margin:"15px 0",borderRadius:"10px"}} className="enq-ticket-meta-box">
                             <img src={Enquiry} alt="Enquiry" className="enq-details-status-img" />
                             <div>
                                 <h3 className="enq-details-id-title">
@@ -82,37 +82,55 @@ export const Enquiries = () => {
                                 <p className="enq-details-created-on">
                                     Created on : {selectedEnquiry.date && selectedEnquiry.time
                                         ? `${selectedEnquiry.date}, ${selectedEnquiry.time}`
-                                        : (selectedEnquiry.date)}
+                                        : (selectedEnquiry.date )}
                                 </p>
                             </div>
                         </div>
+                        
+                        <div style={{marginTop:"25px"}} className="Adm-tic-user-section">
+            <h2 className="Adm-tic-section-title">User Information</h2>
+            <div className="Adm-tic-user-grid">
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Name :</span> <input type="text" disabled value={selectedEnquiry.name} /></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mobile number :</span><input type='text' disabled value={selectedEnquiry.contact}/></div>
+              <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">Mail ID :</span><input disabled value={selectedEnquiry.email}/></div>
+              {/* <div className="Adm-tic-grid-row"><span className="Adm-tic-grid-label">User :</span><input disabled value={selectedEnquiry.category}/></div> */}
+            </div>
+          </div>
 
-                        <div className="enq-details-msg-block">
-                            <h4>Enquiry details</h4>
-                            <p className="enq-details-msg-text">{selectedEnquiry.message || selectedEnquiry.explanation}</p>
-                        </div>
-
-                        <div className="enq-details-user-block">
+                        <div className="Adm-tic-main-content">
+                                <div className="Adm-tic-left-panel">
+                                  <div className="Adm-tic-details-section">
+                                    <h2 className="Adm-tic-section-title">Enquiry details :</h2>
+                                    <p className="Adm-tic-description">{selectedEnquiry.message}</p>
+                                    
+                                    
+                            
+                                  </div>
+                                </div>
+                                
+                              </div>
+ 
+                        {/* <div className="enq-details-user-block">
                             <h4>User Information</h4>
                             <div className="enq-details-user-grid">
                                 <span className="enq-grid-label">Name</span>
                                 <span className="enq-grid-value blue-name">
-                                    : {selectedEnquiry.name || `${selectedEnquiry.firstName || ''} ${selectedEnquiry.lastName || ''}`.trim()}
+                                    : {selectedEnquiry.name.trim()}
                                 </span>
-
+ 
                                 <span className="enq-grid-label">Mobile number</span>
                                 <span className="enq-grid-value">: {selectedEnquiry.contact || selectedEnquiry.mobile}</span>
-
+ 
                                 <span className="enq-grid-label">Mail ID</span>
                                 <span className="enq-grid-value">: {selectedEnquiry.email}</span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
         );
     }
-
+ 
     return (
         <div className="Enquiries-container">
             <div className="Enquiries-header" style={{ marginTop: '30px' }}>
@@ -121,7 +139,7 @@ export const Enquiries = () => {
                     <p>List of newly received enquiries on this portal</p>
                 </div>
             </div>
-
+ 
             <div className="Enquiries-table-wrapper">
                 <table className="Enquiries-table">
                     <thead>
@@ -144,23 +162,26 @@ export const Enquiries = () => {
                                     <td style={{ fontWeight: '600' }}>
                                         {item.name || `${item.firstName || ''} ${item.lastName || ''}`.trim()}
                                     </td>
-
+ 
                                     <td>
                                         <div style={{ fontWeight: '500', color: '#111827' }}>
                                             {formatDate(item.date)}
                                         </div>
                                         <div style={{ color: '#6b7280', fontSize: '13px', marginTop: '3px' }}>
-                                            {item.time || "10:15 PM"}
+                                            {item.time}
                                         </div>
                                     </td>
-
+ 
                                     <td>
-                                        <button
+                                        {/* <button
                                             className="enq-table-view-action-btn"
-                                            onClick={() => setSelectedEnquiry(item)}
+                                            
                                         >
                                             <img src={ViewButton} alt="View" /> View
-                                        </button>
+                                        </button> */}
+                                        <button style={{background:"#1E88E5",color:"white",borderRadius:"5px",
+                                    padding:"7px 10px",outline:"none",border:"none"
+                                }} onClick={() => setSelectedEnquiry(item)}>View Details</button>
                                     </td>
                                 </tr>
                             ))
@@ -177,3 +198,4 @@ export const Enquiries = () => {
         </div>
     )
 }
+ 

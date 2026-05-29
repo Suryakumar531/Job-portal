@@ -5,12 +5,12 @@ import { Header } from '../Components-LandingPage/Header';
 import { Footer } from '../Components-LandingPage/Footer';
 import { useJobs } from '../JobContext';
 
-// Named export to match your App.jsx import
 export const ReportAJob = () => {
     const navigate = useNavigate();
     const { setReports } = useJobs();
     const { id } = useParams();
     const initialValues = {
+        jobId: jobId,
         firstName: "",
         lastName: "",
         mobile: "",
