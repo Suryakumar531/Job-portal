@@ -363,7 +363,7 @@ export const JobProvider = ({ children }) => {
         status: "Pending",
         priority: "High",
         date: "18/05/2026",
-        JobId: "251"
+        JobId: "1"
     },
     {
         id: "#ES100223",
@@ -376,7 +376,7 @@ export const JobProvider = ({ children }) => {
         status: "Resolved",
         priority: "Medium",
         date: "17/05/2026",
-        JobId: "341"
+        JobId: "45"
     }]
 
     const [raisedTickets, setRaisedTickets] = useState(Tickets);

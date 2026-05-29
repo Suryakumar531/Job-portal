@@ -142,6 +142,7 @@ export const Escalation = () => {
 
                 <div className="RepAJob-section">
                     <h4>Report details</h4>
+                    <p>Job Id: {selectedReport.JobId}</p>
                     <p className="RepAJob-description-text">
                         {selectedReport.explanation}
                     </p>
@@ -196,6 +197,7 @@ export const Escalation = () => {
                         <tr>
                             <th>REPORT ID</th>
                             <th>SUBJECT</th>
+                            <th>JOB ID</th>
                             <th>USER</th>
                             <th>CATEGORY</th>
                             <th style={{ paddingLeft: "40px" }}>PRIORITY</th>
@@ -212,6 +214,7 @@ export const Escalation = () => {
                                     <tr key={item.id || index}>
                                         <td>{item.id}</td>
                                         <td>{item.reason || "Progress, project & status reports"}</td>
+                                        <td>{item.JobId}</td>
                                         <td>{item.firstName} {item.lastName}</td>
                                         <td>Report</td>
                                         <td>

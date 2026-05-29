@@ -12,8 +12,6 @@ export const JobMonitoring = () => {
     const [filterType, setFilterType] = useState('Newest');
     const [selectedJobId, setSelectedJobId] = useState(null);
 
-    
-
 
     useEffect(() => {
         const handleClickOutside = (event) => {
