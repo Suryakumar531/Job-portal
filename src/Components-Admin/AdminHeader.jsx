@@ -160,7 +160,7 @@ export const AdminHeader = ({ onLogoutClick }) => {
                                 <span>Upload Photo</span>
                             </div>
 
-                            <div className="Admin-dropdown-item Admin-logout" onClick={handleLogoutAction}>
+                            <div className="Admin-dropdown-item Admin-logout" onClick={() => navigate('/Job-portal/employer/dashboard')}>
                                 <img src={AdminLogout} alt="Logout" />
                                 <span>Logout</span>
                             </div>
