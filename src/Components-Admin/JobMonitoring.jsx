@@ -197,7 +197,6 @@ export const JobMonitoring = () => {
                         </div>
                         <JobMonitorOverview jobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
                         
-                    
                      </>
                 )}
     

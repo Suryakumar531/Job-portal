@@ -11,7 +11,6 @@ import Priority from '../assets/AdminAssets/Priority.png';
 import AdminCategory from '../assets/AdminAssets/AdminCategory.png';
 import AdminStatus from '../assets/AdminAssets/AdminStatus.png';
 import { JobMonitorOverview } from './JobMonitorOverview';
-;
 
 export const Escalation = () => {
     const { reports, setReports } = useJobs();
@@ -156,7 +155,7 @@ export const Escalation = () => {
                         <img src={deleteIcon} alt="delete-icon" className="RepAJob-btn-icon-img" style={{ marginRight: '6px' }} />
                         Delete
                     </button>
-                    <button style={{background:"#2b8bf9"}}  onClick={() => setShowJobOverviewId(selectedReport.jobId)} className="RepAJob-btn-action">
+                    <button style={{background:"#2b8bf9"}}  onClick={() => setShowJobOverviewId(selectedReport.JobId)} className="RepAJob-btn-action">
                         View this Job
                     </button>
                 </div>
