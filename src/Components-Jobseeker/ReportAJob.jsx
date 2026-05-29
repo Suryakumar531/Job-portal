@@ -10,7 +10,7 @@ export const ReportAJob = () => {
     const { setReports } = useJobs();
     const { id } = useParams();
     const initialValues = {
-        jobId: jobId,
+        jobId: id,
         firstName: "",
         lastName: "",
         mobile: "",
