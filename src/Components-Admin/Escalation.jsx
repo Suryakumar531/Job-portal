@@ -156,7 +156,6 @@ export const Escalation = () => {
                         Delete
                     </button>
                     <button style={{background:"#2b8bf9"}}  onClick={() => setShowJobOverviewId(selectedReport.jobId)} className="RepAJob-btn-action">
-                        <img src={deleteIcon} alt="delete-icon" className="RepAJob-btn-icon-img" style={{ marginRight: '6px' }} />
                         View this Job
                     </button>
                 </div>
@@ -210,8 +209,8 @@ export const Escalation = () => {
                             reports.map((item, index) => {
                                 const itemPriority = item.priority || 'Medium';
                                 return (
-                                    <tr key={item.RepId || index}>
-                                        <td>{item.RepId}</td>
+                                    <tr key={item.id || index}>
+                                        <td>{item.id}</td>
                                         <td>{item.reason || "Progress, project & status reports"}</td>
                                         <td>{item.firstName} {item.lastName}</td>
                                         <td>Report</td>
